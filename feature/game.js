@@ -1,36 +1,54 @@
 /* An original conceptual miniature. Every demand and game rule is invented. */
 const SVG_NS = 'http://www.w3.org/2000/svg';
-const COLORS = { home: '#c9512d', work: '#173e40', care: '#3c8b81', ties: '#98603b' };
+let gameInstance = 0;
+const COLORS = { home: '#c9512d', work: '#173e40', use: '#3c8b81', ties: '#98603b' };
 const STOPS = [
-  { id: 'work', name: 'Work', queue: 3, point: [207, -81, 9], pin: [207, -102, 120] },
-  { id: 'care', name: 'Care', queue: 2, point: [286, 22, 9], pin: [293, 8, 87] },
+  { id: 'work', name: 'Work / study', queue: 3, point: [207, -81, 9], pin: [207, -102, 120] },
+  { id: 'use', name: 'Use', queue: 2, point: [286, 22, 9], pin: [293, 8, 87] },
   { id: 'ties', name: 'Ties', queue: 2, point: [171, 135, 9], pin: [170, 123, 73] }
 ];
 const HOME = [-228, 25, 9];
-const INCOMING = [ ['work', 'care'], ['work', 'ties'], ['care', 'ties'], ['work', 'care'], ['work', 'ties'], [] ];
+const INCOMING = [ ['work', 'use'], ['work', 'ties'], ['use', 'ties'], ['work', 'use'], ['work', 'ties'], [] ];
 const project = (x, z, y = 0) => [380 + (x * .825 + z * .565) * .92, 258 + (-x * .565 + z * .825) * .52 - y * .92];
 const xy = (point) => project(...point).map(n => +n.toFixed(2));
 
 export function initGame(container) {
   if (!container) return { pause() {}, destroy() {} };
+  const uid = `cl-game-${++gameInstance}`;
   container.classList.add('cl-game');
   container.innerHTML = `<div class="cl-game-head"><span>Illustrative game</span><span class="cl-game-budget">2 routes · 2 seats per route</span></div>
-    <div class="cl-game-map"><svg class="cl-game-city" viewBox="0 0 760 440" role="img" aria-label="An invented miniature city, with home connected by a bridge to work, care and personal ties. This is not a geographic map."></svg><div class="cl-game-stops"></div></div>
-    <div class="cl-game-play"><p class="cl-game-instruction" id="cl-game-instruction">Tap Home, then a destination to draw a route.</p>
+    <div class="cl-game-map"><svg class="cl-game-city" viewBox="0 0 760 440" role="img" aria-label="An invented miniature city, with home connected by a bridge to work or study, particular uses and personal ties. This is not a geographic map."></svg><div class="cl-game-stops"></div></div>
+    <div class="cl-game-play"><p class="cl-game-instruction" id="${uid}-instruction">Tap a destination to connect it to Home.</p>
       <div class="cl-game-actions"><button class="cl-game-round" type="button">Run a round</button><button class="cl-game-reset" type="button">Reset</button></div>
       <div class="cl-game-ledger"><span class="cl-game-round-count">Round 0 of 6</span><span class="cl-game-result">0 journeys made</span><span class="cl-game-route-count">0 of 2 routes used</span></div>
       <p class="cl-game-status" role="status" aria-live="polite" aria-atomic="true">Choose two connections. You can change them between rounds.</p>
-    </div><p class="cl-game-note">Invented demand and rules, not research data. Each round carries up to two waiting journeys on each route. New needs arrive between rounds.</p>`;
+    </div>
+    <section class="cl-game-end" aria-labelledby="${uid}-end-title" hidden>
+      <h4 class="cl-game-end-title" id="${uid}-end-title" tabindex="-1" aria-describedby="${uid}-end-tally">Six rounds complete</h4>
+      <p class="cl-game-end-tally" id="${uid}-end-tally"></p>
+      <p class="cl-game-end-lead">What did the rules make easy?</p>
+      <ul class="cl-game-left-out">
+        <li><strong>Home stayed fixed.</strong><span>The life arrangements include moving home while keeping connections elsewhere. <a href="#arrangements">Return to the model</a></span></li>
+        <li><strong>Routes changed for free.</strong><span>The game assigns no time, money or commitment to changing a connection. <a href="#ties">Read about continuing ties</a></span></li>
+        <li><strong>Every destination was available.</strong><span>Only routes and seats limited access here. Finding information and suitable services never entered the rules. <a href="#access">Read about everyday services</a></span></li>
+      </ul>
+      <button class="cl-game-again" type="button">Play again</button>
+    </section>
+    <p class="cl-game-note">Invented demand and rules, not research data. Each round carries up to two waiting journeys on each route. New needs arrive between rounds. Connections can be changed freely; this miniature does not model real travel or switching costs.</p>`;
   const svg = container.querySelector('svg');
   const stopsEl = container.querySelector('.cl-game-stops');
   const instruction = container.querySelector('.cl-game-instruction');
   const status = container.querySelector('.cl-game-status');
   const roundButton = container.querySelector('.cl-game-round');
   const resetButton = container.querySelector('.cl-game-reset');
+  const endPanel = container.querySelector('.cl-game-end');
+  const endTitle = container.querySelector('.cl-game-end-title');
+  const endTally = container.querySelector('.cl-game-end-tally');
+  const againButton = container.querySelector('.cl-game-again');
   const media = window.matchMedia('(prefers-reduced-motion: reduce)');
   let globalPaused = document.documentElement.dataset.motion === 'off';
-  let localVisible = true, destroyed = false, raf = 0, startTime = 0, animation = 0;
-  let selected = false, round = 0, journeys = 0, routes = new Set(), queues = {}, tokens = [];
+  let localVisible = typeof IntersectionObserver === 'undefined', destroyed = false, raf = 0, startTime = null, animation = false;
+  let round = 0, journeys = 0, routes = new Set(), queues = {}, tokens = [];
   const listeners = [];
   const on = (target, name, callback) => { target.addEventListener(name, callback); listeners.push(() => target.removeEventListener(name, callback)); };
   const add = (tag, attrs = {}, parent = svg) => {
@@ -48,7 +66,7 @@ export function initGame(container) {
   function building(b) {
     const { x,z,w,d,h,type } = b;
     const home = type === 'home';
-    const mat = home ? ['#e49b72','#9f402b','#c75b3c'] : type === 'care' ? ['#dae3cf','#658e80','#9bb4a1'] : ['#e7dec7','#9da98f','#bec4aa'];
+    const mat = home ? ['#e49b72','#9f402b','#c75b3c'] : type === 'use' ? ['#dae3cf','#658e80','#9bb4a1'] : ['#e7dec7','#9da98f','#bec4aa'];
     poly([[x+6,z+8,1],[x+w+17,z+8,1],[x+w+17,z+d+21,1],[x+6,z+d+21,1]], '#173e4015');
     box(x,z,w,d,h,mat);
     if (home || type === 'ties') {
@@ -62,10 +80,10 @@ export function initGame(container) {
         box(x+10,z+12,w*.45,d*.42,7,['#96b3a5','#487b6e','#739789'],svg,h+5);
         line([[x+w-12,z+12,h+5],[x+w-12,z+12,h+27]],'#496c62',1.4);
       }
-      if(type==='care') {
+      if(type==='use') {
         box(x-2,z+d-2,w+4,11,5,['#6c9c88','#305f55','#427c6c'],svg,25);
-        poly([[x+w*.42,z+d+.3,33],[x+w*.58,z+d+.3,33],[x+w*.58,z+d+.3,45],[x+w*.42,z+d+.3,45]],'#f1eee0');
-        poly([[x+w*.34,z+d+.4,37],[x+w*.66,z+d+.4,37],[x+w*.66,z+d+.4,41],[x+w*.34,z+d+.4,41]],'#f1eee0');
+        // A general-purpose storefront, rather than a medical symbol.
+        line([[x+9,z+d+.4,39],[x+w-9,z+d+.4,39]],'#f1eee0',3);
       }
     }
     for(let level=0;level<Math.max(1,Math.floor((h-12)/21));level++) {
@@ -119,14 +137,14 @@ export function initGame(container) {
       {x:-344,z:12,w:41,d:43,h:53,type:'office'}, {x:-173,z:9,w:38,d:33,h:28,type:'shop'},
       {x:-291,z:100,w:56,d:39,h:32,type:'shop'}, {x:-181,z:99,w:43,d:43,h:62,type:'office'},
       {x:130,z:-127,w:39,d:36,h:37,type:'shop'}, {x:183,z:-122,w:54,d:43,h:111,type:'work'},
-      {x:286,z:-126,w:38,d:42,h:76,type:'office'}, {x:260,z:-14,w:64,d:39,h:47,type:'care'},
+      {x:286,z:-126,w:38,d:42,h:76,type:'office'}, {x:260,z:-14,w:64,d:39,h:47,type:'use'},
       {x:132,z:100,w:72,d:48,h:36,type:'ties'}, {x:263,z:96,w:60,d:41,h:60,type:'office'}
     ];
     const trees=[[-340,111,20],[-320,127,17],[-220,-145,15],[-120,-84,19],[-119,115,17],[112,5,18],[330,59,22],[236,129,17],[266,-145,16]];
     const depth=(x,z)=>-x*.565+z*.825;
     [...buildings.map(b=>({depth:depth(b.x+b.w/2,b.z+b.d/2),draw:()=>building(b)})),...trees.map(([x,z,s])=>({depth:depth(x,z),draw:()=>tree(x,z,s)}))].sort((a,b)=>a.depth-b.depth).forEach(o=>o.draw());
     STOPS.forEach(stop=> {
-      const anchor=xy(stop.point), pin=xy(stop.pin);
+      const anchor=xy(stop.point);
       line([stop.point,[stop.point[0],stop.point[1],stop.pin[2]-16]],COLORS[stop.id],.8,svg,{'stroke-opacity':'.5'});
       add('circle',{cx:anchor[0],cy:anchor[1],r:4,fill:COLORS[stop.id],stroke:'#f2eee3','stroke-width':2});
       if(routes.has(stop.id)) {
@@ -134,88 +152,108 @@ export function initGame(container) {
         const d=`M${a} L${b} L${c} L${end}`;
         add('path',{d,fill:'none',stroke:'#f2eee3','stroke-width':8,'stroke-linejoin':'round','stroke-linecap':'round'});
         const path=add('path',{d,fill:'none',stroke:COLORS[stop.id],'stroke-width':3.3,'stroke-linejoin':'round','stroke-linecap':'round'});
-        const token=add('rect',{x:a[0]-5,y:a[1]-3,width:10,height:6,rx:1,fill:COLORS[stop.id],stroke:'#f2eee3','stroke-width':1.5});
-        tokens.push({token,path});
+        const token=add('rect',{x:a[0]-5,y:a[1]-3,width:10,height:6,rx:1,fill:COLORS[stop.id],stroke:'#f2eee3','stroke-width':1.5,visibility:'hidden'});
+        tokens.push({id:stop.id,token,path});
       }
     });
     const [hx,hy]=xy(HOME);
-    add('circle',{cx:hx,cy:hy,r:selected?9:6,fill:COLORS.home,stroke:'#f2eee3','stroke-width':3});
+    add('circle',{cx:hx,cy:hy,r:6,fill:COLORS.home,stroke:'#f2eee3','stroke-width':3});
     line([HOME,[-228,25,98]],COLORS.home,.9);
   }
   const stopButtons = new Map();
   function makeStop(id,name,pin) {
-    const b=document.createElement('button');
-    b.type='button';b.className='cl-game-stop';b.dataset.stop=id;b.style.setProperty('--stop-color',COLORS[id]);
-    b.style.setProperty('--stop-active', {home:'#a53e22',work:'#173e40',care:'#29675f',ties:'#875132'}[id]);
+    const b=document.createElement(id==='home'?'div':'button');
+    if(id!=='home')b.type='button';
+    b.className=id==='home'?'cl-game-stop cl-game-home':'cl-game-stop';b.dataset.stop=id;b.style.setProperty('--stop-color',COLORS[id]);
+    b.style.setProperty('--stop-active', {home:'#a53e22',work:'#173e40',use:'#29675f',ties:'#875132'}[id]);
     const [x,y]=xy(pin);b.style.left=`${x/7.6}%`;b.style.top=`${y/4.4}%`;
-    b.innerHTML=`<span>${name}</span>${id==='home'?'<small>Start here</small>':'<small></small>'}`;
-    b.setAttribute('aria-describedby','cl-game-instruction');
+    b.innerHTML=`<span>${name}</span>${id==='home'?'<small>Fixed origin</small>':'<small></small>'}`;
+    b.setAttribute('aria-describedby',`${uid}-instruction`);
     stopsEl.appendChild(b);stopButtons.set(id,b);
-    on(b,'click',()=>choose(id));
+    if(id!=='home')on(b,'click',()=>choose(id));
   }
   makeStop('home','Home',[-228,25,111]);
   STOPS.forEach(s=>makeStop(s.id,s.name,s.pin));
   function choose(id) {
-    if(round===6) { status.textContent='The six rounds are complete. Reset to try a different set of connections.'; return; }
-    if(id==='home') {
-      selected=!selected;
-      status.textContent=selected?'Home selected. Choose Work, Care or Ties.':'Choose Home when you want to change a route.';
-    } else if(!selected) {
-      status.textContent='Choose Home first, then a destination. You can remove an existing route the same way.';
-      stopButtons.get('home').focus({preventScroll:true});
-    } else if(routes.has(id)) {
-      routes.delete(id); selected=false; status.textContent=`${STOPS.find(s=>s.id===id).name} route removed. One connection is free.`;
+    if(round===6) { status.textContent='Six rounds complete. Read what the rules left out, or play again below.'; return; }
+    settle();
+    if(routes.has(id)) {
+      routes.delete(id); status.textContent=`${STOPS.find(s=>s.id===id).name} route removed. One connection is free.`;
     } else if(routes.size===2) {
-      status.textContent='Both routes are in use. Choose a connected destination to remove its route, then connect another.';
+      status.textContent='Both routes are in use. Tap a linked destination to remove its route, then connect another.';
     } else {
-      routes.add(id); selected=false; status.textContent=`${STOPS.find(s=>s.id===id).name} connected. ${routes.size===1?'Add a second connection, or run a round.':'Run a round, or change a connection.'}`;
+      routes.add(id); status.textContent=`${STOPS.find(s=>s.id===id).name} connected. ${routes.size===1?'Add a second connection, or run a round.':'Run a round, or change a connection.'}`;
     }
     update();
   }
   function update() {
-    stopButtons.get('home').setAttribute('aria-pressed',String(selected));
     STOPS.forEach(s=> {
       const b=stopButtons.get(s.id), linked=routes.has(s.id);
       b.classList.toggle('is-connected',linked);b.setAttribute('aria-pressed',String(linked));
       b.querySelector('small').textContent=`${queues[s.id]} waiting${linked?' · linked':''}`;
-      b.setAttribute('aria-label',`${s.name}: ${queues[s.id]} waiting. ${linked?'Route connected. Select Home then this stop to remove.':'Select Home then this stop to connect.'}`);
+      b.setAttribute('aria-label',`${s.name}: ${queues[s.id]} waiting. ${round===6?'Six rounds complete.':linked?'Route connected. Tap to remove.':'Tap to connect to Home.'}`);
     });
-    instruction.textContent=round===6?'A day is more than one destination.':selected?'Now choose a destination. Tap a linked stop to remove its route.':'Tap Home, then a destination to draw a route.';
+    instruction.textContent=round===6?'Read what these rules left out below.':'Tap a destination to connect it to Home. Tap again to remove.';
     container.querySelector('.cl-game-round-count').textContent=`Round ${round} of 6`;
-    container.querySelector('.cl-game-result').textContent=`${journeys} journeys made`;
+    container.querySelector('.cl-game-result').textContent=`${journeys} ${journeys===1?'journey':'journeys'} made`;
     container.querySelector('.cl-game-route-count').textContent=`${routes.size} of 2 routes used`;
     roundButton.disabled=routes.size===0||round===6;
+    resetButton.hidden=round===6;
+    endPanel.hidden=round!==6;
+    container.classList.toggle('cl-game-complete',round===6);
     drawCity();
   }
-  function runRound() {
+  function runRound(event) {
     if(!routes.size || round===6) return;
+    // Native keyboard/assistive clicks have detail 0. Capture ownership before
+    // disabling Run; pointer completion must not force focus or scroll.
+    const handoffFocus=event?.detail===0&&document.activeElement===roundButton;
+    settle();
     let carried=0;
-    routes.forEach(id=>{ const n=Math.min(2,queues[id]);queues[id]-=n;carried+=n; });
-    journeys+=carried; INCOMING[round].forEach(id=>queues[id]++); round++;selected=false;
+    const moved=new Set();
+    routes.forEach(id=>{ const n=Math.min(2,queues[id]);queues[id]-=n;carried+=n;if(n)moved.add(id); });
+    journeys+=carried; INCOMING[round].forEach(id=>queues[id]++); round++;
     const waiting=Object.values(queues).reduce((sum,n)=>sum+n,0);
-    status.textContent=round===6?`${journeys} journeys made; ${waiting} still waiting. Two routes could not reach every need at once. Reset to try another approach.`:`${carried} journeys made this round. ${waiting} waiting in total. Keep your routes or change them before the next round.`;
-    update(); animation=1;startTime=0;schedule();
+    status.textContent=round===6?(handoffFocus?'':'Six rounds complete. The reflection below explains what the rules left out.'):`${carried} ${carried===1?'journey':'journeys'} made this round. ${waiting} waiting in total. Keep your routes or change them before the next round.`;
+    endTally.textContent=`Invented tally: ${journeys} ${journeys===1?'journey':'journeys'} made · ${waiting} waiting. These counts describe the game rules.`;
+    // Counts and the live announcement update immediately; motion is feedback only.
+    update();
+    // The focused heading and its tally replace, rather than repeat, the live
+    // completion announcement for keyboard users.
+    if(round===6&&handoffFocus)endTitle.focus();
+    if(!isPaused()&&moved.size){
+      animation=true;startTime=null;
+      tokens.forEach(({id,token})=>token.setAttribute('visibility',moved.has(id)?'visible':'hidden'));
+      schedule();
+    }
   }
   function reset() {
-    round=0;journeys=0;selected=false;routes=new Set();queues=Object.fromEntries(STOPS.map(s=>[s.id,s.queue]));animation=0;
-    status.textContent='Choose two connections. You can change them between rounds.';update();
+    settle();
+    round=0;journeys=0;routes=new Set();queues=Object.fromEntries(STOPS.map(s=>[s.id,s.queue]));
+    endTally.textContent='';
+    status.textContent='Choose up to two destinations. You can change connections between rounds.';update();
   }
   function isPaused() { return globalPaused||media.matches||document.hidden||!localVisible; }
+  function settle() {
+    cancelAnimationFrame(raf);raf=0;startTime=null;animation=false;
+    tokens.forEach(({token})=>token.setAttribute('visibility','hidden'));
+  }
   function frame(now) {
-    raf=0;if(destroyed||isPaused()||!animation)return;
-    if(!startTime)startTime=now;
-    const t=Math.min(1,(now-startTime)/1450), eased=1-Math.pow(1-t,3);
+    raf=0;if(destroyed||isPaused()||!animation){settle();return;}
+    startTime??=now;
+    const t=Math.min(1,(now-startTime)/600), eased=1-Math.pow(1-t,3);
     tokens.forEach(({token,path})=>{const p=path.getPointAtLength(path.getTotalLength()*eased);token.setAttribute('x',p.x-5);token.setAttribute('y',p.y-3);});
-    if(t<1)schedule();else animation=0;
+    if(t<1)schedule();else settle();
   }
   function schedule() {if(!raf&&!destroyed&&!isPaused()&&animation)raf=requestAnimationFrame(frame);}
-  function pause(value=true) {globalPaused=Boolean(value);if(isPaused()){cancelAnimationFrame(raf);raf=0;startTime=0;}else schedule();}
+  function pause(value=true) {globalPaused=Boolean(value);if(isPaused())settle();}
   on(roundButton,'click',runRound);on(resetButton,'click',reset);
+  on(againButton,'click',event=>{const keyboard=event.detail===0;reset();if(keyboard)stopButtons.get('work')?.focus();});
   on(document,'crossing:motion',e=>pause(e.detail?.paused));
-  on(document,'visibilitychange',()=>{if(isPaused()){cancelAnimationFrame(raf);raf=0;startTime=0;}else schedule();});
-  on(media,'change',()=>{if(isPaused()){cancelAnimationFrame(raf);raf=0;startTime=0;}else schedule();});
-  const observer=typeof IntersectionObserver==='function'?new IntersectionObserver(entries=>{localVisible=entries[0].isIntersecting;if(!localVisible){cancelAnimationFrame(raf);raf=0;startTime=0;}else schedule();},{threshold:.05}):null;
+  on(document,'visibilitychange',()=>{if(isPaused())settle();});
+  on(media,'change',()=>{if(isPaused())settle();});
+  const observer=typeof IntersectionObserver==='function'?new IntersectionObserver(entries=>{localVisible=entries.some(entry=>entry.isIntersecting&&entry.intersectionRatio>=.05);if(!localVisible)settle();},{threshold:[0,.05]}):null;
   observer?.observe(container);
   reset();
-  return { pause, destroy(){destroyed=true;cancelAnimationFrame(raf);observer?.disconnect();listeners.forEach(remove=>remove());container.replaceChildren();} };
+  return { pause, getState(){return{round,journeys,routes:[...routes],queues:{...queues},animating:animation};}, destroy(){destroyed=true;settle();observer?.disconnect();listeners.forEach(remove=>remove());container.replaceChildren();} };
 }

@@ -1,5 +1,5 @@
 /* Crossing Lives: evidence-led response, measurement and further-reading instruments.
-   UI summaries paraphrase the supplied research data; full wording and sources remain disclosed. */
+   UI summaries paraphrase the supplied research data; evidence and limits remain visible. */
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const arrow = '<svg viewBox="0 0 32 24" aria-hidden="true"><path d="M2 12h26M20 4l8 8-8 8"/></svg>';
 const steps = {
@@ -37,6 +37,16 @@ const areaSummaries = {
   'useful-connections': ['Short voluntary follow-up', 'Useful assistance received', 'Assess help, not contacts'],
   'established-residents': ['Housing, service & employment series', 'Costs & access for existing residents', 'Examine opportunity and pressure'],
   'institutions-and-reliability': ['Case records & user confirmation', 'Resolution & interrupted access', 'Locate coordination problems']
+};
+const areaLimits = {
+  'household-choices': 'Cash, platforms and surveys cover different activity. Spending estimates may overlap; the proposed distinctions are not measured additional flows.',
+  'business-adjustment': 'Surviving firms miss exits. Closure, relocation and payment-provider changes differ; employment size does not identify chain ownership.',
+  'worker-transitions': 'Earnings, hours and destinations are different outcomes. Retirement, care or training is not necessarily a failed transition; follow-up has coverage limits.',
+  'access-to-growth': 'Registration, introductions and qualification do not establish earnings. Occupational changes alone do not show recognition caused displacement or lower pay.',
+  'everyday-services': 'Services may matter differently to different people. A reported barrier does not establish routine system failure.',
+  'useful-connections': 'A contact is not evidence of help received; a referral is not evidence of resolution. Friendship needs no assigned GDP value.',
+  'established-residents': 'Residence differs from citizenship. Define existing residents and local suppliers; observed pressures alone do not establish integration as the cause.',
+  'institutions-and-reliability': 'A closed ticket is not necessarily a resolved problem. Ordinary service activity alone does not establish disruption effects.'
 };
 const groupLabels = {
   'Customers and markets': 'Customers & markets',
@@ -98,6 +108,14 @@ function disclosure(title, fields, sources) {
   if (sources?.length) body.append(sourcesList(sources));
   details.append(body); return details;
 }
+function evidenceSummary(fields, className = '') {
+  const summary = make('div', `lib-evidence-summary ${className}`);
+  fields.filter(([, value]) => value).forEach(([label, value]) => {
+    const block = make('div', 'lib-evidence-item');
+    block.append(make('h4', '', label), make('p', '', value)); summary.append(block);
+  });
+  return summary;
+}
 function sequence(labels, captions, kinds = ['start', 'join', 'end']) {
   const diagram = make('ol', 'lib-sequence');
   labels.forEach((label, i) => {
@@ -108,6 +126,77 @@ function sequence(labels, captions, kinds = ['start', 'join', 'end']) {
     diagram.append(item);
   });
   return diagram;
+}
+
+/* Reusable editorial mechanism families. An unmapped case keeps the concise
+   sequence above: adding a family never changes its evidence or navigation. */
+const mechanismFamilies = {
+  'cgc-japan': 'pool',
+  'aic-alps': 'pool',
+  'singapore-ccp': 'transition',
+  'oresunddirekt': 'guidance'
+};
+function mechanismSvg(markup, viewBox = '0 0 1000 360') {
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('viewBox', viewBox);
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+  svg.innerHTML = markup;
+  return svg;
+}
+function mechanismLabels(items, className = '') {
+  const labels = make('div', `lib-mechanism-labels ${className}`);
+  items.forEach(([title, detail]) => {
+    const label = make('p', 'lib-mechanism-label');
+    label.append(make('strong', '', title));
+    if (detail) label.append(make('span', '', detail));
+    labels.append(label);
+  });
+  return labels;
+}
+function storefront(x, y, provider = false) {
+  return `<g transform="translate(${x} ${y})" class="lib-pool-member">
+    <path d="M-31-13h62v45h-62z" class="lib-mech-surface"/>
+    <path d="M-36-13l7-22h58l7 22z" class="lib-mech-fill-soft"/>
+    <path d="M-22-32l-4 19m15-19-2 19M0-32v19m11-19 2 19m9-19 4 19" class="lib-mech-fine"/>
+    ${provider ? '<path d="M-9 1h18M0-8v18" class="lib-mech-accent"/><path d="M-17 32V19h34v13"/>' : '<path d="M-21 1h14v16h-14zM5 32V1h17v31"/>'}
+    <path d="M-38 33h76"/>
+  </g>`;
+}
+function poolingMechanism(item) {
+  const care = item.id === 'aic-alps';
+  const figure = make('figure', `lib-mechanism lib-mechanism-pool${care ? ' lib-mechanism-care-pool' : ''}`);
+  const connections = '<g class="lib-mech-connections"><path d="M159 71C290 71 274 180 399 180M164 190H399M194 300C292 300 285 180 399 180"/><path d="M601 180C708 180 694 70 799 70M601 180H799M601 180C708 180 694 290 799 290"/></g>';
+  const output = care ? '<path d="M601 180H805" class="lib-mech-connections"/><g transform="translate(838 180)"><rect x="-49" y="-49" width="98" height="98" class="lib-mech-fill-soft"/><path d="M-24-13h48v36h-48zM-29-13l5-13h48l5 13M0-26v49M-24-13 0-1l24-12"/><circle cx="35" cy="-35" r="14" class="lib-mech-solid"/><path d="m29-35 4 4 8-9" class="lib-mech-inverse"/></g>' : '<g transform="translate(840 70)"><circle r="38" class="lib-mech-fill-soft"/><path d="M-19-7h38v24h-38zM-23-7l4-11h38l4 11M0-18v35"/></g><g transform="translate(840 180)"><circle r="38" class="lib-mech-fill-soft"/><path d="M-23 12v-29h29v29M6-7h12l9 11v8H6M-17 12h-6M-4 12H14"/><circle cx="-10" cy="13" r="5"/><circle cx="20" cy="13" r="5"/></g><g transform="translate(840 290)"><circle r="38" class="lib-mech-fill-soft"/><rect x="-23" y="-20" width="46" height="31"/><path d="M-10 22h20M0 11v11M-8-9h16m-16 8h9"/></g>';
+  figure.append(mechanismSvg(`<path d="M65 343H932" class="lib-mech-ground"/>${care ? '<g class="lib-mech-connections"><path d="M159 71C290 71 274 180 399 180M164 190H399M194 300C292 300 285 180 399 180"/></g>' : connections}${storefront(120,70,care)}${storefront(125,189,care)}${storefront(155,299,care)}<g transform="translate(500 180)"><circle r="101" class="lib-mech-hub-ring"/><circle r="79" class="lib-mech-hub"/><path d="M-38 29v-58h76v58M-25-15h12m9 0H8m9 0h12M-25 0h12m9 0H8m9 0h12M-25 15h12m9 0H8m9 0h12M-50 30H50" class="lib-mech-inverse"/><circle cy="-101" r="5" class="lib-mech-red"/><circle cx="101" r="5" class="lib-mech-red"/><circle cx="-101" r="5" class="lib-mech-red"/></g>${output}`));
+  figure.append(mechanismLabels(care ? [['Care providers','Participating organisations'],['AIC + ALPS','Pool suitable demand'],['Shared procurement','Purchase together']] : [['Supermarkets','Separate ownership'],['CGC','Shared organisation'],['Shared capabilities','Purchasing · logistics · IT']]));
+  figure.append(make('figcaption', 'lib-mechanism-caption', care ? 'A shared purchasing arrangement; the drawing does not represent the number of participating providers.' : 'Share capabilities while keeping separate ownership. The drawing does not represent the number of members.'));
+  return figure;
+}
+function transitionMechanism() {
+  const figure = make('figure', 'lib-mechanism lib-mechanism-transition');
+  figure.append(mechanismLabels([['Hiring','Employers'],['Occupational training','Programme partners'],['Salary support','Programme support']], 'lib-transition-supports'));
+  figure.append(mechanismSvg('<path d="M105 267H895" class="lib-mech-ground"/><path d="M118 215H875" class="lib-mech-route-back"/><path d="M118 215H875" class="lib-mech-route"/><path d="m860 201 15 14-15 14" class="lib-mech-route-arrow"/><g class="lib-mech-supports"><path d="M245 29v73q0 38 40 38h80q40 0 40 40v35M500 29v186M755 29v73q0 38-40 38h-80q-40 0-40 40v35"/></g><g class="lib-mech-support-nodes"><circle cx="245" cy="29" r="18"/><circle cx="500" cy="29" r="18"/><circle cx="755" cy="29" r="18"/></g><path d="m237 28 6 6 11-12M490 29h20m-10-10v20M746 24h18m-18 10h18" class="lib-mech-inverse"/><g transform="translate(119 174)"><circle cy="-15" r="14" class="lib-mech-person"/><path d="M-25 41V16q0-15 25-15t25 15v25" class="lib-mech-person"/></g><g transform="translate(878 185)"><rect x="-33" y="-15" width="66" height="45" class="lib-mech-job"/><path d="M-13-15v-12h26v12M-33 2h66M-5-3v10h10V-3"/></g><g class="lib-mech-transition-points"><circle cx="405" cy="215" r="6"/><circle cx="500" cy="215" r="6"/><circle cx="595" cy="215" r="6"/></g>', '0 0 1000 295'));
+  const ends=make('div','lib-transition-ends');ends.append(make('strong','','Worker'),make('strong','','Destination job'));figure.append(ends);
+  figure.append(make('figcaption','lib-mechanism-caption','Hiring, training and salary support connect a worker to a destination job. This is a mechanism, not a guaranteed outcome or a measured timeline.'));
+  return figure;
+}
+function guidanceMechanism() {
+  const figure=make('figure','lib-mechanism lib-mechanism-guidance');
+  figure.append(mechanismLabels([['Employment',''],['Tax',''],['Social insurance','']], 'lib-guidance-domains'));
+  const plot=make('div','lib-guidance-plot');
+  plot.append(mechanismSvg('<path d="M150 10v52q0 24 24 24h192q32 0 32 32v20M500 10v128M850 10v52q0 24-24 24H634q-32 0-32 32v20" class="lib-mech-connections"/><g class="lib-mech-inputs"><circle cx="150" cy="10" r="7"/><circle cx="500" cy="10" r="7"/><circle cx="850" cy="10" r="7"/></g><path d="M322 137h356v124H322z" class="lib-mech-guidance-desk"/><path d="M342 157h316v84H342z" class="lib-mech-fine"/><path d="M416 261v36q0 25-25 25H249q-25 0-25 25v29M584 261v36q0 25 25 25h142q25 0 25 25v29" class="lib-mech-out-connections"/><circle cx="224" cy="376" r="8" class="lib-mech-red"/><circle cx="776" cy="376" r="8" class="lib-mech-red"/>', '0 0 1000 395'));
+  const centre=make('p','lib-guidance-hub');centre.append(make('strong','','Connected guidance'));plot.append(centre);figure.append(plot);
+  const recipients=make('div','lib-guidance-recipients');recipients.append(make('strong','','Workers'),make('strong','','Employers'));figure.append(recipients);
+  figure.append(make('figcaption','lib-mechanism-caption','Public agencies connect guidance across subjects for cross-border workers and employers. Use of guidance is not evidence of additional jobs.'));
+  return figure;
+}
+function responseMechanism(item) {
+  const family=mechanismFamilies[item.id];
+  if(family==='pool') return poolingMechanism(item);
+  if(family==='transition') return transitionMechanism();
+  if(family==='guidance') return guidanceMechanism();
+  return sequence(steps[item.id] || ['Participants','Documented arrangement','Provided service'], ['WHO IS INVOLVED','HOW IT WORKS','WHAT IT PROVIDES']);
 }
 function pressed(buttons, selected) { buttons.forEach((item, i) => item.setAttribute('aria-pressed', String(i === selected))); }
 function motionControls(container) {
@@ -125,50 +214,60 @@ function motionControls(container) {
 function responses(container, cases) {
   if (!cases?.length) { container.append(make('p', 'lib-empty', 'The examples are unavailable. The research companion contains the source collection.')); return; }
   const groups = [...new Set(cases.map(item => item.problem))];
-  let currentGroup = groups[0], currentIndex = 0;
+  const initial = container.dataset.caseId ? cases.find(item => item.id === container.dataset.caseId) : cases[0];
+  if (!initial) { container.append(make('p', 'lib-empty', 'This response example could not be loaded.')); return; }
+  const fixed = container.dataset.libraryStatic === 'true';
+  container.classList.toggle('lib-static', fixed);
+  let currentGroup = initial.problem, selectedId = initial.id;
   const filters = make('div', 'lib-filters'); filters.setAttribute('role', 'group'); filters.setAttribute('aria-label', 'Choose a practical problem');
+  const choices = make('div', 'lib-case-choices'); choices.setAttribute('role', 'group'); choices.setAttribute('aria-label', 'Choose a response example');
   const content = make('div', 'lib-response-stage');
   const buttons = groups.map((group, i) => {
-    const b = button(groupLabels[group] || group, 'lib-filter', () => { currentGroup = group; currentIndex = 0; pressed(buttons, i); render(); });
-    b.setAttribute('aria-pressed', String(i === 0)); filters.append(b); return b;
+    const b = button(groupLabels[group] || group, 'lib-filter', () => { setCase(cases.find(item => item.problem === group).id); });
+    b.setAttribute('aria-pressed', String(group === currentGroup)); filters.append(b); return b;
   });
-  container.append(filters, content);
+  if (!fixed) container.append(filters, choices);
+  container.append(content);
+  function setCase(id) {
+    const item = cases.find(candidate => candidate.id === id);
+    if (!item) return false;
+    currentGroup = item.problem; selectedId = item.id;
+    pressed(buttons, groups.indexOf(currentGroup)); render(); return true;
+  }
   function render() {
     const available = cases.filter(item => item.problem === currentGroup);
-    currentIndex = Math.min(currentIndex, available.length - 1);
-    const item = available[currentIndex]; content.replaceChildren();
+    const item = available.find(candidate => candidate.id === selectedId);
+    choices.replaceChildren();
+    if (!fixed) available.forEach(candidate => {
+      const choice = button('', 'lib-case-choice', () => {
+        setCase(candidate.id);
+        [...choices.children].find(child => child.dataset.caseId === candidate.id)?.focus({preventScroll:true});
+      });
+      choice.dataset.caseId = candidate.id;
+      choice.setAttribute('aria-pressed', String(candidate.id === selectedId));
+      choice.append(make('span', '', candidate.name), make('small', '', candidate.region));
+      choices.append(choice);
+    });
+    content.replaceChildren();
     const header = make('div', 'lib-case-header');
     const identity = make('div', 'lib-case-identity');
     identity.append(make('h3', 'lib-case-name', item.name));
     const meta = make('p', 'lib-case-meta'); meta.append(make('span', '', item.region), make('span', 'lib-evidence-type', item.evidenceType)); identity.append(meta);
-    const navigation = make('div', 'lib-case-navigation');
-    const previous = button('', 'lib-arrow lib-prev', () => { currentIndex = (currentIndex - 1 + available.length) % available.length; render(); content.querySelector('.lib-prev').focus({preventScroll:true}); }); previous.innerHTML = arrow; previous.setAttribute('aria-label', 'Previous example');
-    const next = button('', 'lib-arrow lib-next', () => { currentIndex = (currentIndex + 1) % available.length; render(); content.querySelector('.lib-next').focus({preventScroll:true}); }); next.innerHTML = arrow; next.setAttribute('aria-label', 'Next example');
-    navigation.append(previous, make('span', 'lib-count', `${currentIndex + 1} / ${available.length}`), next); header.append(identity, navigation);
-    const label = make('label', 'lib-case-picker'); label.append(make('span', '', 'Choose an example'));
-    const select = make('select'); select.setAttribute('aria-label', 'Choose a response example');
-    groups.forEach(group => {
-      const optgroup = make('optgroup'); optgroup.label = group;
-      cases.filter(x => x.problem === group).forEach(x => { const option = make('option', '', `${x.name} · ${x.region}`); option.value = x.id; option.selected = x.id === item.id; optgroup.append(option); }); select.append(optgroup);
-    });
-    select.addEventListener('change', () => {
-      const chosen = cases.find(x => x.id === select.value); currentGroup = chosen.problem;
-      currentIndex = cases.filter(x => x.problem === currentGroup).findIndex(x => x.id === chosen.id);
-      pressed(buttons, groups.indexOf(currentGroup)); render(); content.querySelector('select').focus({preventScroll:true});
-    }); label.append(select);
-    const labels = steps[item.id];
-    content.append(header, sequence(labels || ['Participants', 'Documented arrangement', 'Provided service'], ['WHO IS INVOLVED', 'HOW IT WORKS', 'WHAT IT PROVIDES']));
-    content.append(make('p', 'lib-diagram-note', item.id === 'connected-care' ? 'This sketch follows the eligible-patient pilot. Records and return referrals are separate arrangements.' : 'A mechanism sketch—not an estimate of its effect.'));
-    content.append(label, disclosure('Read the evidence, limits and sources', [['Mechanism', item.mechanism], ['What is documented', item.evidence], ['What this does not establish', item.limit]], item.sources));
+    header.append(identity);
+    content.append(header, responseMechanism(item));
+    if(!mechanismFamilies[item.id]) content.append(make('p', 'lib-diagram-note', item.id === 'connected-care' ? 'This sketch follows the eligible-patient pilot. Records and return referrals are separate arrangements.' : 'A mechanism sketch—not an estimate of its effect.'));
+    content.append(evidenceSummary([['What is documented', item.evidence], ['What this does not establish', item.limit]]));
+    content.append(disclosure('Mechanism and sources', [['Mechanism', item.mechanism]], item.sources));
     const status = make('p', 'lib-screen-status', `${item.name}. ${item.region}. ${item.evidenceType}.`); status.setAttribute('role', 'status'); content.append(status);
   }
   render();
+  return {setCase};
 }
 
 function measures(container, measurement) {
   if (!measurement?.areas?.length) { container.append(make('p', 'lib-empty', 'The measurement menu is unavailable.')); return; }
   let current = 0, regionIndex = 0;
-  container.append(make('p', 'lib-measure-intro', 'Choose the question first. Start with existing records.'));
+  container.append(make('p', 'lib-measure-intro', 'Measurement proposals. Choose the question first; start with existing records.'));
   const areas = make('div', 'lib-area-selector'); areas.setAttribute('role','group'); areas.setAttribute('aria-label','Choose an area to follow');
   const stage = make('div', 'lib-measure-stage');
   const regionStage = make('div', 'lib-region-stage');
@@ -181,7 +280,8 @@ function measures(container, measurement) {
   function render() {
     const area = measurement.areas[current]; stage.replaceChildren();
     stage.append(sequence(areaSummaries[area.id] || ['Existing records','Relevant outcomes','A decision'], ['RECORDS', 'OUTCOME TO FOLLOW', 'DECISION'], ['records','track','decide']));
-    stage.append(disclosure(`Measurement detail · ${area.name}`, [['Records to start with',area.records],['What to follow',area.track],['Decision it can inform',area.decision],['Limit',area.limit]]));
+    stage.append(evidenceSummary([['Limit', areaLimits[area.id] || area.limit]], 'lib-evidence-single'));
+    stage.append(disclosure(`Measurement detail · ${area.name}`, [['Records to start with',area.records],['What to follow',area.track],['Decision it can inform',area.decision],['Full measurement limit',area.limit]]));
     const live=make('p','lib-screen-status',`Measurement area: ${area.name}`); live.setAttribute('role','status');stage.append(live);
   }
   function renderRegion() {
@@ -192,8 +292,8 @@ function measures(container, measurement) {
     const line=make('span','lib-reference-link'); line.innerHTML=arrow;
     const b=make('div','lib-reference-stop');b.append(make('span','lib-reference-dot'),make('strong','','Follow relevant outcomes'));
     timeline.append(a,line,b); regionStage.append(timeline);
-    regionStage.append(make('p','lib-region-note',sg?'A pre-RTS reference point—not a baseline before integration.':'Use a specific change and credible comparisons. A general pre-integration baseline is unavailable.'));
-    regionStage.append(disclosure('Regional approach and comparison limits',[['Approach',region.approach],['Comparison limit',region.caveat]]));
+    regionStage.append(evidenceSummary([['Comparison limit', sg ? 'A pre-RTS reference, not a pre-integration baseline. Other changes may move outcomes, and spending forecasts may overlap.' : 'No general pre-integration baseline. Compare groups with different exposure and check other influences; neighbouring cities are not unaffected controls.']], 'lib-evidence-single'));
+    regionStage.append(disclosure('Regional approach and full limits',[['Approach',region.approach],['Full comparison limit',region.caveat]]));
   }
   render(); renderRegion();
 }
@@ -212,20 +312,22 @@ function futureQuestions(container, future) {
     const constellation=make('div','lib-city-pair');constellation.setAttribute('aria-label',item.places);
     places.forEach((place,i)=>{const point=make('div','lib-city-stop');point.append(make('span','lib-city-dot'),make('span','',place));constellation.append(point);if(i<places.length-1)constellation.append(make('span','lib-city-link'));});
     stage.append(constellation,make('h3','lib-future-question',item.question));
-    stage.append(disclosure('Context and further reading',[['Keep the comparison bounded',item.caveat]],item.sources));
+    stage.append(evidenceSummary([['Keep the comparison bounded', item.caveat]], 'lib-evidence-single'));
+    stage.append(disclosure('Further reading sources',[],item.sources));
     const live=make('p','lib-screen-status',`Future reading: ${item.name}`);live.setAttribute('role','status');stage.append(live);
   }
   render();
 }
 
 export function initLibrary(container, cases, measurement, future) {
-  if (!container) return { pause() {}, destroy() {} };
+  if (!container) return { pause() {}, setCase() {return false;}, destroy() {} };
   container.classList.add('lib-root');
   const mode=container.dataset.library;
   container.replaceChildren();
-  if(mode==='responses')responses(container,cases);
+  let controller;
+  if(mode==='responses')controller=responses(container,cases);
   else if(mode==='measurement')measures(container,measurement);
   else if(mode==='future')futureQuestions(container,future);
   const motion=motionControls(container);
-  return { pause:motion.pause, destroy(){motion.destroy();container.replaceChildren();} };
+  return { pause:motion.pause, setCase(id){return controller?.setCase(id) || false;}, destroy(){motion.destroy();container.replaceChildren();} };
 }

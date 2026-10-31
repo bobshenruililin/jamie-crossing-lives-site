@@ -1,0 +1,108 @@
+{
+  "title": "Different studies. Different views of cross-border life.",
+  "scope": "Selected starting points from the project's research map, not a systematic literature review. Their places, periods and methods differ; they do not form a single before-and-after series.",
+  "studies": [
+    {
+      "id": "shen-2014",
+      "year": "2014",
+      "selector": "Integration",
+      "authors": "Jianfa Shen",
+      "title": "Not quite a twin city: Cross-boundary integration in Hong Kong and Shenzhen",
+      "type": "Journal article · historical context",
+      "publication": "2014 · Habitat International 42, 138–146",
+      "dataPeriod": "Historical evidence; no single observation year specified in this map",
+      "geography": "Hong Kong–Shenzhen",
+      "method": "Analysis of economic, institutional and social integration",
+      "contribution": "Distinguishes forms of integration that can develop at different speeds. The project asks how those parts combine in selected everyday lives.",
+      "limit": "Historical context, not a diagnosis of the region in 2026.",
+      "sources": [
+        {"label": "CUHK publication record", "url": "https://research.cuhk.edu.hk/en/publications/not-quite-a-twin-city-cross-boundary-integration-in-hong-kong-and-2/"}
+      ]
+    },
+    {
+      "id": "gao-han-song-2025",
+      "year": "2025",
+      "selector": "Travel & spending",
+      "authors": "Xijie Gao, Jing Han & Zheng (Michael) Song",
+      "title": "Hong Kong Travelers in Mainland China: Scale, Destinations, and Expenditure Patterns",
+      "type": "Working paper",
+      "publication": "March 2025",
+      "dataPeriod": "Mainly through 2024",
+      "geography": "Hong Kong travel and expenditure in Mainland China",
+      "method": "Official series, AlipayHK aggregates and a simple model",
+      "contribution": "Shows different mixes of purchases and destinations. The project adds people's reported reasons for choosing an activity or place.",
+      "limit": "Platform coverage is selective; Mainland China is broader than Shenzhen. Different baskets do not identify how much Hong Kong spending was displaced.",
+      "sources": [
+        {"label": "Working paper (PDF)", "url": "https://www.michael-song.org/uploads/4/8/1/4/48141215/hongkongers_in_mainland.pdf"},
+        {"label": "CUHK research page", "url": "https://cz-jrc.econ.cuhk.edu.hk/research/hong-kong-travelers-in-mainland-china-scale-destinations-and-expenditure-patterns/"}
+      ]
+    },
+    {
+      "id": "yan-han-he-2026",
+      "year": "2026",
+      "selector": "Healthcare access",
+      "authors": "Xiang Yan, Zixuan Han & Shenjing He",
+      "title": "An infrastructural approach to cross-boundary healthcare access: The case of Hong Kong patients in the Greater Bay Area, China",
+      "type": "Journal article · abstract-level context",
+      "publication": "February 2026 · online 18 December 2025",
+      "dataPeriod": "Field dates not assessed for this research-map entry",
+      "geography": "Hong Kong patients accessing healthcare in the Greater Bay Area",
+      "method": "Qualitative interviews; this entry draws on the abstract",
+      "contribution": "Places the everyday-services lens alongside existing research on how people access healthcare across the boundary.",
+      "limit": "The full methods are not assessed here, and no specific effect from the paper is used in the story. A corrigendum is linked alongside the abstract.",
+      "sources": [
+        {"label": "Publisher abstract", "url": "https://www.sciencedirect.com/science/article/abs/pii/S0277953625012225"},
+        {"label": "HKU abstract record", "url": "https://hub.hku.hk/handle/10722/379192"},
+        {"label": "Corrigendum", "url": "https://www.sciencedirect.com/science/article/abs/pii/S0277953626004557"}
+      ]
+    },
+    {
+      "id": "sbf-rts-2026",
+      "year": "2026",
+      "selector": "RTS spending forecasts",
+      "authors": "Singapore Business Federation, Restaurant Association of Singapore & Singapore Retailers Association",
+      "title": "Impact of RTS on Singapore Retail and F&B Sector",
+      "type": "Association-commissioned study · forecast",
+      "publication": "16 July 2026",
+      "dataPeriod": "March 2026 survey; forward-looking spending projections",
+      "geography": "Singapore–Johor Bahru",
+      "method": "Consumer research and projected changes associated with RTS",
+      "contribution": "Frames a local question about demand in both directions. Actual experience can be compared with the forecasts as RTS use develops.",
+      "limit": "Forecast spending is not realised spending, lost GDP or a measured JS-SEZ effect. It is not directly comparable with observed Hong Kong series.",
+      "sources": [
+        {"label": "SBF summary", "url": "https://www.sbf.org.sg/newsroom/media/press-releases/detail/rts-link-could-reshape-cross-border-consumer-spending--spotlighting-both-opportunities-and-challenges-for-singapore-retail-and-f-b"},
+        {"label": "Full report (PDF)", "url": "https://www.sbf.org.sg/docs/default-source/advocacy-policy/sbf-rts-study_final-report-16-jul.pdf?sfvrsn=b7ba6722_1"}
+      ]
+    },
+    {
+      "id": "xiao-cai-zhang-2026",
+      "year": "2026",
+      "selector": "Living space",
+      "authors": "Yingbo Xiao, Yinger Cai & Wenjia Zhang",
+      "title": "Living Space Patterns and Planning Implications of Cross-Border Employees from Hong Kong in Shenzhen",
+      "type": "Journal article · spatial analysis",
+      "publication": "10 October 2026 · Land 15(10), 1930",
+      "dataPeriod": "2023",
+      "geography": "Hong Kong-linked people in Shenzhen; main spatial sample has Shenzhen home and work anchors",
+      "method": "Selected mobile-phone provider records",
+      "contribution": "Shows neighbourhood differences in how closely home, work and other activity spaces sit together. The project adds reported motives that location signals cannot supply.",
+      "limit": "Selected provider data are not a census or a direct count of daily commuters from Hong Kong. Motives cannot be inferred directly from the signals.",
+      "sources": [
+        {"label": "Publisher article", "url": "https://www.mdpi.com/2073-445X/15/10/1930"}
+      ]
+    }
+  ],
+  "framework": {
+    "title": "A framework for questions, not a score.",
+    "source": "Arup / Resilient Cities Network · City Resilience Framework, 2024 edition",
+    "url": "https://www.arup.com/globalassets/downloads/insights/c/city-resilience-framework/city-resilience-framework-2024v2.pdf",
+    "introduction": "Jamie selected and adapted relevant themes to organise the inquiry. These three lenses do not reproduce the whole framework.",
+    "lenses": [
+      {"name": "Livelihoods and choices", "themes": "Work, skills, businesses and economic conditions"},
+      {"name": "Everyday services and navigation", "themes": "Housing, healthcare, education, mobility and essential services"},
+      {"name": "Relationships and support", "themes": "Community connections and inclusion"}
+    ],
+    "institutions": "Institutions run across all three: relevant rules, organisations, coordination and informed planning.",
+    "limit": "No citywide resilience assessment or score. Environmental and infrastructure risks, disruption and recovery, and comprehensive Shenzhen-side outcomes remain outside this study's scope."
+  }
+}

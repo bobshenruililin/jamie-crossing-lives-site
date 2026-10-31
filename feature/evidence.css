@@ -26,11 +26,51 @@
 .evi-overlap-wrap{margin-left:calc(25% + 1rem);margin-right:6.5rem}
 .evi-overlap{position:relative;height:2.5rem}.evi-net-total,.evi-net-offset{position:absolute;left:0;top:0;height:100%;width:var(--width)}.evi-net-total{background:var(--evi-red)}.evi-net-offset{background:var(--evi-teal)}
 .evi-net-label{margin:0 0 .8rem calc(25% + 1rem);font-weight:700}.evi-key{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;margin:1rem 0 0 calc(25% + 1rem);font-size:.85rem;font-weight:700}.evi-key span{display:flex;align-items:center;gap:.4rem}.evi-key i{display:inline-block;width:.9rem;height:.9rem;background:var(--evi-red)}.evi-key .evi-key-in{background:var(--evi-teal)}
-.evi-changed .evi-sg .evi-chart{animation:evi-reveal .45s cubic-bezier(.16,1,.3,1) both}@keyframes evi-reveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
-.evi-paused .evi-chart,html[data-motion="off"] .evi-sg .evi-chart{animation:none}
-@media(prefers-reduced-motion:reduce){.evi-changed .evi-sg .evi-chart{animation:none}}
+.evi-changed .evi-chart{animation:evi-reveal .22s ease-out both}@keyframes evi-reveal{from{opacity:.35;transform:translateY(3px)}to{opacity:1;transform:none}}
+.evi-paused .evi-chart,html[data-motion="off"] .evi-chart{animation:none}
+@media(prefers-reduced-motion:reduce){.evi-changed .evi-chart{animation:none}}
 @media(max-width:600px){.evi-metadata{display:block}.evi-metadata .evi-unit{margin-top:.5rem}.evi-flows .evi-axis,.evi-net .evi-axis{margin-left:0;margin-right:5rem}.evi-overlap-wrap{margin-left:0;margin-right:5rem}.evi-net-label,.evi-key{margin-left:0}}
-.evi-paused.evi-changed .evi-sg .evi-chart,html[data-motion="off"] .evi-changed .evi-sg .evi-chart{animation:none}
+.evi-paused.evi-changed .evi-chart,html[data-motion="off"] .evi-changed .evi-chart{animation:none}
 
 .evi-heading h3{font-size:clamp(28px,3.4vw,48px);max-width:28ch}.evi-controls{margin-bottom:1.8rem}
 @media(max-width:600px){.evi-heading h3{font-size:28px;max-width:26ch}.evi-controls{margin-bottom:1.5rem}}
+
+/* Claim scope stays beside the marks; disclosure holds provenance. */
+.evi-type{font-size:.72rem;font-weight:700;line-height:1.4;letter-spacing:.07em;text-transform:uppercase;margin:0 0 .65rem;color:#2d726a}
+.evi-fixed{padding-top:1.2rem}
+.evi-bottom{grid-template-columns:minmax(0,1fr);gap:1rem}
+.evi-bottom>div{max-width:76ch}.evi-bottom>div>p:first-child{margin:0}
+.evi-caveat{max-width:76ch;line-height:1.5;border-left:2px solid #b4774e;padding-left:.8rem}
+.evi-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;padding:2rem 0}
+.evi-metric{border-top:1px solid rgba(23,62,64,.3);padding-top:1rem;min-width:0}
+.evi-metric h4{font-size:.9rem;line-height:1.3;margin:0 0 1.1rem;max-width:18ch;min-height:2.6em}
+.evi-metric>strong{display:block;font:700 clamp(1.8rem,3vw,3rem)/1 'Barlow Condensed',sans-serif;color:var(--evi-red);white-space:nowrap}
+.evi-metric>p{font-size:.85rem;line-height:1.4;margin:1rem 0 0;max-width:27ch}
+/* Only the two forecast quantities are colored; unused scale is transparent. */
+.evi-overlap{background:transparent}
+.evi-net-total-label{position:relative;display:flex;gap:.5rem;align-items:baseline;width:var(--end);padding:0 0 .65rem;margin:1.3rem 0 .4rem;border-bottom:1px solid var(--evi-ink);font-size:.8rem;line-height:1.3}
+.evi-net-total-label:before,.evi-net-total-label:after{content:'';position:absolute;bottom:-5px;height:8px;border-left:1px solid var(--evi-ink)}
+.evi-net-total-label:before{left:0}.evi-net-total-label:after{right:0}
+.evi-net-total-label strong{font-size:1rem;white-space:nowrap}.evi-net-values{display:flex;flex-wrap:wrap;gap:.9rem 1.5rem;margin-top:1rem}
+.evi-net-values p{display:grid;grid-template-columns:.65rem auto;gap:.2rem .4rem;margin:0;font-size:.8rem;line-height:1.35}
+.evi-net-values i{width:.65rem;height:.65rem;background:var(--evi-red);align-self:center}.evi-net-values .evi-key-in{background:var(--evi-teal)}
+.evi-net-values strong{font-size:.9rem}.evi-net-values span{grid-column:2}
+@media(max-width:600px){.evi-metrics{grid-template-columns:1fr;gap:1.3rem}.evi-metric{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.6rem 1rem}.evi-metric h4{min-height:0;margin:0;align-self:center}.evi-metric>strong{font-size:2rem}.evi-metric>p{grid-column:1/-1;margin:0;max-width:none}.evi-net-total-label{display:block}.evi-net-total-label span{display:block;margin-top:.2rem}.evi-net-values{gap:.9rem 1rem}}
+
+/* Forecasts have a declared texture; observed charts keep solid marks. */
+.evi-sg{--fc-out:#173e40;--fc-in:#5f8f86;--fc-paper:#f2eee3}
+.evi-sg .evi-bar,.evi-sg .evi-net-total,.evi-sg .evi-net-offset{--fc-mark:var(--fc-out);border-right:0;background:repeating-linear-gradient(135deg,var(--fc-mark) 0 2px,transparent 2px 6px) var(--fc-paper);box-shadow:inset 0 0 0 1px var(--fc-mark)}
+.evi-sg .evi-incoming,.evi-sg .evi-net-offset{--fc-mark:var(--fc-in)}
+.evi-sg .evi-bar::after,.evi-sg .evi-net-total::after,.evi-sg .evi-net-offset::after{content:'';position:absolute;top:-3px;bottom:-3px;right:0;border-right:2px solid var(--fc-mark)}
+.evi-forecast-key{display:flex;align-items:center;gap:.65rem;max-width:66ch;margin:1.15rem 0 0;font-size:.8rem;line-height:1.45}
+.evi-forecast-key i,.evi-sg .evi-net-values i{--fc-mark:var(--fc-out);flex:none;width:22px;height:12px;background:repeating-linear-gradient(135deg,var(--fc-mark) 0 2px,transparent 2px 6px) var(--fc-paper);box-shadow:inset 0 0 0 1px var(--fc-mark)}
+.evi-sg .evi-net-values .evi-key-in{--fc-mark:var(--fc-in)}
+.evi-sg .evi-net-values p{grid-template-columns:22px auto}
+/* System-color outlines survive forced colors without disabling the user's palette. */
+@media(forced-colors:active){
+  .evi-bar,.evi-net-total,.evi-net-offset{background:Canvas;border:1px solid CanvasText;box-shadow:none}
+  .evi-sg .evi-bar,.evi-sg .evi-net-total,.evi-sg .evi-net-offset,.evi-forecast-key i,.evi-sg .evi-net-values i{background:Canvas;box-shadow:none;border:2px dashed CanvasText}
+  .evi-sg .evi-incoming,.evi-sg .evi-net-offset,.evi-sg .evi-net-values .evi-key-in{border-style:solid}
+  .evi-sg .evi-bar::after,.evi-sg .evi-net-total::after,.evi-sg .evi-net-offset::after{border-color:CanvasText}
+  .evi-overlap{background:transparent}.evi-zero{border-color:CanvasText}
+}

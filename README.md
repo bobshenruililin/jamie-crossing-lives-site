@@ -15,6 +15,13 @@ Open `index.html` through an HTTP server for the unified visual research feature
 contains the complete static draft. The previous companion remains at `research.html`,
 and visual studies remain at `samples/`. Font licences are included in `fonts/`.
 
-The opening game uses invented demand and rules. The spatial model is a conceptual
+The optional route game uses invented demand and rules. The spatial model is a conceptual
 illustration, not measured geographic data. Selected field photographs were supplied
 by Bob and Jamie. This is a review edition for Jamie's feedback.
+
+The website and presentation follow the revised script checked on 31 October 2026
+(twelve sets of conversation and visit notes, plus two separate expert discussions).
+The active presentation omits the implications section held for further review.
+The original r2154 presentation PDF remains at presentation-r2154.pdf. Maps, policy
+documents and research collections extend the main narrative with their own sources
+and limits. This is a working draft for review, not a final approval by Jamie.

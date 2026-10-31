@@ -1,0 +1,80 @@
+{
+  "title": "Education and care: distinct cross-boundary connections",
+  "datasets": [
+    {
+      "id": "pupils",
+      "title": "Cross-boundary pupils travelling daily",
+      "unit": "Pupils",
+      "geography": "Mainland residence; school in Hong Kong",
+      "period": "September 2024 snapshot, 2024/25 school year",
+      "items": [
+        {
+          "label": "Daily cross-boundary pupils",
+          "value": 16139,
+          "display": "16,139"
+        },
+        {
+          "label": "Kindergarten",
+          "value": 388,
+          "display": "388"
+        },
+        {
+          "label": "Primary",
+          "value": 2577,
+          "display": "2,577"
+        },
+        {
+          "label": "Secondary",
+          "value": 13174,
+          "display": "13,174"
+        }
+      ],
+      "caveat": "Pupils, not crossing events. Mainland residence is not necessarily Shenzhen. Earlier collections differed in geography and reference month; this is not a comparable trend.",
+      "sources": [
+        {
+          "label": "Education Bureau, 2026/27 estimates, EDB064 Annex table 1 (PDF page 255; printed 246)",
+          "url": "https://www.edb.gov.hk/attachment/en/about-edb/press/legco/replies-to-fc/edb-e-2627.pdf"
+        }
+      ]
+    },
+    {
+      "id": "care",
+      "title": "Three measures of use. Three different meanings.",
+      "eyebrow": "DEFINED CROSS-BOUNDARY HEALTH ARRANGEMENTS",
+      "kind": "metrics",
+      "unit": "Distinct scheme and feature measures",
+      "items": [
+        {
+          "label": "Eligible HA patients using follow-up pilot",
+          "value": 5900,
+          "display": ">5,900",
+          "detail": "By end-January 2026"
+        },
+        {
+          "label": "Attendances under the pilot",
+          "value": 25000,
+          "display": ">25,000",
+          "detail": "By end-January 2026"
+        },
+        {
+          "label": "Cross-boundary Health Record users",
+          "value": 23000,
+          "display": ">23,000",
+          "detail": "By end-May 2026"
+        }
+      ],
+      "summary": "Connected care can involve coverage, payment, records and follow-up through separate defined arrangements.",
+      "caveat": "Patients, attendances and record-feature users are distinct and potentially overlapping. Do not sum them or read them as a funnel, universal coverage or clinical outcomes.",
+      "sources": [
+        {
+          "label": "[5.6] Reply",
+          "url": "https://www.info.gov.hk/gia/general/202606/17/P2026061700586p.htm"
+        },
+        {
+          "label": "[5.14] 25 February 2026",
+          "url": "https://www.info.gov.hk/gia/general/202602/25/P2026022500444.htm"
+        }
+      ]
+    }
+  ]
+}

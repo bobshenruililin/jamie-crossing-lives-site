@@ -99,7 +99,8 @@
         [svg, ...svg.querySelectorAll('*')].forEach((node) => {
           [...node.attributes].forEach((attribute) => {
             const name = attribute.name.toLowerCase();
-            if (name.startsWith('on') || ((name === 'href' || name === 'xlink:href') && !attribute.value.startsWith('#'))) node.removeAttribute(attribute.name);
+            const isEmbeddedRaster = node.localName === 'image' && /^(?:data:image\/(?:jpeg|png);base64,)[A-Za-z0-9+/]+={0,2}$/.test(attribute.value);
+            if (name.startsWith('on') || ((name === 'href' || name === 'xlink:href') && !attribute.value.startsWith('#') && !isEmbeddedRaster)) node.removeAttribute(attribute.name);
           });
         });
         return document.importNode(svg, true);
