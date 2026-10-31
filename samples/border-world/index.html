@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eae6da">
+  <title>Border instruments — a spatial study</title>
+  <link rel="stylesheet" href="world.css">
+</head>
+<body>
+  <main class="instrument" aria-label="A conceptual spatial model of lives across a border">
+    <header class="topline"><a href="../index.html" class="back">← THE STUDIES</a><span>JAMIE KO · CROSSING LIVES</span><span class="edition">SPATIAL STUDY / 01</span></header>
+    <div class="heading"><p class="kicker">BORDER INSTRUMENTS</p><h1>Lives do not<br><em>move together.</em></h1><p class="subheading">One boundary. Different parts of a life.</p></div>
+    <aside class="layer-panel" aria-label="Parts of a life"><span class="panel-label">ISOLATE A LAYER</span><div id="layers"></div><p id="layer-help">Select a layer to see what the account establishes.</p></aside>
+    <section class="world" aria-label="Interactive conceptual miniature">
+      <svg id="scene" viewBox="0 0 1400 800" role="img" tabindex="0" aria-labelledby="scene-title scene-description" aria-keyshortcuts="ArrowLeft ArrowRight Home"><title id="scene-title">Two sides of a boundary, connected by different parts of life</title><desc id="scene-description">A conceptual architectural miniature. Select one of four arrangements below to change the home, work or study, particular-purpose use, and personal ties shown. These are illustrative relationships, not map routes.</desc></svg>
+      <div class="world-instruction"><span class="tiny-cross">✣</span> DRAG OR USE ← → TO TURN <span>·</span> <button id="reset-view" type="button">RESET VIEW ↗</button></div>
+      <div class="camera-controls"><button id="motion" type="button" aria-pressed="false">Ⅱ <span>Pause motion</span></button><span class="model-tag">CONCEPTUAL MODEL · NOT A MAP</span></div>
+    </section>
+    <section class="reading" aria-live="polite" aria-atomic="true"><span id="case-number">01 / 04</span><div><h2 id="case-title">Cross for a particular purpose</h2><p id="case-note"></p></div><button id="evidence-button" aria-expanded="false" aria-controls="evidence" type="button">READ THE LIMITS <span>+</span></button></section>
+    <nav class="arrangements" aria-label="Select a life arrangement">
+      <button data-case="use" aria-pressed="true"><span class="case-index">01</span><span>Cross to use</span><svg viewBox="0 0 70 24" aria-hidden="true"><path d="M5 12h50m-7-6 7 6-7 6"/></svg></button>
+      <button data-case="move" aria-pressed="false"><span class="case-index">02</span><span>Move home</span><svg viewBox="0 0 70 24" aria-hidden="true"><path d="M5 12h50m-7-6 7 6-7 6M61 4v16"/></svg></button>
+      <button data-case="work" aria-pressed="false"><span class="case-index">03</span><span>Work / study across</span><svg viewBox="0 0 70 24" aria-hidden="true"><path d="M6 8h49m-6-5 6 5-6 5M58 17H9m6-5-6 5 6 5"/></svg></button>
+      <button data-case="ties" aria-pressed="false"><span class="case-index">04</span><span>Keep ties</span><svg viewBox="0 0 70 24" aria-hidden="true"><path d="M7 12c10-18 18 18 28 0s18 18 28 0"/></svg></button>
+    </nav>
+    <div id="evidence" class="evidence" hidden><button class="close-evidence" type="button" aria-label="Close evidence details">×</button><p class="kicker">WHAT THIS MODEL CAN SAY</p><h3>Relationships, not routes.</h3><p id="evidence-note"></p><dl id="facts"></dl><p class="evidence-footer">Four illustrative arrangements from the current research presentation. They overlap; they are not a population classification. Architecture, distances and paths are original explanatory illustration. CARE is not established in these four accounts.</p></div>
+    <noscript><div class="no-script">This model needs JavaScript for its spatial view. The four source arrangements are: cross for a particular purpose; move home and retain connections; separate residence and work or study; stay based in Hong Kong and keep ties elsewhere. These are illustrations, not population categories or mapped routes.</div></noscript>
+  </main>
+  <script src="world.js"></script>
+</body>
+</html>

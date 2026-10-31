@@ -1,0 +1,114 @@
+{
+  "areas": [
+    {
+      "id": "household-choices",
+      "name": "Household choices",
+      "track": "Spending by category on both sides; trip purpose and frequency; travel time and cost; access to better-value or otherwise unavailable goods and services. For Singapore–Johor, distinguish relocation-related household spending from spending associated with shopping trips.",
+      "records": "Existing travel and expenditure surveys, complemented where suitable by aggregated payment data.",
+      "decision": "Distinguish household gains, movable spending and travel burdens.",
+      "limit": "Keep samples consistent and account for cash and platform coverage. Records are not assumed accessible or linkable. Check for overlap before combining relocation-related spending estimates with shopping-trip forecasts; these are proposed distinctions, not measured additional flows."
+    },
+    {
+      "id": "business-adjustment",
+      "name": "Business adjustment",
+      "track": "Sales, transactions, staffing, recorded costs and continued operation; changes in products, customers or operating model, separated by sector, location, employment size and ownership.",
+      "records": "A consistent business sample using suitable surveys, licensing or business records, recording exits, relocations and operator changes.",
+      "decision": "Distinguish demand shifts from costs or other constraints and identify where adjustment support may help.",
+      "limit": "Surviving firms alone can give a misleading picture. Dissolution, outlet closure, relocation and payment-provider changes are different events; employment size does not identify chain ownership."
+    },
+    {
+      "id": "worker-transitions",
+      "name": "Worker transitions",
+      "track": "Time to the next job; destination occupation and industry; monthly and hourly earnings; hours; status at six and twelve months, including self-employment, training and labour-force exit.",
+      "records": "Employment-service and administrative records, with targeted follow-up for missing groups and non-participants or non-completers where feasible.",
+      "decision": "Identify workable transitions and groups needing different support.",
+      "limit": "Keep earnings, hours and destinations distinct. Retirement, care, training and self-employment are not automatically failed transitions; report coverage, non-response and attrition."
+    },
+    {
+      "id": "access-to-growth",
+      "name": "Access to growth",
+      "track": "Registration followed by paid professional work; supplier introductions, qualification, paid contracts and repeat business; residents hired and retained in growing activities. Where professional access changes, track registration-to-work alongside vacancies, pay, staffing and service availability in the affected occupation, separating new entrants and established workers where feasible.",
+      "records": "Relevant registration, procurement, employer and programme records where feasible, including contract value and sustained work when useful.",
+      "decision": "Distinguish formal access and activity counts from actual earning opportunities. Examine opportunities opened alongside changes affecting firms and workers already there.",
+      "limit": "Registration, introductions and supplier qualification do not by themselves establish contracts, earnings or causal programme gains. Occupational changes warrant investigation; they do not by themselves establish recognition-caused displacement or lower wages. Check each scheme’s scope rather than assuming reciprocal recognition."
+    },
+    {
+      "id": "everyday-services",
+      "name": "Everyday services",
+      "track": "Jobs or moves delayed or forgone because of housing, care, schooling or healthcare; relevant costs, eligibility, waiting times and completed service hand-offs.",
+      "records": "A few targeted questions in existing applications, onboarding or short follow-ups, including users who abandon a proposed job or move. Agencies and service providers can work with employers and existing support organisations to identify recurring barriers through these records and follow-ups.",
+      "decision": "Identify the practical arrangement preventing a particular group from taking up work or moving. Prioritise recurring, unresolved barriers where a feasible change could make a difference, including specific care gaps identified by users.",
+      "limit": "Do not assume every service is equally important or that a reported barrier establishes routine system failure."
+    },
+    {
+      "id": "useful-connections",
+      "name": "Useful connections",
+      "track": "Knowing where to seek help; whether a referral or introduction produced useful information, practical help, a customer or work opportunity; who remains unreached.",
+      "records": "Short voluntary questions in existing follow-up about whether help was received and used.",
+      "decision": "Assess reach and useful assistance rather than attendance or contact counts.",
+      "limit": "A contact does not establish received help, and a referral does not establish resolution. Do not assign a GDP value to friendships."
+    },
+    {
+      "id": "established-residents",
+      "name": "Established residents",
+      "track": "Housing costs relative to income, relevant service access, local employment and supplier participation, distinguishing established residents and newcomers where feasible.",
+      "records": "Selected local household, housing, service and employment series with residence defined at the chosen reference point.",
+      "decision": "Examine access to new opportunities alongside possible cost pressures for existing residents.",
+      "limit": "Residence is not the same as citizenship. State definitions of existing residents and local suppliers, and do not assume observed pressures were caused by integration."
+    },
+    {
+      "id": "institutions-and-reliability",
+      "name": "Institutions and reliability",
+      "track": "Resolution time, repeated hand-offs, cases outside provider remits and user-confirmed resolution; missed work and interrupted essential services during actual disruptions.",
+      "records": "Existing case records with common categories and aggregated reporting, supported by user confirmation where relevant.",
+      "decision": "Identify a specific coordination issue, the responsible provider and consequences of unreliable access.",
+      "limit": "A closed ticket is not necessarily a resolved problem. Do not infer disruption effects from ordinary service activity alone."
+    }
+  ],
+  "regions": [
+    {
+      "id": "singapore-johor",
+      "name": "Singapore–Johor",
+      "approach": "Use historical series and a reference point before RTS passenger service opens for selected businesses, households and services. Follow outcomes at suitable intervals, including Johor residents and suppliers as well as Singapore households and firms. Distinguish relocation-related household spending from shopping-trip forecasts.",
+      "caveat": "This is a pre-RTS reference point, not a baseline before integration in general. Account for seasonality, anticipation and other changes; distinguish RTS from the JS-SEZ agreement, investment projects and workforce programmes. Check for overlap before combining spending estimates; a possible relocation-related shift is not an observed migration effect or a second quantified forecast."
+    },
+    {
+      "id": "hong-kong-shenzhen",
+      "name": "Hong Kong–Shenzhen",
+      "approach": "Follow particular business activities, workers, registration-to-work pathways or service referrals over time, starting with existing establishment, employment, vacancy and programme data. Where professional access changes, also follow occupational vacancies, pay, staffing and service availability, distinguishing new entrants and established workers where feasible.",
+      "caveat": "A credible general pre-integration baseline is unavailable. Comparisons need similar groups with different exposure and checks on other influences; Hong Kong and Shenzhen are not simply each other’s unaffected control. These measures alone do not show that recognition caused displacement or lower wages; scheme scope and reciprocity must be checked rather than assumed."
+    }
+  ],
+  "principles": [
+    "This is a selective menu for responsible agencies, associations, employers and service providers, not a new resilience index, a requirement to measure everything or additional primary fellowship research.",
+    "Check existing fields, coverage and reporting first. Use available records and fill selected gaps only when the information would change a decision; access and linkage are not assumed.",
+    "Match effort to the decision: routine monitoring of reach, relevant outcomes and cost; proportionate follow-up; and credible comparison-based evaluation for substantial or expanding interventions. Before-and-after improvement alone is not causal evidence.",
+    "Select one main outcome and a few diagnostic measures per intervention: net savings and reliability for shared purchasing; additional and repeat transactions for promotion; sustained work, pay and hours for career conversion; useful assistance for referrals.",
+    "Track household benefits alongside business and worker pressures. Follow the same firms or people where feasible, include exits and non-completers, and show denominators, non-response and attrition.",
+    "Use proportionate secure access and aggregated publication. A bilateral comparison need not transfer identifiable records across the border; agree useful definitions and periods while retaining appropriate local data custody.",
+    "Assign follow-up to existing responsible organisations and use bilateral coordination only where action is required on both sides. Public support should meet demonstrated needs with benefits that justify its cost. Use the results to decide which support to continue, change or stop.",
+    "Existing practices are starting points, not proof of this proposed menu: MOM tracks resident re-employment with coverage limits; Skills4Johor requires six-month outcome assessment; DOSM’s 2025 survey covers Malaysian residents’ spending abroad, not Singapore residents’ spending in Johor."
+  ],
+  "sources": [
+    {
+      "label": "Hong Kong C&SD establishment, employment and vacancy report: June 2026",
+      "url": "https://www.censtatd.gov.hk/en/wbr.html?ecode=B10500032026QQ02"
+    },
+    {
+      "label": "Singapore MOM Labour Market Report: fourth quarter 2025",
+      "url": "https://stats.mom.gov.sg/iMAS_PdfLibrary/mrsd-Labour-Market-Report-4Q-2025.pdf"
+    },
+    {
+      "label": "HRD Corp Skills4Johor assessment guidance",
+      "url": "https://supportcentre.hrdcorp.gov.my/portal/en/kb/articles/skills4johor-initiative"
+    },
+    {
+      "label": "DOSM Expenditure of Malaysian Residents Survey 2025",
+      "url": "https://www.dosm.gov.my/uploads/release-content/file_20261016115904.pdf"
+    },
+    {
+      "label": "Singapore CCP comparison-based evaluation: February 2025",
+      "url": "https://www.meti.gov.sg/resources/economic-survey-of-singapore/economic-survey-of-singapore-and-feature-articles/impact-evaluation-of-workforce-singapore-s-place-and-train-career-conversion-programme/"
+    }
+  ]
+}

@@ -10,6 +10,11 @@ The study is exploratory and Hong Kong-centred, informing questions for Singapor
 Statistics, programme descriptions, forecasts and proposals are distinguished throughout.
 Comparative examples and future reading avenues do not establish transferable effects.
 
-Open `index.html` through an HTTP server for the research companion, or
+Open `index.html` through an HTTP server for the unified visual research feature, or
 `presentation.html` for the manually advanced presentation. `presentation.pdf`
-contains the complete static draft. Font licences are included in `fonts/`.
+contains the complete static draft. The previous companion remains at `research.html`,
+and visual studies remain at `samples/`. Font licences are included in `fonts/`.
+
+The opening game uses invented demand and rules. The spatial model is a conceptual
+illustration, not measured geographic data. Selected field photographs were supplied
+by Bob and Jamie. This is a review edition for Jamie's feedback.

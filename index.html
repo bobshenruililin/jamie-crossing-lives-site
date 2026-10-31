@@ -1,191 +1,26 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#082f35">
-  <title>Crossing Lives / Research companion</title>
-  <link rel="stylesheet" href="research.css">
-  <script src="research.js" defer></script>
-</head>
+<html lang="en" data-motion="on">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f2eee3"><meta name="description" content="Explore how home, work, services and relationships span a border. A visual research companion to Jamie Ko’s presentation, with field photographs and interactive evidence."><title>Crossing Lives — When lives span a border</title><link rel="preload" href="fonts/BarlowCondensed-Bold.ttf" as="font" type="font/ttf" crossorigin><link rel="stylesheet" href="feature/story.css"><link rel="stylesheet" href="feature/game.css"><link rel="stylesheet" href="feature/world.css"><link rel="stylesheet" href="feature/evidence.css"><link rel="stylesheet" href="feature/library.css"></head>
 <body>
-  <a class="skip-link" href="#lives">Skip to the research</a>
-  <header class="site-header">
-    <a href="#top" class="brand" aria-label="Crossing Lives, back to top">Crossing<span>Lives</span><i aria-hidden="true">↗</i></a>
-    <div class="header-right">
-      <span class="draft-badge">Working draft</span>
-      <nav aria-label="Presentation resources">
-        <a href="presentation.pdf" class="pdf-link" target="_blank" rel="noopener">PDF <span aria-hidden="true">↗</span></a>
-        <a href="presentation.html" class="presentation-link">Presentation <span aria-hidden="true">↗</span></a>
-      </nav>
-    </div>
-  </header>
-
-  <nav class="chapter-rail" aria-label="Research chapters">
-    <div class="rail-progress" aria-hidden="true"><span></span></div>
-    <a href="#lives"><span>01</span><b>Lives</b></a>
-    <a href="#evidence"><span>02</span><b>Evidence</b></a>
-    <a href="#responses"><span>03</span><b>Responses</b></a>
-    <a href="#measure"><span>04</span><b>Measure</b></a>
-    <a href="#further"><span>05</span><b>Further</b></a>
-  </nav>
-
-  <main>
-    <section id="top" class="hero dark-section">
-      <div class="hero-art" role="img" aria-label="Conceptual illustration of overlapping threads. The lines do not represent routes or quantities.">
-        <svg viewBox="0 0 1000 880" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <g fill="none" stroke-width="3">
-            <path class="thread-aqua" d="M90 50H650Q720 50 720 120V560Q720 640 800 640H970"/>
-            <path class="thread-orange" d="M180 10V170Q180 240 250 240H810Q880 240 880 310V800"/>
-            <path class="thread-cream" d="M30 400H490Q570 400 570 480V740Q570 810 640 810H990"/>
-            <path class="thread-aqua" d="M470 0V220Q470 300 550 300H630Q710 300 710 380V840"/>
-            <path class="thread-orange" d="M970 120H400Q320 120 320 200V560Q320 640 240 640H90"/>
-            <path class="thread-cream" d="M70 780H780Q850 780 850 710V520Q850 450 780 450H650"/>
-          </g>
-          <g class="thread-nodes" stroke-width="2">
-            <circle cx="720" cy="240" r="13"/><circle cx="470" cy="120" r="13"/>
-            <circle cx="320" cy="400" r="13"/><circle cx="710" cy="640" r="13"/>
-            <circle cx="570" cy="780" r="13"/><circle cx="850" cy="640" r="13"/>
-          </g>
-          <g fill="none" stroke="#acdcd3" stroke-width="1" opacity=".35">
-            <rect x="415" y="345" width="345" height="345"/>
-            <rect x="435" y="365" width="305" height="305"/>
-            <path d="M415 345L435 365M760 345L740 365M415 690L435 670M760 690L740 670"/>
-          </g>
-        </svg>
-      </div>
-      <div class="section-inner hero-inner">
-        <p class="eyebrow hero-eyebrow">Jamie Ko <span>AsiaGlobal Fellows</span></p>
-        <h1>CROSSING<br><span>LIVES.</span></h1>
-        <div class="hero-intro">
-          <p class="hero-question">What changes when<br><em>everyday life</em><br>spans a border?</p>
-          <p class="hero-description">A research companion on household options, uneven adjustment and the arrangements that make life across borders workable.</p>
-        </div>
-        <div class="hero-bottom">
-          <a class="explore-link" href="#lives">Enter the research <span aria-hidden="true">↓</span></a>
-          <p>Hong Kong–Shenzhen<br><span>Informing questions for Singapore–Johor</span></p>
-          <p class="illustration-note">Conceptual illustration.<br>Lines are not routes or quantities.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="lives" class="chapter lives-section light-section" aria-labelledby="lives-title">
-      <div class="section-inner">
-        <div class="chapter-heading reveal">
-          <p class="eyebrow"><span class="section-number">01</span> Everyday geographies</p>
-          <h2 id="lives-title">ONE BORDER.<br><em>Different arrangements.</em></h2>
-          <p class="chapter-intro">Home, work, services and relationships need not move together. Select an arrangement to see what crosses—and what stays in place.</p>
-        </div>
-        <div class="arrangements-layout reveal">
-          <div>
-            <p class="control-caption">Choose an arrangement</p>
-            <div id="arrangement-options" class="arrangement-options" aria-label="Life arrangements"><p class="loading-note">Loading the arrangements…</p></div>
-          </div>
-          <div id="arrangement-detail" class="arrangement-detail" aria-live="polite" aria-atomic="true">
-            <div class="arrangement-heading"><span id="arrangement-number" aria-hidden="true">—</span><h3 id="arrangement-title">Four ways of arranging a life</h3></div>
-            <div class="arrangement-line" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-            <dl class="life-functions">
-              <div><dt>Home</dt><dd id="life-home">—</dd></div>
-              <div><dt>Work / study</dt><dd id="life-work">—</dd></div>
-              <div><dt>Use</dt><dd id="life-use">—</dd></div>
-              <div><dt>Ties</dt><dd id="life-ties">—</dd></div>
-            </dl>
-            <p id="arrangement-note" class="arrangement-note">Arrangements overlap. They are not population shares or a sequence everyone follows.</p>
-          </div>
-        </div>
-        <p class="section-footnote">Read these as configurations of everyday life, not representative portraits or a population typology.</p>
-      </div>
-    </section>
-
-    <section id="evidence" class="chapter evidence-section dark-section" aria-labelledby="evidence-title">
-      <div class="section-inner">
-        <div class="chapter-heading reveal">
-          <p class="eyebrow"><span class="section-number">02</span> The evidence room</p>
-          <h2 id="evidence-title">LOOK CLOSER.<br><em>Keep the context.</em></h2>
-          <p class="chapter-intro">Movement, receipts, work and care measure different things. Explore each series with its units, period, source and limits in view.</p>
-        </div>
-        <div id="dataset-options" class="dataset-options" aria-label="Choose a dataset"><p class="loading-note">Loading the evidence…</p></div>
-        <article id="dataset-panel" class="dataset-panel" aria-labelledby="dataset-title">
-          <div class="dataset-heading">
-            <div><p id="dataset-eyebrow" class="eyebrow"></p><h3 id="dataset-title">Evidence explorer</h3></div>
-            <span id="dataset-index" class="dataset-index" aria-hidden="true"></span>
-          </div>
-          <p id="dataset-unit" class="chart-unit"></p>
-          <div id="chart-host" class="chart-host"></div>
-          <div class="dataset-reading">
-            <div><h4>What this shows</h4><p id="dataset-summary"></p></div>
-            <div class="evidence-limit"><h4>Keep in mind</h4><p id="dataset-caveat"></p></div>
-          </div>
-          <div class="evidence-bottom">
-            <div id="dataset-sources" class="source-links" aria-label="Dataset sources"></div>
-            <details class="data-table-details"><summary>View the data <span aria-hidden="true">+</span></summary><div id="data-table-host" class="data-table-host"></div></details>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="responses" class="chapter responses-section light-section" aria-labelledby="responses-title">
-      <div class="section-inner">
-        <div class="chapter-heading reveal">
-          <p class="eyebrow"><span class="section-number">03</span> A menu of responses</p>
-          <h2 id="responses-title">START WITH<br><em>the problem.</em></h2>
-          <p class="chapter-intro">Different barriers call for different mechanisms. Browse the cases by problem and region; a programme description is not a finding that it will work elsewhere.</p>
-        </div>
-        <div class="case-filters reveal">
-          <label>Problem<select id="case-problem"><option value="">All problems</option></select></label>
-          <label>Region<select id="case-region"><option value="">All regions</option></select></label>
-          <p id="case-count" class="result-count" role="status">Loading the cases…</p>
-        </div>
-        <details id="response-map" class="response-map">
-          <summary><span>Explore the response map</span><span class="map-summary-hint">Problems, cases &amp; evidence types</span><span class="map-toggle" aria-hidden="true">+</span></summary>
-          <div class="map-intro"><p>Connections show relevance, not proven effectiveness; counts reflect this curated selection.</p><div id="map-legend" class="map-legend" aria-label="Evidence types"></div></div>
-          <p class="map-pan-hint">Swipe horizontally to explore the map. Select a numbered case to read its evidence and limits.</p>
-          <div id="response-map-scroll" class="response-map-scroll" tabindex="0" role="region" aria-label="Response map; horizontally scrollable on small screens"><div id="response-map-canvas" class="response-map-canvas"></div></div>
-        </details>
-        <div class="case-workspace">
-          <div id="case-list" class="case-list" aria-label="Response cases"></div>
-          <article id="case-detail" class="case-detail" tabindex="-1" aria-live="polite" aria-atomic="true"><p class="loading-note">The selected case will appear here with its evidence and limits.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="measure" class="chapter measure-section dark-section" aria-labelledby="measure-title">
-      <div class="section-inner">
-        <div class="chapter-heading reveal">
-          <p class="eyebrow"><span class="section-number">04</span> Proposed measurement menu</p>
-          <h2 id="measure-title">BETTER QUESTIONS.<br><em>Useful records.</em></h2>
-          <p class="chapter-intro">A selective menu for responsible agencies and providers, using existing data first. This is proposed monitoring—not additional primary research by Jamie or a composite resilience score.</p>
-        </div>
-        <div class="measure-controls reveal">
-          <label>Where to begin<select id="measure-region"><option value="">Loading regional approaches…</option></select></label>
-          <label>What to examine<select id="measure-area"><option value="">Loading measurement areas…</option></select></label>
-        </div>
-        <div id="region-note" class="region-note"></div>
-        <article id="measure-detail" class="measure-detail" aria-live="polite" aria-atomic="true"><p class="loading-note">The measurement menu is being prepared.</p></article>
-        <div class="measurement-principles"><p class="eyebrow">Principles for use</p><ol id="measure-principles"></ol><div id="measure-sources" class="source-links" aria-label="Measurement references"></div></div>
-      </div>
-    </section>
-
-    <section id="further" class="chapter further-section light-section" aria-labelledby="further-title">
-      <div class="section-inner">
-        <div class="chapter-heading reveal">
-          <p class="eyebrow"><span class="section-number">05</span> Further reading / future questions</p>
-          <h2 id="further-title">THE NEXT<br><em>questions.</em></h2>
-          <p class="chapter-intro">Other city-regions open new lines of inquiry. These are avenues for reading, not findings from this study or evidence that effects transfer from one place to another.</p>
-        </div>
-        <div id="future-list" class="future-list"><p class="loading-note">Loading the reading avenues…</p></div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer dark-section">
-    <div class="section-inner">
-      <div class="footer-top"><p class="eyebrow">Research by Jamie Ko<br><span>AsiaGlobal Fellows</span></p><a href="presentation.html" class="footer-presentation">See the presentation <span aria-hidden="true">↗</span></a></div>
-      <p class="footer-title" aria-hidden="true">CROSSING LIVES.</p>
-      <div class="footer-bottom"><p>A research companion · working draft</p><button id="motion-toggle" type="button" aria-label="Motion" aria-pressed="true">Motion on</button><a href="#top">Back to top ↑</a></div>
-    </div>
-  </footer>
-  <p id="interaction-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
-</body>
-</html>
+<a class="skip-link" href="#story">Skip the game and start the story</a>
+<header class="masthead"><a class="wordmark" href="#top" aria-label="Crossing Lives home"><svg viewBox="0 0 40 30" aria-hidden="true"><path d="M1 7h13l12 16h13M1 23h13L26 7h13"/><path d="M20 0v30"/></svg>CROSSING LIVES</a><nav aria-label="Main navigation"><a href="#story">The story</a><a href="#responses">Explore</a><a class="slides-link" href="presentation.html">The slides<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16 16 4M4 4h12v12"/></svg></a><button class="motion-control" id="motion-control" aria-pressed="false" aria-label="Pause motion"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4v12M13 4v12"/></svg><span>Motion on</span></button></nav><div class="reading-progress" aria-hidden="true"></div></header>
+<main>
+<section class="hero page-width" id="top" aria-labelledby="hero-title"><div class="hero-copy"><h1 id="hero-title"><span>LIVES</span><span>ACROSS A</span><em>border.</em></h1><p class="standfirst">Home. Work. Care. Family.<br>What changes when a life reaches across?</p><p class="byline">A visual research story by <strong>Jamie Ko</strong></p><a class="story-link" href="#story">Start the story<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3v24M6 17l10 10 10-10"/></svg></a></div><div class="hero-play"><div id="opening-game"><p class="loading-note">The playable illustration is loading. <a href="#story">Continue to the story.</a></p></div></div><div class="hero-bottom"><span>Hong Kong — Shenzhen</span><span>Singapore — Johor</span><a href="#sources">About the research</a></div></section>
+<section class="orientation chapter page-width" id="story" aria-labelledby="orientation-title"><div class="chapter-lead"><h2 id="orientation-title">A crossing is only<br><em>the beginning.</em></h2><p>A journey can connect places. Whether a job, a move or an everyday routine works also depends on what happens on either side.</p></div><div class="corridors"><a class="corridor" href="#arrangements"><div class="corridor-line" aria-hidden="true"><span></span><i></i><span></span></div><h3>Hong Kong <em>—</em> Shenzhen</h3><p>Two jurisdictions within China.<br>The main setting for this inquiry.</p><span class="corridor-action">Explore the arrangements <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14M11 4l6 6-6 6"/></svg></span></a><a class="corridor" href="#johor"><div class="corridor-line sgj" aria-hidden="true"><span></span><i></i><span></span></div><h3>Singapore <em>—</em> Johor</h3><p>A sovereign border between Singapore and Malaysia.<br>A distinct setting for questions about what comes next.</p><span class="corridor-action">Look ahead <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14M11 4l6 6-6 6"/></svg></span></a></div><p class="small-note">Different institutions, eligibility rules and economic conditions. One region is not a prediction for the other.</p></section>
+<section class="field-band" aria-labelledby="shenzhen-title"><figure><img src="feature/assets/sz-place.jpg" alt="Glass towers rise beyond an elevated walkway and a broad, tree-lined road." width="1200" height="1600" loading="lazy"><figcaption>Shenzhen field trip · photographs supplied by Bob and Jamie</figcaption></figure><div class="field-band-copy"><h2 id="shenzhen-title">The city is lived<br><em>one choice at a time.</em></h2><p>A repair. A meal. A place to live.<br>A job, a school, someone to visit.</p><a href="#arrangements" class="text-link">See how these choices connect<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M4 11l6 6 6-6"/></svg></a></div></section>
+<section class="chapter model-chapter page-width" id="arrangements" aria-labelledby="model-title"><div class="chapter-lead"><h2 id="model-title">A life can connect<br><em>in more than one way.</em></h2><p>The Hong Kong–Shenzhen material suggests four overlapping arrangements. Explore what changes—and what an account leaves unspecified.</p></div><div id="life-model"><p class="loading-note">Loading the spatial model.</p><ul class="static-list"><li>Cross for a particular purpose.</li><li>Move home while retaining connections.</li><li>Live on one side and work or study across.</li><li>Stay based in Hong Kong and keep ties elsewhere.</li></ul></div></section>
+<section class="editorial-pause page-width"><div class="editorial-mark" aria-hidden="true"><svg viewBox="0 0 160 160"><path d="M10 80h48c35 0 12-52 45-52h45M10 80h48c35 0 12 52 45 52h45M80 5v150"/><circle cx="10" cy="80" r="5"/><circle cx="148" cy="28" r="5"/><circle cx="148" cy="132" r="5"/></svg></div><div><p class="editorial-text">A border is often drawn as a single line. Everyday life is less tidy. The address can change while the family stays; a service can be sought elsewhere while work remains close to home. Understanding the connection means asking which part of a life is moving.</p><span class="editorial-credit">Editorial reflection on the research · not a participant quotation</span></div></section>
+<section class="chapter data-chapter page-width" id="evidence" aria-labelledby="evidence-title"><div class="chapter-lead"><h2 id="evidence-title">More movement.<br><em>Uneven effects.</em></h2><p>Counts reveal the scale of crossings. Business figures show different conditions across sectors and firms. They do not, on their own, explain why those conditions changed.</p></div><div data-evidence="hong-kong"><p class="loading-note">Loading the evidence. <a href="research.html#evidence">Open the existing research companion.</a></p></div></section>
+<section class="photo-diptych page-width" aria-label="Selected Shenzhen field photographs"><figure><img src="feature/assets/sz-services.jpg" alt="Pedestrians pass storefronts with visible dental, courier and mobile-phone signage." loading="lazy" width="1600" height="1200"><figcaption>Dental, courier and mobile-phone storefronts · Shenzhen field trip</figcaption></figure><div><p class="photo-statement">Access is<br>one part.<br><em>Adjustment<br>is another.</em></p><p>Households, existing businesses and workers can face different opportunities and constraints.</p><a href="#responses" class="text-link">Explore possible responses<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14M11 4l6 6-6 6"/></svg></a></div></section>
+<section class="chapter response-chapter page-width" id="responses" aria-labelledby="responses-title"><div class="chapter-lead"><h2 id="responses-title">What would<br><em>make a difference?</em></h2><p>Start with the practical problem. Then examine how a response works, what evidence supports it and what would need to be different here.</p></div><div data-library="responses"><p class="loading-note">Loading the response collection.</p></div><aside class="observation"><figure><img src="feature/assets/sz-wayfinding.jpg" alt="A guidebook rack displays Futian guides in several languages beneath a sign reading Futian Port Inbound Service Center." width="1536" height="2048" loading="lazy"><figcaption>Multilingual guides beneath the “Futian Port Inbound Service Center” sign.</figcaption></figure><div><h3>A help point is a starting point.</h3><p>Staffed help points observed at Futian raise a practical question: does an introduction lead to useful help? The operator was not confirmed and the described referrals were not tested.</p><a href="#sources">Field observation [6.14] · scope and limits</a></div></aside></section>
+<section class="johor-arrival" id="johor" aria-labelledby="johor-title"><div class="johor-photo"><img src="feature/assets/sgj-concourse.jpg" alt="A concourse with pedestrians and signs toward Bangunan Sultan Iskandar and Woodlands" loading="lazy" width="1200" height="1600"><span class="photo-caption">Singapore–Johor visit · a direction toward Woodlands</span></div><div class="johor-heading"><h2 id="johor-title">Another border.<br><em>A new set<br>of questions.</em></h2><p>Singapore–Johor has its own institutions and cross-border routines. The RTS Link makes it timely to ask what households and businesses might do next.</p><a class="text-link" href="#two-way">Follow the forecast<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M4 11l6 6 6-6"/></svg></a></div></section>
+<section class="chapter page-width" id="two-way" aria-labelledby="two-way-title"><div class="chapter-lead"><h2 id="two-way-title">The return journey<br><em>matters, too.</em></h2><p>A July 2026 association-commissioned study forecasts additional consumer spending in both directions. Look at the gross flows, then the net balance.</p></div><div data-evidence="singapore"><p class="loading-note">Loading the spending forecast.</p></div></section>
+<section class="ground-note page-width"><figure><img src="feature/assets/sgj-ica.jpg" alt="A MyICA poster explaining four steps to generate an individual QR code" loading="lazy" width="1200" height="1600"><figcaption>MyICA instructions · field photograph from Jamie’s Singapore–Johor visit</figcaption></figure><div><h2>Connections need<br><em>to work on the ground.</em></h2><p>Information, eligibility and completed hand-offs can determine whether an opportunity is usable. An announced service and a workable everyday arrangement are different things.</p><p class="small-note">The photograph documents instructions on display. It does not measure take-up, waiting times or service outcomes.</p></div></section>
+<section class="chapter measurement-chapter page-width" id="measure" aria-labelledby="measure-title"><div class="chapter-lead"><h2 id="measure-title">Follow what<br><em>happens next.</em></h2><p>Existing records can help agencies and providers decide what to continue, change or stop. Choose a question and a region to explore a selective measurement menu.</p></div><div data-library="measurement"><p class="loading-note">Loading the measurement menu.</p></div></section>
+<section class="chapter future-chapter page-width" id="horizon" aria-labelledby="future-title"><div class="chapter-lead"><h2 id="future-title">The next<br><em>questions.</em></h2><p>Other city-regions may offer useful comparisons. These are avenues for future inquiry, not additional findings or evidence that an effect will transfer.</p></div><div data-library="future"><p class="loading-note">Loading future reading avenues.</p></div></section>
+<section class="closing page-width"><h2>When places connect,<br><em>whose life becomes easier?</em></h2><div><p>That is a question worth following<br>across the border—and over time.</p><a class="solid-link" href="presentation.html">Watch the presentation<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16 16 4M4 4h12v12"/></svg></a><a class="text-link" href="presentation.pdf">Download the slides · PDF</a></div></section>
+</main>
+<footer class="footer page-width" id="sources"><div class="footer-heading"><a class="wordmark" href="#top">CROSSING LIVES</a><p>Research by Jamie Ko<br>Visual production with Bob</p></div><details class="method"><summary>Research, sources and image credits</summary><div class="method-grid"><section><h3>What this project draws on</h3><p>The research combines eleven mixed conversation, observation and visit records, plus two separate expert discussions. It is not a representative survey. The four life arrangements illustrate overlapping possibilities; they are not a population classification.</p><p>Official series, programme descriptions, evaluations and forecasts have different evidentiary roles. Each interactive section links to its sources and states the main limits. Causal claims need suitable comparisons.</p><p>This companion follows the questions in Jamie’s presentation and provides additional ways to explore the material.</p></section><section><h3>About the visuals</h3><p>The opening game uses invented demand, capacities and rules. The spatial model uses authored architecture and conceptual relationships, not measured routes, distances or journey frequencies.</p><p>Field photographs were supplied by Bob and Jamie. The Singapore–Johor visit and their Shenzhen field trip are kept distinct. Captions describe visible context; no pictured person is identified as a research participant.</p><p>The Futian help-point reference [6.14] is a field observation: its operator was not confirmed and described referrals were not tested.</p></section><section><h3>Read further</h3><ul><li><a href="research.html">Existing research companion</a></li><li><a href="presentation.html">Presentation</a></li><li><a href="presentation.pdf">Presentation PDF</a></li><li><a href="research-data.json">Chart and arrangement data</a></li><li><a href="data/response-cases.json">Response sources</a></li><li><a href="feature/measurement-menu.json">Measurement sources</a></li><li><a href="samples">Preserved visual studies</a></li></ul></section></div></details><div class="footer-bottom"><span>Research companion · review edition</span><a href="#top">Back to the beginning<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 17V3M4 9l6-6 6 6"/></svg></a></div></footer>
+<noscript><p class="noscript">The story and photographs remain readable. For charts and interactive material, enable JavaScript or <a href="presentation.pdf">read the presentation PDF</a>.</p></noscript>
+<script type="module" src="feature/story.js"></script>
+</body></html>
