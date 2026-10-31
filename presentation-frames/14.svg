@@ -7,13 +7,25 @@
 <text x="1474.314" y="49" fill="#ACDCD3" font-family="Body" font-size="17" textLength="53.686" lengthAdjust="spacingAndGlyphs">14  /  28</text>
 <line x1="72" y1="69" x2="1528" y2="69" stroke="#ACDCD3" stroke-width="0.7"/>
 <text x="72" y="116" fill="#ACDCD3" font-family="Bold" font-size="19" textLength="196.470" lengthAdjust="spacingAndGlyphs">LENS A / TAKEAWAY</text>
-<text x="72" y="240" fill="#F8F3E8" font-family="Display" font-size="108.24000000000001" textLength="784.740" lengthAdjust="spacingAndGlyphs">SELECTIVE CHOICES.</text>
-<text x="72" y="347" fill="#F8F3E8" font-family="Display" font-size="108.24000000000001" textLength="908.567" lengthAdjust="spacingAndGlyphs">DIFFERENT PRESSURES.</text>
-<text x="72" y="466" fill="#F8F3E8" font-family="Body" font-size="41" textLength="1237.339" lengthAdjust="spacingAndGlyphs">Shenzhen offers choices in price, specialist services and experiences.</text>
+<text x="72" y="217" fill="#F8F3E8" font-family="Display" font-size="100.32000000000001" textLength="727.320" lengthAdjust="spacingAndGlyphs">SELECTIVE CHOICES.</text>
+<text x="72" y="313" fill="#F8F3E8" font-family="Display" font-size="100.32000000000001" textLength="842.086" lengthAdjust="spacingAndGlyphs">DIFFERENT PRESSURES.</text>
+<line x1="72" y1="401" x2="518" y2="401" stroke="#FF9A76" stroke-width="3"/>
+<text x="72" y="461" fill="#FF9A76" font-family="Bold" font-size="28" textLength="215.684" lengthAdjust="spacingAndGlyphs">WHAT IS BOUGHT</text>
+<text x="72" y="531" fill="#F8F3E8" font-family="Body" font-size="36" textLength="387.072" lengthAdjust="spacingAndGlyphs">Price, specialist services</text>
+<text x="72" y="578" fill="#F8F3E8" font-family="Body" font-size="36" textLength="256.176" lengthAdjust="spacingAndGlyphs">and experiences</text>
 <g data-reveal="1">
-<text x="72" y="623" fill="#ACDCD3" font-family="Body" font-size="33" textLength="1227.171" lengthAdjust="spacingAndGlyphs">Use depends on time, convenience and crowding. Businesses face different pressures</text>
-<text x="72" y="667" fill="#ACDCD3" font-family="Body" font-size="33" textLength="570.108" lengthAdjust="spacingAndGlyphs">across purchases and customer groups.</text>
+<line x1="575" y1="401" x2="1021" y2="401" stroke="#FF9A76" stroke-width="3"/>
+<text x="575" y="461" fill="#FF9A76" font-family="Bold" font-size="28" textLength="196.140" lengthAdjust="spacingAndGlyphs">WHO IS SERVED</text>
+<text x="575" y="531" fill="#F8F3E8" font-family="Body" font-size="36" textLength="375.516" lengthAdjust="spacingAndGlyphs">Different purchases and</text>
+<text x="575" y="578" fill="#F8F3E8" font-family="Body" font-size="36" textLength="265.788" lengthAdjust="spacingAndGlyphs">customer groups</text>
 </g>
+<g data-reveal="2">
+<line x1="1078" y1="401" x2="1524" y2="401" stroke="#FF9A76" stroke-width="3"/>
+<text x="1078" y="461" fill="#FF9A76" font-family="Bold" font-size="28" textLength="168.336" lengthAdjust="spacingAndGlyphs">WHEN IT FITS</text>
+<text x="1078" y="531" fill="#F8F3E8" font-family="Body" font-size="36" textLength="359.100" lengthAdjust="spacingAndGlyphs">Time, convenience and</text>
+<text x="1078" y="578" fill="#F8F3E8" font-family="Body" font-size="36" textLength="144.900" lengthAdjust="spacingAndGlyphs">crowding</text>
+</g>
+<text x="72" y="756" fill="#ACDCD3" font-family="Serif" font-size="31" textLength="704.227" lengthAdjust="spacingAndGlyphs">The accounts point to variation within “cross-border demand”.</text>
 <line x1="72" y1="810" x2="1528" y2="810" stroke="#ACDCD3" stroke-width="0.7"/>
 <text x="72" y="841" fill="#ACDCD3" font-family="Body" font-size="18" textLength="732.906" lengthAdjust="spacingAndGlyphs">Synthesis of selected accounts, published consumption research and retail context [4, 7–8, 10]</text>
 <text x="72" y="871" fill="#ACDCD3" font-family="Body" font-size="18" textLength="842.832" lengthAdjust="spacingAndGlyphs">An exploratory finding; no estimate of net welfare, representative household gains or causal business losses.</text>

@@ -1,5 +1,8 @@
 import { initGame } from './game.js?v=20261031-v3';
-import { initWorld } from './world.js?v=20261031-v3';
+import { initWorld } from './world.js?v=20261031-craft';
+import { initAccountTour } from './account-tour.js?v=20261031-craft';
+import { initFieldNotebook } from './field-notebook.js?v=20261031-craft';
+import { initTiesAtlas } from './ties-atlas.js?v=20261031-craft';
 import { initEvidence } from './evidence.js?v=20261031-v3';
 import { initLibrary } from './library.js?v=20261031-v3';
 import { initEveryday } from './everyday.js?v=20261031-v3';
@@ -11,8 +14,8 @@ const motionButton=document.querySelector('#motion-control');
 function motionUI(){html.dataset.motion=paused?'off':'on';motionButton.querySelector('span').textContent=paused?'Resume motion':'Pause motion';motionButton.setAttribute('aria-label',paused?'Resume motion':'Pause motion');motionButton.querySelector('svg').innerHTML=paused?'<path d="M6 3 16 10 6 17Z"/>':'<path d="M7 4v12M13 4v12"/>';document.dispatchEvent(new CustomEvent('crossing:motion',{detail:{paused}}));}
 motionUI();motionButton.addEventListener('click',()=>{paused=!paused;motionUI()});motionQuery.addEventListener('change',e=>{paused=e.matches;motionUI()});
 function fail(element,retry){element.replaceChildren();const p=document.createElement('p');p.className='component-error';p.textContent='This interactive section could not load. The story remains available.';const b=document.createElement('button');b.type='button';b.textContent='Try again';b.addEventListener('click',retry);const a=document.createElement('a');a.href=new URL('../research.html',import.meta.url).href;a.textContent='Open the data appendix';p.append(document.createElement('br'),b,a);element.append(p);}
-function mount(id,fn){const el=document.querySelector(id);if(!el)return;try{fn(el)}catch(err){console.error('Feature component failed:',id,err);fail(el,()=>mount(id,fn))}}
-mount('#opening-game',initGame);mount('#life-model',initWorld);mount('#field-gallery',initFieldGallery);
+function mount(id,fn){const el=document.querySelector(id);if(!el)return;try{return fn(el)}catch(err){console.error('Feature component failed:',id,err);fail(el,()=>mount(id,fn))}}
+mount('#opening-game',initGame);const world=mount('#life-model',initWorld);initAccountTour(document.querySelector('#arrangements'),world);mount('#field-gallery',initFieldGallery);mount('#field-notebook',initFieldNotebook);mount('#ties-atlas',initTiesAtlas);
 // Share pending requests as well as resolved data between exhibits and the index.
 const dataCache=new Map();
 function getData(path){if(!dataCache.has(path)){const request=fetch(new URL(path,import.meta.url)).then(response=>{if(!response.ok)throw new Error(`Data request failed (${response.status})`);return response.json()}).catch(error=>{dataCache.delete(path);throw error});dataCache.set(path,request)}return dataCache.get(path)}

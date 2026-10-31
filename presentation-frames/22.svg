@@ -7,12 +7,24 @@
 <text x="1471.407" y="49" fill="#ACDCD3" font-family="Body" font-size="17" textLength="56.593" lengthAdjust="spacingAndGlyphs">22  /  28</text>
 <line x1="72" y1="69" x2="1528" y2="69" stroke="#ACDCD3" stroke-width="0.7"/>
 <text x="72" y="116" fill="#ACDCD3" font-family="Bold" font-size="19" textLength="195.710" lengthAdjust="spacingAndGlyphs">LENS C / TAKEAWAY</text>
-<text x="72" y="240" fill="#F8F3E8" font-family="Display" font-size="105.60000000000001" textLength="589.565" lengthAdjust="spacingAndGlyphs">TIES CONTINUE.</text>
-<text x="72" y="344" fill="#F8F3E8" font-family="Display" font-size="105.60000000000001" textLength="968.669" lengthAdjust="spacingAndGlyphs">NEW CONNECTIONS FORM.</text>
-<text x="72" y="480" fill="#F8F3E8" font-family="Body" font-size="42" textLength="1101.450" lengthAdjust="spacingAndGlyphs">Moving home or working elsewhere need not replace existing</text>
-<text x="72" y="534" fill="#F8F3E8" font-family="Body" font-size="42" textLength="248.934" lengthAdjust="spacingAndGlyphs">relationships.</text>
+<text x="72" y="229" fill="#F8F3E8" font-family="Display" font-size="97.68" textLength="1281.073" lengthAdjust="spacingAndGlyphs">TIES CONTINUE. CONNECTIONS FORM.</text>
+<text x="72" y="308" fill="#F8F3E8" font-family="Body" font-size="35" textLength="1132.320" lengthAdjust="spacingAndGlyphs">Moving home or working elsewhere need not replace existing relationships.</text>
+<text x="72" y="484" fill="#FF9A76" font-family="Bold" font-size="52" textLength="406.224" lengthAdjust="spacingAndGlyphs">CONTINUING TIES</text>
+<text x="72" y="552" fill="#F8F3E8" font-family="Body" font-size="37" textLength="597.328" lengthAdjust="spacingAndGlyphs">Family and other relationships across</text>
+<text x="72" y="600" fill="#F8F3E8" font-family="Body" font-size="37" textLength="89.096" lengthAdjust="spacingAndGlyphs">cities</text>
+<circle cx="100" cy="716" r="28" fill="#75624A" stroke="none" stroke-width="1"/>
+<text x="93.1575" y="724" fill="#F8F3E8" font-family="Bold" font-size="23" textLength="13.685" lengthAdjust="spacingAndGlyphs">P</text>
+<circle cx="174" cy="716" r="28" fill="#BA3B26" stroke="none" stroke-width="1"/>
+<text x="166.9505" y="724" fill="#F8F3E8" font-family="Bold" font-size="23" textLength="14.099" lengthAdjust="spacingAndGlyphs">G</text>
 <g data-reveal="1">
-<text x="72" y="635" fill="#ACDCD3" font-family="Body" font-size="35" textLength="1025.010" lengthAdjust="spacingAndGlyphs">Work and shared interests can provide entry points into new circles.</text>
+<text x="759.05348" y="553" fill="#ACDCD3" font-family="Display" font-size="91.08" textLength="39.893" lengthAdjust="spacingAndGlyphs">+</text>
+<text x="893" y="484" fill="#FF9A76" font-family="Bold" font-size="52" textLength="459.056" lengthAdjust="spacingAndGlyphs">NEW CONNECTIONS</text>
+<text x="893" y="552" fill="#F8F3E8" font-family="Body" font-size="37" textLength="599.104" lengthAdjust="spacingAndGlyphs">Entry points through work and shared</text>
+<text x="893" y="600" fill="#F8F3E8" font-family="Body" font-size="37" textLength="144.818" lengthAdjust="spacingAndGlyphs">interests</text>
+<circle cx="921" cy="716" r="28" fill="#BA3B26" stroke="none" stroke-width="1"/>
+<text x="913.9505" y="724" fill="#F8F3E8" font-family="Bold" font-size="23" textLength="14.099" lengthAdjust="spacingAndGlyphs">G</text>
+<circle cx="995" cy="716" r="28" fill="#416E84" stroke="none" stroke-width="1"/>
+<text x="987.893" y="724" fill="#F8F3E8" font-family="Bold" font-size="23" textLength="14.214" lengthAdjust="spacingAndGlyphs">D</text>
 </g>
 <line x1="72" y1="810" x2="1528" y2="810" stroke="#ACDCD3" stroke-width="0.7"/>
 <text x="72" y="841" fill="#ACDCD3" font-family="Body" font-size="18" textLength="527.562" lengthAdjust="spacingAndGlyphs">Synthesis of the guide, professional and dining visitors’ accounts [7]</text>

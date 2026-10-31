@@ -47,7 +47,7 @@
     },
     {
       "id": "research-timeline",
-      "title": "Different parts of a cross-border life",
+      "title": "Three views of cross-border life",
       "subtitle": "Section 2 / Existing research and approach",
       "svg": "presentation-frames/03.svg",
       "durationSeconds": 65,
@@ -99,7 +99,7 @@
     },
     {
       "id": "recurring-accounts",
-      "title": "People we will return to",
+      "title": "Four accounts to keep in view",
       "subtitle": "Section 3 / Overlapping arrangements and recurring accounts",
       "svg": "presentation-frames/06.svg",
       "durationSeconds": 40,
@@ -124,7 +124,7 @@
     },
     {
       "id": "locally-based-accounts",
-      "title": "Crossing can be an occasional choice",
+      "title": "Crossing is an occasional choice",
       "subtitle": "Section 3 / Overlapping arrangements and recurring accounts",
       "svg": "presentation-frames/08.svg",
       "durationSeconds": 35,
@@ -134,7 +134,7 @@
     },
     {
       "id": "household-choices",
-      "title": "What makes the crossing worthwhile?",
+      "title": "A specialist capability worth crossing for",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/09.svg",
       "durationSeconds": 50,
@@ -163,7 +163,7 @@
     },
     {
       "id": "guide-choice",
-      "title": "A more workable work–life balance",
+      "title": "Tour guiding: work she preferred",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/11.svg",
       "durationSeconds": 45,
@@ -173,7 +173,7 @@
     },
     {
       "id": "business-routines",
-      "title": "Different customers, different routines",
+      "title": "Which customers? Which daily routines?",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/12.svg",
       "durationSeconds": 55,
@@ -279,7 +279,7 @@
     },
     {
       "id": "continuing-ties",
-      "title": "Home and ties can occupy different places",
+      "title": "Lives can stay connected",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/19.svg",
       "durationSeconds": 55,
@@ -289,7 +289,7 @@
     },
     {
       "id": "help-through-connections",
-      "title": "A useful lead, help at a later step",
+      "title": "A lead. Her action. Later help.",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/20.svg",
       "durationSeconds": 50,
@@ -299,7 +299,7 @@
     },
     {
       "id": "joining-circles",
-      "title": "Work and shared interests create entry points",
+      "title": "Where new circles begin",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/21.svg",
       "durationSeconds": 55,
@@ -332,6 +332,10 @@
         {
           "label": "[2] Current RTS joint release",
           "url": "https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/10/news-releases/grantors-informed-rts-link-service-targeted-feb-2027.html"
+        },
+        {
+          "label": "[maps] Natural Earth public-domain data",
+          "url": "https://www.naturalearthdata.com/about/terms-of-use/"
         }
       ],
       "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
@@ -376,7 +380,7 @@
     },
     {
       "id": "johor-residents",
-      "title": "Keep Johor residents in the picture",
+      "title": "Keep Johor residents in view",
       "subtitle": "Section 6 / Questions for Singapore–Johor",
       "svg": "presentation-frames/26.svg",
       "durationSeconds": 40,

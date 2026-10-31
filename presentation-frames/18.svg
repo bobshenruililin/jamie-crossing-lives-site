@@ -7,13 +7,19 @@
 <text x="1474.824" y="49" fill="#ACDCD3" font-family="Body" font-size="17" textLength="53.176" lengthAdjust="spacingAndGlyphs">18  /  28</text>
 <line x1="72" y1="69" x2="1528" y2="69" stroke="#ACDCD3" stroke-width="0.7"/>
 <text x="72" y="116" fill="#ACDCD3" font-family="Bold" font-size="19" textLength="195.976" lengthAdjust="spacingAndGlyphs">LENS B / TAKEAWAY</text>
-<text x="72" y="240" fill="#F8F3E8" font-family="Display" font-size="97.68" textLength="863.394" lengthAdjust="spacingAndGlyphs">GUIDANCE AND SERVICES</text>
-<text x="72" y="340" fill="#F8F3E8" font-family="Display" font-size="97.68" textLength="928.058" lengthAdjust="spacingAndGlyphs">FOR CROSS-BORDER NEEDS</text>
-<text x="72" y="470" fill="#F8F3E8" font-family="Body" font-size="42" textLength="1042.860" lengthAdjust="spacingAndGlyphs">Practical information offers a starting point for unfamiliar</text>
-<text x="72" y="524" fill="#F8F3E8" font-family="Body" font-size="42" textLength="267.918" lengthAdjust="spacingAndGlyphs">arrangements.</text>
+<text x="72" y="287" fill="#F8F3E8" font-family="Display" font-size="113.52000000000001" textLength="402.996" lengthAdjust="spacingAndGlyphs">GUIDANCE</text>
+<text x="72" y="396" fill="#F8F3E8" font-family="Display" font-size="113.52000000000001" textLength="167.101" lengthAdjust="spacingAndGlyphs">AND</text>
+<text x="72" y="505" fill="#F8F3E8" font-family="Display" font-size="113.52000000000001" textLength="387.898" lengthAdjust="spacingAndGlyphs">SERVICES</text>
+<text x="72" y="664" fill="#FF9A76" font-family="Body" font-size="38" textLength="477.204" lengthAdjust="spacingAndGlyphs">Aimed at cross-border needs</text>
+<line x1="790" y1="192" x2="790" y2="760" stroke="#3A585B" stroke-width="1"/>
+<text x="863" y="248" fill="#FF9A76" font-family="Bold" font-size="19" textLength="259.096" lengthAdjust="spacingAndGlyphs">FINDING A STARTING POINT</text>
+<text x="863" y="315" fill="#F8F3E8" font-family="Body" font-size="43" textLength="457.176" lengthAdjust="spacingAndGlyphs">Practical information for</text>
+<text x="863" y="370" fill="#F8F3E8" font-family="Body" font-size="43" textLength="459.455" lengthAdjust="spacingAndGlyphs">unfamiliar arrangements</text>
 <g data-reveal="1">
-<text x="72" y="627" fill="#ACDCD3" font-family="Body" font-size="35" textLength="1160.845" lengthAdjust="spacingAndGlyphs">Nearby businesses offer services relevant to people moving between the two</text>
-<text x="72" y="672" fill="#ACDCD3" font-family="Body" font-size="35" textLength="108.675" lengthAdjust="spacingAndGlyphs">places.</text>
+<line x1="863" y1="479" x2="1528" y2="479" stroke="#3A585B" stroke-width="1"/>
+<text x="863" y="535" fill="#FF9A76" font-family="Bold" font-size="19" textLength="334.370" lengthAdjust="spacingAndGlyphs">MAINTAINING EVERYDAY ROUTINES</text>
+<text x="863" y="602" fill="#ACDCD3" font-family="Body" font-size="38" textLength="574.712" lengthAdjust="spacingAndGlyphs">Services relevant to people moving</text>
+<text x="863" y="651" fill="#ACDCD3" font-family="Body" font-size="38" textLength="389.956" lengthAdjust="spacingAndGlyphs">between the two places</text>
 </g>
 <line x1="72" y1="810" x2="1528" y2="810" stroke="#ACDCD3" stroke-width="0.7"/>
 <text x="72" y="841" fill="#ACDCD3" font-family="Body" font-size="18" textLength="709.344" lengthAdjust="spacingAndGlyphs">Futian and Sheung Shui observations and accounts [7–8]; published care arrangements [12]</text>

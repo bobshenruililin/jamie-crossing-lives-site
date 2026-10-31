@@ -7,17 +7,22 @@
 <text x="1471.781" y="49" fill="#596767" font-family="Body" font-size="17" textLength="56.219" lengthAdjust="spacingAndGlyphs">25  /  28</text>
 <line x1="72" y1="69" x2="1528" y2="69" stroke="#B8C0B9" stroke-width="0.7"/>
 <text x="72" y="116" fill="#006F68" font-family="Bold" font-size="19" textLength="431.924" lengthAdjust="spacingAndGlyphs">SINGAPORE–JOHOR / CONDITIONAL INTEREST</text>
-<text x="72" y="207" fill="#172C30" font-family="Display" font-size="105.60000000000001" textLength="382.694" lengthAdjust="spacingAndGlyphs">IF TRAVEL</text>
-<text x="72" y="294" fill="#172C30" font-family="Display" font-size="105.60000000000001" textLength="660.211" lengthAdjust="spacingAndGlyphs">BECAME EASIER…</text>
-<text x="72" y="492" fill="#006F68" font-family="Display" font-size="118.80000000000001" textLength="543.272" lengthAdjust="spacingAndGlyphs">Around 1 in 3</text>
-<text x="72" y="570" fill="#172C30" font-family="Body" font-size="34" textLength="896.274" lengthAdjust="spacingAndGlyphs">Singapore respondents could envisage buying a JB home and</text>
-<text x="72" y="615" fill="#172C30" font-family="Body" font-size="34" textLength="204.680" lengthAdjust="spacingAndGlyphs">retiring there.</text>
+<rect x="72" y="182" width="900" height="565" fill="#E3E9DF" stroke="none" stroke-width="1"/>
+<text x="104" y="244" fill="#006F68" font-family="Bold" font-size="34" textLength="440.096" lengthAdjust="spacingAndGlyphs">IF TRAVEL BECAME EASIER…</text>
+<text x="104" y="445" fill="#006F68" font-family="Display" font-size="126.72" textLength="579.491" lengthAdjust="spacingAndGlyphs">Around 1 in 3</text>
+<text x="104" y="524" fill="#172C30" font-family="Body" font-size="39" textLength="772.434" lengthAdjust="spacingAndGlyphs">Singapore respondents could envisage buying</text>
+<text x="104" y="574" fill="#172C30" font-family="Body" font-size="39" textLength="490.425" lengthAdjust="spacingAndGlyphs">a JB home and retiring there.</text>
+<text x="104" y="703" fill="#596767" font-family="Body" font-size="26" textLength="415.428" lengthAdjust="spacingAndGlyphs">Conditional interest / Blackbox, 2024</text>
 <g data-reveal="1">
-<line x1="1088" y1="357" x2="1088" y2="746" stroke="#B8C0B9" stroke-width="1"/>
-<text x="1140" y="409" fill="#172C30" font-family="Bold" font-size="29" textLength="209.119" lengthAdjust="spacingAndGlyphs">Work or lifestyle</text>
-<text x="1140" y="501" fill="#172C30" font-family="Bold" font-size="29" textLength="138.040" lengthAdjust="spacingAndGlyphs">Family ties</text>
-<text x="1140" y="593" fill="#172C30" font-family="Bold" font-size="29" textLength="226.374" lengthAdjust="spacingAndGlyphs">Care and services</text>
-<text x="1140" y="685" fill="#172C30" font-family="Bold" font-size="29" textLength="115.797" lengthAdjust="spacingAndGlyphs">Finances</text>
+<text x="1044" y="228" fill="#006F68" font-family="Bold" font-size="19" textLength="351.188" lengthAdjust="spacingAndGlyphs">HOUSEHOLD QUESTIONS TO EXPLORE</text>
+<text x="1044" y="337" fill="#172C30" font-family="Bold" font-size="31" textLength="239.041" lengthAdjust="spacingAndGlyphs">Work or lifestyle?</text>
+<line x1="1044" y1="367" x2="1528" y2="367" stroke="#B8C0B9" stroke-width="1"/>
+<text x="1044" y="448" fill="#172C30" font-family="Bold" font-size="31" textLength="163.060" lengthAdjust="spacingAndGlyphs">Family ties?</text>
+<line x1="1044" y1="478" x2="1528" y2="478" stroke="#B8C0B9" stroke-width="1"/>
+<text x="1044" y="559" fill="#172C30" font-family="Bold" font-size="31" textLength="257.486" lengthAdjust="spacingAndGlyphs">Care and services?</text>
+<line x1="1044" y1="589" x2="1528" y2="589" stroke="#B8C0B9" stroke-width="1"/>
+<text x="1044" y="670" fill="#172C30" font-family="Bold" font-size="31" textLength="337.466" lengthAdjust="spacingAndGlyphs">Financial arrangements?</text>
+<line x1="1044" y1="700" x2="1528" y2="700" stroke="#B8C0B9" stroke-width="1"/>
 </g>
 <line x1="72" y1="810" x2="1528" y2="810" stroke="#B8C0B9" stroke-width="0.7"/>
 <text x="72" y="841" fill="#596767" font-family="Body" font-size="18" textLength="395.514" lengthAdjust="spacingAndGlyphs">Blackbox Research, SensingSG, February 2024 [14]</text>

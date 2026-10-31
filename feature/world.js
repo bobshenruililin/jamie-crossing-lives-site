@@ -1,3 +1,4 @@
+import { lifeAccounts } from './life-accounts.js';
 /* Authored spatial illustration adapted from the approved Border Instruments sample.
    Coordinates, buildings and paths explain relationships; they are not map data. */
 let worldInstance = 0;
@@ -9,18 +10,22 @@ export function initWorld(container) {
   const uid = `cl-world-${++worldInstance}`;
   container.classList.add('cl-world');
   container.innerHTML = `
-    <div class="cl-world-arrangements" role="group" aria-label="Choose an illustrative life arrangement"></div>
+    <div class="cl-world-arrangements" role="group" aria-label="Choose a research account"></div>
     <figure class="cl-world-figure">
-      <p class="cl-world-status">Conceptual model · not a map</p>
+      <p class="cl-world-status">Selected accounts · conceptual geography, not a map</p>
       <div class="cl-world-viewport" data-world="viewport" id="${uid}-viewport">
         <svg class="cl-world-scene" data-world="scene" viewBox="250 108 1080 584" role="img" tabindex="0" aria-labelledby="${uid}-title ${uid}-description" aria-keyshortcuts="ArrowLeft ArrowRight Home"></svg>
-        <div class="cl-world-placebar" aria-label="Illustrative sides of the boundary"><span data-world="place-left">One side</span><span class="cl-world-boundary-label">The boundary</span><span data-world="place-right">Across</span></div>
+        <div class="cl-world-placebar" aria-label="Illustrative sides of the boundary"><span data-world="place-left">Hong Kong</span><span class="cl-world-boundary-label">The boundary</span><span data-world="place-right">Shenzhen</span></div>
       </div>
+      <div class="cl-world-ribbons" role="group" aria-label="What this account establishes in each city"><div data-world="ribbons-left" role="group" aria-label="Hong Kong"></div><div data-world="ribbons-right" role="group" aria-label="Shenzhen"></div></div>
       <figcaption class="cl-world-reading">
-        <div class="cl-world-case" aria-live="polite" aria-atomic="true"><p class="cl-world-case-title" data-world="case-title"></p><p data-world="case-note"></p></div>
-        <p class="cl-world-path-key">Paths connect the parts of life stated in each example. They do not trace measured journeys.</p>
+        <p class="cl-world-case-title" data-world="case-title"></p>
+        <dl class="cl-world-contrast" data-world="contrast"></dl>
+        <p class="cl-world-unknowns" data-world="unknowns"></p>
       </figcaption>
     </figure>
+    <p class="cl-world-announcement" data-world="announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+    <details class="cl-world-explore"><summary>Explore the model <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7l6 6 6-6"/></svg></summary>
     <div class="cl-world-toolbar">
       <div class="cl-world-layers" data-world="layers" role="group" aria-label="Highlight an established part of life"></div>
       <div class="cl-world-view">
@@ -38,9 +43,7 @@ export function initWorld(container) {
     </div>
     <p class="cl-world-layer-help" data-world="layer-help" hidden></p>
     <p class="cl-world-hint">Drag or use ← and → to turn. + and − zoom; Home resets the view.</p>
-    <details class="cl-world-evidence">
-      <summary>What the example establishes <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7l6 6 6-6"/></svg></summary>
-      <div class="cl-world-evidence-content"><div><p data-world="evidence-note"></p><p class="cl-world-evidence-limit">The four arrangements can overlap. They are not population categories. The architecture and paths are explanatory illustration; moving markers do not measure speed, frequency or journey counts.</p><a href="${new URL('../research-data.json',import.meta.url).href}">View the underlying arrangement descriptions</a></div><dl data-world="facts"></dl></div>
+    <div class="cl-world-evidence-content"><div><p data-world="case-note"></p><p data-world="evidence-note"></p><p class="cl-world-evidence-limit">These are selected, overlapping accounts. They are not population types. The architecture and paths are illustration, not actual buildings, routes, distances or journey frequencies. No participant likenesses are depicted.</p><a href="${new URL('./life-accounts.js',import.meta.url).href}">Read the public account descriptions</a></div><dl data-world="facts"></dl></div>
     </details>`;
 
   const NS = 'http://www.w3.org/2000/svg';
@@ -54,21 +57,15 @@ export function initWorld(container) {
     target.addEventListener(name, handler, options);
     cleanups.push(() => target.removeEventListener(name, handler, options));
   };
-  const arrangements=[
-    {id:'use',label:'Cross to use',title:'Cross for a particular purpose',short:'A visit can cross. A home can stay.',note:'A repair, meal or leisure trip can cross a border while other parts of life stay put.',source:'A repair, meal or leisure trip can cross a border while other parts of life stay put. Illustrative arrangements overlap; this is not a population classification.',home:'One side',work:'Not specified',use:'Across the border',ties:'Not specified',homeSide:0,routes:['use']},
-    {id:'move',label:'Move home',title:'Move home; retain connections',short:'Home moves. Connections remain.',note:'The guide who moved north described lower earnings alongside lower living costs and work she preferred.',source:'One participant described lower earnings alongside lower living costs and preferred work. It is an individual account, not a measured general benefit.',home:'Shenzhen after Hong Kong',work:'Reported guiding work; location not specified',use:'Not specified',ties:'Family in Hong Kong',homeSide:1,routes:['ties']},
-    {id:'work',label:'Work or study across',title:'Separate residence and work or study',short:'Home on one side. Work or study on the other.',note:'Official records count 16,139 daily cross-boundary pupils in 2024/25. Their Mainland residence is not necessarily Shenzhen; this is not a count of workers.',source:'Official cross-boundary pupil data illustrate separation of home and school. Mainland residence is not necessarily Shenzhen; the pupil count does not measure workers.',home:'One side of a boundary',work:'Across the boundary',use:'Not specified',ties:'Not specified',homeSide:0,routes:['work']},
-    {id:'ties',label:'Keep ties',title:'Stay based in Hong Kong; keep ties elsewhere',short:'A base here. Relationships elsewhere.',note:'The professional with Shenzhen ties works and rents in Hong Kong, while family, friends and many activities remain in Shenzhen.',source:'The source account also mentions Shenzhen property. It does not establish a regular commute. Connections can span places without moving home and work.',home:'Rents in Hong Kong',work:'Hong Kong',use:'Not specified',ties:'Shenzhen family and friends',homeSide:0,routes:['ties','localwork']}
-  ];
-
-  // One authored description per selector; no decorative route glyphs.
-  arrangements.forEach((arrangement,index)=>{
-    const button=document.createElement('button');button.type='button';button.dataset.case=arrangement.id;
+  const arrangements=lifeAccounts;
+  const aliases={use:'repair',move:'guide',ties:'professional',work:'manager'};
+  // The source-defined cast, not generic person types, drives the model.
+  arrangements.forEach((account,index)=>{
+    const button=document.createElement('button');button.type='button';button.dataset.case=account.id;
     button.setAttribute('aria-pressed',String(index===0));
-    button.style.setProperty('--case-tone',colors[arrangement.id==='move'?'home':arrangement.id]);
-    const name=document.createElement('span');name.className='cl-world-case-name';name.textContent=arrangement.label;
-    const short=document.createElement('span');short.className='cl-world-case-short';short.textContent=arrangement.short;
-    button.append(name,short);container.querySelector('.cl-world-arrangements').append(button);
+    button.style.setProperty('--case-tone',colors[account.tone]);
+    const name=document.createElement('span');name.className='cl-world-case-name';name.textContent=account.label;
+    button.append(name);container.querySelector('.cl-world-arrangements').append(button);
   });
 
   let current=0, layer=null, yaw=-.62, targetYaw=-.62, tilt=.54;
@@ -211,16 +208,15 @@ export function initWorld(container) {
   const trees=[[-345,99,24],[-318,110,19],[-296,84,21],[-200,-139,18],[-126,-100,22],[-120,52,17],[128,15,18],[335,100,24],[319,128,21],[268,48,18],[119,-90,18],[289,-135,17]];
   function routePath(type){
     const config=arrangements[current];let start,end,color,labelText,lift;
-    if(type==='use'){start=[-222,30,11];end=[270,106,45];color=colors.use;labelText='PARTICULAR PURPOSE';lift=95;}
-    if(type==='work'){start=[-223,30,12];end=[240,-102,105];color=colors.work;labelText='WORK / STUDY';lift=112;}
-    if(type==='ties'){start=config.id==='move'?[200,30,12]:[-222,30,12];end=config.id==='move'?[-244,-15,97]:[201,-14,97];color=colors.ties;labelText=config.id==='move'?'FAMILY':'FAMILY / FRIENDS';lift=130;}
+    if(type==='use'){start=config.id==='repair'?[-151,28,42]:[-222,30,11];end=[270,106,45];color=colors.use;labelText=config.routeLabels.use;lift=95;}
+    if(type==='ties'){start=config.id==='guide'?[200,30,12]:[-222,30,12];end=config.id==='guide'?[-244,-15,97]:[201,-14,97];color=colors.ties;labelText=config.routeLabels.ties;lift=130;}
     if(type==='localwork'){start=[-231,27,8];end=[-307,-97,130];color=colors.work;labelText='WORK';lift=25;}
     const a=project(...start),b=project(...end),c=[a[0]+(b[0]-a[0])*.34,a[1]-lift],d=[a[0]+(b[0]-a[0])*.68,b[1]-lift];
     const path=`M ${a} C ${c} ${d} ${b}`;
-    const opacity=layer&&layer!==(type==='localwork'?'work':type)?.12:1;
+    const facets=type==='localwork'?['work']:type==='ties'&&config.id==='professional'?['ties','use']: [type];
+    const opacity=layer&&!facets.includes(layer)?.12:1;
     const g=elem('g',{opacity,class:'cl-world-critical'},svg);
-    const meanings={use:'A particular-purpose visit across the boundary.',work:'Home and work or study on different sides.',ties:config.id==='move'?'Family ties in Hong Kong continue after a move to Shenzhen.':'Family and friends in Shenzhen while home and work remain in Hong Kong.',localwork:'Home and work remain on the Hong Kong side.'};
-    elem('title',{},g).textContent=meanings[type];
+    elem('title',{},g).textContent=config.routeMeaning[type];
     elem('path',{d:path,class:'cl-world-route',stroke:'#f1ecdf','stroke-width':8},g);
     const pathEl=elem('path',{d:path,class:'cl-world-route',stroke:color,'stroke-width':2.3,'stroke-dasharray':type==='ties'?'3 7':type==='use'?'1 0':'7 3'},g);
     elem('circle',{cx:a[0],cy:a[1],r:4,fill:color,stroke:'#f5efdf','stroke-width':2},g);elem('circle',{cx:b[0],cy:b[1],r:4,fill:color,stroke:'#f5efdf','stroke-width':2},g);
@@ -232,7 +228,7 @@ export function initWorld(container) {
   }
   function render(){
     routeTokens=[];
-    svg.replaceChildren();elem('title',{id:uid+'-title'},svg).textContent='Lives do not move together: '+arrangements[current].title;
+    svg.replaceChildren();elem('title',{id:uid+'-title'},svg).textContent=arrangements[current].label+': '+arrangements[current].title;
     elem('desc',{id:uid+'-description'},svg).textContent='Original conceptual spatial model, not a map. Use left and right arrow keys to turn the model, plus and minus to zoom, and Home to reset the view. '+arrangements[current].source;
     const defs=elem('defs',{},svg);const blur=elem('filter',{id:uid+'-shadow',x:'-30%',y:'-50%',width:'160%',height:'200%'},defs);elem('feGaussianBlur',{stdDeviation:14},blur);
     const [scx,scy]=project(15,32,-43);elem('ellipse',{cx:scx,cy:scy+48,rx:395,ry:95,fill:'#315c4a',opacity:'.12',filter:`url(#${uid}-shadow)`},svg);
@@ -254,55 +250,75 @@ export function initWorld(container) {
     objects.sort((a,b)=>a.depth-b.depth).forEach(o=>o.draw());
     // Boundary markers stop at the bridge. They are a concept, not a depiction of infrastructure.
     for(let z=-177;z<186;z+=16){if(z>30&&z<90)continue;line([[0,z,-5],[0,z+7,-5]],'#517d74',1.4,svg,{'stroke-opacity':'.62'});}
-    const placeNames=current===1||current===3?['Hong Kong','Shenzhen']:['One side','Across'];
+    const placeNames=['Hong Kong','Shenzhen'];
     select('place-left').textContent=placeNames[0];
     select('place-right').textContent=placeNames[1];
     arrangements[current].routes.forEach(routePath);
-    const c=arrangements[current],hx=c.homeSide?199:-245;
+    const c=arrangements[current];
     const homeOpacity=layer&&layer!=='home'?.37:1;
-    const home=pin(hx,-8,119,'HOME',colors.home);
-    home.setAttribute('opacity',homeOpacity);
+    if(c.homeSide!==null){
+      const home=pin(c.homeSide===1?199:-245,-8,119,c.id==='professional'?'RENTED HOME':'HOME',colors.home);
+      home.setAttribute('opacity',homeOpacity);
+    }
     const workOpacity=layer&&layer!=='work'?.25:1;
-    if(c.id==='work')pin(242,-102,153,'WORK / STUDY',colors.work).setAttribute('opacity',workOpacity);
-    if(c.id==='ties')pin(-319,-100,168,'WORK',colors.work).setAttribute('opacity',workOpacity);
+    if(c.workSide===0)pin(-319,-100,168,'WORK',colors.work).setAttribute('opacity',workOpacity);
     viewBox();
     animateTokens();
   }
   function animateTokens(){routeTokens.forEach(({token,a,b,c,d})=>{const t=traversal,mt=1-t;token.setAttribute('visibility',traversing&&t<1?'visible':'hidden');token.setAttribute('cx',mt*mt*mt*a[0]+3*mt*mt*t*c[0]+3*mt*t*t*d[0]+t*t*t*b[0]);token.setAttribute('cy',mt*mt*mt*a[1]+3*mt*mt*t*c[1]+3*mt*t*t*d[1]+t*t*t*b[1]);});}
 
-  function update() {
+  function update({announce=false}={}) {
     const c=arrangements[current];
     select('case-title').textContent=c.title;
     select('case-note').textContent=c.note;
     select('evidence-note').textContent=c.source;
     select('facts').replaceChildren();
-    [['Home',c.home],['Work / study',c.work],['Use',c.use],['Ties',c.ties]].forEach(([key,value])=>{
+    Object.entries(c.facts).forEach(([key,fact])=>{
       const dt=document.createElement('dt'),dd=document.createElement('dd');
-      dt.textContent=key;dd.textContent=value==='Not specified'?'Not established here':value;select('facts').append(dt,dd);
+      dt.textContent=layerNames[key];dd.textContent=fact.text;select('facts').append(dt,dd);
     });
+    c.ribbons.forEach((ribbons,index)=>{
+      const host=select(index?'ribbons-right':'ribbons-left');host.replaceChildren();
+      ribbons.forEach(ribbon=>{
+        const facets=ribbon.facets||[ribbon.facet];
+        const row=document.createElement('div');row.className='cl-world-ribbon';row.dataset.facets=facets.join(' ');row.style.setProperty('--ribbon-tone',colors[ribbon.facet]);
+        const facet=document.createElement('span');facet.className='cl-world-ribbon-kind';facet.textContent=facets.map(key=>layerNames[key]).join(' + ');
+        const value=document.createElement('strong');value.textContent=ribbon.text;
+        const detail=document.createElement('small');detail.textContent=ribbon.detail;
+        row.append(facet,value,detail);host.append(row);
+      });
+    });
+    select('contrast').replaceChildren();
+    c.contrast.forEach(item=>{
+      const pair=document.createElement('div'),dt=document.createElement('dt'),dd=document.createElement('dd');
+      dt.textContent=item.label;dd.textContent=item.text;pair.append(dt,dd);select('contrast').append(pair);
+    });
+    const unknowns=Object.entries(c.facts).filter(([,fact])=>fact.status!=='shown').map(([key,fact])=>fact.status==='location unstated'?`${layerNames[key]} location`:layerNames[key]);
+    select('unknowns').textContent=unknowns.length?`Not established here: ${unknowns.join(' · ')}.`:'A regular cross-border commute is not established by this account.';
     selectAll('[data-case]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.case===c.id)));
+    select('announcement').textContent=announce?`${c.label}. ${c.title} ${c.note}`:'';
     updateLayers();render();
   }
   const layerDescriptions={
     home:'The home anchor moves only when the example establishes a change of residence.',
-    work:'A work location is drawn only when established. The official pupil data concern school, not workers.',
+    work:'A workplace is drawn only when the account locates it. The guide’s precise work location remains unstated.',
     use:'A particular purpose—such as a repair, meal or leisure visit—can cross the border without a change of home.',
     ties:'Family and friendships can span places without establishing a regular commute.'
   };
-  const layerNames={home:'Home',work:'Work / study',use:'Use',ties:'Ties'};
+  const layerNames={home:'Home',work:'Work',use:'Use',ties:'Ties'};
   function updateLayers() {
     const c=arrangements[current];
     selectAll('[data-layer]').forEach(button=>{
       const type=button.dataset.layer;
-      const known=type==='home'||type==='work'&&(c.id==='work'||c.id==='ties')||type==='use'&&c.id==='use'||type==='ties'&&(c.id==='move'||c.id==='ties');
-      const status=known?'shown':type==='work'&&c.id==='move'?'location unstated':'not established here';
+      const status=c.facts[type].status;
       button.querySelector('.cl-world-layer-status').textContent=status;
       button.setAttribute('aria-pressed',String(layer===type));
       button.setAttribute('aria-label',`${layerNames[type]}: ${status}. ${layer===type?'Remove highlight':'Highlight layer'}`);
       button.classList.toggle('cl-world-muted',Boolean(layer&&layer!==type));
     });
     select('layer-help').hidden=!layer;
-    select('layer-help').textContent=layer?layerDescriptions[layer]:'';
+    select('layer-help').textContent=layer?`${c.facts[layer].text}. ${layerDescriptions[layer]}`:'';
+    selectAll('.cl-world-ribbon').forEach(ribbon=>ribbon.classList.toggle('cl-world-ribbon-muted',Boolean(layer&&!ribbon.dataset.facets.split(' ').includes(layer))));
   }
   Object.keys(layerDescriptions).forEach(type=>{
     const button=document.createElement('button');button.type='button';button.className='cl-world-layer';
@@ -311,15 +327,23 @@ export function initWorld(container) {
     listen(button,'click',()=>{settleTraversal();layer=layer===type?null:type;updateLayers();render();});
     select('layers').append(button);
   });
+  function selectCase(id,{announce=true,motion=true}={}) {
+    if(destroyed)return false;
+    const next=arrangements.findIndex(c=>c.id===(aliases[id]||id));
+    if(next<0||next===current)return false;
+    settleTraversal();current=next;layer=null;update({announce});
+    if(motion)beginTraversal();
+    return true;
+  }
   function chooseCase(id) {
-    const next=arrangements.findIndex(c=>c.id===id);
-    if(next<0)return;settleTraversal();current=next;layer=null;update();beginTraversal();
+    const changed=selectCase(id);
+    container.dispatchEvent(new CustomEvent('crossing:case',{bubbles:true,detail:{id:arrangements[current].id,source:'model',changed}}));
   }
   selectAll('[data-case]').forEach(button=>listen(button,'click',()=>chooseCase(button.dataset.case)));
   listen(container.querySelector('.cl-world-arrangements'),'keydown',event=>{
     if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
     event.preventDefault();
-    const next=event.key==='Home'?0:event.key==='End'?3:(current+(event.key==='ArrowRight'?1:3))%4;
+    const next=event.key==='Home'?0:event.key==='End'?arrangements.length-1:(current+(event.key==='ArrowRight'?1:arrangements.length-1))%arrangements.length;
     chooseCase(arrangements[next].id);
     container.querySelector(`[data-case="${arrangements[next].id}"]`).focus();
   });
@@ -412,7 +436,7 @@ export function initWorld(container) {
   document.fonts?.ready.then(()=>{if(!destroyed)viewBox();});
   const api={
     pause,arrive,setZoom,enlarge,
-    setCase:chooseCase,
+    selectCase,setCase:selectCase,
     setView(value){if(!Number.isFinite(value))return;settleTraversal();targetYaw=yaw=Math.max(-.97,Math.min(-.24,value));render();},
     getState(){return{arrangement:arrangements[current].id,layer,paused:isPaused(),yaw,zoom,expanded,arrival:hasArrived?'complete':'ready',traversal:traversing?'playing':'settled',renderer:'projected SVG'};},
     destroy(){destroyed=true;settleTraversal();observer?.disconnect();resizeObserver?.disconnect();cleanups.forEach(cleanup=>cleanup());instances.delete(container);container.replaceChildren();container.classList.remove('cl-world','cl-world-expanded');}

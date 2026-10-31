@@ -7,19 +7,20 @@
 <text x="1475.64" y="49" fill="#596767" font-family="Body" font-size="17" textLength="52.360" lengthAdjust="spacingAndGlyphs">17  /  28</text>
 <line x1="72" y1="69" x2="1528" y2="69" stroke="#B8C0B9" stroke-width="0.7"/>
 <text x="72" y="116" fill="#006F68" font-family="Bold" font-size="19" textLength="497.660" lengthAdjust="spacingAndGlyphs">LENS B / A PUBLISHED HEALTHCARE ARRANGEMENT</text>
-<text x="72" y="207" fill="#172C30" font-family="Display" font-size="100.32000000000001" textLength="625.796" lengthAdjust="spacingAndGlyphs">FOLLOW-UP CARE</text>
-<text x="72" y="294" fill="#172C30" font-family="Display" font-size="100.32000000000001" textLength="738.656" lengthAdjust="spacingAndGlyphs">ACROSS THE BORDER</text>
-<text x="72" y="456" fill="#006F68" font-family="Display" font-size="132.0" textLength="320.628" lengthAdjust="spacingAndGlyphs">&gt;5,900</text>
-<text x="72" y="533" fill="#172C30" font-family="Body" font-size="31" textLength="602.702" lengthAdjust="spacingAndGlyphs">eligible Hospital Authority patients joined the</text>
-<text x="72" y="573" fill="#172C30" font-family="Body" font-size="31" textLength="674.777" lengthAdjust="spacingAndGlyphs">HKU–Shenzhen Hospital follow-up pilot by January</text>
-<text x="72" y="613" fill="#172C30" font-family="Body" font-size="31" textLength="75.330" lengthAdjust="spacingAndGlyphs">2026.</text>
+<text x="72" y="220" fill="#172C30" font-family="Display" font-size="92.4" textLength="1275.212" lengthAdjust="spacingAndGlyphs">FOLLOW-UP CARE ACROSS THE BORDER</text>
+<rect x="72" y="297" width="858" height="464" fill="#006F68" stroke="none" stroke-width="1"/>
+<text x="104" y="342" fill="#ACDCD3" font-family="Bold" font-size="19" textLength="327.698" lengthAdjust="spacingAndGlyphs">FOLLOW-UP CONSULTATION PILOT</text>
+<text x="104" y="510" fill="#F8F3E8" font-family="Display" font-size="151.8" textLength="368.722" lengthAdjust="spacingAndGlyphs">&gt;5,900</text>
+<text x="104" y="580" fill="#F8F3E8" font-family="Body" font-size="34" textLength="661.028" lengthAdjust="spacingAndGlyphs">eligible Hospital Authority patients joined the</text>
+<text x="104" y="624" fill="#F8F3E8" font-family="Body" font-size="34" textLength="682.992" lengthAdjust="spacingAndGlyphs">HKU–Shenzhen Hospital pilot by January 2026.</text>
+<text x="104" y="726" fill="#ACDCD3" font-family="Body" font-size="25" textLength="414.275" lengthAdjust="spacingAndGlyphs">Programme use, not clinical outcomes</text>
 <g data-reveal="1">
-<line x1="934" y1="370" x2="934" y2="430" stroke="#006F68" stroke-width="4"/>
-<text x="980" y="406" fill="#172C30" font-family="Bold" font-size="42" textLength="256.158" lengthAdjust="spacingAndGlyphs">Consultations</text>
-<line x1="934" y1="496" x2="934" y2="556" stroke="#006F68" stroke-width="4"/>
-<text x="980" y="532" fill="#172C30" font-family="Bold" font-size="42" textLength="293.748" lengthAdjust="spacingAndGlyphs">Medical records</text>
-<line x1="934" y1="622" x2="934" y2="682" stroke="#006F68" stroke-width="4"/>
-<text x="980" y="658" fill="#172C30" font-family="Bold" font-size="42" textLength="295.218" lengthAdjust="spacingAndGlyphs">Return referrals</text>
+<text x="1000" y="342" fill="#006F68" font-family="Bold" font-size="19" textLength="263.400" lengthAdjust="spacingAndGlyphs">SEPARATE ARRANGEMENTS</text>
+<text x="1000" y="434" fill="#172C30" font-family="Bold" font-size="39" textLength="272.766" lengthAdjust="spacingAndGlyphs">Medical records</text>
+<line x1="1000" y1="478" x2="1528" y2="478" stroke="#B8C0B9" stroke-width="1"/>
+<text x="1000" y="553" fill="#172C30" font-family="Bold" font-size="39" textLength="274.131" lengthAdjust="spacingAndGlyphs">Return referrals</text>
+<text x="1000" y="660" fill="#596767" font-family="Body" font-size="28" textLength="488.152" lengthAdjust="spacingAndGlyphs">Defined eligibility; no universal coverage</text>
+<text x="1000" y="697" fill="#596767" font-family="Body" font-size="28" textLength="89.544" lengthAdjust="spacingAndGlyphs">implied</text>
 </g>
 <line x1="72" y1="810" x2="1528" y2="810" stroke="#B8C0B9" stroke-width="0.7"/>
 <text x="72" y="841" fill="#596767" font-family="Body" font-size="18" textLength="481.446" lengthAdjust="spacingAndGlyphs">HKSAR Government replies, 25 February and 17 June 2026 [12]</text>
