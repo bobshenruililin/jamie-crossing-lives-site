@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Jamie / Crossing lives</title>
+  <link rel="stylesheet" href="review.css">
+  <script src="review.js" defer></script>
+</head>
+<body>
+  <div class="review-shell">
+    <header class="top-strip">
+      <div class="header-brand">
+        <a id="wordmark" class="wordmark" href="./" aria-label="Jamie, crossing lives">Jamie <span aria-hidden="true">/</span> <span id="collection-title">Crossing lives</span></a>
+        <p id="draft-label" class="draft-label">Presentation draft</p>
+      </div>
+      <div class="header-actions">
+        <span id="working-badge" class="working-badge">Working draft</span>
+        <nav id="companion-links" class="companion-links" aria-label="Related material">
+          <a href="research.html">Explore the research <span aria-hidden="true">↗</span></a>
+          <a id="pdf-link" href="presentation.pdf" target="_blank" rel="noopener" hidden>PDF <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="viewer" class="viewer" aria-label="Presentation viewer" tabindex="-1">
+      <div class="stage-viewport" tabindex="0" role="region" aria-label="Presentation slide" aria-describedby="scroll-hint" data-native-keys>
+        <div id="stage" class="stage" aria-busy="true">
+          <p class="stage-message">Loading the presentation…</p>
+        </div>
+      </div>
+      <nav class="fullscreen-nav" aria-label="Fullscreen controls">
+        <button id="fullscreen-prev" class="icon-button" type="button" aria-label="Previous reveal or slide">←</button>
+        <button id="fullscreen-scenes" class="text-button fullscreen-picker" type="button" aria-label="Choose a slide" aria-haspopup="dialog" aria-controls="scenes-dialog"><span id="fullscreen-count" class="fullscreen-count"></span> <span aria-hidden="true">⌄</span></button>
+        <button id="fullscreen-next" class="icon-button" type="button" aria-label="Next reveal or slide">→</button>
+        <span class="control-divider" aria-hidden="true"></span>
+        <button id="exit-fullscreen" class="text-button" type="button">Exit fullscreen <span aria-hidden="true">↙</span></button>
+      </nav>
+      <dialog id="scenes-dialog" class="review-dialog scene-picker-dialog" aria-labelledby="scenes-title">
+        <div class="scene-picker-header">
+          <div>
+            <p class="dialog-kicker">Jump to a scene</p>
+            <h2 id="scenes-title">Presentation</h2>
+          </div>
+          <button id="close-scenes" class="icon-button" type="button" aria-label="Close scene picker">×</button>
+        </div>
+        <ol id="scene-list" class="scene-list" aria-label="Presentation scenes"></ol>
+      </dialog>
+    </main>
+
+    <p id="scroll-hint" class="scroll-hint">Swipe horizontally to explore the full slide.</p>
+
+    <footer class="review-footer">
+      <div class="scene-meta">
+        <div class="scene-eyebrow"><button id="scenes-trigger" class="scene-picker-trigger" type="button" aria-label="Choose a slide" aria-haspopup="dialog" aria-controls="scenes-dialog"><span id="scene-count">— / —</span><span id="picker-label">All slides</span><span aria-hidden="true">⌄</span></button><span id="reveal-count"></span></div>
+        <h1 id="scene-title">Crossing lives</h1>
+        <p id="scene-subtitle" class="scene-subtitle"></p>
+      </div>
+      <nav class="study-navigation" aria-label="Presentation navigation">
+        <button id="previous" class="nav-button" type="button" aria-label="Previous reveal or slide" title="Previous reveal or slide (←)"><span aria-hidden="true">←</span> <span>Previous</span></button>
+        <button id="next" class="nav-button" type="button" aria-label="Next reveal or slide" title="Next reveal or slide (→)"><span>Next</span> <span aria-hidden="true">→</span></button>
+      </nav>
+      <div class="review-tools" aria-label="Review tools">
+        <button id="sources" class="text-button" type="button" aria-haspopup="dialog">Sources <span aria-hidden="true">↗</span></button>
+        <button id="motion" class="text-button" type="button" aria-label="Motion" aria-pressed="true" title="Turn motion off and show all evidence">Motion on</button>
+        <button id="fullscreen" class="text-button" type="button">Fullscreen <span aria-hidden="true">↗</span></button>
+      </div>
+    </footer>
+    <p id="keyboard-hint" class="keyboard-hint">Use ← → to move through the presentation. Home / End jump to the beginning / end.</p>
+    <p id="status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+  </div>
+
+  <dialog id="sources-dialog" class="review-dialog" aria-labelledby="sources-title">
+    <div class="dialog-header">
+      <p class="dialog-kicker">Sources &amp; scope</p>
+      <button id="close-sources" class="icon-button" type="button" aria-label="Close sources">×</button>
+    </div>
+    <h2 id="sources-title"></h2>
+    <p id="source-note" class="source-note"></p>
+    <ul id="source-links" class="source-links"></ul>
+    <aside id="review-question-section" class="review-question" hidden>
+      <h3>For discussion</h3>
+      <p id="review-question"></p>
+    </aside>
+    <p id="dialog-caveat" class="dialog-caveat">Working presentation draft for private review. Source scope and caveats remain part of the claim.</p>
+  </dialog>
+</body>
+</html>

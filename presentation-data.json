@@ -1,0 +1,735 @@
+{
+  "title": "When lives span a border",
+  "status": "Working draft",
+  "scenes": [
+    {
+      "id": "ordinary-choices",
+      "title": "An ordinary choice. A regional economy.",
+      "subtitle": "Section 1 / Opening: economic question / everyday choices",
+      "svg": "presentation-frames/01.svg",
+      "durationSeconds": 40,
+      "sourceNote": "The familiarity of a conversation does not establish frequency or a population trend.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "question-and-three-themes",
+      "title": "When lives span a border",
+      "subtitle": "Section 1 / Opening: economic question / everyday choices",
+      "svg": "presentation-frames/02.svg",
+      "durationSeconds": 50,
+      "sourceNote": "JS-SEZ geography is in Johor. RTS is a separate project; no causal or transferable equivalence is asserted.",
+      "sourceLinks": [
+        {
+          "label": "[1.1] Factsheet",
+          "url": "https://www.edb.gov.sg/en/about-edb/media-releases-publications/agreement-between-singapore-and-malaysia-and-the-johor-singapore-special-economic-zone.html"
+        },
+        {
+          "label": "[1.2] Joint release",
+          "url": "https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/10/news-releases/grantors-informed-rts-link-service-targeted-feb-2027.html"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "scale-to-life",
+      "title": "The scale is regional. The choices are lived.",
+      "subtitle": "Section 2 / Regional ambition to everyday economic outcomes",
+      "svg": "presentation-frames/03.svg",
+      "durationSeconds": 45,
+      "sourceNote": "Regional scale and participation figures do not measure value added by integration. GBA population and GDP refer to 2025; Qianhai participation figures are reported by its Authority in July 2026.",
+      "sourceLinks": [
+        {
+          "label": "[2.4] GBA overview",
+          "url": "https://www.bayarea.gov.hk/en/about/overview.html"
+        },
+        {
+          "label": "[2.4] Development plan",
+          "url": "https://www.bayarea.gov.hk/en/outline/plan.html"
+        },
+        {
+          "label": "[2.4] Qianhai figures",
+          "url": "https://qh.sz.gov.cn/en/news/content/post_12913106.html"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "two-economic-questions",
+      "title": "Purchasing power / earning opportunity",
+      "subtitle": "Section 2 / Regional ambition to everyday economic outcomes",
+      "svg": "presentation-frames/04.svg",
+      "durationSeconds": 60,
+      "sourceNote": "The OECD evidence is general, not an HK–Shenzhen estimate; the study does not calculate net welfare.",
+      "sourceLinks": [
+        {
+          "label": "[2.5] Paper",
+          "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2023/05/economic-policy-making-to-pursue-economic-welfare_7a77b55b/ccc5634c-en.pdf"
+        },
+        {
+          "label": "[2.1] Executive summary",
+          "url": "https://www.oecd.org/en/publications/what-works-for-inclusive-growth-in-cities_680809c3-en/full-report/executive-summary_a21ae386.html"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "ties-and-institutions",
+      "title": "Opportunities need support",
+      "subtitle": "Section 2 / Regional ambition to everyday economic outcomes",
+      "svg": "presentation-frames/05.svg",
+      "durationSeconds": 45,
+      "sourceNote": "Illustrative links are conceptual, not observed frequencies. Resilience is an analytical question, not a measured result.",
+      "sourceLinks": [
+        {
+          "label": "[2.2] Chapter",
+          "url": "https://www.oecd.org/en/publications/oecd-sme-and-entrepreneurship-outlook-2023_342b8564-en/full-report/component-7.html"
+        },
+        {
+          "label": "[2.3] Paper",
+          "url": "https://documents1.worldbank.org/curated/en/700061638779538611/pdf/The-Dos-and-Don-ts-of-Special-Economic-Zones.pdf"
+        },
+        {
+          "label": "[3.2] Framework",
+          "url": "https://www.arup.com/globalassets/downloads/insights/c/city-resilience-framework/city-resilience-framework-2024v2.pdf"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "what-the-study-can-see",
+      "title": "Eleven records. Two expert discussions.",
+      "subtitle": "Section 3 / Research approach and scope",
+      "svg": "presentation-frames/06.svg",
+      "durationSeconds": 40,
+      "sourceNote": "The eleven records mix conversations, observations and an institutional visit; the two expert discussions are separate. Exploratory material, not thirteen survey interviews or a representative sample.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "three-lenses-one-limit",
+      "title": "Three lenses; institutions through all",
+      "subtitle": "Section 3 / Research approach and scope",
+      "svg": "presentation-frames/07.svg",
+      "durationSeconds": 50,
+      "sourceNote": "No official Arup “3+1” model, numerical score, citywide resilience claim or causal estimate.",
+      "sourceLinks": [
+        {
+          "label": "[3.2] Framework",
+          "url": "https://www.arup.com/globalassets/downloads/insights/c/city-resilience-framework/city-resilience-framework-2024v2.pdf"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "four-arrangements",
+      "title": "Four ways to organise a life",
+      "subtitle": "Section 4 / Four overlapping cross-border life configurations",
+      "svg": "presentation-frames/08.svg",
+      "durationSeconds": 95,
+      "sourceNote": "Configurations overlap; these are not four population shares. The Hong Kong-based account does not establish regular commuting. Pupils’ Mainland homes are not necessarily Shenzhen. Unspecified functions remain unspecified.",
+      "sourceLinks": [
+        {
+          "label": "[4.3] Estimates",
+          "url": "https://www.edb.gov.hk/attachment/en/about-edb/press/legco/replies-to-fc/edb-e-2627.pdf"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "those-who-stay",
+      "title": "The border reaches people who stay",
+      "subtitle": "Section 4 / Four overlapping cross-border life configurations",
+      "svg": "presentation-frames/09.svg",
+      "durationSeconds": 25,
+      "sourceNote": "No measured spillover magnitude or causal effect is implied.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "journeys-not-people",
+      "title": "85.8 million journeys",
+      "subtitle": "Section 5 / Three findings",
+      "svg": "presentation-frames/10.svg",
+      "durationSeconds": 25,
+      "sourceNote": "Six Shenzhen-facing checkpoints only; not unique residents, all departures, verified shopping trips or expenditure.",
+      "sourceLinks": [
+        {
+          "label": "[5.1] Table",
+          "url": "https://www.censtatd.gov.hk/en/web_table.html?id=650-80006"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "household-options",
+      "title": "A useful option has more than one value",
+      "subtitle": "Section 5 / Three findings",
+      "svg": "presentation-frames/11.svg",
+      "durationSeconds": 60,
+      "sourceNote": "Established-user sample; geography/denominators matter. No inferred trend, total spending loss or migration of half of HK spending. Lower earnings and living costs are one account.",
+      "sourceLinks": [
+        {
+          "label": "[5.7] Study",
+          "url": "https://cz-jrc.econ.cuhk.edu.hk/research/hong-kong-travelers-in-mainland-china-scale-destinations-and-expenditure-patterns/"
+        },
+        {
+          "label": "[5.7] Research release",
+          "url": "https://socsc.cuhk.edu.hk/voicedetails/research-release-on-hong-kong-travelers-in-mainland-china-official-data-e-wallet-data-model-analysis-reveals-hong-kong-residents-mainland-consumption-trends/"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "gains-and-mixed-pressure",
+      "title": "Useful options. Uneven pressure.",
+      "subtitle": "Section 5 / Three findings",
+      "svg": "presentation-frames/12.svg",
+      "durationSeconds": 70,
+      "sourceNote": "Retail is sales value, not volume; Jan–Aug is not full-year 2026. Restaurant categories have their own denominator. Figures do not identify Shenzhen competition as the cause.",
+      "sourceLinks": [
+        {
+          "label": "[5.2] Government reply, 5 June 2024",
+          "url": "https://www.info.gov.hk/gia/general/202406/05/P2024060500442p.htm"
+        },
+        {
+          "label": "[5.3] Table 620-67001",
+          "url": "https://www.censtatd.gov.hk/en/web_table.html?id=620-67001"
+        },
+        {
+          "label": "[5.3] August 2026 release",
+          "url": "https://www.info.gov.hk/gia/general/202610/02/P2026100200324p.htm"
+        },
+        {
+          "label": "[5.8] Current table",
+          "url": "https://www.censtatd.gov.hk/en/web_table.html?id=625-68003"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "capacity-to-respond",
+      "title": "Room to respond differs",
+      "subtitle": "Section 5 / Three findings",
+      "svg": "presentation-frames/13.svg",
+      "durationSeconds": 45,
+      "sourceNote": "Residual is not net profit, cash reserves or closure risk. Size is not chain ownership. No firm-level causal conclusion.",
+      "sourceLinks": [
+        {
+          "label": "[5.11] Food services",
+          "url": "https://www.censtatd.gov.hk/wbr/B1080016/B10800162024AN24/att/en/B10800162024AN24.pdf"
+        },
+        {
+          "label": "[5.11] Retail",
+          "url": "https://www.censtatd.gov.hk/wbr/B1080014/B10800142024AN24/att/en/B10800142024AN24.pdf"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "workers-need-workable-jobs",
+      "title": "A vacancy is not yet an alternative",
+      "subtitle": "Section 5 / Three findings",
+      "svg": "presentation-frames/14.svg",
+      "durationSeconds": 40,
+      "sourceNote": "Net employment changes do not measure layoffs or identify workers’ subsequent jobs. Vacancy counts concern positions, not the same individuals as the employment totals.",
+      "sourceLinks": [
+        {
+          "label": "[5.12] Release",
+          "url": "https://www.info.gov.hk/gia/general/202609/18/P2026091800290.htm"
+        },
+        {
+          "label": "[5.12] Tables",
+          "url": "https://gia.info.gov.hk/general/202609/18/P2026091800290_557077_1_1789705751580.pdf"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "livelihoods-takeaway",
+      "title": "Cheaper living + stronger earning options",
+      "subtitle": "Section 5 / Three findings",
+      "svg": "presentation-frames/15.svg",
+      "durationSeconds": 20,
+      "sourceNote": "No net-welfare balance or general ranking of firms follows.",
+      "sourceLinks": [
+        {
+          "label": "[5.3] Table 620-67001",
+          "url": "https://www.censtatd.gov.hk/en/web_table.html?id=620-67001"
+        },
+        {
+          "label": "[5.3] August 2026 release",
+          "url": "https://www.info.gov.hk/gia/general/202610/02/P2026100200324p.htm"
+        },
+        {
+          "label": "[5.11] Food services",
+          "url": "https://www.censtatd.gov.hk/wbr/B1080016/B10800162024AN24/att/en/B10800162024AN24.pdf"
+        },
+        {
+          "label": "[5.11] Retail",
+          "url": "https://www.censtatd.gov.hk/wbr/B1080014/B10800142024AN24/att/en/B10800142024AN24.pdf"
+        },
+        {
+          "label": "[5.12] Release",
+          "url": "https://www.info.gov.hk/gia/general/202609/18/P2026091800290.htm"
+        },
+        {
+          "label": "[5.12] Tables",
+          "url": "https://gia.info.gov.hk/general/202609/18/P2026091800290_557077_1_1789705751580.pdf"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "recognition-to-work",
+      "title": "Permission becomes usable work",
+      "subtitle": "Section 5 / Three findings",
+      "svg": "presentation-frames/16.svg",
+      "durationSeconds": 45,
+      "sourceNote": "Specific contracts are not quantified net jobs or productivity gains; registration applies to eligible professions and arrangements.",
+      "sourceLinks": [
+        {
+          "label": "[5.13] Registration arrangements",
+          "url": "https://www.devb.gov.hk/en/construction_sector_matters/service_promotion/gba/index.html"
+        },
+        {
+          "label": "[5.13] Contract evidence",
+          "url": "https://www.cmab.gov.hk/doc/en/legco/CMAB-2-e1-2025.pdf"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "connected-care",
+      "title": "One consultation, several arrangements",
+      "subtitle": "Section 5 / Three findings",
+      "svg": "presentation-frames/17.svg",
+      "durationSeconds": 75,
+      "sourceNote": "Patient counts, attendances and record-feature users are distinct, potentially overlapping measures. Defined schemes do not imply universal coverage, interoperable records for everyone or clinical outcomes. Care is one example, not the top economic priority.",
+      "sourceLinks": [
+        {
+          "label": "[5.14] 25 February 2026",
+          "url": "https://www.info.gov.hk/gia/general/202602/25/P2026022500444.htm"
+        },
+        {
+          "label": "[5.14] 17 June 2026",
+          "url": "https://www.info.gov.hk/gia/general/202606/17/P2026061700586p.htm"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "relationships-across-cities",
+      "title": "Moving home need not move every tie",
+      "subtitle": "Section 5 / Three findings",
+      "svg": "presentation-frames/18.svg",
+      "durationSeconds": 35,
+      "sourceNote": "Two illustrative participant accounts, not a claim about prevalence. The Hong Kong-based account does not establish a regular commute.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "a-lead-needs-a-route",
+      "title": "A lead still needs a route into work",
+      "subtitle": "Section 5 / Three findings",
+      "svg": "presentation-frames/19.svg",
+      "durationSeconds": 55,
+      "sourceNote": "Age-related hiring and intervention are the participant’s account; institutional, licensing or legal claims require separate verification. Do not infer which groups lack support.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "different-positions-different-needs",
+      "title": "Same opportunity, different implications",
+      "subtitle": "Section 5 / Three findings",
+      "svg": "presentation-frames/20.svg",
+      "durationSeconds": 40,
+      "sourceNote": "Conceptual positions overlap; no population segmentation or ranked severity.",
+      "sourceLinks": [
+        {
+          "label": "[5.3] Table 620-67001",
+          "url": "https://www.censtatd.gov.hk/en/web_table.html?id=620-67001"
+        },
+        {
+          "label": "[5.3] August 2026 release",
+          "url": "https://www.info.gov.hk/gia/general/202610/02/P2026100200324p.htm"
+        },
+        {
+          "label": "[5.12] Release",
+          "url": "https://www.info.gov.hk/gia/general/202609/18/P2026091800290.htm"
+        },
+        {
+          "label": "[5.12] Tables",
+          "url": "https://gia.info.gov.hk/general/202609/18/P2026091800290_557077_1_1789705751580.pdf"
+        },
+        {
+          "label": "[5.13] Registration arrangements",
+          "url": "https://www.devb.gov.hk/en/construction_sector_matters/service_promotion/gba/index.html"
+        },
+        {
+          "label": "[5.13] Contract evidence",
+          "url": "https://www.cmab.gov.hk/doc/en/legco/CMAB-2-e1-2025.pdf"
+        },
+        {
+          "label": "[5.14] 25 February 2026",
+          "url": "https://www.info.gov.hk/gia/general/202602/25/P2026022500444.htm"
+        },
+        {
+          "label": "[5.14] 17 June 2026",
+          "url": "https://www.info.gov.hk/gia/general/202606/17/P2026061700586p.htm"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "target-demonstrated-need",
+      "title": "Exposure is a starting question",
+      "subtitle": "Section 6 / Targeted responses",
+      "svg": "presentation-frames/21.svg",
+      "durationSeconds": 30,
+      "sourceNote": "This is a proposed assessment, not an evaluated targeting algorithm or a claim that all exposed firms need support.",
+      "sourceLinks": [
+        {
+          "label": "[5.2] Government reply, 5 June 2024",
+          "url": "https://www.info.gov.hk/gia/general/202406/05/P2024060500442p.htm"
+        },
+        {
+          "label": "[5.3] Table 620-67001",
+          "url": "https://www.censtatd.gov.hk/en/web_table.html?id=620-67001"
+        },
+        {
+          "label": "[5.3] August 2026 release",
+          "url": "https://www.info.gov.hk/gia/general/202610/02/P2026100200324p.htm"
+        },
+        {
+          "label": "[5.11] Food services",
+          "url": "https://www.censtatd.gov.hk/wbr/B1080016/B10800162024AN24/att/en/B10800162024AN24.pdf"
+        },
+        {
+          "label": "[5.11] Retail",
+          "url": "https://www.censtatd.gov.hk/wbr/B1080014/B10800142024AN24/att/en/B10800142024AN24.pdf"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "business-options-and-cgc",
+      "title": "Share capacity. Find viable demand.",
+      "subtitle": "Section 6 / Targeted responses",
+      "svg": "presentation-frames/22.svg",
+      "durationSeconds": 50,
+      "sourceNote": "CGC is not evidence of survival effects; weekday meals are an illustrative option, not verified demand. Shared buying requires safeguards and benefits sufficient for its costs.",
+      "sourceLinks": [
+        {
+          "label": "[6.1] SME One",
+          "url": "https://www.hkpc.org/en/our-services/sme-support/smeone"
+        },
+        {
+          "label": "[6.1] BUD Fund",
+          "url": "https://www.smefund.tid.gov.hk/english/bud/bud_home.html"
+        },
+        {
+          "label": "[6.1] GoGBA",
+          "url": "https://www.go-gba.com/en/service-centre/"
+        },
+        {
+          "label": "[6.4] Taste Hong Kong",
+          "url": "https://tastehk.discoverhongkong.com/en"
+        },
+        {
+          "label": "[6.4] Joint-buying guidance",
+          "url": "https://www.compcomm.hk/en/legislation_guidance/guidance/first_conduct_rule/files/Guideline_The_First_Conduct_Rule_Eng.pdf"
+        },
+        {
+          "label": "[6.9] Business overview",
+          "url": "https://www.cgcjapan.co.jp/company/business/"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "worker-transition-ccp",
+      "title": "Connect training to a realistic job",
+      "subtitle": "Section 6 / Targeted responses",
+      "svg": "presentation-frames/23.svg",
+      "durationSeconds": 40,
+      "sourceNote": "Non-randomised comparison, with a predominantly PMET sample; participants with fewer than three months of employment records at their placement company were excluded. Singapore’s estimated results do not predict outcomes for Hong Kong retail workers.",
+      "sourceLinks": [
+        {
+          "label": "[5.16] Reply",
+          "url": "https://www.info.gov.hk/gia/general/202506/04/P2025060400287.htm"
+        },
+        {
+          "label": "[6.10] Published evaluation",
+          "url": "https://www.meti.gov.sg/resources/economic-survey-of-singapore/economic-survey-of-singapore-and-feature-articles/impact-evaluation-of-workforce-singapore-s-place-and-train-career-conversion-programme/"
+        },
+        {
+          "label": "[6.10] Full report",
+          "url": "https://isomer-user-content.by.gov.sg/1004/c1fe97bf-398d-4c4b-ae21-3e58ee6beaa4/FA2_AES2024.pdf"
+        },
+        {
+          "label": "[6.5] Recruitment services",
+          "url": "https://www.info.gov.hk/gia/general/202509/25/P2025092500568.htm"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "specific-user-specific-arrangement",
+      "title": "Start with the proposed work or move",
+      "subtitle": "Section 6 / Targeted responses",
+      "svg": "presentation-frames/24.svg",
+      "durationSeconds": 40,
+      "sourceNote": "The evidence does not establish routine failure or a universal ranking of care, housing and childcare needs. The relevant arrangement depends on the person’s proposed work or move.",
+      "sourceLinks": [
+        {
+          "label": "[5.13] Registration arrangements",
+          "url": "https://www.devb.gov.hk/en/construction_sector_matters/service_promotion/gba/index.html"
+        },
+        {
+          "label": "[5.13] Contract evidence",
+          "url": "https://www.cmab.gov.hk/doc/en/legco/CMAB-2-e1-2025.pdf"
+        },
+        {
+          "label": "[5.14] 25 February 2026",
+          "url": "https://www.info.gov.hk/gia/general/202602/25/P2026022500444.htm"
+        },
+        {
+          "label": "[5.14] 17 June 2026",
+          "url": "https://www.info.gov.hk/gia/general/202606/17/P2026061700586p.htm"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "existing-help-gba",
+      "title": "Practical advice. Referrals. Peer contacts.",
+      "subtitle": "Section 6 / Targeted responses",
+      "svg": "presentation-frames/25.svg",
+      "durationSeconds": 35,
+      "sourceNote": "The commissioned help covers eligible GBA Youth Employment Scheme participants. Programme provision is not universal coverage or proof of outcomes, and does not establish that all other households lack support.",
+      "sourceLinks": [
+        {
+          "label": "[6.12] Service description",
+          "url": "https://www2.jobs.gov.hk/0/tc/information/gbayes/supportservices/"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "fit-the-response-to-the-problem",
+      "title": "Follow outcomes. Build on existing evidence.",
+      "subtitle": "Section 6 / Targeted responses",
+      "svg": "presentation-frames/26.svg",
+      "durationSeconds": 45,
+      "sourceNote": "An agency/provider-facing proposal using existing data first. Records are not assumed accessible or linkable. Hong Kong–Shenzhen requires particular-change comparisons; Singapore–Johor can establish a pre-RTS reference point. Before/after improvement alone is not causal evidence; distinguish RTS, JS-SEZ and other changes.",
+      "sourceLinks": [
+        {
+          "label": "[6.13] MOM",
+          "url": "https://stats.mom.gov.sg/iMAS_PdfLibrary/mrsd-Labour-Market-Report-4Q-2025.pdf"
+        },
+        {
+          "label": "[6.13] Skills4Johor",
+          "url": "https://supportcentre.hrdcorp.gov.my/portal/en/kb/articles/skills4johor-initiative"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "sg-johor-distinct-context",
+      "title": "A different border. Two possible shifts.",
+      "subtitle": "Section 7 / Singapore–Johor: two possible shifts",
+      "svg": "presentation-frames/27.svg",
+      "durationSeconds": 25,
+      "sourceNote": "Different sovereign-border and legal arrangements. JS-SEZ designates geography in Johor; RTS is a separate project. Its February 2027 passenger-service target remains subject to safety certification and regulatory approvals.",
+      "sourceLinks": [
+        {
+          "label": "[7.1] Factsheet",
+          "url": "https://www.edb.gov.sg/en/about-edb/media-releases-publications/agreement-between-singapore-and-malaysia-and-the-johor-singapore-special-economic-zone.html"
+        },
+        {
+          "label": "[1.2] Joint release",
+          "url": "https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/10/news-releases/grantors-informed-rts-link-service-targeted-feb-2027.html"
+        },
+        {
+          "label": "[7.7] Scheme review",
+          "url": "https://www.moh.gov.sg/newsroom/reviewing-the-medisave-scheme-for-overseas-elective-treatments/"
+        },
+        {
+          "label": "[7.7] Continuity of care",
+          "url": "https://www.moh.gov.sg/newsroom/likely-impact-on-quality-and-continuity-of-care-for-patients-who-travel-to-johor-bahru-for-healthcare-given-upcoming-rts-link/"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "two-way-spending-forecasts",
+      "title": "Two forecast flows. Uneven exposure.",
+      "subtitle": "Section 7 / Singapore–Johor: two possible shifts",
+      "svg": "presentation-frames/28.svg",
+      "durationSeconds": 45,
+      "sourceNote": "Forecast additional annual spending flows, not realised effects, GDP losses or effects attributable to JS-SEZ. Rounded gross inputs subtract to S$294m; the source reports approximately S$290m, without implying greater precision.",
+      "sourceLinks": [
+        {
+          "label": "[7.5] Summary",
+          "url": "https://www.sbf.org.sg/newsroom/media/press-releases/detail/rts-link-could-reshape-cross-border-consumer-spending--spotlighting-both-opportunities-and-challenges-for-singapore-retail-and-f-b"
+        },
+        {
+          "label": "[7.5] Full report",
+          "url": "https://www.sbf.org.sg/docs/default-source/advocacy-policy/sbf-rts-study_final-report-16-jul.pdf?sfvrsn=b7ba6722_1"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "prepare-businesses-and-workers",
+      "title": "Prepare; compare; adjust",
+      "subtitle": "Section 7 / Singapore–Johor: two possible shifts",
+      "svg": "presentation-frames/29.svg",
+      "durationSeconds": 35,
+      "sourceNote": "Eligibility and modalities differ; programmes are not RTS-specific measures. Prioritisation is a proposed focus, not a government commitment.",
+      "sourceLinks": [
+        {
+          "label": "[7.4] Heartland programmes",
+          "url": "https://www.enterprisesg.gov.sg/industries/heartland-enterprises/heartland-enterprises"
+        },
+        {
+          "label": "[7.9] Retail programme",
+          "url": "https://conversion.mycareersfuture.gov.sg/Portal/ProgramDetails.aspx?ProgID=P00004063"
+        },
+        {
+          "label": "[7.9] Food programme",
+          "url": "https://conversion.mycareersfuture.gov.sg/Portal/ProgramDetails.aspx?ProgID=P00002663"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "conditional-retirement-interest",
+      "title": "If travel became easier…",
+      "subtitle": "Section 7 / Singapore–Johor: two possible shifts",
+      "svg": "presentation-frames/30.svg",
+      "durationSeconds": 30,
+      "sourceNote": "Survey respondents, not one-third of all Singaporeans; buying a JB home and retiring there if travel improves. Sampling/question wording need verification before publication.",
+      "sourceLinks": [
+        {
+          "label": "[7.6] Original survey post",
+          "url": "https://www.linkedin.com/posts/blackbox-research_sensingsg-feb24-spotlight-on-the-sg-jb-activity-7165164423840550912-fz3R"
+        },
+        {
+          "label": "[7.6] Context",
+          "url": "https://www.businesstimes.com.sg/opinion-features/home-away-home-more-singaporeans-eye-malaysia-place-retire"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "before-and-after-a-move",
+      "title": "Help before and after a move",
+      "subtitle": "Section 7 / Singapore–Johor: two possible shifts",
+      "svg": "presentation-frames/31.svg",
+      "durationSeconds": 45,
+      "sourceNote": "Review does not mean entitlement expansion has occurred. GBA youth help is for eligible participants. Administrative entitlements cannot simply transfer across a sovereign border; no routine gap is assumed.",
+      "sourceLinks": [
+        {
+          "label": "[7.7] Scheme review",
+          "url": "https://www.moh.gov.sg/newsroom/reviewing-the-medisave-scheme-for-overseas-elective-treatments/"
+        },
+        {
+          "label": "[7.7] Continuity of care",
+          "url": "https://www.moh.gov.sg/newsroom/likely-impact-on-quality-and-continuity-of-care-for-patients-who-travel-to-johor-bahru-for-healthcare-given-upcoming-rts-link/"
+        },
+        {
+          "label": "[1.2] Joint release",
+          "url": "https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/10/news-releases/grantors-informed-rts-link-service-targeted-feb-2027.html"
+        },
+        {
+          "label": "[6.12] Service description",
+          "url": "https://www2.jobs.gov.hk/0/tc/information/gbayes/supportservices/"
+        },
+        {
+          "label": "[5.6] Reply",
+          "url": "https://www.info.gov.hk/gia/general/202606/17/P2026061700586p.htm"
+        },
+        {
+          "label": "[5.14] 25 February 2026",
+          "url": "https://www.info.gov.hk/gia/general/202602/25/P2026022500444.htm"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "johor-residents-and-selective-coordination",
+      "title": "Whose experience will guide the response?",
+      "subtitle": "Section 7 / Singapore–Johor: two possible shifts",
+      "svg": "presentation-frames/32.svg",
+      "durationSeconds": 60,
+      "sourceNote": "Housing and service pressures are questions to monitor, not measured effects claimed here. Bilateral coordination is relevant where both governments must act; other issues can use existing organisations.",
+      "sourceLinks": [
+        {
+          "label": "[7.3] Joint statement",
+          "url": "https://www.pmo.gov.sg/newsroom/joint-statement-by-pm-lawrence-wong-and-pm-dato-seri-anwar-ibrahim-at-the-12th-singapore-malaysia-leaders-retreat/"
+        },
+        {
+          "label": "[7.1] Factsheet",
+          "url": "https://www.edb.gov.sg/en/about-edb/media-releases-publications/agreement-between-singapore-and-malaysia-and-the-johor-singapore-special-economic-zone.html"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "three-findings-three-responses",
+      "title": "Gains. Access. Relationships.",
+      "subtitle": "Section 8 / Closing",
+      "svg": "presentation-frames/33.svg",
+      "durationSeconds": 30,
+      "sourceNote": "Do not make the strength of evidence for every response appear identical or imply universal coverage gaps.",
+      "sourceLinks": [
+        {
+          "label": "[5.3] Table 620-67001",
+          "url": "https://www.censtatd.gov.hk/en/web_table.html?id=620-67001"
+        },
+        {
+          "label": "[5.3] August 2026 release",
+          "url": "https://www.info.gov.hk/gia/general/202610/02/P2026100200324p.htm"
+        },
+        {
+          "label": "[5.12] Release",
+          "url": "https://www.info.gov.hk/gia/general/202609/18/P2026091800290.htm"
+        },
+        {
+          "label": "[5.12] Tables",
+          "url": "https://gia.info.gov.hk/general/202609/18/P2026091800290_557077_1_1789705751580.pdf"
+        },
+        {
+          "label": "[5.14] 25 February 2026",
+          "url": "https://www.info.gov.hk/gia/general/202602/25/P2026022500444.htm"
+        },
+        {
+          "label": "[5.14] 17 June 2026",
+          "url": "https://www.info.gov.hk/gia/general/202606/17/P2026061700586p.htm"
+        },
+        {
+          "label": "[6.12] Service description",
+          "url": "https://www2.jobs.gov.hk/0/tc/information/gbayes/supportservices/"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    },
+    {
+      "id": "opportunities-that-can-endure",
+      "title": "Cheaper living. Stronger earning opportunities.",
+      "subtitle": "Section 8 / Closing",
+      "svg": "presentation-frames/34.svg",
+      "durationSeconds": 30,
+      "sourceNote": "Exploratory study identifies practical questions and preparation routes; it does not measure citywide resilience or net welfare.",
+      "sourceLinks": [
+        {
+          "label": "[3.2] Framework",
+          "url": "https://www.arup.com/globalassets/downloads/insights/c/city-resilience-framework/city-resilience-framework-2024v2.pdf"
+        }
+      ],
+      "reviewQuestion": "Does this emphasis and pacing support the spoken argument?"
+    }
+  ]
+}
