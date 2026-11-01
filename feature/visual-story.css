@@ -1,0 +1,67 @@
+/* One visual argument per chapter. The research library carries optional depth. */
+.story-opening .opening-deck{max-width:39ch}
+.story-opening .opening-deck>p:first-child{font-size:20px;line-height:1.4}
+.story-opening .opening-deck .byline{margin-top:24px}
+.story-opening .opening-deck .story-link{margin-top:20px}
+.story-route{margin-top:36px;margin-bottom:0}
+.finding{padding-top:74px;padding-bottom:52px}
+.finding-heading{margin-bottom:38px}
+.finding-heading>p:last-child{font-size:18px;line-height:1.45;max-width:28ch}
+.finding-heading h2{font-size:clamp(48px,5.5vw,78px)}
+.finding .chapter-next{margin-top:30px}
+.editorial-context{margin-top:26px}
+.editorial-context>summary{font-size:13px;letter-spacing:.01em}
+.editorial-context .reading-columns{margin-top:15px;margin-bottom:20px}
+.editorial-context .reading-columns p{font-size:15px;line-height:1.65}
+.editorial-context .reading-columns div p+p{margin-top:18px}
+.spc-heading{margin-bottom:0}
+.spc-kicker{margin-bottom:18px}
+.spc-insight{min-height:1.5em;margin-top:26px}
+.spc-controls{margin-bottom:24px}
+.spc-panel h4{font-family:var(--font-display);font-size:29px;margin-bottom:18px}
+.spc-row{margin-bottom:17px}
+.spc-track{height:23px}
+.spc-caption{margin-bottom:14px}
+.access-finding #field-notebook{margin-bottom:0}
+.ties-finding .finding-heading{margin-bottom:30px}
+.johor-arrival{margin-top:30px}
+#two-way{padding-top:66px;padding-bottom:52px}
+#two-way .chapter-lead{margin-bottom:30px}
+#two-way .chapter-lead h2 em{color:var(--rust)}
+#two-way .chapter-lead>p{max-width:32ch}
+.story-conclusion{padding-top:72px;padding-bottom:75px}
+.story-conclusion h2{font-size:clamp(49px,6.5vw,92px);max-width:16ch}
+.story-conclusion .conclusion-line{max-width:43ch;font-size:19px;line-height:1.5;margin:28px 0 16px}
+.closing-question{display:inline-flex;align-items:center;gap:35px;padding:12px 0;border-bottom:1px solid var(--ink);font-size:14px;text-decoration:none}
+.closing-question:hover{color:var(--rust)}
+.story-conclusion .conclusion-links{margin-top:36px}
+.research-depth{padding-top:58px}
+.depth-content .arrangement-overview{border-top:0;padding-top:0}
+.depth-content .arrangement-intro{display:block}
+.depth-content .arrangement-intro>p:last-child{max-width:66ch;margin-top:18px}
+.depth-content .arrangement-intro h2,.depth-content .inquiry-section h2,.depth-content .learning-visit h2{font-size:40px}
+.depth-content .orientation{padding-block:35px}
+.depth-content .inquiry-section{padding-top:0;padding-bottom:36px;border-top:0}
+.depth-content .inquiry-grid{margin-top:24px}
+.depth-content .learning-visit{border-top:1px solid var(--line);padding-top:30px;padding-bottom:30px}
+.depth-content .retirement-question{padding-block:30px}
+.depth-content .care-passage{margin-top:0;padding-top:0}
+@media(max-width:760px){
+  .story-opening .opening-deck>p:first-child{font-size:17px;max-width:35ch}
+  .story-opening .opening-deck .byline{margin-top:18px}
+  .story-route{margin-top:30px}
+  .finding{padding-top:52px;padding-bottom:38px}
+  .finding-heading{margin-bottom:27px}
+  .finding-heading h2{font-size:clamp(44px,10.6vw,68px);margin-bottom:18px}
+  .finding-heading>p:last-child{font-size:16px;max-width:36ch}
+  .spc-panel h4{font-size:23px}
+  .spc-insight{min-height:2.9em;font-size:16px}
+  .editorial-context .reading-columns p{font-size:14px}
+  #two-way{padding-block:48px}
+  .story-conclusion{padding-block:48px}
+  .story-conclusion h2{font-size:clamp(45px,11vw,65px)}
+  .story-conclusion .conclusion-line{font-size:17px}
+  .story-conclusion .conclusion-links{margin-top:28px}
+  .depth-content .arrangement-grid{grid-template-columns:1fr 1fr}
+  .depth-content .arrangement-intro h2,.depth-content .inquiry-section h2,.depth-content .learning-visit h2{font-size:34px}
+}

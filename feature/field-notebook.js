@@ -1,26 +1,36 @@
 /* Photo annotations are normalized to unchanged originals; no locations or outcomes are inferred. */
 const photographs = [
   {
-    id:'street', label:'Street services', title:'Several services share one frontage',
+    id:'street', label:'Street services', title:'Everyday services, side by side',
     file:'sz-services.jpg', width:1600, height:1200,
     alt:'Pedestrians pass a row of storefronts with dental, courier and mobile-phone signage.',
-    caption:'A commercial street on the Shenzhen field trip.',
-    scope:'Visible signs do not establish customer origins, service quality or prices.',
+    caption:'Shenzhen · a commercial street.',
+    scope:'Signs show what is offered, not who uses it.',
     spots:[
-      {id:'dental', label:'Dental', rect:[.071,.316,.262,.075], observation:'A large sign advertises dental services.', limit:'The photograph does not establish clinical quality or prices.'},
-      {id:'parcels', label:'Parcels', rect:[.368,.323,.236,.073], observation:'Courier signage sits above a storefront with parcels outside.', limit:'No parcel volumes or cross-border flows are measured here.'},
-      {id:'mobile', label:'Mobile services', rect:[.649,.325,.303,.077], observation:'China Mobile signage spans the right-hand storefront.', limit:'Visible branding does not establish ownership, eligibility or who uses the service.'}
+      {id:'dental', label:'Dental', rect:[.071,.316,.262,.075], observation:'Dental services are advertised above the street.', limit:'Quality and prices are not established.'},
+      {id:'parcels', label:'Parcels', rect:[.368,.323,.236,.073], observation:'Courier signage above a storefront with parcels outside.', limit:'Parcel volumes and destinations are unknown.'},
+      {id:'mobile', label:'Mobile services', rect:[.649,.325,.303,.077], observation:'China Mobile signage identifies another everyday service.', limit:'The sign does not establish eligibility or use.'}
     ]
   },
   {
-    id:'guides', label:'Information display', title:'A name above a multilingual guide rack',
+    id:'guides', label:'Arrival guides', title:'Information at the crossing',
     file:'sz-wayfinding.jpg', width:1536, height:2048,
     alt:'A rack holds guides in several languages beneath the Futian Port Inbound Service Center sign.',
-    caption:'Guides beneath the Futian Port Inbound Service Center sign.',
-    scope:'The photograph records information on display. The operator and referral outcomes are unconfirmed.',
+    caption:'Futian Port · guides on display.',
+    scope:'The operator is unconfirmed; referrals were not tested.',
     spots:[
-      {id:'name', label:'Centre name', rect:[.244,.054,.523,.050], observation:'The heading names the Futian Port Inbound Service Center.', limit:'The name does not establish which organisation operates it.'},
-      {id:'languages', label:'Language guides', rect:[.269,.247,.445,.126], observation:'Korean, Japanese and Spanish guides share the first row.', limit:'Printed languages do not show the languages in which staff provided help.'}
+      {id:'name', label:'Centre name', rect:[.244,.054,.523,.050], observation:'Futian Port Inbound Service Center.', limit:'The sign does not identify its operator.'},
+      {id:'languages', label:'Language guides', rect:[.269,.247,.445,.126], observation:'Korean, Japanese and Spanish guides share a row.', limit:'Printed languages do not establish staff language support.'}
+    ]
+  },
+  {
+    id:'licences', label:'Licence conversion', title:'A service between systems',
+    file:'ss-driving-school.jpg', width:1200, height:1600,
+    alt:'Lee Kin Driving School storefront with a red sign advertising conversion to Mainland and Hong Kong driving licences.',
+    caption:'Driving-licence conversion advertised at a Sheung Shui driving school.',
+    scope:'Advertising, not evidence of completed applications.',
+    spots:[
+      {id:'conversion', label:'Conversion sign', rect:[.123,.516,.202,.244], observation:'The red sign advertises Mainland and Hong Kong driving-licence conversion.', limit:'Use, eligibility and outcomes are not shown.'}
     ]
   }
 ];
@@ -40,15 +50,15 @@ export function initFieldNotebook(host){
   const highlight=make('span','fn-highlight');highlight.setAttribute('aria-hidden','true');highlight.hidden=true;
   stage.append(photoImage,highlight);
   const caption=make('figcaption','fn-caption');
-  const credit=make('p','fn-credit','Photographs supplied by Bob and Jamie. No pictured person is identified as a participant.');
+  const credit=make('p','fn-credit','Field photographs supplied by Bob and Jamie.');
   context.append(stage,caption,credit);
 
   const reading=make('div','fn-reading');
   const title=make('h4','fn-title');
-  const instruction=make('p','fn-instruction','Choose a sign to inspect the detail.');
+  const instruction=make('p','fn-instruction','Choose a detail.');
   const choices=make('div','fn-choices');choices.setAttribute('role','group');choices.setAttribute('aria-label','Choose a visible detail');
   const detail=make('div','fn-detail');detail.hidden=true;
-  const detailLabel=make('p','fn-detail-label','Detail from the same photograph');
+  const detailLabel=make('p','fn-detail-label','From the same photograph');
   const crop=make('div','fn-crop');crop.setAttribute('aria-hidden','true');
   const cropImage=make('img');cropImage.alt='';cropImage.decoding='async';crop.append(cropImage);
   const observation=make('p','fn-observation');observation.id=`${prefix}-observation`;
@@ -67,6 +77,7 @@ export function initFieldNotebook(host){
     highlight.hidden=!spot;detail.hidden=!spot;scope.hidden=Boolean(spot);
     if(!spot){if(announce)status.textContent=`Whole photograph. ${photo.caption}`;return}
     const [x,y,w,h]=spot.rect;
+    detailLabel.textContent=spot.label;
     Object.assign(highlight.style,{left:`${x*100}%`,top:`${y*100}%`,width:`${w*100}%`,height:`${h*100}%`});
     crop.style.aspectRatio=String((photo.width*w)/(photo.height*h));
     cropImage.src=asset(photo.file);cropImage.width=photo.width;cropImage.height=photo.height;
@@ -86,7 +97,7 @@ export function initFieldNotebook(host){
     if(announce)status.textContent=`${photo.label}. ${photo.caption}`;
   }
   const onPhotoClick=event=>{const index=tabButtons.findIndex(button=>button.contains(event.target));if(index>=0)choosePhoto(index)};
-  const onPhotoKey=event=>{let next;if(event.key==='ArrowRight')next=(current+1)%photographs.length;else if(event.key==='ArrowLeft')next=(current+photographs.length-1)%photographs.length;else return;event.preventDefault();choosePhoto(next);tabButtons[next].focus()};
+  const onPhotoKey=event=>{let next;if(event.key==='ArrowRight')next=(current+1)%photographs.length;else if(event.key==='ArrowLeft')next=(current+photographs.length-1)%photographs.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=photographs.length-1;else return;event.preventDefault();choosePhoto(next);tabButtons[next].focus()};
   const onDetailClick=event=>{const button=event.target.closest('button[data-detail]');if(button&&choices.contains(button))chooseDetail(Number(button.dataset.detail))};
   const onDetailKey=event=>{let next;const count=choiceButtons.length;const focused=choiceButtons.indexOf(event.target.closest('button'));const start=focused<0?selected+1:focused;if(event.key==='ArrowRight'||event.key==='ArrowDown')next=(start+1)%count;else if(event.key==='ArrowLeft'||event.key==='ArrowUp')next=(start+count-1)%count;else if(event.key==='Home')next=0;else if(event.key==='End')next=count-1;else return;event.preventDefault();chooseDetail(next-1);choiceButtons[next].focus()};
   tabs.addEventListener('click',onPhotoClick);tabs.addEventListener('keydown',onPhotoKey);choices.addEventListener('click',onDetailClick);choices.addEventListener('keydown',onDetailKey);choosePhoto(0,false);
