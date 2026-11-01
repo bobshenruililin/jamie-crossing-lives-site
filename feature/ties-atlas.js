@@ -1,17 +1,80 @@
 let tiesInstance = 0;
 
-// Original still-life symbols. These depict categories of ties, not possessions,
+// Original miniature symbols. These depict categories of ties, not possessions,
 // photographed places, people, routes, or the quantity/strength of a relationship.
 const objects = {
-  rental: `<path class="ta-object-soft" d="M27 26 80 17 91 25 91 105 27 105Z"/><path class="ta-object-paper" d="M27 26 80 17 80 105 27 105Z"/><path class="ta-object-line" d="M39 40 68 35 68 105M39 40V105M60 70h4"/><path class="ta-object-accent" d="M81 69h18v17H81Z"/><path class="ta-object-line" d="M86 74h8v7h-8ZM91 86v17h8v-6h-8"/>`,
-  university: `<path class="ta-object-ink" d="M19 91h81v7H19Z"/><path class="ta-object-line" d="M27 98v9M92 98v9"/><path class="ta-object-paper" d="M30 79h64v12H30Z"/><path class="ta-object-soft" d="M24 65h62v14H24Z"/><path class="ta-object-line" d="M32 70h44M37 84h46"/><path class="ta-object-accent" d="M45 29h43v36H45Z"/><path class="ta-object-paper" d="M49 33h35v27H49Z"/><path class="ta-object-line" d="M55 41h22M55 47h22M55 53h13M58 60v5"/>`,
-  property: `<path class="ta-object-soft" d="m29 84 49-14 20 15-48 17Z"/><path class="ta-object-accent" d="M34 25h32v32H34Z"/><path class="ta-object-paper" d="M43 34h14v14H43Z"/><path class="ta-object-ink" d="M47 57h9v35h18v-9H56V73h10v-8H56Z"/><path class="ta-object-line" d="m66 41 20 8v23l-12 7-10-8V48"/>`,
-  family: `<path class="ta-object-soft" d="m20 98 62-6 21 13-64 3Z"/><path class="ta-object-ink" d="M25 32h63v67H25Z"/><path class="ta-object-paper" d="M31 38h51v54H31Z"/><path class="ta-object-soft" d="M39 48h35v28H39Z"/><path class="ta-object-line" d="m39 48 18 14 17-14M39 76l12-10m23 10L62 66M39 84h20"/><path class="ta-object-accent" d="m75 79 21-5 6 24-22 5Z"/>`,
-  friends: `<path class="ta-object-soft" d="m18 99 70-6 20 13H35Z"/><path class="ta-object-line" d="M75 54h20v24H84M38 65H22v24h18"/><path class="ta-object-paper" d="M57 44h27v49H57Z"/><path class="ta-object-accent" d="M35 56h30v44H35Z"/><path class="ta-object-line" d="M42 63h16M64 51h13"/>`,
-  activities: `<path class="ta-object-soft" d="m17 96 64-9 27 17-66 5Z"/><path class="ta-object-paper" d="m31 35 43-8 10 58-43 8Z"/><path class="ta-object-line" d="m39 46 29-5m-27 15 29-5m-27 15 20-4"/><path class="ta-object-accent" d="m58 70 40-7 7 33-41 8Z"/><path class="ta-object-line" d="m68 78 23-4m-21 12 23-4"/>`,
-  home: `<path class="ta-object-soft" d="m23 98 60-8 22 14-65 5Z"/><path class="ta-object-paper" d="M29 55h57v46H29Z"/><path class="ta-object-accent" d="m22 55 35-31 36 31Z"/><path class="ta-object-line" d="M50 101V73h16v28M34 63h11v12H34Zm38 0h9v12h-9"/>`,
-  community: `<path class="ta-object-soft" d="m14 98 72-8 26 15-76 5Z"/><path class="ta-object-line" d="M29 53v47M91 53v47"/><path class="ta-object-paper" d="M23 28h74v50H23Z"/><path class="ta-object-accent" d="m31 36 24-3 3 31-24 3Z"/><path class="ta-object-soft" d="M64 41h25v28H64Z"/><path class="ta-object-line" d="m36 43 13-1m-12 8 13-1M69 48h14m-14 7h14M21 84h79"/>`,
-  guiding: `<path class="ta-object-soft" d="m17 98 69-8 22 15-69 4Z"/><path class="ta-object-ink" d="M22 34h40v65H22Z"/><path class="ta-object-paper" d="M28 40h28v52H28Z"/><path class="ta-object-line" d="M34 50h15M34 57h15M34 64h9M94 67h10v19H92"/><path class="ta-object-accent" d="M65 58h29v42H65Z"/><path class="ta-object-line" d="M72 65h15"/>`
+  rental: `<ellipse class="ta-object-shadow" cx="61" cy="102" rx="43" ry="5"/><rect class="ta-object-soft" x="31" y="20" width="54" height="77" rx="11"/><rect class="ta-object-paper" x="23" y="16" width="54" height="81" rx="11"/><path class="ta-object-ink" d="M38 96V54a13 13 0 0 1 26 0v42Z"/><path class="ta-object-highlight" d="M30 35v-7a5 5 0 0 1 5-5h27"/><rect class="ta-object-soft" x="38" y="25" width="25" height="6" rx="3"/><circle class="ta-object-paper" cx="57" cy="69" r="2.3"/><path class="ta-object-accent" d="M82 75h7v9h9v7h-9v8h-7Z"/><circle class="ta-object-accent" cx="85.5" cy="66" r="11"/><circle class="ta-object-paper" cx="85.5" cy="66" r="3.5"/>`,
+  university: `<ellipse class="ta-object-shadow" cx="61" cy="102" rx="45" ry="5"/>
+    <rect class="ta-object-soft" x="31" y="43" width="67" height="51" rx="5"/>
+    <rect class="ta-object-paper" x="24" y="43" width="67" height="51" rx="5"/>
+    <path class="ta-object-ink" d="m19 40 36-23a7 7 0 0 1 8 0l36 23a3 3 0 0 1-2 6H21a3 3 0 0 1-2-6Z"/>
+    <circle class="ta-object-paper" cx="59" cy="32" r="5"/>
+    <rect class="ta-object-soft" x="34" y="51" width="8" height="36" rx="3"/>
+    <rect class="ta-object-soft" x="54" y="51" width="8" height="36" rx="3"/>
+    <rect class="ta-object-soft" x="74" y="51" width="8" height="36" rx="3"/>
+    <rect class="ta-object-paper" x="21" y="88" width="76" height="9" rx="3"/>
+    <g transform="rotate(-8 39 93)"><rect class="ta-object-accent" x="17" y="82" width="40" height="18" rx="4"/><path class="ta-object-paper" d="M24 87h32v8H24a4 4 0 0 1 0-8Z"/><path class="ta-object-line" d="M29 91h22"/></g>`,
+  property: `<ellipse class="ta-object-shadow" cx="61" cy="102" rx="42" ry="5"/>
+    <path class="ta-object-line" d="M48 27c20-18 46-1 37 23"/>
+    <path class="ta-object-soft" d="M68 55 81 44a6 6 0 0 1 8 0l13 11a6 6 0 0 1 2 5v30a6 6 0 0 1-6 6H72a6 6 0 0 1-6-6V60a6 6 0 0 1 2-5Z"/>
+    <circle class="ta-object-paper" cx="85" cy="54" r="3"/>
+    <path class="ta-object-paper" d="M77 96V77a8 8 0 0 1 16 0v19Z"/>
+    <path class="ta-object-highlight" d="M72 66v20"/>
+    <path class="ta-object-accent" d="M34 49h10v24h15v9H44v13H34Z"/>
+    <circle class="ta-object-accent" cx="39" cy="35" r="19"/>
+    <circle class="ta-object-paper" cx="39" cy="35" r="8"/>
+    <path class="ta-object-highlight" d="M27 32a13 13 0 0 1 9-9"/>`,
+  family: `<ellipse class="ta-object-shadow" cx="60" cy="102" rx="45" ry="5"/>
+    <path class="ta-object-soft" d="M18 95V78a19 19 0 0 1 38 0v17a5 5 0 0 1-5 5H23a5 5 0 0 1-5-5Z"/>
+    <circle class="ta-object-paper" cx="37" cy="46" r="14"/>
+    <path class="ta-object-ink" d="M67 99a5 5 0 0 1-5-5V77a19 19 0 0 1 38 0v17a5 5 0 0 1-5 5Z"/>
+    <circle class="ta-object-paper" cx="81" cy="45" r="14"/>
+    <path class="ta-object-accent" d="M45 96V84a15 15 0 0 1 30 0v12a5 5 0 0 1-5 5H50a5 5 0 0 1-5-5Z"/>
+    <circle class="ta-object-paper" cx="60" cy="61" r="11"/>
+    <path class="ta-object-accent" d="M53 20c-7-9-18 1-9 9l9 8 9-8c9-8-2-18-9-9Z"/>
+    <path class="ta-object-highlight" d="M25 78v12M68 84v9"/>`,
+  friends: `<ellipse class="ta-object-shadow" cx="62" cy="101" rx="45" ry="5"/><path class="ta-object-soft" d="M87 47h7a12 12 0 0 1 0 24h-8v-7h8a5 5 0 0 0 0-10h-7Z"/><path class="ta-object-soft" d="M58 40h33v26a16.5 16.5 0 0 1-33 0Z"/><ellipse class="ta-object-paper" cx="74.5" cy="40" rx="16.5" ry="5"/><ellipse class="ta-object-ink" cx="74.5" cy="40" rx="11.5" ry="2.3"/><path class="ta-object-highlight" d="M65 50v14c0 5 2 8 5 10"/><path class="ta-object-paper" d="M31 64h-8a12 12 0 0 0 0 24h8v-7h-8a5 5 0 0 1 0-10h8Z"/><path class="ta-object-accent" d="M28 57h35v25a17.5 17.5 0 0 1-35 0Z"/><ellipse class="ta-object-paper" cx="45.5" cy="57" rx="17.5" ry="5"/><ellipse class="ta-object-ink" cx="45.5" cy="57" rx="12.5" ry="2.3"/><path class="ta-object-highlight" d="M35 67v13c0 5 2 8 5 10"/><path class="ta-object-line" d="M41 43c-7-7 7-9 1-17M72 26c-6-6 6-8 1-14"/>`,
+  activities: `<ellipse class="ta-object-shadow" cx="61" cy="102" rx="43" ry="5"/>
+    <g transform="rotate(12 84 52)"><path class="ta-object-paper" d="M72 22h26a4 4 0 0 1 4 4v13a6 6 0 0 0 0 12v28a4 4 0 0 1-4 4H72a4 4 0 0 1-4-4V51a6 6 0 0 0 0-12V26a4 4 0 0 1 4-4Z"/><path class="ta-object-line" d="M76 34h18M76 61h18M76 68h12"/><circle class="ta-object-accent" cx="85" cy="47" r="4"/></g>
+    <path class="ta-object-accent" d="M28 44h44a6 6 0 0 1 6 5l5 45a6 6 0 0 1-6 7H23a6 6 0 0 1-6-7l5-45a6 6 0 0 1 6-5Z"/>
+    <path class="ta-object-paper" d="M35 44V32a15 15 0 0 1 30 0v12h-7V32a8 8 0 0 0-16 0v12Z"/>
+    <path class="ta-object-highlight" d="m30 55-4 34"/>
+    <path class="ta-object-paper" d="M43 65h15v15H43Z"/>
+    <path class="ta-object-line" d="m47 72 3 3 5-6"/>`,
+  home: `<ellipse class="ta-object-shadow" cx="61" cy="102" rx="43" ry="5"/>
+    <rect class="ta-object-soft" x="77" y="25" width="13" height="30" rx="4"/>
+    <path class="ta-object-soft" d="M37 51h60v43a7 7 0 0 1-7 7H44a7 7 0 0 1-7-7Z"/>
+    <path class="ta-object-paper" d="M25 49h63v45a7 7 0 0 1-7 7H32a7 7 0 0 1-7-7Z"/>
+    <path class="ta-object-accent" d="m17 45 35-28a7 7 0 0 1 9 0l37 28a6 6 0 0 1-7 10L57 29 24 55a6 6 0 0 1-7-10Z"/>
+    <path class="ta-object-highlight" d="m27 43 26-21"/>
+    <path class="ta-object-ink" d="M47 101V78a10 10 0 0 1 20 0v23Z"/>
+    <rect class="ta-object-soft" x="34" y="56" width="12" height="12" rx="3"/>
+    <rect class="ta-object-soft" x="68" y="56" width="12" height="12" rx="3"/>
+    <circle class="ta-object-paper" cx="60" cy="84" r="2"/>`,
+  community: `<ellipse class="ta-object-shadow" cx="61" cy="102" rx="46" ry="5"/>
+    <path class="ta-object-line" d="M91 64v34"/>
+    <path class="ta-object-soft" d="M78 59c-13-5-9-20 1-23-2-17 24-22 27-5 15 3 15 23 3 27-4 9-22 12-31 1Z"/>
+    <path class="ta-object-line" d="m91 72-9-10m9 1 10-10"/>
+    <rect class="ta-object-paper" x="22" y="65" width="61" height="14" rx="4"/>
+    <path class="ta-object-line" d="M26 87v14M77 87v14"/>
+    <rect class="ta-object-soft" x="19" y="81" width="67" height="7" rx="3"/>
+    <path class="ta-object-accent" d="M26 79V65a12 12 0 0 1 24 0v14Z"/>
+    <circle class="ta-object-paper" cx="38" cy="41" r="10"/>
+    <path class="ta-object-ink" d="M52 79V65a12 12 0 0 1 24 0v14Z"/>
+    <circle class="ta-object-paper" cx="64" cy="41" r="10"/>
+    <path class="ta-object-line" d="M32 88v10h8M64 88v10h8"/>
+    <path class="ta-object-highlight" d="M31 65v8"/>`,
+  guiding: `<ellipse class="ta-object-shadow" cx="61" cy="102" rx="43" ry="5"/>
+    <path class="ta-object-paper" d="M18 96V81a16 16 0 0 1 32 0v15a5 5 0 0 1-5 5H23a5 5 0 0 1-5-5Z"/>
+    <circle class="ta-object-paper" cx="34" cy="53" r="12"/>
+    <path class="ta-object-soft" d="M49 96V77a18 18 0 0 1 36 0v19a5 5 0 0 1-5 5H54a5 5 0 0 1-5-5Z"/>
+    <circle class="ta-object-paper" cx="67" cy="45" r="13"/>
+    <path class="ta-object-accent" d="M96 17h-22a4 4 0 0 0-3 6l5 7-5 7a4 4 0 0 0 3 6h22Z"/>
+    <path class="ta-object-line" d="M96 14v84M82 76h14"/>
+    <circle class="ta-object-ink" cx="96" cy="13" r="3"/>
+    <path class="ta-object-highlight" d="M56 76v15"/>
+    <path class="ta-object-line" d="m60 61 7 10 7-10"/>
+    <rect class="ta-object-paper" x="63" y="74" width="8" height="12" rx="2"/>`
 };
 
 

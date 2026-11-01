@@ -2,7 +2,7 @@ import { initGame } from './game.js?v=20261031-v3';
 import { initWorld } from './world.js?v=20261031-craft';
 import { initAccountTour } from './account-tour.js?v=20261101-script-art';
 import { initFieldNotebook } from './field-notebook.js?v=20261101-editorial';
-import { initTiesAtlas } from './ties-atlas.js?v=20261101-editorial';
+import { initTiesAtlas } from './ties-atlas.js?v=20261101-reader';
 import { initSpendingComparison } from './spending-comparison.js?v=20261101-editorial';
 import { initEvidence } from './evidence.js?v=20261031-v3';
 import { initLibrary } from './library.js?v=20261101-script';
@@ -43,5 +43,5 @@ contents.addEventListener('keydown',event=>{if(event.key==='Escape'&&contents.op
 document.addEventListener('pointerdown',event=>{if(contents.open&&!contents.contains(event.target))contents.open=false});
 const chapters=[...document.querySelectorAll('[data-reading-title]')];
 let chapterFrame=0;
-function updateChapter(){chapterFrame=0;const offset=document.querySelector('.masthead').getBoundingClientRect().height+40;let current=chapters[0];for(const section of chapters){if(section.getBoundingClientRect().top<=offset)current=section;else break}if(!current)return;contentsSummary.querySelector('.current-chapter').textContent=current.dataset.readingTitle;contents.querySelectorAll('[data-chapter]').forEach(link=>{if(link.dataset.chapter===current.id)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')})}
-addEventListener('scroll',()=>{if(!chapterFrame)chapterFrame=requestAnimationFrame(updateChapter)},{passive:true});addEventListener('resize',updateChapter);updateChapter();
+function updateChapter(){chapterFrame=0;const offset=document.querySelector('.masthead').getBoundingClientRect().height+Math.min(180,innerHeight*.2);let current=chapters[0];for(const section of chapters){if(section.getBoundingClientRect().top<=offset)current=section;else break}if(!current)return;document.querySelector('.chapter-index')?.classList.toggle('is-visible',document.querySelector('#story').getBoundingClientRect().top<=offset);contentsSummary.querySelector('.current-chapter').textContent=current.dataset.readingTitle;document.querySelectorAll('[data-chapter]').forEach(link=>{if(link.dataset.chapter===current.id)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')})}
+addEventListener('scroll',()=>{if(!chapterFrame)chapterFrame=requestAnimationFrame(updateChapter)},{passive:true});addEventListener('resize',updateChapter);addEventListener('hashchange',()=>requestAnimationFrame(updateChapter));document.querySelectorAll('details').forEach(details=>details.addEventListener('toggle',updateChapter));Promise.allSettled(loads).then(()=>requestAnimationFrame(updateChapter));updateChapter();
