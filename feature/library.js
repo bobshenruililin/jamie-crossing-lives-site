@@ -29,24 +29,18 @@ const steps = {
   'greater-geneva': ['Covered workers’ payroll', 'Agreed compensation', 'Resources to France']
 };
 const areaSummaries = {
-  'household-choices': ['Travel & spending surveys', 'Benefits, spending & travel burden', 'Understand household choices'],
-  'business-adjustment': ['Business records & surveys', 'Sales, costs, staffing & survival', 'Identify adjustment needs'],
-  'worker-transitions': ['Employment records & follow-up', 'Destination job, pay & retention', 'Improve workable transitions'],
-  'access-to-growth': ['Registration & contract records', 'Paid work & repeat business', 'Distinguish access from earnings'],
-  'everyday-services': ['Applications & targeted follow-up', 'Delayed plans & completed hand-offs', 'Prioritise practical barriers'],
-  'useful-connections': ['Short voluntary follow-up', 'Useful assistance received', 'Assess help, not contacts'],
-  'established-residents': ['Housing, service & employment series', 'Costs & access for existing residents', 'Examine opportunity and pressure'],
-  'institutions-and-reliability': ['Case records & user confirmation', 'Resolution & interrupted access', 'Locate coordination problems']
+  'household-choices': ['Travel & expenditure data', 'Purchases, reasons & access', 'Keep household benefits in view'],
+  'business-adjustment': ['Comparable firms, including exits', 'Customers, offerings & business changes', 'Consider useful adaptations'],
+  'worker-transitions': ['Employment records & follow-up', 'Next destination, earnings & hours', 'Identify groups needing help'],
+  'everyday-services': ['Provider histories & user follow-up', 'Offerings, resolution & people missed', 'Improve services and reach'],
+  'useful-connections': ['Voluntary follow-up, including non-participants', 'Ties, support & valued connections', 'Understand changing needs']
 };
 const areaLimits = {
-  'household-choices': 'Cash, platforms and surveys cover different activity. Spending estimates may overlap; the proposed distinctions are not measured additional flows.',
-  'business-adjustment': 'Surviving firms miss exits. Closure, relocation and payment-provider changes differ; employment size does not identify chain ownership.',
-  'worker-transitions': 'Earnings, hours and destinations are different outcomes. Retirement, care or training is not necessarily a failed transition; follow-up has coverage limits.',
-  'access-to-growth': 'Registration, introductions and qualification do not establish earnings. Occupational changes alone do not show recognition caused displacement or lower pay.',
-  'everyday-services': 'Services may matter differently to different people. A reported barrier does not establish routine system failure.',
-  'useful-connections': 'A contact is not evidence of help received; a referral is not evidence of resolution. Friendship needs no assigned GDP value.',
-  'established-residents': 'Residence differs from citizenship. Define existing residents and local suppliers; observed pressures alone do not establish integration as the cause.',
-  'institutions-and-reliability': 'A closed ticket is not necessarily a resolved problem. Ordinary service activity alone does not establish disruption effects.'
+  'household-choices': 'Define the group and coverage. Household benefits and work or business pressures can affect the same person; this is not a net-welfare calculation.',
+  'business-adjustment': 'Include exits. Observed chains do not demonstrate better survival, and employment size does not identify chain ownership.',
+  'worker-transitions': 'Earnings, hours and destinations are distinct. Retirement, care, training and self-employment are not automatically failed transitions.',
+  'everyday-services': 'Advertised provision does not establish use or resolution. Include people who abandon the process or never reach the service.',
+  'useful-connections': 'Attendance alone cannot establish stronger attachment or useful support. Include people outside organised activities.'
 };
 const groupLabels = {
   'Customers and markets': 'Customers & markets',
@@ -267,7 +261,7 @@ function responses(container, cases) {
 function measures(container, measurement) {
   if (!measurement?.areas?.length) { container.append(make('p', 'lib-empty', 'The measurement menu is unavailable.')); return; }
   let current = 0, regionIndex = 0;
-  container.append(make('p', 'lib-measure-intro', 'Measurement proposals. Choose the question first; start with existing records.'));
+  container.append(make('p', 'lib-measure-intro', 'A focused menu for further inquiry. Choose one question and a defined group; start with existing records.'));
   const areas = make('div', 'lib-area-selector'); areas.setAttribute('role','group'); areas.setAttribute('aria-label','Choose an area to follow');
   const stage = make('div', 'lib-measure-stage');
   const regionStage = make('div', 'lib-region-stage');
@@ -276,7 +270,7 @@ function measures(container, measurement) {
   const regionControls = make('div', 'lib-region-controls'); regionControls.setAttribute('role','group'); regionControls.setAttribute('aria-label','Choose the regional reference point');
   const regions = (measurement.regions || []).map((region,i) => { const b = button(region.name, 'lib-region-button', () => { regionIndex=i; pressed(regions, regionIndex); renderRegion(); }); b.setAttribute('aria-pressed',String(i===0)); regionControls.append(b); return b; });
   const regionSection = make('section', 'lib-regional'); regionSection.append(make('h3', '', 'The reference point matters.'), regionControls, regionStage); container.append(regionSection);
-  container.append(disclosure('How to use this selective menu', (measurement.principles || []).map((text,i)=>[i === 0 ? 'Scope' : ['Existing records first','Match effort to the decision','Select outcomes','Keep people and firms in view','Proportionate data use','Responsible organisations','Existing practices'][i-1] || 'Principle', text]), measurement.sources));
+  container.append(disclosure('How to use this selective menu', (measurement.principles || []).map((text,i)=>[i === 0 ? 'Scope' : ['Existing records first','Follow defined groups','Interpret carefully','Proportionate effort'][i-1] || 'Principle', text]), measurement.sources));
   function render() {
     const area = measurement.areas[current]; stage.replaceChildren();
     stage.append(sequence(areaSummaries[area.id] || ['Existing records','Relevant outcomes','A decision'], ['RECORDS', 'OUTCOME TO FOLLOW', 'DECISION'], ['records','track','decide']));
@@ -288,11 +282,11 @@ function measures(container, measurement) {
     const region = measurement.regions[regionIndex]; if (!region) return; regionStage.replaceChildren();
     const sg = region.id === 'singapore-johor';
     const timeline = make('div', 'lib-reference-line');
-    const a=make('div','lib-reference-stop'); a.append(make('span','lib-reference-dot'),make('strong','',sg?'Before RTS passenger service':'Before a specific change'));
+    const a=make('div','lib-reference-stop'); a.append(make('span','lib-reference-dot'),make('strong','',sg?'Pre-opening reference, if feasible':'Choose an activity or group'));
     const line=make('span','lib-reference-link'); line.innerHTML=arrow;
-    const b=make('div','lib-reference-stop');b.append(make('span','lib-reference-dot'),make('strong','','Follow relevant outcomes'));
+    const b=make('div','lib-reference-stop');b.append(make('span','lib-reference-dot'),make('strong','','Follow change over time'));
     timeline.append(a,line,b); regionStage.append(timeline);
-    regionStage.append(evidenceSummary([['Comparison limit', sg ? 'A pre-RTS reference, not a pre-integration baseline. Other changes may move outcomes, and spending forecasts may overlap.' : 'No general pre-integration baseline. Compare groups with different exposure and check other influences; neighbouring cities are not unaffected controls.']], 'lib-evidence-single'));
+    regionStage.append(evidenceSummary([['Comparison limit', sg ? 'Keep spending in both directions visible. Separate RTS changes from JS-SEZ investment and other developments; forecasts are not observed outcomes.' : 'No general pre-integration baseline. The accounts suggest contrasts, but their prevalence is unknown; observed change does not establish its cause.']], 'lib-evidence-single'));
     regionStage.append(disclosure('Regional approach and full limits',[['Approach',region.approach],['Full comparison limit',region.caveat]]));
   }
   render(); renderRegion();

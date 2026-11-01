@@ -9,3 +9,14 @@ html[data-motion=off] .ta-bundle{transition:none}
 @media(prefers-reduced-motion:reduce){.ta-atlas .ta-bundle{transition:none}}
 @media(forced-colors:active){.ta-atlas{--ta-paper:Canvas;--ta-ink:CanvasText;--ta-accent:Canvas;--ta-soft:Canvas;--ta-rule:CanvasText}.ta-city-headings h4:last-child,.ta-tie-detail,.ta-caption,.ta-unplaced{color:CanvasText}.ta-switch button[aria-pressed=true]{color:Highlight}.ta-object-paper,.ta-object-soft,.ta-object-accent{fill:Canvas;stroke:CanvasText}.ta-object-ink{fill:CanvasText}.ta-switch button:focus-visible{outline-color:Highlight}.ta-bundle{transition:none}}
 @media print{.ta-status,.ta-switch button,.ta-choice-mark{display:none}.ta-switch{display:block;border:0;margin-bottom:18px}.ta-switch button[aria-pressed=true]{display:block;min-height:0;padding:0;font-size:15px;text-decoration:none}.ta-bundles{display:block}.ta-bundles::before{display:none}.ta-bundle{display:none}.ta-bundle.ta-active{display:grid;opacity:1;visibility:visible}.ta-atlas{break-inside:avoid}.ta-object{height:90px}.ta-reading{min-height:0}.ta-caption{font-size:10px}}
+
+/* One conceptual image sets the scene; the comparison remains readable text. */
+.ta-concept{margin:4px 0 30px;background:#f3ecdf}
+.ta-concept img{display:block;width:100%;height:auto;max-height:430px;object-fit:contain;mix-blend-mode:multiply}
+.ta-concept p{margin:0;padding:0 12px 10px;text-align:right;font-size:11px;line-height:1.4;color:var(--muted,#52655f)}
+.ta-shelf{display:block}
+.ta-tie{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--ta-rule)}
+.ta-tie-label{font-size:16px;line-height:1.3}
+.ta-tie-detail{font-size:13px;line-height:1.4;margin:0;max-width:none}
+@media(max-width:760px){.ta-concept{margin-bottom:24px}.ta-concept img{max-height:none}.ta-concept p{text-align:left;padding:0 8px 10px}.ta-tie{display:block;padding:13px 0}.ta-tie-label{font-size:15px}.ta-tie-detail{font-size:12px;margin-top:4px}}
+@media print{.ta-concept img{max-height:180px}.ta-tie{padding:6px 0}}

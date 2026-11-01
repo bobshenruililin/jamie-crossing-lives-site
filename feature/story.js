@@ -1,10 +1,10 @@
 import { initGame } from './game.js?v=20261031-v3';
 import { initWorld } from './world.js?v=20261031-craft';
-import { initAccountTour } from './account-tour.js?v=20261031-craft';
+import { initAccountTour } from './account-tour.js?v=20261101-script-art';
 import { initFieldNotebook } from './field-notebook.js?v=20261031-craft';
-import { initTiesAtlas } from './ties-atlas.js?v=20261031-craft';
+import { initTiesAtlas } from './ties-atlas.js?v=20261101-script-art';
 import { initEvidence } from './evidence.js?v=20261031-v3';
-import { initLibrary } from './library.js?v=20261031-v3';
+import { initLibrary } from './library.js?v=20261101-script';
 import { initEveryday } from './everyday.js?v=20261031-v3';
 import { initFieldGallery } from './field-gallery.js?v=20261031-v3';
 const html=document.documentElement;
@@ -20,10 +20,10 @@ mount('#opening-game',initGame);const world=mount('#life-model',initWorld);initA
 const dataCache=new Map();
 function getData(path){if(!dataCache.has(path)){const request=fetch(new URL(path,import.meta.url)).then(response=>{if(!response.ok)throw new Error(`Data request failed (${response.status})`);return response.json()}).catch(error=>{dataCache.delete(path);throw error});dataCache.set(path,request)}return dataCache.get(path)}
 async function loadEvidence(element){try{initEvidence(element,await getData('../research-data.json'))}catch(err){console.error('Evidence could not load:',err);fail(element,()=>loadEvidence(element))}}
-async function loadLibrary(element){try{const [cases,measurement,research]=await Promise.all([getData('../data/response-cases.json'),getData('./measurement-menu.json'),getData('../research-data.json')]);initLibrary(element,cases,measurement,research.future)}catch(err){console.error('Research collection could not load:',err);fail(element,()=>loadLibrary(element))}}
+async function loadLibrary(element){try{const [cases,measurement,research]=await Promise.all([getData('../data/response-cases.json'),getData('./measurement-menu.json?v=20261101-script'),getData('../research-data.json')]);initLibrary(element,cases,measurement,research.future)}catch(err){console.error('Research collection could not load:',err);fail(element,()=>loadLibrary(element))}}
 async function loadEveryday(element){try{initEveryday(element,await getData('./everyday-data.json'))}catch(err){console.error('Everyday evidence could not load:',err);fail(element,()=>loadEveryday(element))}}
 async function loadSupplement(selector,fn){const host=document.querySelector(selector);if(!host)return;try{await fn(host)}catch(error){console.error('Research section could not load:',error);fail(host,()=>loadSupplement(selector,fn))}}
-const loads=[loadSupplement('#policy-map',async host=>(await import('./policy-map.js?v=20261031-v3')).mountPolicyMap(host)),loadSupplement('#research-overview',async host=>(await import('./research-overview.js?v=20261031-v3')).mountResearchOverview(host)),...Array.from(document.querySelectorAll('[data-evidence]'),loadEvidence),...Array.from(document.querySelectorAll('[data-library]'),loadLibrary),...Array.from(document.querySelectorAll('[data-everyday-view]'),loadEveryday)];
+const loads=[loadSupplement('#policy-map',async host=>(await import('./policy-map.js?v=20261031-v3')).mountPolicyMap(host)),loadSupplement('#research-overview',async host=>(await import('./research-overview.js?v=20261101-script')).mountResearchOverview(host)),...Array.from(document.querySelectorAll('[data-evidence]'),loadEvidence),...Array.from(document.querySelectorAll('[data-library]'),loadLibrary),...Array.from(document.querySelectorAll('[data-everyday-view]'),loadEveryday)];
 // Native details keep the index light; deep links reveal their destination.
 function revealTarget(hash,focus=false){let id;try{id=decodeURIComponent(hash.slice(1))}catch{return}const target=document.getElementById(id);if(!target)return;for(let node=target;node;node=node.parentElement){if(node.tagName==='DETAILS')node.open=true}if(focus){target.setAttribute('tabindex','-1');target.addEventListener('blur',()=>target.removeAttribute('tabindex'),{once:true});requestAnimationFrame(()=>target.focus({preventScroll:true}))}return target}
 document.addEventListener('click',event=>{const link=event.target.closest('a[href^="#"]');if(!link)return;revealTarget(link.hash,true);if(link.closest('.contents-panel'))document.querySelector('#contents-menu').open=false});

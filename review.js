@@ -9,6 +9,11 @@
   const studyMode = false;
   const sceneName = studyMode ? 'study' : 'slide';
   const dataFile = studyMode ? 'review-data.json' : 'presentation-data.json';
+  const runtimeUrl = (path) => {
+    const url = new URL(path, document.baseURI);
+    url.searchParams.set('v', '20261101-v2');
+    return url;
+  };
   const framePattern = studyMode ? /^frames\/[a-zA-Z0-9][a-zA-Z0-9_.-]*\.svg$/ : /^presentation-frames\/[a-zA-Z0-9][a-zA-Z0-9_.-]*\.svg$/;
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const frames = new Map();
@@ -89,7 +94,7 @@
     if (!framePattern.test(path)) throw new Error('Invalid local frame path.');
     if (!frames.has(path)) {
       frames.set(path, (async () => {
-        const response = await fetch(new URL(path, document.baseURI));
+        const response = await fetch(runtimeUrl(path));
         if (!response.ok) throw new Error(`Frame unavailable (${response.status}).`);
         const parsed = new DOMParser().parseFromString(await response.text(), 'image/svg+xml');
         const svg = parsed.documentElement;
@@ -99,7 +104,7 @@
         [svg, ...svg.querySelectorAll('*')].forEach((node) => {
           [...node.attributes].forEach((attribute) => {
             const name = attribute.name.toLowerCase();
-            const isEmbeddedRaster = node.localName === 'image' && /^(?:data:image\/(?:jpeg|png);base64,)[A-Za-z0-9+/]+={0,2}$/.test(attribute.value);
+            const isEmbeddedRaster = node.localName === 'image' && /^(?:data:image\/(?:jpeg|png|webp);base64,)[A-Za-z0-9+/]+={0,2}$/.test(attribute.value);
             if (name.startsWith('on') || ((name === 'href' || name === 'xlink:href') && !attribute.value.startsWith('#') && !isEmbeddedRaster)) node.removeAttribute(attribute.name);
           });
         });
@@ -319,7 +324,7 @@
     refreshControls();
     void revealAvailablePdf();
     try {
-      const response = await fetch(new URL(dataFile, document.baseURI));
+      const response = await fetch(runtimeUrl(dataFile));
       if (!response.ok) throw new Error(`Presentation data unavailable (${response.status}).`);
       const data = await response.json();
       if (!Array.isArray(data.scenes) || !data.scenes.length) throw new Error('No scenes are available.');

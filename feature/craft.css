@@ -57,7 +57,7 @@
 .capability-panel h3 br:first-child::after{content:' '}
 .visual-limit{font-size:11px;color:var(--muted);display:block;line-height:1.5}
 .basket-visual{height:260px;position:relative;display:flex;align-items:center;justify-content:center;gap:28px;margin:10px 0 28px}
-.basket-disc{height:225px;width:225px;border-radius:50%;background:conic-gradient(from -90deg,var(--teal) 0 50%,#dce3d7 50% 100%);position:relative;display:grid;place-items:center}
+.basket-disc{height:225px;width:225px;border-radius:50%;background:conic-gradient(from -90deg,var(--teal) 0 47%,#dce3d7 47% 100%);position:relative;display:grid;place-items:center}
 .basket-disc::before{content:'';position:absolute;inset:29px;border-radius:50%;background:var(--paper)}
 .basket-disc span{position:relative;z-index:1;font-family:Instrument,Georgia,serif;font-style:italic;font-size:90px;line-height:1;color:var(--ink)}
 .basket-key{font-size:14px;position:absolute;left:50%;bottom:0;transform:translateX(-50%)}
@@ -109,3 +109,54 @@
 .model-story.is-candidate .cl-world-contrast,.model-story.is-scrolly .cl-world-contrast{display:none}
 .model-story.is-candidate .cl-world-viewport,.model-story.is-scrolly .cl-world-viewport{height:318px;min-height:318px;max-height:318px;aspect-ratio:auto}
 .model-story.is-scrolly .cl-world-expanded .cl-world-viewport{height:430px;max-height:none}
+
+/* The replacement image is an illustration, not a field photograph. */
+.repair-illustration{object-fit:contain;mix-blend-mode:multiply}
+
+/* Script update: four overlapping arrangements, questions and field evidence. */
+.arrangement-overview{display:block;padding:32px 0 34px;border-top:1px solid var(--ink)}
+.arrangement-intro{display:grid;grid-template-columns:1.15fr .85fr;gap:0 9%;align-items:end}
+.arrangement-intro .eyebrow{grid-column:1/-1;margin-bottom:16px}
+.arrangement-intro h2,.inquiry-section h2,.learning-visit h2{font-family:var(--font-display);font-size:clamp(40px,4.6vw,70px);line-height:.98;letter-spacing:-.02em;margin:0}
+.arrangement-intro h2 em,.inquiry-section h2 em,.learning-visit h2 em{color:var(--rust);display:block}
+.arrangement-intro>p:last-child{font-size:15px;line-height:1.55;max-width:45ch;margin:0}
+.arrangement-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:25px;margin-top:30px}
+.arrangement-grid article{border-top:2px solid var(--teal);padding-top:12px}
+.arrangement-grid span,.inquiry-grid span{display:block;font-size:11px;color:var(--rust);font-weight:600;margin-bottom:10px}
+.arrangement-grid h3{font-family:var(--font-display);font-size:25px;line-height:1.05;margin:0 0 9px}
+.arrangement-grid p,.arrangement-grid a{font-size:13px;line-height:1.5;margin:0}
+.arrangement-grid a{display:inline-block;margin-top:10px}
+.arrangement-note{font-size:11px;line-height:1.5;color:var(--muted);margin:18px 0 0;max-width:95ch}
+.time-constraint{border-left:3px solid var(--rust);padding:5px 0 5px 22px;margin:34px 0;max-width:74ch}
+.time-constraint .account-label{display:block;margin-bottom:10px}
+.time-constraint strong{font-family:var(--font-display);font-size:clamp(25px,2.8vw,38px);line-height:1.1;display:block}
+.time-constraint p{font-size:15px;line-height:1.55;margin:12px 0 0}
+.licence-observation{display:grid;grid-template-columns:1fr 1fr;gap:9%;align-items:center;border-top:1px solid var(--line);padding-top:35px;margin:30px 0 55px}
+.licence-observation figure{margin:0;background:#e6e6dc}
+.licence-observation img{display:block;width:100%;height:auto;max-height:500px;object-fit:contain}
+.licence-observation figcaption{font-size:11px;line-height:1.5;padding:10px;color:var(--muted)}
+.licence-observation h3{font-family:var(--font-display);font-size:clamp(36px,4vw,58px);line-height:1;margin:0 0 18px}
+.licence-observation h3 em{display:block;color:var(--rust)}
+.licence-observation p{font-size:16px;line-height:1.55;max-width:40ch}
+.licence-observation .visual-limit{font-size:12px}
+.inquiry-section{padding-top:80px;padding-bottom:80px;border-top:1px solid var(--ink)}
+.inquiry-section>p:not(.eyebrow):not(.inquiry-links){max-width:65ch;line-height:1.55;margin-top:22px}
+.inquiry-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:35px;margin-top:40px}
+.inquiry-grid article{border-top:2px solid var(--teal);padding-top:18px}
+.inquiry-grid h3{font-family:var(--font-display);font-size:clamp(25px,2.6vw,38px);line-height:1.08;margin:0 0 15px}
+.inquiry-grid p{font-size:15px;line-height:1.55;max-width:38ch}
+.inquiry-links{display:flex;gap:28px;flex-wrap:wrap;font-size:13px;margin:28px 0 45px}
+.learning-visit{padding-top:20px;padding-bottom:70px}
+.learning-visit>p:not(.eyebrow){max-width:74ch;font-size:16px;line-height:1.6}
+.learning-visit .visual-limit{font-size:12px!important}
+@media(max-width:760px){.arrangement-intro{display:block}.arrangement-intro>p:last-child{margin-top:18px}.arrangement-grid{grid-template-columns:1fr 1fr;gap:24px 18px}.arrangement-grid h3{font-size:22px}.arrangement-grid p,.arrangement-grid a{font-size:12px}.licence-observation{grid-template-columns:1fr;gap:22px;margin-bottom:40px}.licence-observation img{max-height:450px}.licence-observation h3{font-size:37px}.inquiry-section{padding-top:60px;padding-bottom:50px}.inquiry-grid{grid-template-columns:1fr;gap:22px;margin-top:30px}.inquiry-grid article{padding-top:13px}.inquiry-grid p{max-width:55ch}.learning-visit{padding-bottom:45px}}
+.retirement-question{display:grid;grid-template-columns:1fr 1fr;gap:9%;border-top:1px solid var(--ink);padding-top:38px;padding-bottom:48px}
+.retirement-question strong{font-family:var(--font-display);font-size:clamp(70px,8vw,120px);line-height:1;color:var(--teal)}
+.retirement-question h2{font-family:var(--font-display);font-size:clamp(32px,3.5vw,50px);line-height:1.05;margin:0 0 18px}
+.retirement-question p:not(.account-label){font-size:16px;line-height:1.55;max-width:49ch}
+.retirement-question .visual-limit{font-size:12px!important}
+@media(max-width:760px){.retirement-question{grid-template-columns:1fr;gap:25px;padding-top:30px;padding-bottom:35px}.retirement-question strong{font-size:80px}.retirement-question h2{font-size:36px}}
+/* Leave room for the tallest account labels in shorter desktop viewports. */
+@media(min-width:1100px) and (max-height:710px){.model-story.is-candidate .cl-world-viewport,.model-story.is-scrolly:not(.model-expanded) .cl-world-viewport{height:285px;min-height:285px;max-height:285px}}
+.arrangement-grid article,.arrangement-grid h3,.arrangement-grid p,.arrangement-grid a{min-width:0;overflow-wrap:anywhere}
+@media(max-width:760px){.arrangement-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}

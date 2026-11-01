@@ -20,7 +20,7 @@ function sourceLink(source) {
 /** Optional research-map depth. Publication order is separate from data periods. */
 export async function mountResearchOverview(host, suppliedData) {
   if (!host) return {destroy() {}};
-  const data = suppliedData || await fetch(new URL('./research-overview-data.json', import.meta.url)).then(response => {
+  const data = suppliedData || await fetch(new URL('./research-overview-data.json?v=20261101-script', import.meta.url)).then(response => {
     if (!response.ok) throw new Error(`Research map could not load (${response.status})`);
     return response.json();
   });

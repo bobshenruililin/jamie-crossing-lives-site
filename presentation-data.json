@@ -1,6 +1,6 @@
 {
   "title": "Cross-border lives: Hong Kong–Shenzhen",
-  "status": "Revised draft · 31 October 2026",
+  "status": "Revised draft · 1 November 2026",
   "sourceVersion": "Script flow v2",
   "scenes": [
     {
@@ -58,6 +58,10 @@
           "url": "https://research.cuhk.edu.hk/en/publications/not-quite-a-twin-city-cross-boundary-integration-in-hong-kong-and-2/"
         },
         {
+          "label": "[4] CUHK research release, Figure 3, 19 June 2025",
+          "url": "https://socsc.cuhk.edu.hk/voicedetails/research-release-on-hong-kong-travelers-in-mainland-china-official-data-e-wallet-data-model-analysis-reveals-hong-kong-residents-mainland-consumption-trends/"
+        },
+        {
           "label": "[4] Paper",
           "url": "https://www.michael-song.org/uploads/4/8/1/4/48141215/hongkongers_in_mainland.pdf"
         },
@@ -99,21 +103,21 @@
     },
     {
       "id": "recurring-accounts",
-      "title": "Four accounts to keep in view",
+      "title": "Different ways to cross: users and movers",
       "subtitle": "Section 3 / Overlapping arrangements and recurring accounts",
       "svg": "presentation-frames/06.svg",
       "durationSeconds": 40,
-      "sourceNote": "Arrangements overlap. Cast markers identify accounts, not portraits. The worker/student illustration uses official schooling evidence; no firsthand commuting account was obtained.",
+      "sourceNote": "Arrangements overlap. Conceptual illustrated avatars identify roles, not participant likenesses. The worker/student illustration uses official schooling evidence; no firsthand commuting account was obtained.",
       "sourceLinks": [],
       "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
     },
     {
       "id": "four-arrangements",
-      "title": "A life does not move all at once",
+      "title": "Work, home and ties need not share a city",
       "subtitle": "Section 3 / Overlapping arrangements and recurring accounts",
       "svg": "presentation-frames/07.svg",
       "durationSeconds": 45,
-      "sourceNote": "Arrangements overlap. Cast markers identify accounts, not portraits. The worker/student illustration uses official schooling evidence; no firsthand commuting account was obtained.",
+      "sourceNote": "Arrangements overlap. Conceptual illustrated avatars identify roles, not participant likenesses. The worker/student illustration uses official schooling evidence; no firsthand commuting account was obtained.",
       "sourceLinks": [
         {
           "label": "[9] Estimates",
@@ -124,32 +128,36 @@
     },
     {
       "id": "locally-based-accounts",
-      "title": "Crossing is an occasional choice",
+      "title": "The local accounts matter too",
       "subtitle": "Section 3 / Overlapping arrangements and recurring accounts",
       "svg": "presentation-frames/08.svg",
       "durationSeconds": 35,
-      "sourceNote": "Arrangements overlap. Cast markers identify accounts, not portraits. The worker/student illustration uses official schooling evidence; no firsthand commuting account was obtained.",
+      "sourceNote": "Arrangements overlap. Conceptual illustrated avatars identify roles, not participant likenesses. The worker/student illustration uses official schooling evidence; no firsthand commuting account was obtained.",
       "sourceLinks": [],
       "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
     },
     {
       "id": "household-choices",
-      "title": "A specialist capability worth crossing for",
+      "title": "Different reasons to cross",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/09.svg",
-      "durationSeconds": 50,
+      "durationSeconds": 45,
       "sourceNote": "Selected personal accounts, observation and contextual evidence. Paraphrases are not verbatim quotations; no population or causal integration effect is estimated.",
       "sourceLinks": [],
       "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
     },
     {
       "id": "purchase-mixes",
-      "title": "The mix of purchases differs by place",
+      "title": "Different places, different baskets",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/10.svg",
-      "durationSeconds": 45,
-      "sourceNote": "Established AlipayHK users who spent in Mainland China. Mainland coverage is broader than Shenzhen; expenditure baskets do not identify displaced local spending.",
+      "durationSeconds": 40,
+      "sourceNote": "Shares of recorded spending within each location for seasoned AlipayHK users, from the CUHK release of 19 June 2025, Figure 3. Mainland chart concerns users with Mainland transactions; the release does not establish identical cohort membership across panels. Rounded shares sum to 101% in HK. Mainland is broader than Shenzhen; not displaced local spending.",
       "sourceLinks": [
+        {
+          "label": "[4] CUHK research release, Figure 3, 19 June 2025",
+          "url": "https://socsc.cuhk.edu.hk/voicedetails/research-release-on-hong-kong-travelers-in-mainland-china-official-data-e-wallet-data-model-analysis-reveals-hong-kong-residents-mainland-consumption-trends/"
+        },
         {
           "label": "[4] Paper",
           "url": "https://www.michael-song.org/uploads/4/8/1/4/48141215/hongkongers_in_mainland.pdf"
@@ -162,22 +170,62 @@
       "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
     },
     {
-      "id": "guide-choice",
-      "title": "Tour guiding: work she preferred",
+      "id": "local-household-choices",
+      "title": "Some routines cross, others stay",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/11.svg",
-      "durationSeconds": 45,
+      "durationSeconds": 25,
+      "sourceNote": "Selected personal accounts, observation and contextual evidence. Paraphrases are not verbatim quotations; no population or causal integration effect is estimated.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
+    },
+    {
+      "id": "time-and-childcare",
+      "title": "A visit also needs time",
+      "subtitle": "Section 4 / Three exploratory findings",
+      "svg": "presentation-frames/12.svg",
+      "durationSeconds": 25,
+      "sourceNote": "One expert’s conditional personal example; no measured threshold or general claim about parents.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
+    },
+    {
+      "id": "guide-choice",
+      "title": "A preferred occupation, a workable balance",
+      "subtitle": "Section 4 / Three exploratory findings",
+      "svg": "presentation-frames/13.svg",
+      "durationSeconds": 35,
       "sourceNote": "Reported aspirations and financial trade-offs; no financial audit or verified saving percentage.",
       "sourceLinks": [],
       "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
     },
     {
       "id": "business-routines",
-      "title": "Which customers? Which daily routines?",
+      "title": "Which meals can move?",
       "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/12.svg",
-      "durationSeconds": 55,
-      "sourceNote": "Three Sheung Shui accounts remain distinct. Staff perspectives are not customer shares. The guide’s restaurant comparison is a personal interpretation.",
+      "svg": "presentation-frames/14.svg",
+      "durationSeconds": 25,
+      "sourceNote": "The guide’s restaurant comparison is a personal interpretation, not a measured business effect.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
+    },
+    {
+      "id": "business-customers",
+      "title": "One town, different customers",
+      "subtitle": "Section 4 / Three exploratory findings",
+      "svg": "presentation-frames/15.svg",
+      "durationSeconds": 30,
+      "sourceNote": "Staff perspectives are not measured customer shares; the estate shop and Landmark North manager remain distinct.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
+    },
+    {
+      "id": "business-follow-up",
+      "title": "What changes over time?",
+      "subtitle": "Section 4 / Three exploratory findings",
+      "svg": "presentation-frames/16.svg",
+      "durationSeconds": 20,
+      "sourceNote": "Reports of fewer crowds need comparable footfall data. The expert’s scale hypothesis does not establish chain survival.",
       "sourceLinks": [],
       "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
     },
@@ -185,8 +233,8 @@
       "id": "retail-context",
       "title": "Retail changed across years",
       "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/13.svg",
-      "durationSeconds": 45,
+      "svg": "presentation-frames/17.svg",
+      "durationSeconds": 25,
       "sourceNote": "Retail-sales value, not volume. Citywide changes do not isolate Shenzhen’s effect or establish the local footfall trend.",
       "sourceLinks": [
         {
@@ -200,10 +248,14 @@
       "id": "lens-a-takeaway",
       "title": "Selective choices, different pressures",
       "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/14.svg",
-      "durationSeconds": 35,
+      "svg": "presentation-frames/18.svg",
+      "durationSeconds": 30,
       "sourceNote": "Selected personal accounts, observation and contextual evidence. Paraphrases are not verbatim quotations; no population or causal integration effect is estimated.",
       "sourceLinks": [
+        {
+          "label": "[4] CUHK research release, Figure 3, 19 June 2025",
+          "url": "https://socsc.cuhk.edu.hk/voicedetails/research-release-on-hong-kong-travelers-in-mainland-china-official-data-e-wallet-data-model-analysis-reveals-hong-kong-residents-mainland-consumption-trends/"
+        },
         {
           "label": "[4] Paper",
           "url": "https://www.michael-song.org/uploads/4/8/1/4/48141215/hongkongers_in_mainland.pdf"
@@ -223,8 +275,8 @@
       "id": "futian-guidance",
       "title": "Two different forms of help",
       "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/15.svg",
-      "durationSeconds": 60,
+      "svg": "presentation-frames/19.svg",
+      "durationSeconds": 45,
       "sourceNote": "Immigration assistance and the help centre are separate forms of assistance. Operator unconfirmed, referrals described but not tested. A photo of brochures does not establish delivered services.",
       "sourceLinks": [],
       "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
@@ -233,9 +285,19 @@
       "id": "visible-services",
       "title": "Everyday services around the crossing",
       "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/16.svg",
-      "durationSeconds": 45,
+      "svg": "presentation-frames/20.svg",
+      "durationSeconds": 35,
       "sourceNote": "Photograph documents visible storefronts; other offerings are reported by a property agent. No participant identity, service-quality or outcome inference.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
+    },
+    {
+      "id": "driving-licence-services",
+      "title": "Services for cross-border needs",
+      "subtitle": "Section 4 / Three exploratory findings",
+      "svg": "presentation-frames/21.svg",
+      "durationSeconds": 20,
+      "sourceNote": "Observed advertising at Lee Kin Driving School, Sheung Shui. The signs concern driving-licence conversion, not vehicle registration plates; service use and effectiveness were not assessed.",
       "sourceLinks": [],
       "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
     },
@@ -243,8 +305,8 @@
       "id": "follow-up-care",
       "title": "Follow-up care across the border",
       "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/17.svg",
-      "durationSeconds": 45,
+      "svg": "presentation-frames/22.svg",
+      "durationSeconds": 30,
       "sourceNote": "Defined eligible HA patients; separate consultations, medical-record and return-referral arrangements. Programme use does not establish clinical outcomes or universal coverage.",
       "sourceLinks": [
         {
@@ -262,8 +324,8 @@
       "id": "lens-b-takeaway",
       "title": "Guidance and services for cross-border needs",
       "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/18.svg",
-      "durationSeconds": 35,
+      "svg": "presentation-frames/23.svg",
+      "durationSeconds": 30,
       "sourceNote": "Selected personal accounts, observation and contextual evidence. Paraphrases are not verbatim quotations; no population or causal integration effect is estimated.",
       "sourceLinks": [
         {
@@ -281,7 +343,7 @@
       "id": "continuing-ties",
       "title": "Lives can stay connected",
       "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/19.svg",
+      "svg": "presentation-frames/24.svg",
       "durationSeconds": 55,
       "sourceNote": "Two accounts, no commuting frequency or prevalence established. Property ownership is the professional’s own explanation, not a general cause of belonging.",
       "sourceLinks": [],
@@ -289,9 +351,9 @@
     },
     {
       "id": "help-through-connections",
-      "title": "A lead. Her action. Later help.",
+      "title": "A lead, her action, later help",
       "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/20.svg",
+      "svg": "presentation-frames/25.svg",
       "durationSeconds": 50,
       "sourceNote": "The guide’s reported sequence does not establish a general age rule, precise licensing requirement or qualification recognition.",
       "sourceLinks": [],
@@ -301,7 +363,7 @@
       "id": "joining-circles",
       "title": "Where new circles begin",
       "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/21.svg",
+      "svg": "presentation-frames/26.svg",
       "durationSeconds": 55,
       "sourceNote": "Dining visitors discussed Hong Kong community activities during a Shenzhen visit. Do not relocate those examples to Shenzhen.",
       "sourceLinks": [],
@@ -311,9 +373,39 @@
       "id": "lens-c-takeaway",
       "title": "Ties continue, new connections form",
       "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/22.svg",
+      "svg": "presentation-frames/27.svg",
       "durationSeconds": 40,
       "sourceNote": "Selected personal accounts, observation and contextual evidence. Paraphrases are not verbatim quotations; no population or causal integration effect is estimated.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
+    },
+    {
+      "id": "inquiry-businesses-workers",
+      "title": "How do businesses evolve? What happens to workers?",
+      "subtitle": "Section 5 / Questions worth exploring",
+      "svg": "presentation-frames/28.svg",
+      "durationSeconds": 40,
+      "sourceNote": "Questions for further inquiry, not findings or established effects. Detailed measurement proposals remain in the appendix.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
+    },
+    {
+      "id": "inquiry-services-users",
+      "title": "When does a service become useful?",
+      "subtitle": "Section 5 / Questions worth exploring",
+      "svg": "presentation-frames/29.svg",
+      "durationSeconds": 40,
+      "sourceNote": "Questions for further inquiry, not findings or established effects. Detailed measurement proposals remain in the appendix.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
+    },
+    {
+      "id": "inquiry-movers-relationships",
+      "title": "How do movers keep ties and build new ones?",
+      "subtitle": "Section 5 / Questions worth exploring",
+      "svg": "presentation-frames/30.svg",
+      "durationSeconds": 40,
+      "sourceNote": "Questions for further inquiry, not findings or established effects. Detailed measurement proposals remain in the appendix.",
       "sourceLinks": [],
       "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
     },
@@ -321,7 +413,7 @@
       "id": "singapore-johor-questions",
       "title": "Carry the questions, find the answers locally",
       "subtitle": "Section 6 / Questions for Singapore–Johor",
-      "svg": "presentation-frames/23.svg",
+      "svg": "presentation-frames/31.svg",
       "durationSeconds": 35,
       "sourceNote": "Questions for Singapore–Johor, not a prediction of the same changes. Forecasts and conditional interest remain distinct from realised outcomes.",
       "sourceLinks": [
@@ -344,8 +436,8 @@
       "id": "two-way-spending-forecast",
       "title": "Spending in both directions",
       "subtitle": "Section 6 / Questions for Singapore–Johor",
-      "svg": "presentation-frames/24.svg",
-      "durationSeconds": 60,
+      "svg": "presentation-frames/32.svg",
+      "durationSeconds": 45,
       "sourceNote": "Forecast additional annual consumer spending, not realised spending, GDP or JS-SEZ effects. Rounded S$1,050m less S$756m gives S$294m; source reports approximately S$290m.",
       "sourceLinks": [
         {
@@ -360,11 +452,21 @@
       "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
     },
     {
+      "id": "association-learning-visit",
+      "title": "Learn from operators in Hong Kong and Shenzhen",
+      "subtitle": "Section 6 / Questions for Singapore–Johor",
+      "svg": "presentation-frames/33.svg",
+      "durationSeconds": 40,
+      "sourceNote": "Jamie’s proposal for an association-led exchange, including difficult and unsuccessful adaptations. Not a scheduled programme.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
+    },
+    {
       "id": "conditional-retirement-interest",
       "title": "If travel became easier",
       "subtitle": "Section 6 / Questions for Singapore–Johor",
-      "svg": "presentation-frames/25.svg",
-      "durationSeconds": 45,
+      "svg": "presentation-frames/34.svg",
+      "durationSeconds": 35,
       "sourceNote": "Conditional stated interest among respondents, not actual moves or one-third of all Singaporeans.",
       "sourceLinks": [
         {
@@ -382,8 +484,8 @@
       "id": "johor-residents",
       "title": "Keep Johor residents in view",
       "subtitle": "Section 6 / Questions for Singapore–Johor",
-      "svg": "presentation-frames/26.svg",
-      "durationSeconds": 40,
+      "svg": "presentation-frames/35.svg",
+      "durationSeconds": 25,
       "sourceNote": "Opportunities and housing/service pressures are questions for local evidence; this project has not assessed those effects.",
       "sourceLinks": [],
       "reviewQuestion": "Does this emphasis and pacing support the current Script flow v2?"
@@ -392,7 +494,7 @@
       "id": "exploratory-insights",
       "title": "Everyday experiences make integration concrete",
       "subtitle": "Section 7 / Closing",
-      "svg": "presentation-frames/27.svg",
+      "svg": "presentation-frames/36.svg",
       "durationSeconds": 65,
       "sourceNote": "Exploratory contributions and questions for further evidence; not a measure of the overall success of integration.",
       "sourceLinks": [],
@@ -400,9 +502,9 @@
     },
     {
       "id": "further-questions",
-      "title": "Follow the everyday experience",
+      "title": "Opportunities, adjustments, everyday lives",
       "subtitle": "Section 7 / Closing",
-      "svg": "presentation-frames/28.svg",
+      "svg": "presentation-frames/37.svg",
       "durationSeconds": 55,
       "sourceNote": "Exploratory contributions and questions for further evidence; not a measure of the overall success of integration.",
       "sourceLinks": [],

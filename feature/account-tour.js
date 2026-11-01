@@ -35,12 +35,17 @@ export function initAccountTour(host, world) {
     schedule();
   }
   function manual(event) {
-    // Mark the current reading step as handled. A manual choice stays selected
-    // until the reader enters another step; it never scrolls or moves focus.
     if (!active) return;
-    const threshold = innerHeight * .54;
-    current = steps.filter(step => step.getBoundingClientRect().top <= threshold).at(-1) || steps[0];
-    steps.forEach(step => step.classList.toggle('is-current', step.dataset.profile === event.detail?.id));
+    const step = steps.find(node => node.dataset.profile === event.detail?.id);
+    if (!step) return;
+    // The model and adjacent narrative are one comparison. Move the selected
+    // step into the reading position without moving focus or animating the page.
+    // Setting current first makes the resulting native scroll idempotent.
+    current = step;
+    steps.forEach(node => node.classList.toggle('is-current', node === step));
+    const rect = step.getBoundingClientRect();
+    const delta = rect.top + rect.height / 2 - innerHeight * .54;
+    if (Math.abs(delta) > 1) window.scrollBy({ top: delta, behavior: 'instant' });
   }
   function disclosure(event) {
     if (event.target.tagName === 'DETAILS') host.classList.toggle('model-expanded', event.target.open);

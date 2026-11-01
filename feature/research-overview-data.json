@@ -16,7 +16,34 @@
       "contribution": "Distinguishes forms of integration that can develop at different speeds. The project asks how those parts combine in selected everyday lives.",
       "limit": "Historical context, not a diagnosis of the region in 2026.",
       "sources": [
-        {"label": "CUHK publication record", "url": "https://research.cuhk.edu.hk/en/publications/not-quite-a-twin-city-cross-boundary-integration-in-hong-kong-and-2/"}
+        {
+          "label": "CUHK publication record",
+          "url": "https://research.cuhk.edu.hk/en/publications/not-quite-a-twin-city-cross-boundary-integration-in-hong-kong-and-2/"
+        }
+      ]
+    },
+    {
+      "id": "blackbox-2024",
+      "year": "2024",
+      "selector": "Conditional retirement interest",
+      "authors": "Blackbox Research",
+      "title": "SensingSG: Spotlight on the Singapore–Johor Bahru connection",
+      "type": "Survey · stated conditional interest",
+      "publication": "February 2024",
+      "dataPeriod": "2024 survey",
+      "geography": "Singapore respondents considering Johor Bahru",
+      "method": "Survey question about interest if travel becomes easier",
+      "contribution": "Around one in three respondents could envisage buying a JB home and retiring there under the easier-travel condition. This prompts questions about services and relationships.",
+      "limit": "Stated interest under a condition is not an observed move and does not represent one-third of all Singaporeans.",
+      "sources": [
+        {
+          "label": "Original survey post",
+          "url": "https://www.linkedin.com/posts/blackbox-research_sensingsg-feb24-spotlight-on-the-sg-jb-activity-7165164423840550912-fz3R"
+        },
+        {
+          "label": "Context",
+          "url": "https://www.businesstimes.com.sg/opinion-features/home-away-home-more-singaporeans-eye-malaysia-place-retire"
+        }
       ]
     },
     {
@@ -33,8 +60,14 @@
       "contribution": "Shows different mixes of purchases and destinations. The project adds people's reported reasons for choosing an activity or place.",
       "limit": "Platform coverage is selective; Mainland China is broader than Shenzhen. Different baskets do not identify how much Hong Kong spending was displaced.",
       "sources": [
-        {"label": "Working paper (PDF)", "url": "https://www.michael-song.org/uploads/4/8/1/4/48141215/hongkongers_in_mainland.pdf"},
-        {"label": "CUHK research page", "url": "https://cz-jrc.econ.cuhk.edu.hk/research/hong-kong-travelers-in-mainland-china-scale-destinations-and-expenditure-patterns/"}
+        {
+          "label": "Working paper (PDF)",
+          "url": "https://www.michael-song.org/uploads/4/8/1/4/48141215/hongkongers_in_mainland.pdf"
+        },
+        {
+          "label": "CUHK research page",
+          "url": "https://cz-jrc.econ.cuhk.edu.hk/research/hong-kong-travelers-in-mainland-china-scale-destinations-and-expenditure-patterns/"
+        }
       ]
     },
     {
@@ -49,11 +82,20 @@
       "geography": "Hong Kong patients accessing healthcare in the Greater Bay Area",
       "method": "Qualitative interviews; this entry draws on the abstract",
       "contribution": "Places the everyday-services lens alongside existing research on how people access healthcare across the boundary.",
-      "limit": "The full methods are not assessed here, and no specific effect from the paper is used in the story. A corrigendum is linked alongside the abstract.",
+      "limit": "The full methods and field dates are not assessed here; the linked corrigendum has not been reviewed. No specific result from the paper is used in the story.",
       "sources": [
-        {"label": "Publisher abstract", "url": "https://www.sciencedirect.com/science/article/abs/pii/S0277953625012225"},
-        {"label": "HKU abstract record", "url": "https://hub.hku.hk/handle/10722/379192"},
-        {"label": "Corrigendum", "url": "https://www.sciencedirect.com/science/article/abs/pii/S0277953626004557"}
+        {
+          "label": "Publisher abstract",
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0277953625012225"
+        },
+        {
+          "label": "HKU abstract record",
+          "url": "https://hub.hku.hk/handle/10722/379192"
+        },
+        {
+          "label": "Corrigendum",
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0277953626004557"
+        }
       ]
     },
     {
@@ -70,8 +112,14 @@
       "contribution": "Frames a local question about demand in both directions. Actual experience can be compared with the forecasts as RTS use develops.",
       "limit": "Forecast spending is not realised spending, lost GDP or a measured JS-SEZ effect. It is not directly comparable with observed Hong Kong series.",
       "sources": [
-        {"label": "SBF summary", "url": "https://www.sbf.org.sg/newsroom/media/press-releases/detail/rts-link-could-reshape-cross-border-consumer-spending--spotlighting-both-opportunities-and-challenges-for-singapore-retail-and-f-b"},
-        {"label": "Full report (PDF)", "url": "https://www.sbf.org.sg/docs/default-source/advocacy-policy/sbf-rts-study_final-report-16-jul.pdf?sfvrsn=b7ba6722_1"}
+        {
+          "label": "SBF summary",
+          "url": "https://www.sbf.org.sg/newsroom/media/press-releases/detail/rts-link-could-reshape-cross-border-consumer-spending--spotlighting-both-opportunities-and-challenges-for-singapore-retail-and-f-b"
+        },
+        {
+          "label": "Full report (PDF)",
+          "url": "https://www.sbf.org.sg/docs/default-source/advocacy-policy/sbf-rts-study_final-report-16-jul.pdf?sfvrsn=b7ba6722_1"
+        }
       ]
     },
     {
@@ -82,13 +130,16 @@
       "title": "Living Space Patterns and Planning Implications of Cross-Border Employees from Hong Kong in Shenzhen",
       "type": "Journal article · spatial analysis",
       "publication": "10 October 2026 · Land 15(10), 1930",
-      "dataPeriod": "2023",
+      "dataPeriod": "November 2023",
       "geography": "Hong Kong-linked people in Shenzhen; main spatial sample has Shenzhen home and work anchors",
-      "method": "Selected mobile-phone provider records",
+      "method": "Selected mobile-phone provider records; the main spatial sample has 2,964 selected Hong Kong-linked users with both home and work anchors inferred in Shenzhen",
       "contribution": "Shows neighbourhood differences in how closely home, work and other activity spaces sit together. The project adds reported motives that location signals cannot supply.",
-      "limit": "Selected provider data are not a census or a direct count of daily commuters from Hong Kong. Motives cannot be inferred directly from the signals.",
+      "limit": "Selected provider data from one month are not a census; the main analytical sample excludes Hong Kong-home/Shenzhen-work daily commuters and dual-residence cases. Motives cannot be inferred directly from the signals.",
       "sources": [
-        {"label": "Publisher article", "url": "https://www.mdpi.com/2073-445X/15/10/1930"}
+        {
+          "label": "Publisher article",
+          "url": "https://www.mdpi.com/2073-445X/15/10/1930"
+        }
       ]
     }
   ],
@@ -98,9 +149,18 @@
     "url": "https://www.arup.com/globalassets/downloads/insights/c/city-resilience-framework/city-resilience-framework-2024v2.pdf",
     "introduction": "Jamie selected and adapted relevant themes to organise the inquiry. These three lenses do not reproduce the whole framework.",
     "lenses": [
-      {"name": "Livelihoods and choices", "themes": "Work, skills, businesses and economic conditions"},
-      {"name": "Everyday services and navigation", "themes": "Housing, healthcare, education, mobility and essential services"},
-      {"name": "Relationships and support", "themes": "Community connections and inclusion"}
+      {
+        "name": "Livelihoods and choices",
+        "themes": "Work, skills, businesses and economic conditions"
+      },
+      {
+        "name": "Everyday services and navigation",
+        "themes": "Housing, healthcare, education, mobility and essential services"
+      },
+      {
+        "name": "Relationships and support",
+        "themes": "Community connections and inclusion"
+      }
     ],
     "institutions": "Institutions run across all three: relevant rules, organisations, coordination and informed planning.",
     "limit": "No citywide resilience assessment or score. Environmental and infrastructure risks, disruption and recovery, and comprehensive Shenzhen-side outcomes remain outside this study's scope."
