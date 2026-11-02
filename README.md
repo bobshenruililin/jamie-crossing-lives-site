@@ -19,9 +19,9 @@ The optional route game uses invented demand and rules. The spatial model is a c
 illustration, not measured geographic data. Selected field photographs were supplied
 by Bob and Jamie. This is a review edition for Jamie's feedback.
 
-The website and presentation follow the revised script checked on 1 November 2026
-(twelve sets of conversation and visit notes, plus two separate expert discussions).
-The active presentation includes the current questions for further inquiry.
+The presentation follows Script flow v3 checked on 2 November 2026, with at least
+fourteen individual/group conversations and three Shenzhen trips. It includes
+the revised questions for further inquiry. The website remains the prior review edition.
 The original r2154 presentation PDF remains at presentation-r2154.pdf. Maps, policy
 documents and research collections extend the main narrative with their own sources
 and limits. This is a working draft for review, not a final approval by Jamie.

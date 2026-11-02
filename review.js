@@ -11,7 +11,7 @@
   const dataFile = studyMode ? 'review-data.json' : 'presentation-data.json';
   const runtimeUrl = (path) => {
     const url = new URL(path, document.baseURI);
-    url.searchParams.set('v', '20261101-v2');
+    url.searchParams.set('v', '20261102-v3-final');
     return url;
   };
   const framePattern = studyMode ? /^frames\/[a-zA-Z0-9][a-zA-Z0-9_.-]*\.svg$/ : /^presentation-frames\/[a-zA-Z0-9][a-zA-Z0-9_.-]*\.svg$/;
@@ -40,7 +40,28 @@
   function hashSceneIndex() {
     let id;
     try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return -1; }
-    return id ? scenes.findIndex((scene) => scene.id === id) : -1;
+    const aliases = {
+      'local-household-choices': 'household-choices',
+      'time-and-childcare': 'household-choices',
+      'guide-choice': 'household-choices',
+      'business-routines': 'business-customers',
+      'business-follow-up': 'business-customers',
+      'futian-guidance': 'cross-border-services',
+      'visible-services': 'cross-border-services',
+      'driving-licence-services': 'cross-border-services',
+      'help-through-connections': 'continuing-ties',
+      'inquiry-businesses-workers': 'questions-worth-exploring',
+      'inquiry-services-users': 'questions-worth-exploring',
+      'inquiry-movers-relationships': 'questions-worth-exploring',
+      'two-way-spending-forecast': 'singapore-johor-questions',
+      'association-learning-visit': 'singapore-johor-questions',
+      'conditional-retirement-interest': 'singapore-johor-questions',
+      'johor-residents': 'singapore-johor-questions',
+      'exploratory-insights': 'closing',
+      'further-questions': 'closing',
+    };
+    const currentId = studyMode ? id : (aliases[id] || id);
+    return currentId ? scenes.findIndex((scene) => scene.id === currentId) : -1;
   }
 
   function pushSceneHash(scene) {
@@ -306,7 +327,7 @@
     byId('next').title = `Next reveal or ${sceneName} (→)`;
     byId('draft-label').textContent = studyMode ? 'Visual studies · draft for discussion' : 'Presentation draft';
     byId('keyboard-hint').textContent = `Use ← → to move through ${studyMode ? 'each study' : 'the presentation'}. Home / End jump to the beginning / end.`;
-    byId('dialog-caveat').textContent = `${studyMode ? 'Provisional visual study' : 'Working presentation draft'} for private review. Source scope and caveats remain part of the claim.`;
+    byId('dialog-caveat').textContent = `${studyMode ? 'Provisional visual study' : 'Working presentation draft'} for review. Source scope and caveats remain part of the claim.`;
     const loadingMessage = stage.querySelector('.stage-message');
     if (loadingMessage) loadingMessage.textContent = studyMode ? 'Loading the studies…' : 'Loading the presentation…';
   }
@@ -314,7 +335,9 @@
   async function revealAvailablePdf() {
     if (studyMode) return;
     try {
-      const response = await fetch(new URL('presentation.pdf', document.baseURI), { method: 'HEAD' });
+      const pdfUrl = runtimeUrl('presentation.pdf');
+      const response = await fetch(pdfUrl, { method: 'HEAD' });
+      byId('pdf-link').href = pdfUrl;
       byId('pdf-link').hidden = !response.ok;
     } catch { /* Keep the link hidden until the local PDF is available. */ }
   }
@@ -335,7 +358,7 @@
       }));
       buildScenePicker();
       if (text(data.title)) document.title = data.title;
-      byId('draft-label').textContent = studyMode ? `${scenes.length} studies · draft for discussion` : 'Presentation draft';
+      byId('draft-label').textContent = studyMode ? `${scenes.length} studies · draft for discussion` : (text(data.status) || 'Presentation draft');
       // An absent or unknown hash opens the first scene without rewriting the URL.
       await showScene(Math.max(0, hashSceneIndex()), 'start', false);
     } catch (error) {
