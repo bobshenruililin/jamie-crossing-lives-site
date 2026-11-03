@@ -109,3 +109,17 @@ html[data-motion=off]{scroll-behavior:auto}
 .work-notice{display:flex;flex-wrap:wrap;align-items:baseline;gap:5px 16px;padding:12px 0;margin:0 0 26px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14px;line-height:1.5}
 .work-notice strong{color:#a03d21;font-weight:600;white-space:nowrap}
 @media(max-width:760px){.masthead .site-status{font-size:10px}.work-notice{font-size:13px;margin-bottom:22px}}
+
+/* A brief first-visit notice; the permanent status label remains after dismissal. */
+.status-popup{width:min(440px,calc(100% - 40px));max-height:calc(100svh - 40px);margin:auto;padding:36px;border:1px solid var(--line);border-radius:4px;background:var(--paper);color:var(--ink);box-shadow:0 18px 70px #173e4030;overflow:auto}
+.status-popup::backdrop{background:#173e4066}
+.status-popup form{margin:0}
+.status-popup-kicker{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding-right:20px;margin:0 0 20px;color:var(--muted)}
+.status-popup h2{font-family:var(--font-display),sans-serif;font-size:42px;font-weight:700;line-height:1.05;text-wrap:initial;margin:0 0 16px}
+.status-popup #status-popup-description{font-size:16px;line-height:1.5;margin:0 0 26px}
+.status-popup-close{position:absolute;top:8px;right:8px;min-width:44px;min-height:44px;padding:0;border:0;background:transparent;color:var(--ink);font-size:26px;line-height:1}
+.status-popup-explore{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;min-height:48px;padding:12px 16px;border:1px solid var(--ink);border-radius:2px;background:var(--ink);color:var(--paper);font-size:15px;font-weight:600}
+.status-popup-explore:hover{background:#24565a}
+html.status-popup-open{overflow:hidden}
+@media(max-width:380px){.status-popup{padding:30px 24px}.status-popup h2{font-size:36px}.status-popup-kicker{font-size:10px}}
+@media print{.status-popup{display:none!important}html.status-popup-open{overflow:visible}}

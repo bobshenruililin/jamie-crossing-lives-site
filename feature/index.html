@@ -9,9 +9,18 @@
 <link rel="stylesheet" href="story.css?v=20261031-v3"><link rel="stylesheet" href="game.css?v=20261031-v3"><link rel="stylesheet" href="world.css?v=20261031-v3"><link rel="stylesheet" href="evidence.css?v=20261031-v3"><link rel="stylesheet" href="library.css?v=20261031-v3"><link rel="stylesheet" href="everyday.css?v=20261031-v3"><link rel="stylesheet" href="editorial.css?v=20261031-v3"><link rel="stylesheet" href="navigation.css?v=20261031-v3"><link rel="stylesheet" href="field-gallery.css?v=20261031-v3"><link rel="stylesheet" href="policy-map.css?v=20261031-v3"><link rel="stylesheet" href="research-overview.css?v=20261101-script">
 <link rel="stylesheet" href="craft.css?v=20261101-editorial"><link rel="stylesheet" href="field-notebook.css?v=20261101-editorial"><link rel="stylesheet" href="ties-atlas.css?v=20261101-reader">
 <link rel="stylesheet" href="spending-comparison.css?v=20261101-editorial">
-<link rel="stylesheet" href="visual-story.css?v=20261103-wip">
+<link rel="stylesheet" href="visual-story.css?v=20261103-popup">
 </head>
 <body>
+<dialog class="status-popup" id="status-popup" aria-labelledby="status-popup-title" aria-describedby="status-popup-description">
+  <form method="dialog">
+    <button class="status-popup-close" type="submit" aria-label="Close work-in-progress notice">×</button>
+    <p class="status-popup-kicker">Crossing Lives · Research website</p>
+    <h2 id="status-popup-title">Work in progress</h2>
+    <p id="status-popup-description">This research website is still being developed and reviewed.</p>
+    <button class="status-popup-explore" type="submit" autofocus>Explore the website <span aria-hidden="true">→</span></button>
+  </form>
+</dialog>
 <a class="skip-link" href="#story">Skip the model and read the story</a>
 <header class="masthead">
   <a class="wordmark" href="#top" aria-label="Crossing Lives home — work in progress">CROSSING LIVES<span class="site-status">Work in progress</span></a>
@@ -85,5 +94,5 @@
 </main>
 <footer class="footer page-width" id="sources"><div class="footer-heading"><a class="wordmark" href="#top">CROSSING LIVES</a><p>Research by Jamie Ko<br>Visualization by Bob</p></div><details class="method"><summary>Research, sources and image credits</summary><div class="method-grid"><section><h3>What this project draws on</h3><p>The research combines twelve mixed qualitative records, plus two separate expert discussions: eleven earlier conversation, observation and visit records, and one Sheung Shui visit on 31 October containing three brief chats. It is not a representative survey. These selected accounts illustrate overlapping ways of living; they are not population categories.</p><p>Official series, programme descriptions, evaluations and forecasts have different evidentiary roles. Each interactive section links to its sources and states the main limits. Causal claims need suitable comparisons.</p><p>The presentation follows the revised script checked on 1 November 2026. The website selects from the same research for a visual reading path. Maps, policy documents and the research collections provide additional context. This is a working draft for review.</p></section><section><h3>About the visuals</h3><p>The optional route game uses invented demand, capacities and rules. The spatial model uses authored architecture and conceptual relationships, not measured routes, distances or journey frequencies. The relationship symbols identify reported parts of life; they do not show participants’ actual possessions, the strength of ties or their frequency.</p><p>Field photographs were supplied by Bob and Jamie. The Singapore–Johor visit and their Shenzhen field trip are kept distinct. Captions describe visible context; no pictured person is identified as a research participant.</p><p>The Futian help-point example is a field observation: its operator was not confirmed and described referrals were not tested.</p></section><section><h3>Read further</h3><ul><li><a href="../research.html">Data appendix and earlier companion</a></li><li><a href="../presentation.html">Presentation</a></li><li><a href="../presentation.pdf">Presentation PDF</a></li><li><a href="../research-data.json">Chart and arrangement data</a></li><li><a href="../data/response-cases.json">Response sources</a></li><li><a href="measurement-menu.json">Measurement sources</a></li><li><a href="everyday-data.json">Education and care sources</a></li><li><a href="policy-map-data.json">Map and policy sources</a></li><li><a href="research-overview-data.json">Research reading list</a></li><li><a href="../presentation-r2154.pdf">Earlier slide PDF · r2154</a></li><li><a href="../samples/">Preserved visual studies</a></li></ul></section></div></details><div class="footer-bottom"><span>Visual research story · work in progress</span><a href="#top">Back to the beginning<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 17V3M4 9l6-6 6 6"/></svg></a></div></footer>
 <noscript><p class="noscript">The story and photographs remain readable. Enable JavaScript for interactive maps, charts and models, or <a href="../presentation.pdf">read the presentation PDF</a>.</p></noscript>
-<script type="module" src="story.js?v=20261101-reader"></script>
+<script type="module" src="story.js?v=20261103-popup"></script>
 </body></html>

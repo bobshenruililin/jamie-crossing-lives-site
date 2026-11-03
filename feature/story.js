@@ -45,3 +45,20 @@ const chapters=[...document.querySelectorAll('[data-reading-title]')];
 let chapterFrame=0;
 function updateChapter(){chapterFrame=0;const offset=document.querySelector('.masthead').getBoundingClientRect().height+Math.min(180,innerHeight*.2);let current=chapters[0];for(const section of chapters){if(section.getBoundingClientRect().top<=offset)current=section;else break}if(!current)return;document.querySelector('.chapter-index')?.classList.toggle('is-visible',document.querySelector('#story').getBoundingClientRect().top<=offset);contentsSummary.querySelector('.current-chapter').textContent=current.dataset.readingTitle;document.querySelectorAll('[data-chapter]').forEach(link=>{if(link.dataset.chapter===current.id)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')})}
 addEventListener('scroll',()=>{if(!chapterFrame)chapterFrame=requestAnimationFrame(updateChapter)},{passive:true});addEventListener('resize',updateChapter);addEventListener('hashchange',()=>requestAnimationFrame(updateChapter));document.querySelectorAll('details').forEach(details=>details.addEventListener('toggle',updateChapter));Promise.allSettled(loads).then(()=>requestAnimationFrame(updateChapter));updateChapter();
+
+// Acknowledge once per tab session; keep the static status when storage/JS is unavailable.
+const statusPopup=document.querySelector('#status-popup');
+const statusStorageKey='crossing-lives:website-wip-acknowledged';
+let statusAcknowledged=false;
+try{statusAcknowledged=sessionStorage.getItem(statusStorageKey)==='yes'}catch{}
+if(statusPopup&&typeof statusPopup.showModal==='function'&&!statusAcknowledged){
+  const previousFocus=document.activeElement;
+  statusPopup.addEventListener('close',()=>{
+    html.classList.remove('status-popup-open');
+    try{sessionStorage.setItem(statusStorageKey,'yes')}catch{}
+    const returnFocus=previousFocus&&previousFocus!==document.body&&previousFocus.isConnected?previousFocus:document.querySelector('.masthead .wordmark');
+    returnFocus?.focus({preventScroll:true});
+  },{once:true});
+  statusPopup.showModal();
+  html.classList.add('status-popup-open');
+}
