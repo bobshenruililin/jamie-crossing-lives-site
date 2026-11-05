@@ -77,7 +77,7 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
   const svg = $('svg'), world = $('world'), arcLayer = $('arcs'), overlay = $('overlay'), stage = $('stage');
   const card = $('card'), now = $('now'), status = $('status'), canvas = $('canvas');
   let gpu = null;
-  let yaw = YAW, sceneId = 'overview', openId = null, destroyed = false;
+  let yaw = YAW, sceneId = 'overview', openId = null, peekId = null, destroyed = false;
   let vb = null, vbTarget = null, vbFrom = null, vbStart = 0, vbFrame = 0;
   let tokens = [], tokenStart = 0, tokenFrame = 0;
   const cleanups = [];
@@ -232,6 +232,7 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
 
   function usesMainland() { const sc = currentScene(); return sc.arcs.some(a => a.from === 'mainland' || a.to === 'mainland') || sc.pins.some(p => p.at === 'mainland'); }
   function placeState(id) {
+    if (peekId === id) return 'lit';
     const scene = currentScene();
     if (!scene.lit.length) return 'normal';
     return scene.lit.includes(id) ? 'lit' : 'dim';
@@ -411,6 +412,7 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
       button.classList.toggle('is-dim', state === 'dim');
       button.classList.toggle('has-pin', Boolean(pin));
       button.classList.toggle('is-open', openId === id);
+      button.classList.toggle('is-peek', peekId === id);
       button.setAttribute('aria-expanded', String(openId === id));
       const label = button.querySelector('.mark-label');
       label.innerHTML = pin ? `${facetGlyph(pin.facet)}<span>${esc(pin.text)}</span>` : '';
@@ -517,7 +519,7 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
 
   function gpuScene() {
     const sc = currentScene();
-    gpu.setScene({ lit: sc.lit, dim: sc.lit.length > 0, arcs: sc.arcs.map(arc3d), beyond: usesMainland(), pupils: sceneId === 'pupils' });
+    gpu.setScene({ lit: peekId ? [...sc.lit, peekId] : sc.lit, dim: sc.lit.length > 0, arcs: sc.arcs.map(arc3d), beyond: usesMainland(), pupils: sceneId === 'pupils' });
   }
   function gpuCamera(animate) {
     const sc = currentScene();
@@ -731,6 +733,13 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
     },
     getScene: () => sceneId,
     openPlace: id => openCard(id, null),
+    /* Light one place briefly — for words in the text that name it. */
+    peek(id) {
+      if (destroyed || id === peekId) return;
+      peekId = placeById[id] ? id : null;
+      if (gpu) { gpuScene(); placeOverlays(); return; }
+      drawWorld(); drawArcs(); placeOverlays();
+    },
     closeCard: () => closeCard(false),
     getState: () => ({ scene: sceneId, yaw, open: openId, renderer: gpu ? 'webgpu' : 'projected SVG' }),
     destroy() { destroyed = true; gpu?.destroy(); cancelAnimationFrame(vbFrame); cancelAnimationFrame(tokenFrame); resize?.disconnect(); cleanups.forEach(fn => fn()); host.replaceChildren(); host.classList.remove('mini'); }

@@ -112,6 +112,19 @@ html.has-photo-title #hero-title{position:absolute;width:1px;height:1px;overflow
 .lens-mark .ptype-chip{left:auto!important;right:0;width:240px}
 @media (max-width:1099px){.lens-mark{font-size:96px;top:-10px}.lens-head h2{padding-right:70px}}
 
+.rearrange-replay{position:absolute;right:0;top:0;width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--rule-strong);border-radius:50%;background:var(--card);opacity:0;transition:opacity .3s}
+.rearrange-replay svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.rearrange.is-rearranged .rearrange-replay,.rearrange-replay:focus-visible{opacity:1}
+.rearrange.is-piece{cursor:pointer}
+
+/* Place words: text that lights the model */
+.pw{display:inline;padding:0 .08em;margin:0 -.04em;border:0;font:inherit;color:inherit;text-align:inherit;cursor:pointer;border-radius:2px;background:linear-gradient(to top,var(--pw-tint) 0,var(--pw-tint) 36%,transparent 36%);transition:background-size .2s,color .2s;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.pw.side-hk{--pw-tint:#c9512d33;--pw-strong:#c9512d55}
+.pw.side-sz{--pw-tint:#008c7a2e;--pw-strong:#008c7a4d}
+.pw:hover,.pw:focus-visible{background:linear-gradient(to top,var(--pw-strong) 0,var(--pw-strong) 100%,transparent 100%)}
+.mini-mark.is-peek .mark-dot{background:var(--lamp);border-color:var(--ink);box-shadow:0 0 0 6px #f1b84e55,0 2px 6px #173e4022}
+.mini-mark.is-peek{opacity:1!important;z-index:5}
+
 /* Shared type ----------------------------------------------------------- */
 .eyebrow{font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft)}
 .deck{font-size:clamp(17px,1.35vw,20px);line-height:1.5;max-width:46ch;color:var(--ink-soft)}

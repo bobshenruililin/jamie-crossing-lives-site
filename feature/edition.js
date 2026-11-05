@@ -98,20 +98,33 @@ document.addEventListener('mini:request-scene', event => goToStep(event.detail.i
 /* ---- Type cut from field photographs: the title and each lens letter ---- */
 const heroTitle = document.querySelector('#hero-title');
 mount('#hero-type', async host => {
-  const { mountPhotoType } = await import(`./photo-type.js?v=${V}`);
-  const t = mountPhotoType(host, {
-    interactive: true,
+  const { mountRearrange } = await import(`./photo-type.js?v=${V}`);
+  const t = mountRearrange(host, {
     size: () => parseFloat(getComputedStyle(heroTitle).fontSize),
-    lines: [
-      [{ text: 'A', photo: 'driving-school', tone: 'hk' }, { text: 'life', photo: 'driving-school', tone: 'hk', focus: [[.25, .55]] }],
-      [{ text: 'doesn’t', photo: 'crossing-hall', tone: 'x', focus: [[.5, .38]] }, { text: 'move', photo: 'hsitp-sign', tone: 'x' }],
-      [{ text: 'all', photo: 'place', tone: 'sz', font: 'accent' }, { text: 'at', photo: 'menu', tone: 'sz', font: 'accent' }, { text: 'once.', photo: 'community-centre', tone: 'sz', font: 'accent', focus: [[.5, .45]] }]
-    ]
+    from: [[{ text: 'Two', photo: 'driving-school', tone: 'hk' }, { text: 'places,', photo: 'place', tone: 'sz', focus: [.5, .35] }]],
+    to: [[{ text: 'one' }, { text: 'life,' }], [{ text: 'rearranged.', font: 'accent' }]]
   });
-  requestAnimationFrame(() => { if (host.classList.contains('is-ready')) html.classList.add('has-photo-title'); });
-  new MutationObserver(() => { if (host.classList.contains('is-ready')) html.classList.add('has-photo-title'); }).observe(host, { attributes: true, attributeFilter: ['class'] });
+  const ready = () => { if (host.classList.contains('is-ready')) html.classList.add('has-photo-title'); };
+  new MutationObserver(ready).observe(host, { attributes: true, attributeFilter: ['class'] });
+  ready();
   return t;
 });
+
+/* ---- Place words: the text and the model are one instrument ---- */
+document.addEventListener('pointerover', event => { const w = event.target.closest?.('.pw'); if (w) mini?.peek?.(w.dataset.place); });
+document.addEventListener('pointerout', event => { const w = event.target.closest?.('.pw'); if (w && !w.contains(event.relatedTarget)) mini?.peek?.(null); });
+document.addEventListener('focusin', event => { const w = event.target.closest?.('.pw'); if (w) mini?.peek?.(w.dataset.place); });
+document.addEventListener('focusout', event => { if (event.target.closest?.('.pw')) mini?.peek?.(null); });
+document.addEventListener('click', event => {
+  const w = event.target.closest?.('.pw');
+  if (!w || !mini) return;
+  mini.openPlace(w.dataset.place);
+  const graphic = document.querySelector('.scrolly-graphic');
+  const box = graphic?.getBoundingClientRect();
+  // On phones the model may sit below the text: bring it, and the card, into view.
+  if (box && (box.top < 0 || box.bottom > innerHeight + 4)) graphic.scrollIntoView({ block: 'start', behavior: motionAllowed() ? 'smooth' : 'instant' });
+});
+
 const LENS_PHOTOS = { A: ['menu', 'service-street'], B: ['help-kiosk', 'help-point', 'driving-school'], C: ['community-centre', 'community-sign', 'park'] };
 document.querySelectorAll('.lens-mark').forEach(mark => mount(`.lens-mark[data-lens="${mark.dataset.lens}"]`, async host => {
   const { mountPhotoType } = await import(`./photo-type.js?v=${V}`);

@@ -90,7 +90,28 @@ Bob’s note: less secondary labelling; text only where it carries insight. This
 - **Places have no photographs yet** for Sheung Shui shops, the repair specialists, restaurants (beyond one menu), tuition and the clinic. Those cards say so honestly.
 - `research.html` and the presentation footer still carry older revision wording; they're out of scope for this pass.
 
-## Checkpoint 8 — type cut from field photographs; life signatures; a cleaner frame · RESUME HERE
+## Checkpoint 9 — the slogan rearranges itself; text that lights the model · RESUME HERE
+
+**Opening slogan:** "Two places, / *one life, rearranged.*" (Bob's idea: a two-line slogan for the whole project whose first line's photos and colours rearrange into the second).
+- The project's arrangements framework becomes the opening gesture:
+  - "Two" is cut from the Sheung Shui driving-school photograph (rust, Hong Kong);
+  - "places," from the Shenzhen towers (teal).
+- After it settles, every piece lifts off and recomposes "one life, rearranged.", deliberately mixing rust and teal, so the second line is a collage of both places' photographs.
+- The first line stays as a dashed outline, the arrangement that was: the same ghost grammar the site uses for "not established".
+- Every piece is still a real photograph: hover line 2 for true colour and its source, and click a piece to open the photograph it came from.
+- Hovering the outline pulls the pieces back; a ↺ button replays. Reduced motion shows the final state.
+- The real `<h1>` reads "Two places, one life, rearranged."
+- "A life doesn't move all at once." now heads the tour's payoff step, above the five signatures.
+
+**Place words.** Phrases in the opening deck and the tour that name a place are highlighted in their side's colour (rust or teal). Hovering or focusing one lights that building in the miniature; activating it opens the building's evidence (on phones, it brings the model into view). The text and the model work as one instrument.
+
+**Also:** a "Signs toward the port" stop in the services trail uses the crossing-hall photos as wayfinding, without asserting which side of the boundary it is.
+
+**Checks:** 65, all passing on `/` and `/feature/`; no overflow at 320 or 390px.
+
+**Before pushing to `main`:** send `docs/REVIEW-REQUEST-ASTRA.md` to the original Astra chat for a last check.
+
+## Checkpoint 8 — type cut from field photographs; life signatures; a cleaner frame
 
 **Type made of the fieldwork** (`feature/photo-type.js`).
 - The title's letterforms are filled with field photographs and coloured by side of the boundary:
@@ -137,7 +158,7 @@ Bob’s note: less secondary labelling; text only where it carries insight. This
   - Confirm the crossing-hall location (visible signs: "Futian Port / HSITP", MTR branding) and the kiosk poster wording.
   - Add these five to the private photo ledger.
 
-**Checks:** `tools/check-site.js` now has 60 checks; all pass on `/` and `/feature/`, with no overflow at 320 or 390px.
+**Checks (at checkpoint 8):** `tools/check-site.js` had 60 checks; all pass on `/` and `/feature/`, with no overflow at 320 or 390px.
 
 **Next ideas:**
 - a "share your signature" card;

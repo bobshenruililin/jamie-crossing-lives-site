@@ -110,12 +110,24 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   check('motion pause sets data-motion=off', (await page.getAttribute('html', 'data-motion')) === 'off');
   await page.click('#motion-control');
 
-  // Type cut from field photographs
-  check('title is drawn from field photographs', await page.evaluate(() => document.documentElement.classList.contains('has-photo-title') && document.querySelectorAll('#hero-type .ptype-hit').length === 7));
-  check('title text stays in the document for assistive technology', (await page.textContent('#hero-title')).replace(/\s+/g, ' ').trim() === 'A life doesn’t move all at once.');
+  // The slogan: line 1's photo pieces rearrange into line 2
+  check('slogan is drawn from field photographs', await page.evaluate(() => document.documentElement.classList.contains('has-photo-title') && document.querySelectorAll('#hero-type .ptype-hit').length === 2));
+  check('slogan text stays in the document for assistive technology', (await page.textContent('#hero-title')).replace(/\s+/g, ' ').trim() === 'Two places, one life, rearranged.');
+  await page.waitForFunction(() => document.querySelector('#hero-type').classList.contains('is-rearranged'), null, { timeout: 9000 }).catch(() => {});
+  check('line 1’s pieces rearrange into line 2', await page.$eval('#hero-type', n => n.classList.contains('is-rearranged')));
   const wordLabel = await page.getAttribute('#hero-type .ptype-hit[data-word="0"]', 'aria-label');
-  check('each title word names its photograph', /field photograph: .+Open the photograph/.test(wordLabel || ''), wordLabel);
+  check('each slogan word names its photograph', /field photograph: .+Open the photograph/.test(wordLabel || ''), wordLabel);
+  check('“A life doesn’t move all at once” is the tour’s payoff', (await page.textContent('#step-together h2')).includes('A life doesn’t move'));
   check('three lens letters are drawn from photographs', (await page.$$eval('.lens-mark.is-ready', l => l.length)) === 3);
+
+  // Place words light the model and open its evidence
+  await page.hover('.pw[data-place="sz-repair"] >> nth=0');
+  check('a place word lights its building', await page.$eval('.mini-mark[data-place="sz-repair"]', n => n.classList.contains('is-peek')));
+  await page.mouse.move(5, 5);
+  check('the light goes when the pointer leaves', !(await page.$eval('.mini-mark[data-place="sz-repair"]', n => n.classList.contains('is-peek'))));
+  await page.click('.pw[data-place="hk-rental"] >> nth=0');
+  check('a place word opens its evidence', (await page.isVisible('.mini-card')) && (await page.textContent('.mini-card h3')) === 'A rented flat');
+  await page.keyboard.press('Escape');
 
   // Life signatures
   check('a signature for every ledger row', (await page.$$eval('.lrow .lrow-sig svg.sig', l => l.length)) === 9);
@@ -148,7 +160,7 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   }
 
   check('EVIDENCE the unconsented street photograph is never requested', !requests.some(u => /sz-services\.jpg/.test(u)));
-  check('new field photographs load as cropped derivatives', ['hk-crossing-hall', 'hk-hsitp-sign', 'sz-community-centre'].every(n => requests.some(u => u.includes(n))));
+  check('new field photographs load as cropped derivatives', ['hk-crossing-hall', 'sz-help-kiosk', 'sz-community-centre'].every(n => requests.some(u => u.includes(n))));
   check('no page errors', errors.length === 0, errors.join(' | '));
   await browser.close();
 
