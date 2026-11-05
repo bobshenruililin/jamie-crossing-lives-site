@@ -1,5 +1,7 @@
 # Crossing Lives — website edition of 5 November 2026
 
+**6 November update:** Bob authorised deployment of `721631f`; the reviewed runtime now serves the main GitHub Pages URL. Three additional visual experiments remain isolated for his decision. See [the comparison and verification record](VISUAL-STUDIES-20261106.md). Historical “main unchanged” statements below describe their checkpoint dates.
+
 Original branch `claude/keen-cerf-j2szmo`; follow-up review branch `codex/jamie-internal-draft-20261105`, based on `9482378`. A coherent rebuild of the story layer, aligned with Script v3 (checked 2 November 2026). The presentation, `research.html`, `samples/`, PDFs and QR assets are untouched. See checkpoint 10 for the current review state.
 
 ## Preview

@@ -1,0 +1,26 @@
+/* Comparison-only additions. These styles are never loaded by the main site. */
+.guide-story{display:none}
+html[data-lab-study=guide][data-lab-variant=proposal] .guide-story{display:block}
+.guide-story{max-width:42ch;margin-top:4px;border-block:1px solid var(--rule-strong)}
+.guide-story summary{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:13px 0;list-style:none;font-size:15px;font-weight:600}
+.guide-story summary::-webkit-details-marker{display:none}
+.guide-story summary>span:last-child{font-weight:400;font-size:23px;line-height:1;transition:transform .2s}
+.guide-story[open] summary>span:last-child{transform:rotate(45deg)}
+.guide-story-body{padding:0 0 18px}
+.guide-story-source{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:18px}
+.guide-story-parts{display:grid;gap:19px}
+.guide-story-parts li{display:grid;grid-template-columns:27px 1fr;gap:12px}
+.guide-story-parts [data-facet-glyph]{color:var(--sz-text);padding-top:3px}
+.guide-story-parts .glyph{width:22px;height:22px;color:var(--sz-text)}
+.guide-story-parts h3{font-family:var(--font-text);font-size:15px;line-height:1.25;font-weight:600;text-wrap:initial;margin-bottom:4px}
+.guide-story-parts p{font-size:14px;line-height:1.45;color:var(--ink-soft)}
+.guide-story-link{font-size:13px;margin:19px 0 0 39px}
+.mini{flex-direction:column}
+.pupil-count-dock{flex:none;display:grid;grid-template-columns:repeat(3,1fr);gap:5px 18px;align-items:end;border-top:1px solid var(--rule-strong);padding:10px 15px 6px;background:var(--paper);text-align:center;color:var(--ink)}
+.count-level{display:grid;grid-template-columns:10px auto;gap:1px 6px;justify-content:center;align-items:center}
+.count-level i{width:8px;height:8px;border-radius:50%}
+.count-level b{font:700 27px/1 var(--font-display);text-align:left}
+.count-level small{grid-column:2;text-align:left;font-size:11.5px;color:var(--ink-soft)}
+.count-unit{grid-column:1/-1;font-size:10px;letter-spacing:.04em;color:var(--muted)}
+@media(max-width:760px){.pupil-count-dock{gap:3px 8px;padding:7px 12px 4px}.count-level b{font-size:23px}.count-level small{font-size:10.5px}.count-unit{font-size:9px}.guide-story{max-width:none}}
+@media(prefers-reduced-motion:reduce){.guide-story summary>span:last-child{transition:none}}
