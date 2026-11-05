@@ -67,7 +67,7 @@ export function initBasket(host) {
     <div class="bk-legend"><span><i class="dot-mainland"></i>Spent in Mainland China</span><span><i class="dot-hk"></i>Spent in Hong Kong</span></div>
     <ol class="bk-rows">${rows}</ol>
     <div class="bk-axis" aria-hidden="true"><span></span><span class="bk-axis-track">${ticks.map(t => `<b style="left:${t / MAX * 100}%">${t}${t === MAX ? '%' : ''}</b>`).join('')}</span></div>
-    <table class="visually-hidden"><caption>Share of recorded spending within each location, seasoned AlipayHK users</caption><thead><tr><th scope="col">Category</th><th scope="col">Mainland China</th><th scope="col">Hong Kong</th></tr></thead><tbody>${CATEGORIES.map(c => `<tr><th scope="row">${esc(c.label)}</th><td>${c.mainland}%</td><td>${c.hk}%</td></tr>`).join('')}</tbody></table>
+    <div class="visually-hidden"><table><caption>Share of recorded spending within each location, seasoned AlipayHK users</caption><thead><tr><th scope="col">Category</th><th scope="col">Mainland China</th><th scope="col">Hong Kong</th></tr></thead><tbody>${CATEGORIES.map(c => `<tr><th scope="row">${esc(c.label)}</th><td>${c.mainland}%</td><td>${c.hk}%</td></tr>`).join('')}</tbody></table></div>
     <figcaption>${evidenceGlyph('published')} Share of recorded spending <em>within</em> each location · seasoned AlipayHK users · CUHK research release, Figure 3, 19 June 2025</figcaption>
     <details class="source-note"><summary>Source and limits</summary>
       <p>Services are 47% of recorded Mainland spending—the largest category, not a majority. Hong Kong’s published labels are rounded and total 101%; the chart keeps them as printed.</p>

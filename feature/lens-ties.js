@@ -29,9 +29,9 @@ export function initTies(host) {
   host.innerHTML = `<figure class="ties">
     <div class="ties-switch" role="group" aria-label="Choose whose ties to explore">${PROFILES.map((p, i) => `<button type="button" data-profile="${p.id}" aria-pressed="${i === 0}">${esc(p.label)}</button>`).join('')}</div>
     <div class="ties-board">
-      <div class="ties-city city-hk"><h4>Hong Kong</h4><ul></ul></div>
+      <div class="ties-city city-hk"><h3>Hong Kong</h3><ul></ul></div>
       <span class="ties-boundary" aria-hidden="true"><span class="ties-moved" hidden>Home moved <svg viewBox="0 0 40 12"><path d="M1 6h34M30 1l6 5-6 5"/></svg></span></span>
-      <div class="ties-city city-sz"><h4>Shenzhen</h4><ul></ul></div>
+      <div class="ties-city city-sz"><h3>Shenzhen</h3><ul></ul></div>
     </div>
     <p class="ties-reading" aria-live="polite"></p>
     <figcaption>${evidenceGlyph('account')} <span class="ties-note"></span> Symbols show kinds of ties, not possessions, their number or strength.</figcaption>

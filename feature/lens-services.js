@@ -55,15 +55,15 @@ export function initServiceTrail(host) {
     const more = stop.more ? `<button type="button" class="tr-more" data-photo="${stop.more}">${evidenceGlyph('photo')}${esc(photos[stop.more].caption)}</button>` : '';
     view.innerHTML = `${figure}<div class="tr-text">
       <p class="tr-kicker zone-${stop.zone}">${ZONES[stop.zone]}</p>
-      <h4>${esc(stop.title)}</h4>
+      <h3>${esc(stop.title)}</h3>
       <p class="tr-body">${evidenceGlyph(stop.ev)} ${esc(stop.text)}</p>
       ${spots}${more}
       <p class="tr-limit">${esc(stop.limit)}</p>
     </div>`;
-    view.dataset.stop = id;
+    view.dataset.current = id;
   }
   function chooseSpot(index) {
-    const stop = STOPS.find(s => s.id === view.dataset.stop);
+    const stop = STOPS.find(s => s.id === view.dataset.current);
     const photo = photos[stop.photo];
     const spot = photo.spots[index];
     view.querySelectorAll('[data-spot]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.spot) === index)));
@@ -102,6 +102,7 @@ export function initCareLoop(host) {
       <div class="care-node n3"><b>3</b><p>Return to HA follow-up</p><small>On request, according to clinical need</small></div>
       <div class="care-link l2"><span class="care-line"></span><span>A referral route back</span></div>
     </div>
+    <p class="care-note">Patients authorise access to their records through eHealth; a referral route leads back to HA follow-up, on request, according to clinical need.</p>
     <div class="care-figure">${evidenceGlyph('published')}<strong>&gt;5,900</strong><p>eligible HA patients had joined the follow-up pilot by January 2026.</p><small>A later release reported over 6,000 by end-February 2026.</small></div>
     <figcaption>Defined outpatient follow-up eligibility. Participation does not establish clinical outcomes or universal coverage. <a href="https://www.info.gov.hk/gia/general/202602/25/P2026022500444.htm" target="_blank" rel="noopener">25 Feb 2026 reply ↗</a><a href="https://www.info.gov.hk/gia/general/202603/31/P2026033100709.htm" target="_blank" rel="noopener">Health Bureau, 31 Mar 2026 ↗</a></figcaption>
   </figure>`;

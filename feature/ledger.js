@@ -71,7 +71,7 @@ export function initLedger(host) {
   const focusButtons = [...ledger.querySelectorAll('[data-focus]')];
   function setFocus(id) {
     focusButtons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.focus === id)));
-    ledger.dataset.focus = id;
+    ledger.dataset.highlight = id;
     reading.textContent = READINGS[id];
   }
   ledger.addEventListener('click', event => {

@@ -315,7 +315,7 @@ export function initMiniature(host) {
     [-386, 386].forEach(x => [-168, 168].forEach(z => [-24, 150].forEach(y => corners.push(project(x, z, y)))));
     const whole = bounds(corners);
     const padTop = 44, padBottom = 34;
-    let box = { x: whole.x - 14, y: whole.y - padTop, w: whole.w + 28, h: whole.h + padTop + padBottom };
+    let box = { x: whole.x - 34, y: whole.y - padTop, w: whole.w + 68, h: whole.h + padTop + padBottom };
     const scene = currentScene();
     const focusIds = [...scene.lit, ...scene.pins.map(p => p.at)].filter((v, i, a) => a.indexOf(v) === i);
     if (focusIds.length && sceneId !== 'together') {
@@ -370,6 +370,7 @@ export function initMiniature(host) {
   function placeOverlays() {
     if (!vb) return;
     const scene = currentScene();
+    const stageWidth = stage.clientWidth || 800;
     const pinFor = Object.fromEntries(scene.pins.filter(p => placeById[p.at]).map(p => [p.at, p]));
     buttons.forEach((button, id) => {
       const [l, t] = toPct(project(...anchorOf(id)));
@@ -379,11 +380,11 @@ export function initMiniature(host) {
       button.classList.toggle('is-dim', state === 'dim');
       button.classList.toggle('has-pin', Boolean(pin));
       button.classList.toggle('is-open', openId === id);
-      button.classList.toggle('is-flipped', l > 70);
       button.setAttribute('aria-expanded', String(openId === id));
       const label = button.querySelector('.mark-label');
       label.innerHTML = pin ? `${facetGlyph(pin.facet)}<span>${esc(pin.text)}</span>` : '';
     });
+    layoutPins(stageWidth, stage.clientHeight || 500);
     extras.replaceChildren();
     scene.pins.filter(p => EDGES[p.at]).forEach(pin => {
       const flag = make('span', 'mini-flag is-approximate');
@@ -406,6 +407,32 @@ export function initMiniature(host) {
       tag.style.left = `${l}%`; tag.style.top = `${t}%`;
       extras.append(tag);
     });
+  }
+
+  /* Pins are centred over their building. Keep each inside the stage and lift
+     any that would overlap an earlier one; the leader line keeps pointing at
+     the building it labels. */
+  function layoutPins(W, H) {
+    const placed = [];
+    const list = [...buttons.values()];
+    list.forEach(b => { b.style.removeProperty('--dx'); b.style.removeProperty('--lift'); });
+    list.filter(b => b.classList.contains('has-pin'))
+      .map(b => ({ b, x: parseFloat(b.style.left) / 100 * W, y: parseFloat(b.style.top) / 100 * H, w: b.offsetWidth, h: b.offsetHeight }))
+      .sort((p, q) => q.y - p.y)
+      .forEach(p => {
+        let left = p.x - p.w / 2;
+        const dx = Math.max(6 - left, Math.min(0, W - 6 - (left + p.w)));
+        left += dx;
+        let lift = 0;
+        for (let guard = 0; guard < 5; guard++) {
+          const top = p.y - 8 - p.h - lift;
+          if (!placed.some(r => left < r.right + 4 && left + p.w > r.left - 4 && top < r.bottom + 3 && top + p.h > r.top - 3)) break;
+          lift += p.h + 6;
+        }
+        if (dx) p.b.style.setProperty('--dx', `${dx}px`);
+        if (lift) p.b.style.setProperty('--lift', `${lift}px`);
+        placed.push({ left, right: left + p.w, top: p.y - 8 - p.h - lift, bottom: p.y - 8 - lift });
+      });
   }
 
   function animateTokens() {
@@ -433,7 +460,7 @@ export function initMiniature(host) {
   function renderNow() {
     const person = byId[sceneId];
     if (person) now.innerHTML = `<b>${esc(person.name)}</b><span>${esc(ARRANGEMENTS[person.arrangement].label)}</span>`;
-    else if (sceneId === 'together') now.innerHTML = '<b>Five accounts together</b><span>Thin lines: each account’s crossings</span>';
+    else if (sceneId === 'together') now.innerHTML = '<b>Five examples together</b><span>Thin lines: each one’s crossings</span>';
     else now.innerHTML = '<b>A miniature of the fieldwork</b><span>Tap a marker to see the evidence</span>';
   }
 
