@@ -577,6 +577,7 @@ export function initMiniature(host) {
     if (event.key === 'Home') { event.preventDefault(); yaw = YAW; render(); }
   });
   function turn(delta) {
+    swayCancelled = true; // a reader's own turn always wins over the hint
     yaw = Math.max(YAW_MIN, Math.min(YAW_MAX, yaw + delta));
     drawWorld(); drawArcs(); vbTarget = targetView(); applyView(vbTarget);
   }
@@ -585,13 +586,13 @@ export function initMiniature(host) {
   resize?.observe(stage);
   on(document, 'crossing:motion', () => { if (!motionAllowed()) { cancelAnimationFrame(tokenFrame); tokens.forEach(t => t.token.setAttribute('visibility', 'hidden')); } });
 
-  let swayed = false;
+  let swayed = false, swayCancelled = false;
   const swayWatch = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => {
     if (swayed || !entries.some(e => e.isIntersecting && e.intersectionRatio > .6) || !motionAllowed()) return;
     swayed = true; swayWatch.disconnect();
     const from = yaw, start = performance.now();
     const step = t => {
-      if (destroyed || drag) return;
+      if (destroyed || swayCancelled) return;
       const k = Math.min(1, (t - start) / 1800);
       yaw = from + .14 * Math.sin(Math.PI * k) * (1 - k * .15);
       drawWorld(); drawArcs(); placeOverlays();

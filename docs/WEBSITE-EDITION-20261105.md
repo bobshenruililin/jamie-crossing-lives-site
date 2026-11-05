@@ -65,7 +65,7 @@ Bob’s note: less secondary labelling; text only where it carries insight. This
 ## Checks run (5 November, headless Chromium)
 
 - `node --check` on all 21 JS modules; `git diff --check` clean.
-- 41 scripted interaction checks, passing on both `/` and `/feature/` (re-run after checkpoint 3):
+- `tools/check-site.js`: 51 checks passing on both `/` and `/feature/` (checkpoint 5; earlier checkpoints ran 41):
   - Popup: shows, closes, session acknowledgement, suppressed on reload; the header label persists.
   - Miniature: markers open cards; the photo viewer opens, highlights details, closes on Escape and returns focus; arrow keys turn the model; the switcher drives the tour.
   - Ledger: focus and expand.
@@ -89,6 +89,29 @@ Bob’s note: less secondary labelling; text only where it carries insight. This
 - The **research-desk modules** keep their earlier internal styling; they fit, but deserve a harmonising pass.
 - **Places have no photographs yet** for Sheung Shui shops, the repair specialists, restaurants (beyond one menu), tuition and the clinic. Those cards say so honestly.
 - `research.html` and the presentation footer still carry older revision wording; they're out of scope for this pass.
+
+## Checkpoint 5 — the questions travel; the checks travel too
+
+- **Singapore–Johor is drawn as the same miniature, deliberately unbuilt** (`feature/echo.js`).
+  - Dashed outlines stand where fieldwork would go, and numbered questions sit on the places they concern, each paired with its wording beside the model.
+  - The only filled marks are published figures: the RTS opening target and the 2024 survey of stated interest.
+  - The RTS forecast becomes two hatched arcs in both directions, widths proportional to S$1.05bn and S$756m, coloured by destination.
+  - The image says "the questions travel; the answers need local evidence" without a caption. It replaces the three text columns and the bar chart.
+  - Marker and label positions were checked numerically against the arcs so they stay apart at phone width.
+- **The guide's move is motion that explains.**
+  - Switching to her account, her home flies from Hong Kong across the boundary into Shenzhen and leaves a dashed "Home, before the move" outline; family visits stay where they were.
+  - With motion paused or reduced, the outline alone carries it.
+- **`tools/check-site.js`**: 51 browser checks anyone can rerun (instructions at the top of the file).
+  - Ten of them are evidence regressions from dot's corrections:
+    - The unconsented street photograph is never requested.
+    - Pupils' homes are Mainland, not Shenzhen, in the ledger and the miniature.
+    - The manager's shopping isn't placed in Sheung Shui.
+    - The parent isn't "locally based".
+    - There are eight selected accounts plus an official count.
+    - No institution is disclosed.
+    - The trips are named correctly.
+  - I confirmed these checks fail when the original photo or a Shenzhen placement for the pupils is reintroduced.
+- **Fix:** a reader's own turn of the model now cancels the one-time sway hint instead of being undone by it.
 
 ## Checkpoint 4 — dot's evidence corrections (applied)
 
@@ -130,7 +153,7 @@ dot checked my questions against the saved Script v3 and the photo records.
 The public root `index.html` is the authored page here. `feature/index.html` is generated from it by `python3 tools/sync-feature-alias.py`. For the private source, copy the generated `feature/index.html` to `app/feature/index.html`; its paths are already relative to `feature/`.
 
 - **Add** to `app/feature/` and the export allowlist:
-  - Modules: `cast.js`, `grammar.js`, `miniature.js`, `ledger.js`, `lens-choices.js`, `lens-services.js`, `lens-ties.js`, `photo-viewer.js`, `ties-icons.js`, `edition.js`.
+  - Modules: `cast.js`, `grammar.js`, `miniature.js`, `ledger.js`, `lens-choices.js`, `lens-services.js`, `lens-ties.js`, `echo.js`, `photo-viewer.js`, `ties-icons.js`, `edition.js`.
   - Stylesheets: `edition.css`, `desk.css`.
   - Asset: `assets/sz-services-signage.jpg`.
 - **Changed** (copy over): `field-gallery.js` now uses the signage derivative.
@@ -141,4 +164,4 @@ The public root `index.html` is the authored page here. `feature/index.html` is 
 - **Unchanged and still used:**
   - Modules, each with its CSS: `evidence`, `everyday`, `library`, `policy-map`, `research-overview`, `game` (and `field-gallery`, with the one-line change above).
   - Their JSON data, `research-data.json`, `data/`, and `feature/assets/`.
-- **Public repo only:** `tools/sync-feature-alias.py` and `docs/`.
+- **Public repo only:** `tools/sync-feature-alias.py`, `tools/check-site.js` and `docs/`. The check script is worth porting to the private source too.
