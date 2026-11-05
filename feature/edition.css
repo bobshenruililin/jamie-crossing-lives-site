@@ -184,10 +184,11 @@ h1 em{font-size:1.12em}
 .mini-mark.has-pin{gap:0}
 .mini-mark.has-pin .mark-label{display:inline-flex;align-items:center;gap:5px;margin-left:-4px;padding:4px 9px 4px 10px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:600;line-height:1.1;white-space:nowrap;border-radius:0 12px 12px 0}
 .mark-label .glyph{width:13px;height:13px}
-.mini-flag{position:absolute;transform:translate(-50%,-100%);display:inline-flex;align-items:center;gap:5px;padding:4px 9px;font-size:11.5px;font-weight:600;white-space:nowrap;border-radius:12px;pointer-events:none}
+.mini-flag{--dx:0px;position:absolute;transform:translate(calc(-50% + var(--dx)),-100%);display:inline-flex;align-items:center;gap:5px;padding:4px 9px;font-size:11.5px;font-weight:600;white-space:nowrap;border-radius:12px;pointer-events:none}
 .mini-flag .glyph{width:13px;height:13px}
 .mini-flag.is-approximate{background:var(--card);border:1.5px dashed var(--sz);color:var(--ink)}
-.mini-flag.is-unknown{background:var(--card);border:1.5px dashed var(--rule-strong);color:var(--muted);transform:translate(-50%,-30%)}
+.mini-flag.is-approximate.side-hk{border-color:var(--hk)}
+.mini-zone{--dx:0px;position:absolute;transform:translate(calc(-100% + var(--dx)),-50%);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--sz-text);white-space:nowrap;pointer-events:none}
 .mini-ghost{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1.5px dashed var(--ink-soft);background:#f6f2e8d9;color:var(--ink-soft);pointer-events:auto;animation:ghost-float 4.5s ease-in-out infinite}
 .mini-ghost .glyph{width:15px;height:15px}
 .mini-ghost::after{content:'';position:absolute;left:50%;top:100%;height:var(--drop,30px);border-left:1px dashed #173e4055}
@@ -217,6 +218,7 @@ h1 em{font-size:1.12em}
 .card-photo{display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:center;width:100%;margin-top:10px;padding:6px;border:1px solid var(--rule-strong);background:var(--paper);text-align:left;font-size:13px;font-weight:600}
 .card-photo img{width:72px;height:56px;object-fit:cover}
 .card-photo span{display:flex;gap:6px;align-items:center}
+.card-photo-note{font-size:12px;color:var(--muted);margin-top:6px}
 .card-limit{font-size:11.5px;color:var(--muted);margin-top:10px}
 
 /* Photo viewer ---------------------------------------------------------- */
@@ -273,6 +275,9 @@ h1 em{font-size:1.12em}
 .lmark[data-side=sz]{background:var(--sz-tint);box-shadow:inset 0 0 0 1px #008c7a40}
 .lmark[data-side=sz] .glyph{color:var(--sz-text)}
 .lrow-unknown{display:flex;flex-wrap:wrap;gap:4px}
+.lmark.is-beyond{margin-left:auto;background:repeating-linear-gradient(135deg,transparent 0 6px,#008c7a14 6px 7px);box-shadow:none;border:1.5px dashed var(--sz);color:var(--ink)}
+.lmark.is-beyond .glyph{color:var(--sz-text)}
+.beyond-arrow{width:16px;height:10px;flex:none;fill:none;stroke:var(--sz-text);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .lmark.is-unknown{padding:4px;border-radius:50%;border:1.5px dashed var(--rule-strong);color:var(--muted)}
 .lmark.is-unknown .glyph{width:14px;height:14px}
 .ledger[data-highlight]:not([data-highlight=all]) .lmark{opacity:.22}

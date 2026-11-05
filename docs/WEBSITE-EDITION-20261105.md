@@ -22,7 +22,7 @@ The research says a cross-border life is a *combination*: people place home, wor
 
 1. **A miniature of the fieldwork** (opening). The loved spatial model stays the spine, but its generic buildings now each stand for a place in the research: homes in Fanling, shops in Sheung Shui, a driving school advertising licence conversion, the crossing at Futian, repair specialists, restaurants, a street of services, a follow-up clinic. Each has an evidence marker; selecting it opens what the research says about that place, and the field photograph where one exists. The title and the model share the first screen.
 2. **A tour of five examples**, following v3's arrangements: cross-border user, northbound mover, worker or student (the official pupil count, clearly marked as not an interview), Hong Kong base with Mainland ties, and the locally based. The camera moves to each life; places light up, arcs show what crosses, and what an account does not establish stays visibly unplaced.
-3. **The ledger**: all nine accounts side by side, each part of life on its side of the boundary, hollow where unknown. Highlighting a part of life (home, work, purchases, ties) reveals the pattern with one carefully worded sentence. This answers "what do these people combine, and where does the evidence end?" in one view.
+3. **The ledger**: eight selected accounts and one official schooling count, side by side (not an exhaustive cast), each part of life on its side of the boundary, hollow where unknown. Highlighting a part of life (home, work, purchases, ties) reveals the pattern with one carefully worded sentence. This answers "what do these people combine, and where does the evidence end?" in one view.
 4. **Three lenses** with v3's clear claims as headlines instead of punchy phrases:
    - **A · Choices**: reasons that draw an activity across vs keep it local (six accounts), a dumbbell of the CUHK spending shares, and who businesses serve.
    - **B · Services**: a trail from Sheung Shui through the crossing into Shenzhen; each stop opens its evidence and inspectable photo details; the documented follow-up-care loop.
@@ -90,13 +90,40 @@ Bob’s note: less secondary labelling; text only where it carries insight. This
 - **Places have no photographs yet** for Sheung Shui shops, the repair specialists, restaurants (beyond one menu), tuition and the clinic. Those cards say so honestly.
 - `research.html` and the presentation footer still carry older revision wording; they're out of scope for this pass.
 
-## Requests for dot
+## Checkpoint 4 — dot's evidence corrections (applied)
 
-1. **Confirm the anonymisation change** above, and that the v3 cast wording used here (dining visitors, Sheung Shui resident and shop employee, parent, property agent) is acceptable for the public site. All of it is paraphrased from the public v3 slide text in this repository; see `feature/cast.js`.
-2. **Face in `sz-services.jpg`** (foreground, identifiable). It was already published. Is there clearance? If not, I'll crop it to the signage.
-3. **Verified photographs** with place and date provenance, unchanged originals, any aspect ratio, for the miniature's places: Sheung Shui street or shops (31 October walk); the Futian or Lo Wu crossing; Shenzhen restaurants; a repair or electronics market.
-4. **Clarify slide 12**: which account says "Landmark North · busier Monday–Thursday"? It's omitted until clarified. "Fewer crowds, in two accounts" is used as printed.
-5. **Check one phrasing**: the three trips are rendered as "by rail through Futian and Lo Wu, and an AsiaGlobal Fellows coach trip" (v3: "Futian rail · Lo Wu rail · AGF coach").
+dot checked my questions against the saved Script v3 and the photo records.
+
+- **Anonymisation:** confirmed. Employers and institutions stay undisclosed.
+- **Street photograph:** there is no recorded consent from the identifiable foreground person.
+  - The site now publishes only a signage derivative, `feature/assets/sz-services-signage.jpg`: a full-width strip at 19.5–40.5% of the height that contains no people.
+  - The miniature card, the services filmstrip, the photo viewer, its "open the full image" link and the research-desk gallery all use it. Detail spots are re-normalised to the strip.
+  - The original is removed from this branch's tree.
+- **Context photographs:** they are no longer presented as establishments interviewees used.
+  - The restaurant card says the menu is context, not a restaurant these accounts describe.
+  - The community-centre sign is detached from the guide's "community life".
+  - No capture dates are assigned to photographs.
+- **Store manager:** her reported pattern is restored as "Locals and Mainland visitors—busier Monday to Thursday", marked as not measured footfall. I left out the mall name: it adds identifiability and no insight.
+- **Trips:** now "by rail via Lok Ma Chau/Futian and via Lo Wu, and an AsiaGlobal Fellows coach visit". No crossing point is given for the coach.
+- **Ledger:** now "Eight selected accounts and one official count of schoolchildren—illustrations, not a sample or everyone the research mentions".
+- **Schoolchildren:** Mainland residence is visibly *not* Shenzhen.
+  - In the miniature, their homes sit in a dashed zone beyond the Shenzhen plinth labelled "Elsewhere on the Mainland".
+  - In the ledger, a dashed mark sits at the far edge of the Shenzhen column with an outward arrow.
+- **Store manager's shopping:** no longer placed in Sheung Shui. The miniature shows it as a dashed "somewhere in Hong Kong" marker, not a building.
+- **Parent:** moved from "Locally based" to a band headed "Arrangement not established".
+
+### Still needs attention outside this branch
+
+- **The live site (`main`) still serves the original street photograph** (`feature/assets/sz-services.jpg`) with the identifiable person, until this branch, or a hotfix, reaches `main`.
+- **The same full photograph is embedded as base64 in `presentation-frames/15.svg`.** The slide may visually crop it, but the whole image ships in the file, and the presentation PDFs likely contain it too. The presentation is a separate deliverable, so I haven't changed it.
+- **Git history** of the public repository still contains the original on `main`.
+  - This branch's checkpoint 3 commit also includes a small screenshot thumbnail of it in `docs/edition-20261105/desktop-05-lens-b.jpg`, since regenerated.
+  - Purging either would mean rewriting history, which is your decision. I haven't done it.
+
+## Remaining requests for dot
+
+1. **Verified, dated photographs** for any of the miniature's places, when available. Until then, the cards for places without photos say so.
+2. **Decide on the street photograph** in the presentation and on `main` (above).
 
 ## Porting to the private source (`app/feature/`)
 
@@ -105,10 +132,13 @@ The public root `index.html` is the authored page here. `feature/index.html` is 
 - **Add** to `app/feature/` and the export allowlist:
   - Modules: `cast.js`, `grammar.js`, `miniature.js`, `ledger.js`, `lens-choices.js`, `lens-services.js`, `lens-ties.js`, `photo-viewer.js`, `ties-icons.js`, `edition.js`.
   - Stylesheets: `edition.css`, `desk.css`.
+  - Asset: `assets/sz-services-signage.jpg`.
+- **Changed** (copy over): `field-gallery.js` now uses the signage derivative.
+- **Remove** the original `assets/sz-services.jpg` once nothing else depends on it.
 - **Remove** from `app/feature/` and the allowlist (superseded, recoverable from git history):
   - Scripts: `story.js`, `world.js`, `account-tour.js`, `life-accounts.js`, `spending-comparison.js`, `field-notebook.js`, `ties-atlas.js`.
   - Stylesheets: `world.css`, `spending-comparison.css`, `field-notebook.css`, `ties-atlas.css`, `story.css`, `editorial.css`, `navigation.css`, `craft.css`, `visual-story.css`.
 - **Unchanged and still used:**
-  - Modules, each with its CSS: `evidence`, `everyday`, `library`, `policy-map`, `research-overview`, `field-gallery`, `game`.
+  - Modules, each with its CSS: `evidence`, `everyday`, `library`, `policy-map`, `research-overview`, `game` (and `field-gallery`, with the one-line change above).
   - Their JSON data, `research-data.json`, `data/`, and `feature/assets/`.
 - **Public repo only:** `tools/sync-feature-alias.py` and `docs/`.

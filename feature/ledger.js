@@ -1,4 +1,5 @@
-/* The ledger: every account in the study, side by side.
+/* The ledger: eight selected accounts and one official count, side by side.
+   It is not an exhaustive cast of everyone mentioned in the research.
    Each row places the parts of one life on the Hong Kong or Shenzhen side of a
    central boundary. Hollow marks are what the account does not establish.
    Highlighting a part of life changes emphasis only, never the data. */
@@ -11,7 +12,7 @@ const ORDER = ['home', 'work', 'spend', 'ties'];
    checked against the rows below; none generalises beyond these accounts. */
 const READINGS = {
   all: 'Only one account describes moving home. More often, one part of life crosses: a repair, a meal, a school day, time with family.',
-  home: 'One account moved home north; the schoolchildren live on the Mainland side; one resident rents in Hong Kong yet calls Shenzhen home. Four accounts do not say where home is.',
+  home: 'One account moved home north; the schoolchildren live across the Mainland, not only in Shenzhen; one resident rents in Hong Kong yet calls Shenzhen home. Four accounts do not say where home is.',
   work: 'Every workplace or school these accounts locate is in Hong Kong. The guide’s preferred work is not located.',
   spend: 'Purchases and services are what most often cross—a repair, meals, shopping and activities. The store manager still does most shopping in Hong Kong.',
   ties: 'Relationships and activities sit on both sides—for the guide and the resident, partly on the side opposite where they live.'
@@ -28,7 +29,9 @@ export function initLedger(host) {
       const f = person.facets[facet] || {};
       if (f.hk) hk.push(mark(facet, f.hk, 'hk'));
       if (f.sz) sz.push(mark(facet, f.sz, 'sz'));
-      if (!f.hk && !f.sz) {
+      // Mainland but not necessarily Shenzhen: drawn beyond the Shenzhen column.
+      if (f.mainland) sz.push(`<li class="lmark is-beyond" data-facet="${facet}" data-side="mainland">${facetGlyph(facet)}<span>${esc(f.mainland)}</span><svg class="beyond-arrow" viewBox="0 0 18 10" aria-hidden="true"><path d="M1 5h14M11 1l4 4-4 4"/></svg></li>`);
+      if (!f.hk && !f.sz && !f.mainland) {
         const covered = !(person.notCovered || []).includes(facet);
         unknown.push(`<li class="lmark is-unknown" data-facet="${facet}" title="${covered ? 'Not established' : 'Not covered by this record'}">${facetGlyph(facet)}<span class="visually-hidden">${esc(FACETS[facet].label)}: ${covered ? 'not established' : 'not covered by this record'}</span></li>`);
       }
@@ -52,7 +55,7 @@ export function initLedger(host) {
       </div>
     </li>`;
   };
-  const BANDS = { user: 'Cross-border users', mover: 'Northbound mover', worker: 'Worker or student · an official count', base: 'Hong Kong base, Mainland ties', local: 'Locally based' };
+  const BANDS = { user: 'Cross-border users', mover: 'Northbound mover', worker: 'Worker or student · an official count', base: 'Hong Kong base, Mainland ties', local: 'Locally based', unplaced: 'Arrangement not established' };
   const rows = Object.entries(BANDS).map(([key, name]) => {
     const people = cast.filter(p => p.arrangement === key);
     return people.length ? `<li class="lband"><p class="lband-name">${esc(name)}</p><ol class="lband-rows">${people.map(rowFor).join('')}</ol></li>` : '';

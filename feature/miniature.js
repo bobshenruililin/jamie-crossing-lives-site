@@ -34,7 +34,11 @@ const GEOMETRY = {
   'sz-community': { x: 254,  z: 90,   w: 50, d: 42, h: 24 },
   'sz-park':      { x: 318,  z: 86,   w: 54, d: 72, h: 4 }
 };
-const EDGES = { 'hk-edge': [-150, 59, 6], 'sz-edge': [150, 59, 6] };
+/* Edges and loose points: 'mainland' lies beyond the Shenzhen plinth, because the
+   pupil data cover Mainland residence, not Shenzhen; 'hk-side' is an unplaced
+   point on the Hong Kong side for activities the account does not locate. */
+const EDGES = { 'hk-edge': [-150, 59, 6], 'sz-edge': [150, 59, 6], mainland: [478, 30, 6], 'hk-side': [-206, 59, 4] };
+const BEYOND = { x0: 404, x1: 556, z0: -150, z1: 150 };
 /* Parts of a life an account does not place hover over the boundary gap. */
 const GHOSTS = { home: [0, 2, 52], work: [0, -58, 52], ties: [0, -118, 52], spend: [0, -178, 52] };
 const TREES = [[-200, -112, 20], [-118, -150, 18], [-112, -78, 16], [-196, 18, 17], [-120, 22, 15], [-112, 150, 18], [-372, 20, 16],
@@ -224,6 +228,7 @@ export function initMiniature(host) {
     return grp;
   }
 
+  function usesMainland() { const sc = currentScene(); return sc.arcs.some(a => a.from === 'mainland' || a.to === 'mainland') || sc.pins.some(p => p.at === 'mainland'); }
   function placeState(id) {
     const scene = currentScene();
     if (!scene.lit.length) return 'normal';
@@ -258,6 +263,11 @@ export function initMiniature(host) {
       poly([[x0 + 7, 44, .3], [x0 + 279, 44, .3], [x0 + 279, 74, .3], [x0 + 7, 74, .3]], '#efeadb', frag);
       for (let xx = x0 + 16; xx < x0 + 276; xx += 22) line([[xx, 59, .5], [xx + 10, 59, .5]], '#c9c3ad', .8, frag);
     });
+    if (usesMainland()) {
+      const { x0, x1, z0, z1 } = BEYOND;
+      poly([[x0, z0, -2], [x1, z0, -2], [x1, z1, -2], [x0, z1, -2]], '#008c7a12', frag, { stroke: '#008c7a', 'stroke-width': 1.4, 'stroke-dasharray': '6 6' });
+      for (let zz = z0 + 30; zz < z1; zz += 60) line([[x0 + 24, zz, -1.5], [x1 - 24, zz + 18, -1.5]], '#008c7a33', 1, frag, { 'stroke-dasharray': '2 5' });
+    }
     box(-100, 42, 200, 34, 8, { top: '#e8d8b9', side: '#8c9b88', front: '#b0bca4' }, frag, -1);
     for (let xx = -90; xx < 100; xx += 14) line([[xx, 44, 8], [xx, 74, 8]], '#ac9a7b', .7, frag);
     [43, 75].forEach(zz => { line([[-100, zz, 18], [100, zz, 18]], '#426d65', 1.6, frag); for (let xx = -96; xx <= 100; xx += 24) line([[xx, zz, 7], [xx, zz, 18]], '#426d65', 1.1, frag); });
@@ -314,7 +324,7 @@ export function initMiniature(host) {
     const W = rect.width || 900, H = rect.height || 520;
     const ratio = W / H;
     const corners = [];
-    [-386, 386].forEach(x => [-168, 168].forEach(z => [-24, 150].forEach(y => corners.push(project(x, z, y)))));
+    [-386, usesMainland() ? BEYOND.x1 + 10 : 386].forEach(x => [-168, 168].forEach(z => [-24, 150].forEach(y => corners.push(project(x, z, y)))));
     const whole = bounds(corners);
     const padTop = 44, padBottom = 34;
     let box = { x: whole.x - 34, y: whole.y - padTop, w: whole.w + 68, h: whole.h + padTop + padBottom };
@@ -323,6 +333,7 @@ export function initMiniature(host) {
     if (focusIds.length && sceneId !== 'together') {
       const pts = [];
       (scene.unplaced || []).forEach(f => pts.push(project(...GHOSTS[f])));
+      if (usesMainland()) [BEYOND.x0, BEYOND.x1].forEach(x => [BEYOND.z0, BEYOND.z1].forEach(z => pts.push(project(x, z, 0), project(x, z, 40))));
       focusIds.forEach(id => { const g = GEOMETRY[id] || { x: EDGES[id][0] - 10, z: EDGES[id][1] - 10, w: 20, d: 20, h: 10 }; [g.x, g.x + g.w].forEach(x => [g.z, g.z + g.d].forEach(z => { pts.push(project(x, z, 0)); pts.push(project(x, z, g.h + 64)); })); });
       scene.arcs.forEach(arc => { const g = arcGeometry(arc.from, arc.to, false, arc.style); pts.push(g.pa, g.pb, g.c1, g.c2); });
       const f = bounds(pts);
@@ -389,8 +400,14 @@ export function initMiniature(host) {
     });
     layoutPins(stageWidth, stage.clientHeight || 500);
     extras.replaceChildren();
+    if (usesMainland()) {
+      const zone = make('span', 'mini-zone', 'Elsewhere on the Mainland');
+      const [l, t] = toPct(project(BEYOND.x1 - 20, BEYOND.z1 - 6, 0));
+      zone.style.left = `${l}%`; zone.style.top = `${t}%`;
+      extras.append(zone);
+    }
     scene.pins.filter(p => EDGES[p.at]).forEach(pin => {
-      const flag = make('span', 'mini-flag is-approximate');
+      const flag = make('span', `mini-flag is-approximate side-${EDGES[pin.at][0] < 0 ? 'hk' : 'sz'}`);
       flag.innerHTML = `${facetGlyph(pin.facet)}<span>${esc(pin.text)}</span>`;
       const [l, t] = toPct(project(...EDGES[pin.at]));
       flag.style.left = `${l}%`; flag.style.top = `${t}%`;
@@ -414,6 +431,16 @@ export function initMiniature(host) {
       const [l, t] = toPct(arc._g.mid);
       tag.style.left = `${l}%`; tag.style.top = `${t}%`;
       extras.append(tag);
+    });
+    clampLoose(stageWidth);
+  }
+
+  function clampLoose(W) {
+    extras.querySelectorAll('.mini-flag, .mini-zone').forEach(node => {
+      node.style.removeProperty('--dx');
+      const r = node.getBoundingClientRect(), stageBox = stage.getBoundingClientRect();
+      const dx = Math.max(6 - (r.left - stageBox.left), Math.min(0, stageBox.right - 6 - r.right));
+      if (dx) node.style.setProperty('--dx', `${dx}px`);
     });
   }
 
@@ -492,7 +519,7 @@ export function initMiniature(host) {
     const photo = place.photo && photos[place.photo];
     card.innerHTML = `<header><p class="card-side side-${place.side}">${sideName}</p><h3>${esc(place.label)}</h3><button type="button" class="card-close" aria-label="Close ${esc(place.label)}"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15"/></svg></button></header>
       <ul class="card-evidence">${rows.join('')}</ul>
-      ${photo ? `<button type="button" class="card-photo" data-photo="${place.photo}"><img src="${asset(photo.file)}" alt="" loading="lazy" decoding="async" width="${photo.width}" height="${photo.height}"><span>${evidenceGlyph('photo')}Inspect the field photograph</span></button>` : ''}
+      ${photo ? `<button type="button" class="card-photo" data-photo="${place.photo}"><img src="${asset(photo.file)}" alt="" loading="lazy" decoding="async" width="${photo.width}" height="${photo.height}"><span>${evidenceGlyph('photo')}Inspect the field photograph</span></button>${place.photoNote ? `<p class="card-photo-note">${esc(place.photoNote)}</p>` : ''}` : ''}
       <p class="card-limit">Placed to explain, not mapped. Accounts are paraphrased.</p>`;
     card.hidden = false;
     status.textContent = `${place.label}. ${sideName}. ${card.querySelector('.card-evidence').textContent}`;

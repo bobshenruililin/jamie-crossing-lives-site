@@ -31,14 +31,15 @@ export const ARRANGEMENTS = {
   mover:  { n: '02', label: 'Northbound mover',               gloss: 'Home moves from Hong Kong to Shenzhen.' },
   worker: { n: '03', label: 'Cross-border worker or student', gloss: 'Lives on one side; works or studies on the other.' },
   base:   { n: '04', label: 'Hong Kong base, Mainland ties',  gloss: 'Based in Hong Kong, with property, relationships or activities across.' },
-  local:  { n: '—',  label: 'Locally based',                  gloss: 'Lives and works near the border; crossing is occasional.' }
+  local:  { n: '—',  label: 'Locally based',                  gloss: 'Based near the border; crossing is occasional.' },
+  unplaced: { n: '',  label: 'Arrangement not established',   gloss: 'The account does not say where the person lives or works.' }
 };
 
 const FIELD = 'Jamie Ko’s fieldwork · paraphrased';
 const SHEUNG_SHUI = 'Sheung Shui walk and brief chats, 31 October 2026 · paraphrased';
 
 /* Each facet lists what the account places on each side.
-   hk / sz: short phrases. note: a qualification that travels with the facet.
+   hk / sz: short phrases. mainland: a Mainland placement that is not Shenzhen. note: a qualification that travels with the facet.
    A facet with neither side is drawn as "not established". */
 export const cast = [
   {
@@ -80,7 +81,7 @@ export const cast = [
     figure: { value: '16,139', label: 'pupils travelling daily, 2024/25' },
     summary: 'Official data count 16,139 pupils who live on the Mainland side and travel daily to school in Hong Kong.',
     facets: {
-      home: { sz: 'Mainland residence', note: 'Not necessarily Shenzhen.' },
+      home: { mainland: 'Mainland residence—not only Shenzhen' },
       work: { hk: 'School in Hong Kong' },
       spend: {}, ties: {}
     },
@@ -109,7 +110,8 @@ export const cast = [
       spend: { hk: 'Most shopping', sz: 'Meals, about monthly' },
       ties: {}
     },
-    limit: 'Reported visit frequency and shopping pattern, not transaction data.'
+    customers: 'Locals and Mainland visitors, busier Monday to Thursday, as she described them.',
+    limit: 'Reported visit frequency, shopping and customer patterns—not transaction or footfall data.'
   },
   {
     id: 'ss-resident', name: 'Sheung Shui resident', arrangement: 'local', evidence: 'account', source: SHEUNG_SHUI,
@@ -133,7 +135,7 @@ export const cast = [
     limit: 'A reported customer mix, not a measured market share.'
   },
   {
-    id: 'parent', name: 'Parent', arrangement: 'local', evidence: 'account', source: 'A parent’s personal account · paraphrased',
+    id: 'parent', name: 'Parent', arrangement: 'unplaced', evidence: 'account', source: 'A parent’s personal account · paraphrased',
     summary: 'Their child’s Hong Kong activities leave little time. With childcare arranged and half a day free, a Shenzhen visit might be workable.',
     facets: {
       home: {}, work: {},
@@ -174,15 +176,16 @@ export const photos = {
     spots: []
   },
   'service-street': {
-    file: 'sz-services.jpg', width: 1600, height: 1200, where: 'Shenzhen',
-    alt: 'Storefronts with dental, courier and mobile-phone signage along a Shenzhen street.',
-    caption: 'Dental, courier and mobile-phone storefronts share one street.',
+    // Signage-only derivative of a field photograph: the original's identifiable
+    // foreground person has no recorded consent, so only this crop is published.
+    file: 'sz-services-signage.jpg', width: 1600, height: 252, where: 'Shenzhen',
+    alt: 'Signs for dental, courier and mobile-phone services above a row of Shenzhen storefronts.',
+    caption: 'Dental, courier and mobile-phone signs along one Shenzhen street.',
     limit: 'Signs show what is offered, not who uses it, prices or quality.',
-    crop: [0, .24, 1, .42],
     spots: [
-      { label: 'Dental', rect: [.071, .316, .262, .075], note: 'Dental services advertised above the street.' },
-      { label: 'Courier', rect: [.368, .323, .236, .073], note: 'Courier signage, with parcels outside the storefront.' },
-      { label: 'Mobile', rect: [.649, .325, .303, .077], note: 'China Mobile signage identifies another everyday service.' }
+      { label: 'Dental', rect: [.071, .576, .262, .357], note: 'Dental services advertised above the street.' },
+      { label: 'Courier', rect: [.368, .610, .236, .348], note: 'Courier signage above a storefront.' },
+      { label: 'Mobile', rect: [.649, .619, .303, .367], note: 'China Mobile signage identifies another everyday service.' }
     ]
   },
   'parcels': {
@@ -231,7 +234,7 @@ export const places = [
   { id: 'hk-rental',   side: 'hk', kind: 'slab',     label: 'A rented flat',          who: { resident: 'Rents here' } },
   { id: 'hk-fanling',  side: 'hk', kind: 'estate',   label: 'Homes in Fanling',       who: { manager: 'Home in Fanling' } },
   { id: 'hk-family',   side: 'hk', kind: 'house',    label: 'Family in Hong Kong',    who: { guide: 'Family visits continue' } },
-  { id: 'hk-shops',    side: 'hk', kind: 'mall',     label: 'Shops in Sheung Shui',   who: { manager: 'Works here; most shopping', 'ss-employee': 'An estate shop', 'ss-resident': 'Lives near the border' },
+  { id: 'hk-shops',    side: 'hk', kind: 'mall',     label: 'Shops in Sheung Shui',   who: { manager: 'Works here', 'ss-employee': 'An estate shop' },
     observed: 'Walking observations in Sheung Shui on 31 October 2026 noted familiar chains—a question to test, not a survival finding.' },
   { id: 'hk-licence',  side: 'hk', kind: 'shop',     label: 'Licence conversion',     photo: 'driving-school', observed: 'A Sheung Shui driving school advertises Mainland and Hong Kong licence conversion.' },
   { id: 'hk-school',   side: 'hk', kind: 'school',   label: 'Schools',                who: { pupils: '16,139 daily pupils' } },
@@ -241,15 +244,15 @@ export const places = [
     observed: 'At Futian, immigration staff helped with the arrival form. A separate help point offered information and described referrals; its operator was unconfirmed and referrals were not tested.' },
   // Shenzhen side
   { id: 'sz-repair',   side: 'sz', kind: 'market',   label: 'Repair specialists',     who: { repair: 'Specialist parts and repair' } },
-  { id: 'sz-dining',   side: 'sz', kind: 'restaurant', label: 'Restaurants',          photo: 'menu', who: { manager: 'Meals, about monthly', dining: 'Choice, space, price' },
+  { id: 'sz-dining',   side: 'sz', kind: 'restaurant', label: 'Restaurants',          photo: 'menu', photoNote: 'A menu photographed on a Shenzhen street—context, not a restaurant these accounts describe.', who: { manager: 'Meals, about monthly', dining: 'Choice, space, price' },
     reported: 'A property agent described restaurants catering to Hong Kong tastes.' },
   { id: 'sz-tower',    side: 'sz', kind: 'tower',    label: 'Family, friends, property', who: { resident: 'Property; family; friends' } },
   { id: 'sz-leisure',  side: 'sz', kind: 'mall',     label: 'Shops and leisure',      who: { resident: 'Shopping and many activities' } },
   { id: 'sz-home',     side: 'sz', kind: 'house',    label: 'A new home',             who: { guide: 'Moved home here' } },
-  { id: 'sz-street',   side: 'sz', kind: 'street',   label: 'A street of services',   photo: 'service-street', observed: 'Dental, courier and mobile-phone storefronts were photographed along one street; a parcel pickup point nearby.' },
+  { id: 'sz-street',   side: 'sz', kind: 'street',   label: 'A street of services',   photo: 'service-street', photoNote: 'Signs photographed in Shenzhen; no account links to this street.', observed: 'Dental, courier and mobile-phone storefronts were photographed along one street; a parcel pickup point nearby.' },
   { id: 'sz-clinic',   side: 'sz', kind: 'clinic',   label: 'Follow-up clinic',       published: 'More than 5,900 eligible Hospital Authority patients had joined a follow-up consultation pilot at HKU–Shenzhen Hospital by January 2026.' },
   { id: 'sz-tuition',  side: 'sz', kind: 'tuition',  label: 'Tuition',                reported: 'A property agent described tuition in Shenzhen for Hong Kong-curriculum students.' },
-  { id: 'sz-community',side: 'sz', kind: 'community',label: 'Community life',         photo: 'community-sign', who: { guide: 'Community, sport and interests' } },
+  { id: 'sz-community',side: 'sz', kind: 'community',label: 'Community life',         who: { guide: 'Community, sport and interests' } },
   { id: 'sz-park',     side: 'sz', kind: 'park',     label: 'Waterside park',         photo: 'park', observed: 'Public space photographed on the Shenzhen field trip.' }
 ];
 
@@ -274,8 +277,8 @@ export const scenes = {
   },
   pupils: {
     lit: ['hk-school'],
-    pins: [{ at: 'hk-school', facet: 'work', text: 'School' }, { at: 'sz-edge', facet: 'home', text: 'Mainland homes*', approximate: true }],
-    arcs: [{ from: 'sz-edge', to: 'hk-school', style: 'daily', text: '16,139 daily' }]
+    pins: [{ at: 'hk-school', facet: 'work', text: 'School' }, { at: 'mainland', facet: 'home', text: 'Homes across the Mainland', approximate: true }],
+    arcs: [{ from: 'mainland', to: 'hk-school', style: 'daily', text: '16,139 daily' }]
   },
   resident: {
     lit: ['hk-rental', 'hk-work', 'sz-tower', 'sz-leisure'],
@@ -284,7 +287,7 @@ export const scenes = {
   },
   manager: {
     lit: ['hk-fanling', 'hk-shops', 'sz-dining'],
-    pins: [{ at: 'hk-fanling', facet: 'home', text: 'Home' }, { at: 'hk-shops', facet: 'work', text: 'Work + shopping' }, { at: 'sz-dining', facet: 'spend', text: 'Meals' }],
+    pins: [{ at: 'hk-fanling', facet: 'home', text: 'Home' }, { at: 'hk-shops', facet: 'work', text: 'Work' }, { at: 'hk-side', facet: 'spend', text: 'Most shopping: somewhere in Hong Kong', approximate: true }, { at: 'sz-dining', facet: 'spend', text: 'Meals' }],
     unplaced: ['ties'],
     arcs: [{ from: 'hk-fanling', to: 'sz-dining', style: 'visit', text: 'About monthly' }]
   },
