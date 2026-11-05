@@ -90,6 +90,47 @@ Bob’s note: less secondary labelling; text only where it carries insight. This
 - **Places have no photographs yet** for Sheung Shui shops, the repair specialists, restaurants (beyond one menu), tuition and the clinic. Those cards say so honestly.
 - `research.html` and the presentation footer still carry older revision wording; they're out of scope for this pass.
 
+## Checkpoint 6 (work in progress) — a live GPU miniature · RESUME HERE
+
+Bob's direction: less a traditional website, more something inherently interactive (WebGPU), built beyond generated imagery. The experience is built from the research itself, not from generated images (large generated illustrations were rejected earlier for feeling pasted in).
+
+**State at pause:** `feature/world-gpu.js` is a complete first draft of a WebGPU renderer for the miniature, wired into `feature/miniature.js` behind an opt-in flag. **The default site still uses the proven SVG miniature**: all 51 checks pass and nothing changes for readers. The draft has not rendered successfully yet.
+
+**What the draft does (design intent):**
+- **Same shared scene logic.** Places, footprints, cards, pins, ghosts and evidence are unchanged. Only the drawing layer swaps.
+- **Rendering:**
+  - Lighting with a 2048² PCF shadow map, a soft ground-contact shadow under the floating plinths, and 4× multisampling.
+  - Procedural windows: dark glass by day, lamplight when an account lights that place.
+  - Crossings as camera-facing ribbons that keep the grammar (dots = ties, dashes = moves, heavy = daily), with a lamp pulse showing direction only.
+- **Camera and input:**
+  - The camera flies between accounts.
+  - Drag orbits; vertical drag tilts with a mouse.
+  - Pinch, or ctrl/trackpad-pinch on the wheel, zooms; plain scrolling still scrolls the page.
+  - Keyboard: arrows turn and tilt, +/− zoom, Home resets.
+  - Picking is a ray against the footprints.
+- **The schoolchildren's step (the reason for the GPU):**
+  - All 16,139 pupils are drawn as individual points.
+  - They start as an unlocated cloud floating over the Mainland side ("Mainland residence, location not specified", consistent with the floating-ghost grammar and dot's correction).
+  - They then cross and settle on a tray in front of Hong Kong as a unit bar chart by level: 388 kindergarten, 2,577 primary, 13,174 secondary. Each point is one pupil; paths are illustrative.
+
+**How to try it:**
+- Open `/?renderer=gpu` in a WebGPU browser (recent Chrome, Edge or Safari).
+- For headless testing, launch Chromium with `--enable-unsafe-webgpu`; it then uses SwiftShader.
+
+**Open bug (first thing to fix):** in headless Chromium the device reports "Device was destroyed" during start-up, and the miniature correctly falls back to SVG. Likely suspects:
+1. A validation error in a pipeline or bind group (log `device.pushErrorScope('validation')` around creation, plus `device.onuncapturederror`).
+2. `depth32float` comparison sampling: the shadow texture may need `sampleType: 'depth'` and `textureSampleCompareLevel` support. Try a `filter: false` sampler, or `depth24plus`.
+3. Zero-sized instance buffers.
+
+Capture screenshots with `--enable-unsafe-webgpu` (the scratch script pattern is in this file's history), then verify on a real phone.
+
+**After it renders:**
+1. Compare the GPU and SVG views at 1440 and 390px.
+2. Tune colours against the palette.
+3. Add GPU-specific checks to `tools/check-site.js`, such as a second run with `--enable-unsafe-webgpu` asserting `data-renderer="webgpu"`.
+4. Only then make GPU the default where available, keeping SVG as the fallback.
+5. Port `world-gpu.js` to the private source.
+
 ## Checkpoint 5 — the questions travel; the checks travel too
 
 - **Singapore–Johor is drawn as the same miniature, deliberately unbuilt** (`feature/echo.js`).
@@ -153,7 +194,7 @@ dot checked my questions against the saved Script v3 and the photo records.
 The public root `index.html` is the authored page here. `feature/index.html` is generated from it by `python3 tools/sync-feature-alias.py`. For the private source, copy the generated `feature/index.html` to `app/feature/index.html`; its paths are already relative to `feature/`.
 
 - **Add** to `app/feature/` and the export allowlist:
-  - Modules: `cast.js`, `grammar.js`, `miniature.js`, `ledger.js`, `lens-choices.js`, `lens-services.js`, `lens-ties.js`, `echo.js`, `photo-viewer.js`, `ties-icons.js`, `edition.js`.
+  - Modules: `cast.js`, `grammar.js`, `miniature.js`, `ledger.js`, `lens-choices.js`, `lens-services.js`, `lens-ties.js`, `echo.js`, `photo-viewer.js`, `ties-icons.js`, `edition.js`, and `world-gpu.js` (opt-in, in development).
   - Stylesheets: `edition.css`, `desk.css`.
   - Asset: `assets/sz-services-signage.jpg`.
 - **Changed** (copy over): `field-gallery.js` now uses the signage derivative.

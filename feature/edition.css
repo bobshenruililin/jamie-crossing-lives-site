@@ -159,6 +159,12 @@ h1 em{font-size:1.12em}
 .mini-scene{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab;outline-offset:-3px}
 .is-turning .mini-scene{cursor:grabbing}
 .mini-place{cursor:pointer;transition:opacity .3s}
+.mini-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab;outline-offset:-3px}
+.is-turning .mini-canvas{cursor:grabbing}
+.mini-count{position:absolute;transform:translate(-50%,-100%);padding:3px 8px;border-radius:3px;background:#f6f2e8e8;font-size:12px;line-height:1.25;white-space:nowrap;pointer-events:none;color:var(--ink-soft)}
+.mini-count b{font-family:var(--font-display);font-size:17px;color:var(--ink);margin-right:3px}
+.mini-count.is-bar{transform:translate(-50%,10%)}
+.mini-count.is-cloud{border:1.5px dashed var(--sz);background:var(--card)}
 .mini-arc .arc-halo{fill:none;stroke:#f6f2e8;stroke-width:7;stroke-linecap:round}
 .mini-arc .arc-line{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
 .mini-arc.arc-ties .arc-line{stroke-dasharray:1 6;stroke-width:2.6}

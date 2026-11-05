@@ -55,7 +55,7 @@ const ROOF = { normal: ['#58786f', '#2e514b'], lit: ['#e29a46', '#a9692a'], dim:
 
 let uidCounter = 0;
 
-export function initMiniature(host) {
+export function initMiniature(host, { renderer = 'auto' } = {}) {
   const uid = `mini-${++uidCounter}`;
   host.classList.add('mini');
   host.innerHTML = `
@@ -66,6 +66,7 @@ export function initMiniature(host) {
         <desc id="${uid}-desc">Hong Kong on the left and Shenzhen on the right, joined by one crossing. Each building stands for a place that appears in the research. Use the left and right arrow keys to turn the model.</desc>
         <g data-mini="world"></g><g data-mini="arcs"></g>
       </svg>
+      <canvas class="mini-canvas" data-mini="canvas" hidden tabindex="0" role="img" aria-label="A miniature of the fieldwork, rendered live: Hong Kong on the left and Shenzhen on the right, joined by one crossing. Each building stands for a place in the research. Arrow keys turn it; plus and minus zoom."></canvas>
       <div class="mini-overlay" data-mini="overlay"></div>
       <div class="mini-sides" aria-hidden="true"><span class="side-hk">Hong Kong</span><span class="side-bd">The boundary</span><span class="side-sz">Shenzhen</span></div>
       <section class="mini-card" data-mini="card" hidden aria-live="polite"></section>
@@ -74,7 +75,8 @@ export function initMiniature(host) {
 
   const $ = key => host.querySelector(`[data-mini="${key}"]`);
   const svg = $('svg'), world = $('world'), arcLayer = $('arcs'), overlay = $('overlay'), stage = $('stage');
-  const card = $('card'), now = $('now'), status = $('status');
+  const card = $('card'), now = $('now'), status = $('status'), canvas = $('canvas');
+  let gpu = null;
   let yaw = YAW, sceneId = 'overview', openId = null, destroyed = false;
   let vb = null, vbTarget = null, vbFrom = null, vbStart = 0, vbFrame = 0;
   let tokens = [], tokenStart = 0, tokenFrame = 0;
@@ -381,13 +383,26 @@ export function initMiniature(host) {
   overlay.append(extras);
 
   function toPct([x, y]) { return [(x - vb.x) / vb.w * 100, (y - vb.y) / vb.h * 100]; }
+  /* Overlay positions for a model point [x, z, height], whichever renderer draws. */
+  const pctAt = (x, z, y) => gpu ? gpu.toPct([x, z, y]) : toPct(project(x, z, y));
+  /* A crossing in world space: [x, height, z] control points for the GPU ribbons. */
+  function arc3d(arc) {
+    const [ax, az, ay] = anchorOf(arc.from), [bx, bz, by] = anchorOf(arc.to);
+    const A = [ax, ay, az], B = [bx, by, bz];
+    const dist = Math.hypot(bx - ax, bz - az);
+    const lift = ((arc.thin ? 40 : 60) + dist * .26) * (arc.style === 'move' ? .45 : 1);
+    const lerp = t => [A[0] + (B[0] - A[0]) * t, Math.max(A[1], B[1]) + lift, A[2] + (B[2] - A[2]) * t];
+    const p1 = lerp(.3), p2 = lerp(.7);
+    const mid = [0, 1, 2].map(k => .125 * A[k] + .375 * p1[k] + .375 * p2[k] + .125 * B[k]);
+    return { p0: A, p1, p2, p3: B, style: arc.style, thin: Boolean(arc.thin), mid };
+  }
   function placeOverlays() {
-    if (!vb) return;
+    if (!vb && !gpu) return;
     const scene = currentScene();
     const stageWidth = stage.clientWidth || 800;
     const pinFor = Object.fromEntries(scene.pins.filter(p => placeById[p.at]).map(p => [p.at, p]));
     buttons.forEach((button, id) => {
-      const [l, t] = toPct(project(...anchorOf(id)));
+      const [l, t] = pctAt(...anchorOf(id));
       button.style.left = `${l}%`; button.style.top = `${t}%`;
       const state = placeState(id), pin = pinFor[id];
       button.classList.toggle('is-lit', state === 'lit');
@@ -398,18 +413,28 @@ export function initMiniature(host) {
       const label = button.querySelector('.mark-label');
       label.innerHTML = pin ? `${facetGlyph(pin.facet)}<span>${esc(pin.text)}</span>` : '';
     });
+    if (gpu && sceneId === 'pupils') {
+      const a = gpu.pupilAnchors();
+      const label = (cls, at, html) => { const n = make('span', `mini-count ${cls}`); n.innerHTML = html; const [l, t] = pctAt(...at); n.style.left = `${l}%`; n.style.top = `${t}%`; extras.append(n); };
+      if (a.flying && !a.ready) label('is-cloud', a.cloud, '<b>16,139</b> pupils · Mainland residence, location not specified');
+      if (a.ready) {
+        label('is-bar', a.kindergarten, '<b>388</b> kindergarten');
+        label('is-bar', a.primary, '<b>2,577</b> primary');
+        label('is-bar', a.secondary, '<b>13,174</b> secondary · each point is one pupil');
+      }
+    }
     layoutPins(stageWidth, stage.clientHeight || 500);
     extras.replaceChildren();
     if (usesMainland()) {
       const zone = make('span', 'mini-zone', 'Elsewhere on the Mainland');
-      const [l, t] = toPct(project(BEYOND.x1 - 20, BEYOND.z1 - 6, 0));
+      const [l, t] = pctAt(BEYOND.x1 - 20, BEYOND.z1 - 6, 0);
       zone.style.left = `${l}%`; zone.style.top = `${t}%`;
       extras.append(zone);
     }
     scene.pins.filter(p => EDGES[p.at]).forEach(pin => {
       const flag = make('span', `mini-flag is-approximate side-${EDGES[pin.at][0] < 0 ? 'hk' : 'sz'}`);
       flag.innerHTML = `${facetGlyph(pin.facet)}<span>${esc(pin.text)}</span>`;
-      const [l, t] = toPct(project(...EDGES[pin.at]));
+      const [l, t] = pctAt(...EDGES[pin.at]);
       flag.style.left = `${l}%`; flag.style.top = `${t}%`;
       extras.append(flag);
     });
@@ -419,16 +444,17 @@ export function initMiniature(host) {
       const ghost = make('span', 'mini-ghost');
       ghost.title = `${FACETS[facet].short}: not established in this account`;
       ghost.innerHTML = facetGlyph(facet);
-      const [l, t] = toPct(project(...GHOSTS[facet]));
-      const [, ground] = toPct(project(GHOSTS[facet][0], GHOSTS[facet][1], 0));
+      const [l, t] = pctAt(...GHOSTS[facet]);
+      const [, ground] = pctAt(GHOSTS[facet][0], GHOSTS[facet][1], 0);
       ghost.style.left = `${l}%`; ghost.style.top = `${t}%`;
       ghost.style.setProperty('--drop', `${Math.max(0, (ground - t) / 100 * (stage.clientHeight || 500))}px`);
       extras.append(ghost);
     });
     scene.arcs.forEach(arc => {
-      if (!arc.text || !arc._g) return;
+      if (!arc.text || (!arc._g && !gpu)) return;
       const tag = make('span', `mini-arc-label arc-${arc.style}`, arc.text);
-      const [l, t] = toPct(arc._g.mid);
+      const m = gpu ? arc3d(arc).mid : null;
+      const [l, t] = gpu ? gpu.toPct([m[0], m[2], m[1]]) : toPct(arc._g.mid);
       tag.style.left = `${l}%`; tag.style.top = `${t}%`;
       extras.append(tag);
     });
@@ -491,8 +517,29 @@ export function initMiniature(host) {
     now.innerHTML = person ? `<b>${esc(person.name)}</b>` : sceneId === 'together' ? '<b>All five together</b>' : '<b>Tap a marker for its evidence</b>';
   }
 
+  function gpuScene() {
+    const sc = currentScene();
+    gpu.setScene({ lit: sc.lit, dim: sc.lit.length > 0, arcs: sc.arcs.map(arc3d), beyond: usesMainland(), pupils: sceneId === 'pupils' });
+  }
+  function gpuCamera(animate) {
+    const sc = currentScene();
+    const pts = [];
+    const whole = () => [-386, usesMainland() ? BEYOND.x1 + 10 : 386].forEach(x => [-168, 168].forEach(z => [-24, 120].forEach(y => pts.push([x, y, z]))));
+    const focusIds = [...sc.lit, ...sc.pins.map(p => p.at)].filter((v, i, a) => a.indexOf(v) === i);
+    if (!focusIds.length || sceneId === 'together') whole();
+    else {
+      pts.push([-100, 0, 42], [100, 8, 76]);
+      focusIds.forEach(id => { const g = GEOMETRY[id] || { x: EDGES[id][0] - 10, z: EDGES[id][1] - 10, w: 20, d: 20, h: 10 }; [g.x, g.x + Math.min(g.w, 160)].forEach(x => [g.z, g.z + g.d].forEach(z => { pts.push([x, 0, z], [x, g.h + 40, z]); })); });
+      sc.arcs.map(arc3d).forEach(a => pts.push(a.p0, a.p3, a.mid));
+      (sc.unplaced || []).forEach(f => { const [x, z, y] = GHOSTS[f]; pts.push([x, y + 10, z]); });
+      if (usesMainland()) [BEYOND.x0, BEYOND.x1].forEach(x => [BEYOND.z0, BEYOND.z1].forEach(z => pts.push([x, 0, z])));
+      if (sceneId === 'pupils') pts.push([-380, -8, 206], [-118, -8, 206], [560, 196, -150], [170, 118, 150]);
+    }
+    gpu.flyTo(pts, { animate });
+  }
   function render({ animate = false } = {}) {
     if (destroyed) return;
+    if (gpu) { gpuScene(); renderNow(); gpuCamera(animate); placeOverlays(); return; }
     drawWorld();
     drawArcs();
     renderNow();
@@ -578,13 +625,14 @@ export function initMiniature(host) {
   });
   function turn(delta) {
     swayCancelled = true; // a reader's own turn always wins over the hint
+    if (gpu) { gpu.orbit(delta * 1.4); return; }
     yaw = Math.max(YAW_MIN, Math.min(YAW_MAX, yaw + delta));
     drawWorld(); drawArcs(); vbTarget = targetView(); applyView(vbTarget);
   }
 
-  const resize = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { cancelAnimationFrame(vbFrame); applyView(targetView()); }) : null;
+  const resize = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { if (gpu) { gpu.requestFrame(); return; } cancelAnimationFrame(vbFrame); applyView(targetView()); }) : null;
   resize?.observe(stage);
-  on(document, 'crossing:motion', () => { if (!motionAllowed()) { cancelAnimationFrame(tokenFrame); tokens.forEach(t => t.token.setAttribute('visibility', 'hidden')); } });
+  on(document, 'crossing:motion', () => { gpu?.setMotion(motionAllowed()); if (!motionAllowed()) { cancelAnimationFrame(tokenFrame); tokens.forEach(t => t.token.setAttribute('visibility', 'hidden')); } });
 
   let swayed = false, swayCancelled = false;
   const swayWatch = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => {
@@ -598,13 +646,77 @@ export function initMiniature(host) {
       drawWorld(); drawArcs(); placeOverlays();
       if (k < 1) requestAnimationFrame(step); else { yaw = from; drawWorld(); drawArcs(); placeOverlays(); }
     };
-    setTimeout(() => requestAnimationFrame(step), 700);
+    setTimeout(() => gpu ? gpu.sway() : requestAnimationFrame(step), 700);
   }, { threshold: [.6] }) : null;
   swayWatch?.observe(stage);
   cleanups.push(() => swayWatch?.disconnect());
 
   render();
-  document.fonts?.ready.then(() => !destroyed && applyView(targetView()));
+  document.fonts?.ready.then(() => !destroyed && !gpu && applyView(targetView()));
+  tryGpu();
+
+  /* Upgrade to the GPU renderer when available; the SVG stays the fallback. */
+  function useSvg(reason) {
+    if (gpu) { gpu.destroy(); gpu = null; }
+    canvas.hidden = true; svg.style.display = ''; svg.removeAttribute('aria-hidden');
+    host.classList.remove('is-gpu'); host.dataset.renderer = 'svg';
+    if (reason) console.info('Miniature uses SVG:', reason);
+    render();
+  }
+  async function tryGpu() {
+    const forced = new URLSearchParams(location.search).get('renderer');
+    // Opt-in while the WebGPU renderer is in development: add ?renderer=gpu to the URL.
+    if (renderer === 'svg' || forced !== 'gpu' || !('gpu' in navigator)) { host.dataset.renderer = 'svg'; return; }
+    try {
+      const { createGpuWorld } = await import('./world-gpu.js?v=20261105-gpu');
+      canvas.hidden = false;
+      const world = await createGpuWorld(canvas, { GEOMETRY, places, TREES, BEYOND }, { onFrame: () => placeOverlays(), onLost: info => useSvg(info?.message || 'GPU device lost') });
+      if (destroyed) { world.destroy(); return; }
+      gpu = world;
+      gpu.setMotion(motionAllowed());
+      svg.style.display = 'none'; svg.setAttribute('aria-hidden', 'true');
+      host.classList.add('is-gpu'); host.dataset.renderer = 'webgpu';
+      render({ animate: false });
+      host.dispatchEvent(new CustomEvent('mini:renderer', { bubbles: true, detail: { renderer: 'webgpu' } }));
+    } catch (error) { canvas.hidden = true; useSvg(error.message); }
+  }
+  const pointers = new Map();
+  let gpuDrag = null, pinch = null;
+  on(canvas, 'pointerdown', event => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (pointers.size === 2) { const [a, b] = [...pointers.values()]; pinch = Math.hypot(a.x - b.x, a.y - b.y); gpuDrag = null; return; }
+    gpuDrag = { x: event.clientX, y: event.clientY, lastX: event.clientX, lastY: event.clientY, active: false, id: event.pointerId, mouse: event.pointerType === 'mouse' };
+  });
+  on(canvas, 'pointermove', event => {
+    if (!pointers.has(event.pointerId)) return;
+    pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (pinch && pointers.size === 2) { const [a, b] = [...pointers.values()]; const d = Math.hypot(a.x - b.x, a.y - b.y); gpu?.zoomBy(pinch / d); pinch = d; event.preventDefault(); return; }
+    if (!gpuDrag) return;
+    const dx = event.clientX - gpuDrag.x, dy = event.clientY - gpuDrag.y;
+    if (!gpuDrag.active) {
+      if (Math.hypot(dx, dy) < 6) return;
+      if (!gpuDrag.mouse && Math.abs(dy) > Math.abs(dx)) { gpuDrag = null; return; }
+      gpuDrag.active = true; canvas.setPointerCapture?.(event.pointerId); host.classList.add('is-turning'); swayCancelled = true;
+    }
+    gpu?.orbit((event.clientX - gpuDrag.lastX) * .0042, gpuDrag.mouse ? (event.clientY - gpuDrag.lastY) * .003 : 0);
+    gpuDrag.lastX = event.clientX; gpuDrag.lastY = event.clientY;
+  });
+  const endGpuDrag = event => {
+    const wasClick = gpuDrag && !gpuDrag.active && pointers.size === 1;
+    pointers.delete(event.pointerId);
+    if (pointers.size < 2) pinch = null;
+    if (wasClick && gpu) { const id = gpu.pick(event.clientX, event.clientY); if (id) openCard(id, null); }
+    if (gpuDrag?.active) host.classList.remove('is-turning');
+    gpuDrag = null;
+  };
+  on(canvas, 'pointerup', endGpuDrag); on(canvas, 'pointercancel', endGpuDrag);
+  on(canvas, 'wheel', event => { if (!event.ctrlKey || !gpu) return; event.preventDefault(); gpu.zoomBy(Math.exp(event.deltaY * .01)); }, { passive: false });
+  on(canvas, 'keydown', event => {
+    if (!gpu || event.altKey || event.metaKey) return;
+    const keys = { ArrowLeft: () => turn(-.06), ArrowRight: () => turn(.06), ArrowUp: () => gpu.orbit(0, .05), ArrowDown: () => gpu.orbit(0, -.05), '+': () => gpu.zoomBy(.88), '=': () => gpu.zoomBy(.88), '-': () => gpu.zoomBy(1.14), Home: () => { gpu.zoom = 1; gpuCamera(true); } };
+    if (keys[event.key]) { event.preventDefault(); swayCancelled = true; keys[event.key](); }
+  });
 
   const api = {
     setScene(id, { animate = true } = {}) {
@@ -621,8 +733,8 @@ export function initMiniature(host) {
     getScene: () => sceneId,
     openPlace: id => openCard(id, null),
     closeCard: () => closeCard(false),
-    getState: () => ({ scene: sceneId, yaw, open: openId, renderer: 'projected SVG' }),
-    destroy() { destroyed = true; cancelAnimationFrame(vbFrame); cancelAnimationFrame(tokenFrame); resize?.disconnect(); cleanups.forEach(fn => fn()); host.replaceChildren(); host.classList.remove('mini'); }
+    getState: () => ({ scene: sceneId, yaw, open: openId, renderer: gpu ? 'webgpu' : 'projected SVG' }),
+    destroy() { destroyed = true; gpu?.destroy(); cancelAnimationFrame(vbFrame); cancelAnimationFrame(tokenFrame); resize?.disconnect(); cleanups.forEach(fn => fn()); host.replaceChildren(); host.classList.remove('mini'); }
   };
   return api;
 }
