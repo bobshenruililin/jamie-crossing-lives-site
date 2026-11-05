@@ -101,11 +101,11 @@ struct SolidOut {
     if (inside > 0.5) {
       let h = hash2(floor(vec2f(u / 14.0, (v - 3.0) / 18.0)) + vec2f(in.misc.y * 13.1, in.misc.y * 7.7));
       base = mix(base, vec3f(0.24, 0.40, 0.38), 0.78 * (1.0 - dim * 0.6));
-      glow = vec3f(1.0, 0.80, 0.42) * lit * step(0.2, h) * (0.55 + 0.45 * h);
+      glow = vec3f(1.0, 0.78, 0.38) * lit * step(0.16, h) * (0.75 + 0.5 * h);
       base = mix(base, vec3f(0.30, 0.22, 0.12), lit * 0.5);
     }
   }
-  base = mix(base, vec3f(0.99, 0.85, 0.58), lit * select(0.18, 0.42, N.y > 0.5));
+  base = mix(base, vec3f(0.98, 0.80, 0.50), lit * select(0.34, 0.55, N.y > 0.5));
   base = mix(base, vec3f(0.945, 0.937, 0.905), dim * 0.62);
   let sh = shadowAt(toShadow(in.world + N * 0.6));
   let diffuse = max(dot(N, L), 0.0) * mix(1.0, sh, 0.85);
@@ -190,7 +190,7 @@ struct PartOut { @builtin(position) pos : vec4f, @location(0) uv : vec2f, @locat
   let row = f32(k % 42u);
   let col = f32(k / 42u);
   let endP = vec3f(x0 + col * sp, -5.2, 177.0 + row * sp);
-  let s = vec3f(mix(170.0, 560.0, hashu(ii * 3u)), mix(118.0, 196.0, hashu(ii * 3u + 1u)), mix(-150.0, 150.0, hashu(ii * 3u + 2u)));
+  let s = vec3f(mix(340.0, 610.0, hashu(ii * 3u)), mix(150.0, 236.0, hashu(ii * 3u + 1u)), mix(-150.0, 150.0, hashu(ii * 3u + 2u)));
   let delay = hashu(ii * 7u + 11u) * 0.5;
   let t0 = clamp((g.params.x - delay) / 0.5, 0.0, 1.0);
   let e = t0 * t0 * (3.0 - 2.0 * t0);
@@ -330,9 +330,14 @@ export async function createGpuWorld(canvas, data, { onFrame, onLost } = {}) {
   const adapter = await navigator.gpu.requestAdapter({ powerPreference: 'high-performance' });
   if (!adapter) throw new Error('No WebGPU adapter');
   const device = await adapter.requestDevice();
-  const context = canvas.getContext('webgpu');
+  // Debug only: '&gpu-debug=offscreen' renders off-screen and copies pixels to a
+  // 2D canvas. Headless test browsers can render WebGPU but not present it.
+  const offscreen = new URLSearchParams(location.search).get('gpu-debug') === 'offscreen';
   const format = navigator.gpu.getPreferredCanvasFormat();
-  context.configure({ device, format, alphaMode: 'premultiplied' });
+  const context = offscreen ? null : canvas.getContext('webgpu');
+  const ctx2d = offscreen ? canvas.getContext('2d') : null;
+  context?.configure({ device, format, alphaMode: 'premultiplied' });
+  let resolveTex = null, readback = null, reading = false, reads = 0, readErr = '';
   let destroyed = false;
   device.lost.then(info => { if (!destroyed) onLost?.(info); });
 
@@ -429,6 +434,7 @@ export async function createGpuWorld(canvas, data, { onFrame, onLost } = {}) {
     W = canvas.width = w; H = canvas.height = h; aspect = w / h;
     msaa?.destroy(); depth?.destroy();
     msaa = device.createTexture({ size: [w, h], sampleCount: SAMPLES, format, usage: GPUTextureUsage.RENDER_ATTACHMENT });
+    if (offscreen) { resolveTex?.destroy(); resolveTex = device.createTexture({ size: [w, h], format, usage: GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.COPY_SRC }); }
     depth = device.createTexture({ size: [w, h], sampleCount: SAMPLES, format: depthFormat, usage: GPUTextureUsage.RENDER_ATTACHMENT });
   }
 
@@ -531,10 +537,12 @@ export async function createGpuWorld(canvas, data, { onFrame, onLost } = {}) {
       if (pupilAlpha > 0 && (pupilProgress < 1 || pupilAlpha < 1 || pupilTarget === 0)) busy = true;
     }
     if (pulses && motion && ribbonCount) busy = true;
+    // debug readback: let the slow software GPU drain before queuing more work
+    if (offscreen && reading) { frame = requestAnimationFrame(step); return; }
     resize();
     updateMatrices();
     draw(now);
-    const key = `${cam.target.join()},${cam.dist},${cam.yaw},${cam.pitch},${W},${H}`;
+    const key = `${cam.target.join()},${cam.dist},${cam.yaw},${cam.pitch},${W},${H},${pupilAlpha > .5},${pupilProgress > .92}`;
     if (key !== lastCamKey) { lastCamKey = key; onFrame?.(); }
     if (busy && inView && !document.hidden) frame = requestAnimationFrame(step);
   }
@@ -557,7 +565,7 @@ export async function createGpuWorld(canvas, data, { onFrame, onLost } = {}) {
       needsShadow = false;
     }
     const pass = enc.beginRenderPass({
-      colorAttachments: [{ view: msaa.createView(), resolveTarget: context.getCurrentTexture().createView(), clearValue: { r: 0, g: 0, b: 0, a: 0 }, loadOp: 'clear', storeOp: 'discard' }],
+      colorAttachments: [{ view: msaa.createView(), resolveTarget: offscreen ? resolveTex.createView() : context.getCurrentTexture().createView(), clearValue: { r: 0, g: 0, b: 0, a: 0 }, loadOp: 'clear', storeOp: 'discard' }],
       depthStencilAttachment: { view: depth.createView(), depthClearValue: 1, depthLoadOp: 'clear', depthStoreOp: 'discard' }
     });
     pass.setBindGroup(0, mainGroup);
@@ -567,7 +575,23 @@ export async function createGpuWorld(canvas, data, { onFrame, onLost } = {}) {
     pass.setPipeline(groundPipe); pass.setVertexBuffer(0, groundBuf); pass.draw(6);
     if (pupilAlpha > 0) { pass.setPipeline(partPipe); pass.draw(6, 16139); }
     pass.end();
+    let copy = null;
+    if (offscreen && !reading) {
+      const bpr = Math.ceil(W * 4 / 256) * 256;
+      readback = device.createBuffer({ size: bpr * H, usage: GPUBufferUsage.COPY_DST | GPUBufferUsage.MAP_READ });
+      enc.copyTextureToBuffer({ texture: resolveTex }, { buffer: readback, bytesPerRow: bpr }, [W, H]);
+      copy = { buf: readback, bpr, w: W, h: H };
+    }
     device.queue.submit([enc.finish()]);
+    if (copy) { reading = true; copy.buf.mapAsync(GPUMapMode.READ).then(() => {
+      const src = new Uint8Array(copy.buf.getMappedRange()), img = new ImageData(copy.w, copy.h), bgra = format.startsWith('bgra');
+      for (let y = 0; y < copy.h; y++) for (let x = 0; x < copy.w; x++) {
+        const i = y * copy.bpr + x * 4, o = (y * copy.w + x) * 4, a = src[i + 3] || 1;
+        img.data[o] = Math.min(255, (bgra ? src[i + 2] : src[i]) * 255 / a); img.data[o + 1] = Math.min(255, src[i + 1] * 255 / a); img.data[o + 2] = Math.min(255, (bgra ? src[i] : src[i + 2]) * 255 / a); img.data[o + 3] = src[i + 3];
+      }
+      if (canvas.width !== copy.w) { canvas.width = copy.w; canvas.height = copy.h; }
+      ctx2d.putImageData(img, 0, 0); copy.buf.unmap(); copy.buf.destroy(); reading = false; reads++;
+    }).catch(e => { readErr = e.message; reading = false; }); }
   }
 
   const visibility = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => { inView = entries.some(e => e.isIntersecting); if (inView) kick(); }) : null;
@@ -647,11 +671,12 @@ export async function createGpuWorld(canvas, data, { onFrame, onLost } = {}) {
     },
     /* Label anchors for the pupil count. */
     pupilAnchors() {
-      return { cloud: [440, 0, 214], kindergarten: [-371, 207, -6], primary: [-342, 207, -6], secondary: [-220, 207, -6], ready: pupilAlpha > .5 && pupilProgress > .92, flying: pupilAlpha > .5 };
+      return { cloud: [475, 0, 262], bars: [-250, 170, 4], ready: pupilAlpha > .5 && pupilProgress > .92, flying: pupilAlpha > .5 };
     },
     requestFrame: kick,
     destroy() { destroyed = true; cancelAnimationFrame(frame); visibility?.disconnect(); resizeObs?.disconnect(); document.removeEventListener('visibilitychange', onVisible); device.destroy?.(); }
   };
+  if (offscreen) window.__gpuDebug = { lit: () => ({ set: [...litSet], dimming, tween: Boolean(stateAnim.to), litInstances: Object.values(instData).reduce((n, arr) => { for (let i = 12; i < arr.length; i += 16) n += arr[i] > .5 ? 1 : 0; return n; }, 0), frame: Boolean(frame), pulses, motion, reads, reading, readErr }) };
   kick();
   return api;
 }

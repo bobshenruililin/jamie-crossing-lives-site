@@ -161,9 +161,12 @@ h1 em{font-size:1.12em}
 .mini-place{cursor:pointer;transition:opacity .3s}
 .mini-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab;outline-offset:-3px}
 .is-turning .mini-canvas{cursor:grabbing}
-.mini-count{position:absolute;transform:translate(-50%,-100%);padding:3px 8px;border-radius:3px;background:#f6f2e8e8;font-size:12px;line-height:1.25;white-space:nowrap;pointer-events:none;color:var(--ink-soft)}
+.mini-count{--dx:0px;position:absolute;transform:translate(calc(-50% + var(--dx)),-100%);padding:3px 8px;border-radius:3px;background:#f6f2e8e8;font-size:12px;line-height:1.25;white-space:nowrap;pointer-events:none;color:var(--ink-soft)}
 .mini-count b{font-family:var(--font-display);font-size:17px;color:var(--ink);margin-right:3px}
-.mini-count.is-bar{transform:translate(-50%,10%)}
+.mini-count.is-bar{transform:translate(calc(-50% + var(--dx)),-120%)}
+.mini-count i{display:inline-block;width:9px;height:9px;border-radius:50%;margin:0 4px 0 8px;vertical-align:0}
+.mini-count i:first-child{margin-left:0}
+.k-kg{background:var(--lamp)}.k-pr{background:var(--sz)}.k-se{background:var(--ink)}
 .mini-count.is-cloud{border:1.5px dashed var(--sz);background:var(--card)}
 .mini-arc .arc-halo{fill:none;stroke:#f6f2e8;stroke-width:7;stroke-linecap:round}
 .mini-arc .arc-line{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}

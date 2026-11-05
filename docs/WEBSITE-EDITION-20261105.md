@@ -117,15 +117,19 @@ Bob's direction: less a traditional website, more something inherently interacti
 - Open `/?renderer=gpu` in a WebGPU browser (recent Chrome, Edge or Safari).
 - For headless testing, launch Chromium with `--enable-unsafe-webgpu`; it then uses SwiftShader.
 
-**Open bug (first thing to fix):** in headless Chromium the device reports "Device was destroyed" during start-up, and the miniature correctly falls back to SVG. Likely suspects:
-1. A validation error in a pipeline or bind group (log `device.pushErrorScope('validation')` around creation, plus `device.onuncapturederror`).
-2. `depth32float` comparison sampling: the shadow texture may need `sampleType: 'depth'` and `textureSampleCompareLevel` support. Try a `filter: false` sampler, or `depth24plus`.
-3. Zero-sized instance buffers.
+**Update — the GPU world renders.**
+- The "Device was destroyed" error was the sandbox's headless Chromium, which cannot *present* a WebGPU canvas; a bare test page loses its device the same way.
+- Off-screen rendering works. A debug-only mode, `?renderer=gpu&gpu-debug=offscreen`, renders off-screen and copies pixels to a 2D canvas, so the GPU output can be screenshotted in headless tests.
+- Verified this way:
+  - lighting and shadows;
+  - lamp-lit windows and dimming per account;
+  - dotted, dashed and pulsing ribbons;
+  - overlays aligned to buildings;
+  - the 16,139-point cloud crossing and settling into keyed bars.
+- Real-browser presentation is still unverified, so GPU stays opt-in.
 
-Capture screenshots with `--enable-unsafe-webgpu` (the scratch script pattern is in this file's history), then verify on a real phone.
-
-**After it renders:**
-1. Compare the GPU and SVG views at 1440 and 390px.
+**Next:**
+1. Open `?renderer=gpu` on a real desktop and phone (Chrome/Edge/Safari); compare with the SVG at 1440 and 390px.
 2. Tune colours against the palette.
 3. Add GPU-specific checks to `tools/check-site.js`, such as a second run with `--enable-unsafe-webgpu` asserting `data-renderer="webgpu"`.
 4. Only then make GPU the default where available, keeping SVG as the fallback.

@@ -413,16 +413,6 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
       const label = button.querySelector('.mark-label');
       label.innerHTML = pin ? `${facetGlyph(pin.facet)}<span>${esc(pin.text)}</span>` : '';
     });
-    if (gpu && sceneId === 'pupils') {
-      const a = gpu.pupilAnchors();
-      const label = (cls, at, html) => { const n = make('span', `mini-count ${cls}`); n.innerHTML = html; const [l, t] = pctAt(...at); n.style.left = `${l}%`; n.style.top = `${t}%`; extras.append(n); };
-      if (a.flying && !a.ready) label('is-cloud', a.cloud, '<b>16,139</b> pupils · Mainland residence, location not specified');
-      if (a.ready) {
-        label('is-bar', a.kindergarten, '<b>388</b> kindergarten');
-        label('is-bar', a.primary, '<b>2,577</b> primary');
-        label('is-bar', a.secondary, '<b>13,174</b> secondary · each point is one pupil');
-      }
-    }
     layoutPins(stageWidth, stage.clientHeight || 500);
     extras.replaceChildren();
     if (usesMainland()) {
@@ -458,11 +448,17 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
       tag.style.left = `${l}%`; tag.style.top = `${t}%`;
       extras.append(tag);
     });
+    if (gpu && sceneId === 'pupils') {
+      const a = gpu.pupilAnchors();
+      const label = (cls, at, html) => { const n = make('span', `mini-count ${cls}`); n.innerHTML = html; const [l, t] = pctAt(...at); n.style.left = `${l}%`; n.style.top = `${t}%`; extras.append(n); };
+      if (a.flying && !a.ready) label('is-cloud', a.cloud, '<b>16,139</b> pupils · Mainland residence, location not specified');
+      if (a.ready) label('is-bar', a.bars, '<i class="k-kg"></i><b>388</b> kindergarten <i class="k-pr"></i><b>2,577</b> primary <i class="k-se"></i><b>13,174</b> secondary · each point is one pupil');
+    }
     clampLoose(stageWidth);
   }
 
   function clampLoose(W) {
-    extras.querySelectorAll('.mini-flag, .mini-zone').forEach(node => {
+    extras.querySelectorAll('.mini-flag, .mini-zone, .mini-count').forEach(node => {
       node.style.removeProperty('--dx');
       const r = node.getBoundingClientRect(), stageBox = stage.getBoundingClientRect();
       const dx = Math.max(6 - (r.left - stageBox.left), Math.min(0, stageBox.right - 6 - r.right));
@@ -533,7 +529,7 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
       sc.arcs.map(arc3d).forEach(a => pts.push(a.p0, a.p3, a.mid));
       (sc.unplaced || []).forEach(f => { const [x, z, y] = GHOSTS[f]; pts.push([x, y + 10, z]); });
       if (usesMainland()) [BEYOND.x0, BEYOND.x1].forEach(x => [BEYOND.z0, BEYOND.z1].forEach(z => pts.push([x, 0, z])));
-      if (sceneId === 'pupils') pts.push([-380, -8, 206], [-118, -8, 206], [560, 196, -150], [170, 118, 150]);
+      if (sceneId === 'pupils') pts.push([-380, -8, 206], [-118, -8, 206], [610, 236, -150], [340, 150, 150]);
     }
     gpu.flyTo(pts, { animate });
   }
