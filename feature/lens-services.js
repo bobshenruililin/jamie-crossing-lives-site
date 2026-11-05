@@ -16,7 +16,7 @@ const STOPS = [
     limit: 'One fieldwork experience of arrival assistance.' },
   { id: 'help', zone: 'x', title: 'A help point', ev: 'observed', photo: 'help-point',
     text: 'Near the exit, a separate help point offered everyday information and described referrals.',
-    limit: 'Arrival assistance and help-centre provision are distinct. The operator was not confirmed; referrals were not tested.' },
+    limit: 'Its operator wasn’t confirmed, and the referrals weren’t tested.' },
   { id: 'maps', zone: 'sz', title: 'Two networks, one display', ev: 'observed', photo: 'transit-maps',
     text: 'Shenzhen rail and Hong Kong MTR maps were displayed side by side at an information point.',
     limit: 'Information on display, not evidence of the help received.' },
@@ -33,7 +33,11 @@ const STOPS = [
 const ZONES = { hk: 'Hong Kong', x: 'The crossing', sz: 'Shenzhen' };
 
 export function initServiceTrail(host) {
-  const list = Object.entries(ZONES).map(([zone, name]) => `<li class="tr-zone zone-${zone}"><p class="tr-zone-name">${name}</p><ol>${STOPS.filter(s => s.zone === zone).map(s => `<li><button type="button" class="tr-stop" data-stop="${s.id}" aria-pressed="false" aria-controls="trail-view">${evidenceGlyph(s.photo ? 'photo' : s.ev)}<span>${esc(s.title)}</span></button></li>`).join('')}</ol></li>`).join('');
+  const thumb = stop => {
+    const photo = stop.photo && photos[stop.photo];
+    return photo ? `<img src="${asset(photo.file)}" alt="" loading="lazy" decoding="async" width="${photo.width}" height="${photo.height}">` : evidenceGlyph(stop.ev);
+  };
+  const list = Object.entries(ZONES).map(([zone, name]) => `<li class="tr-zone zone-${zone}"><p class="tr-zone-name">${name}</p><ol>${STOPS.filter(s => s.zone === zone).map(s => `<li><button type="button" class="tr-stop${s.photo ? '' : ' is-text'}" data-stop="${s.id}" aria-pressed="false" aria-controls="trail-view"><span class="tr-thumb">${thumb(s)}</span><span class="tr-name">${esc(s.title)}</span></button></li>`).join('')}</ol></li>`).join('');
   host.innerHTML = `<div class="trail">
     <ol class="tr-line" role="list">${list}</ol>
     <div class="tr-view" id="trail-view" aria-live="polite"></div>
@@ -49,12 +53,11 @@ export function initServiceTrail(host) {
     spotIndex = -1;
     const figure = photo ? `<figure class="tr-photo" data-format="${photo.width < photo.height ? 'portrait' : 'landscape'}">
         <div class="tr-frame" style="aspect-ratio:${photo.width}/${photo.height}"><img src="${asset(photo.file)}" alt="${esc(photo.alt)}" width="${photo.width}" height="${photo.height}" decoding="async"><span class="tr-box" hidden></span></div>
-        <figcaption>${esc(photo.caption)} <button type="button" class="tr-enlarge" data-photo="${stop.photo}">Enlarge ↗</button></figcaption>
-      </figure>` : `<div class="tr-nophoto">${evidenceGlyph(stop.ev)}<p>${stop.ev === 'account' ? 'Reported in conversation.' : 'Experienced during fieldwork.'} No photograph.</p></div>`;
+        <figcaption><button type="button" class="tr-enlarge" data-photo="${stop.photo}">Enlarge ↗</button></figcaption>
+      </figure>` : `<div class="tr-nophoto">${evidenceGlyph(stop.ev)}<p>${stop.ev === 'account' ? 'Reported in conversation' : 'Experienced at the crossing'}</p></div>`;
     const spots = photo?.spots?.length ? `<div class="tr-spots" role="group" aria-label="Inspect a detail">${['Whole view', ...photo.spots.map(s => s.label)].map((label, i) => `<button type="button" data-spot="${i - 1}" aria-pressed="${i === 0}">${esc(label)}</button>`).join('')}</div><p class="tr-spot-note"></p>` : '';
     const more = stop.more ? `<button type="button" class="tr-more" data-photo="${stop.more}">${evidenceGlyph('photo')}${esc(photos[stop.more].caption)}</button>` : '';
     view.innerHTML = `${figure}<div class="tr-text">
-      <p class="tr-kicker zone-${stop.zone}">${ZONES[stop.zone]}</p>
       <h3>${esc(stop.title)}</h3>
       <p class="tr-body">${evidenceGlyph(stop.ev)} ${esc(stop.text)}</p>
       ${spots}${more}
@@ -96,14 +99,14 @@ export function initCareLoop(host) {
     <div class="care-flow" role="img" aria-label="An eligible Hospital Authority follow-up appointment can be taken at a corresponding clinic at HKU–Shenzhen Hospital. Patients authorise access to their records through eHealth. Referral back to Hospital Authority follow-up is available on request, according to clinical need.">
       <span class="care-boundary" aria-hidden="true"></span>
       <p class="care-head hk">Hong Kong</p><p class="care-head sz">Shenzhen</p>
-      <div class="care-node n1"><b>1</b><p>Hospital Authority follow-up appointment</p><small>An eligible outpatient</small></div>
+      <div class="care-node n1"><b>1</b><p>Hospital Authority follow-up appointment</p></div>
       <div class="care-link l1"><span>Patients authorise access to their records through eHealth</span><span class="care-line"></span></div>
-      <div class="care-node n2"><b>2</b><p>Corresponding clinic at HKU–Shenzhen Hospital</p><small>Follow-up consultation</small></div>
-      <div class="care-node n3"><b>3</b><p>Return to HA follow-up</p><small>On request, according to clinical need</small></div>
-      <div class="care-link l2"><span class="care-line"></span><span>A referral route back</span></div>
+      <div class="care-node n2"><b>2</b><p>Follow-up at HKU–Shenzhen Hospital</p></div>
+      <div class="care-node n3"><b>3</b><p>Back to HA follow-up, on request, as clinical need requires</p></div>
+      <div class="care-link l2"><span class="care-line"></span></div>
     </div>
-    <p class="care-note">Patients authorise access to their records through eHealth; a referral route leads back to HA follow-up, on request, according to clinical need.</p>
-    <div class="care-figure">${evidenceGlyph('published')}<strong>&gt;5,900</strong><p>eligible HA patients had joined the follow-up pilot by January 2026.</p><small>A later release reported over 6,000 by end-February 2026.</small></div>
-    <figcaption>Defined outpatient follow-up eligibility. Participation does not establish clinical outcomes or universal coverage. <a href="https://www.info.gov.hk/gia/general/202602/25/P2026022500444.htm" target="_blank" rel="noopener">25 Feb 2026 reply ↗</a><a href="https://www.info.gov.hk/gia/general/202603/31/P2026033100709.htm" target="_blank" rel="noopener">Health Bureau, 31 Mar 2026 ↗</a></figcaption>
+    <p class="care-note">Patients authorise access to their records through eHealth.</p>
+    <div class="care-figure">${evidenceGlyph('published')}<strong>&gt;5,900</strong><p>eligible HA patients had joined by January 2026—over 6,000 by end-February.</p></div>
+    <figcaption>Joining the pilot isn’t evidence of clinical outcomes. <a href="https://www.info.gov.hk/gia/general/202602/25/P2026022500444.htm" target="_blank" rel="noopener">25 Feb 2026 reply ↗</a><a href="https://www.info.gov.hk/gia/general/202603/31/P2026033100709.htm" target="_blank" rel="noopener">Health Bureau, 31 Mar 2026 ↗</a></figcaption>
   </figure>`;
 }

@@ -37,11 +37,13 @@ function fail(element, retry) {
   p.append(b);
   element.append(p);
 }
-async function mount(selector, loader) {
+const mounts = [];
+function mount(selector, loader) { const pending = mountNow(selector, loader); mounts.push(pending); return pending; }
+async function mountNow(selector, loader) {
   const host = document.querySelector(selector);
   if (!host) return null;
   try { return await loader(host); }
-  catch (error) { console.error('Component failed:', selector, error); fail(host, () => mount(selector, loader)); return null; }
+  catch (error) { console.error('Component failed:', selector, error); fail(host, () => mountNow(selector, loader)); return null; }
 }
 
 /* ---- Opening: the miniature and its account tour ---- */
@@ -164,7 +166,8 @@ addEventListener('hashchange', () => revealTarget(location.hash));
 const initialTarget = revealTarget(location.hash);
 if (initialTarget) {
   const details = initialTarget.closest('details.shelf');
-  (details ? loadShelf(details) : Promise.resolve()).then(() => requestAnimationFrame(() => initialTarget.scrollIntoView({ behavior: 'instant', block: 'start' })));
+  // Wait until components above the target have replaced their fallbacks.
+  Promise.allSettled([...mounts, details ? loadShelf(details) : null, document.fonts?.ready]).then(() => requestAnimationFrame(() => initialTarget.scrollIntoView({ behavior: 'instant', block: 'start' })));
 }
 
 /* ---- Reading progress and current chapter ---- */

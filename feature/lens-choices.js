@@ -31,7 +31,6 @@ export function initReasons(host) {
   host.innerHTML = `<figure class="reasons">
     <div class="rs-head" aria-hidden="true"><span class="rs-head-hk">Keeps it in Hong Kong</span><span class="rs-head-sz">Draws it to Shenzhen</span></div>
     <ol class="rs-rows">${rows}</ol>
-    <figcaption>${evidenceGlyph('account')} Six accounts, paraphrased. Dashed: a conditional possibility, not a reported visit. Selected accounts, not fixed household categories or measured savings.</figcaption>
   </figure>`;
   const observer = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => {
     entries.forEach(entry => { if (entry.isIntersecting) { host.firstElementChild.classList.add('is-seen'); observer.disconnect(); } });
@@ -50,7 +49,8 @@ const MAX = 60;
 
 export function initBasket(host) {
   const ticks = [0, 20, 40, 60];
-  const rows = CATEGORIES.map(c => {
+  const rows = CATEGORIES.map((c, index) => {
+    const series = name => index === 0 ? `<i class="bk-series">${name}</i>` : '';
     const lo = Math.min(c.mainland, c.hk), hi = Math.max(c.mainland, c.hk);
     const mainlandHigher = c.mainland > c.hk;
     return `<li class="bk-row" data-category="${c.id}" tabindex="0" aria-label="${esc(c.label)}: Mainland China ${c.mainland}%, Hong Kong ${c.hk}% of recorded spending">
@@ -58,17 +58,16 @@ export function initBasket(host) {
       <span class="bk-track" aria-hidden="true">
         ${ticks.map(t => `<i class="bk-grid" style="left:${t / MAX * 100}%"></i>`).join('')}
         <span class="bk-span ${mainlandHigher ? 'to-mainland' : 'to-hk'}" style="left:${lo / MAX * 100}%;width:${(hi - lo) / MAX * 100}%"></span>
-        <span class="bk-dot dot-mainland ${mainlandHigher ? 'is-high' : 'is-low'}" style="left:${c.mainland / MAX * 100}%"><b>${c.mainland}%</b></span>
-        <span class="bk-dot dot-hk ${mainlandHigher ? 'is-low' : 'is-high'}" style="left:${c.hk / MAX * 100}%"><b>${c.hk}%</b></span>
+        <span class="bk-dot dot-mainland ${mainlandHigher ? 'is-high' : 'is-low'}" style="left:${c.mainland / MAX * 100}%">${series('Mainland')}<b>${c.mainland}%</b></span>
+        <span class="bk-dot dot-hk ${mainlandHigher ? 'is-low' : 'is-high'}" style="left:${c.hk / MAX * 100}%">${series('Hong Kong')}<b>${c.hk}%</b></span>
       </span>
     </li>`;
   }).join('');
   host.innerHTML = `<figure class="basket">
-    <div class="bk-legend"><span><i class="dot-mainland"></i>Spent in Mainland China</span><span><i class="dot-hk"></i>Spent in Hong Kong</span></div>
     <ol class="bk-rows">${rows}</ol>
     <div class="bk-axis" aria-hidden="true"><span></span><span class="bk-axis-track">${ticks.map(t => `<b style="left:${t / MAX * 100}%">${t}${t === MAX ? '%' : ''}</b>`).join('')}</span></div>
     <div class="visually-hidden"><table><caption>Share of recorded spending within each location, seasoned AlipayHK users</caption><thead><tr><th scope="col">Category</th><th scope="col">Mainland China</th><th scope="col">Hong Kong</th></tr></thead><tbody>${CATEGORIES.map(c => `<tr><th scope="row">${esc(c.label)}</th><td>${c.mainland}%</td><td>${c.hk}%</td></tr>`).join('')}</tbody></table></div>
-    <figcaption>${evidenceGlyph('published')} Share of recorded spending <em>within</em> each location · seasoned AlipayHK users · CUHK research release, Figure 3, 19 June 2025</figcaption>
+    <figcaption>${evidenceGlyph('published')} Share of recorded spending within each place, among seasoned AlipayHK users · CUHK, June 2025</figcaption>
     <details class="source-note"><summary>Source and limits</summary>
       <p>Services are 47% of recorded Mainland spending—the largest category, not a majority. Hong Kong’s published labels are rounded and total 101%; the chart keeps them as printed.</p>
       <p>“Seasoned” users registered and started before 30 June 2021, with transactions after 1 January 2022. These users do not represent all residents or all spending, and identical membership in both panels is not established. Mainland China is broader than Shenzhen.</p>

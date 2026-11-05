@@ -22,7 +22,7 @@ function mark(facet, text, side) {
 }
 
 export function initLedger(host) {
-  const rows = cast.map(person => {
+  const rowFor = person => {
     const hk = [], sz = [], unknown = [], notes = [];
     ORDER.forEach(facet => {
       const f = person.facets[facet] || {};
@@ -34,12 +34,10 @@ export function initLedger(host) {
       }
       if (f.note) notes.push(`<li><b>${esc(FACETS[facet].label)}.</b> ${esc(f.note)}</li>`);
     });
-    const arrangement = ARRANGEMENTS[person.arrangement];
     const inTour = tour.includes(person.id);
-    return `<li class="lrow" data-person="${person.id}" data-evidence="${person.evidence}">
+    return `<li class="lrow" data-person="${person.id}" data-evidence="${person.evidence}" style="--unk:${unknown.length}">
       <button type="button" class="lrow-who" aria-expanded="false" aria-controls="ledger-${person.id}">
-        <span class="lrow-name">${esc(person.name)}</span>
-        <span class="lrow-meta">${evidenceGlyph(person.evidence)}<span>${person.evidence === 'published' ? 'Published figure' : esc(arrangement.label)}</span></span>
+        <span class="lrow-name">${esc(person.name)}${person.evidence === 'published' ? ` ${evidenceGlyph('published', 'lrow-ev')}` : ''}</span>
         <svg class="lrow-toggle" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg>
       </button>
       <ul class="lrow-side lrow-hk" aria-label="Hong Kong">${hk.join('')}</ul>
@@ -53,6 +51,11 @@ export function initLedger(host) {
         <p class="lrow-source">${evidenceGlyph(person.evidence)}${esc(person.source)}${inTour ? ` · <a href="#step-${person.id}">See this account in the miniature ↑</a>` : ''}</p>
       </div>
     </li>`;
+  };
+  const BANDS = { user: 'Cross-border users', mover: 'Northbound mover', worker: 'Worker or student · an official count', base: 'Hong Kong base, Mainland ties', local: 'Locally based' };
+  const rows = Object.entries(BANDS).map(([key, name]) => {
+    const people = cast.filter(p => p.arrangement === key);
+    return people.length ? `<li class="lband"><p class="lband-name">${esc(name)}</p><ol class="lband-rows">${people.map(rowFor).join('')}</ol></li>` : '';
   }).join('');
 
   host.innerHTML = `<div class="ledger">
@@ -61,9 +64,8 @@ export function initLedger(host) {
       ${ORDER.map(f => `<button type="button" data-focus="${f}" aria-pressed="false">${facetGlyph(f)}<span>${esc(FACETS[f].label)}</span></button>`).join('')}
     </div>
     <p class="ledger-reading" aria-live="polite">${READINGS.all}</p>
-    <div class="ledger-head" aria-hidden="true"><span></span><span class="lh-hk">Hong Kong</span><span class="lh-bd"></span><span class="lh-sz">Shenzhen</span><span class="lh-un">Not established</span></div>
+    <div class="ledger-head" aria-hidden="true"><span></span><span class="lh-hk">Hong Kong</span><span class="lh-bd"></span><span class="lh-sz">Shenzhen</span><span class="lh-un">${evidenceGlyph('unknown')}Not established</span></div>
     <ol class="ledger-rows">${rows}</ol>
-    <p class="ledger-foot">${evidenceGlyph('account')} Accounts from conversations, paraphrased · ${evidenceGlyph('published')} the schoolchildren are an official count, not an interview · ${evidenceGlyph('unknown')} hollow marks: not established. Selected accounts, not a representative sample or population categories.</p>
   </div>`;
 
   const ledger = host.firstElementChild;

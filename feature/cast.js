@@ -264,7 +264,7 @@ export const scenes = {
     lit: ['sz-repair'],
     pins: [{ at: 'sz-repair', facet: 'spend', text: 'Parts + repair' }],
     unplaced: ['home', 'work', 'ties'],
-    arcs: [{ from: 'hk-edge', to: 'sz-repair', style: 'visit', text: 'Specialist repair' }]
+    arcs: [{ from: 'ghost:home', to: 'sz-repair', style: 'visit', text: 'Specialist repair' }]
   },
   guide: {
     lit: ['sz-home', 'sz-community', 'hk-family'],

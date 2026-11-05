@@ -34,7 +34,6 @@ export function initTies(host) {
       <div class="ties-city city-sz"><h3>Shenzhen</h3><ul></ul></div>
     </div>
     <p class="ties-reading" aria-live="polite"></p>
-    <figcaption>${evidenceGlyph('account')} <span class="ties-note"></span> Symbols show kinds of ties, not possessions, their number or strength.</figcaption>
   </figure>`;
   const figure = host.firstElementChild;
   const [hk, sz] = figure.querySelectorAll('.ties-city ul');
@@ -48,7 +47,6 @@ export function initTies(host) {
     sz.setAttribute('aria-label', `${p.label}: reported ties in Shenzhen`);
     figure.querySelector('.ties-moved').hidden = !p.moved;
     figure.querySelector('.ties-reading').textContent = p.reading;
-    figure.querySelector('.ties-note').textContent = p.note;
     figure.dataset.profile = id;
     figure.classList.remove('is-swapping'); void figure.offsetWidth; figure.classList.add('is-swapping');
   }
@@ -70,10 +68,10 @@ export function initForecast(host) {
     { label: 'Johor Bahru consumers spending in Singapore', value: 756, display: 'S$756m', side: 'in' }
   ];
   host.innerHTML = `<figure class="forecast">
-    <p class="fc-kicker">${evidenceGlyph('forecast')} Forecast additional annual consumer spending with the RTS Link</p>
+    <p class="fc-kicker">${evidenceGlyph('forecast')} Forecast extra spending each year, once the RTS Link opens</p>
     <ol class="fc-rows">${rows.map(r => `<li class="fc-row fc-${r.side}"><span class="fc-label">${esc(r.label)}</span><span class="fc-track"><span class="fc-bar" style="width:${r.value / 1200 * 100}%"></span></span><strong>${r.display}</strong></li>`).join('')}</ol>
     <div class="fc-axis" aria-hidden="true"><span></span><span class="fc-axis-track"><b style="left:0">0</b><b style="left:50%">S$600m</b><b style="left:100%">S$1.2bn</b></span><span></span></div>
-    <p class="fc-net">About <strong>S$290 million</strong> net incremental outflow, in the study’s own rounding.</p>
-    <figcaption>Association-commissioned RTS study (SBF, RAS and SRA), July 2026. Forecasts, not realised spending, lost GDP or measured JS-SEZ effects. Rounded inputs imply S$294m; the study reports about S$290m. <a href="https://www.sbf.org.sg/newsroom/media/press-releases/detail/rts-link-could-reshape-cross-border-consumer-spending--spotlighting-both-opportunities-and-challenges-for-singapore-retail-and-f-b" target="_blank" rel="noopener">Summary ↗</a> <a href="https://www.sbf.org.sg/docs/default-source/advocacy-policy/sbf-rts-study_final-report-16-jul.pdf?sfvrsn=b7ba6722_1" target="_blank" rel="noopener">Full report ↗</a></figcaption>
+    <p class="fc-net">Net, about <strong>S$290 million</strong> more consumer spending would flow out of Singapore than in—a forecast, not lost GDP.</p>
+    <figcaption>A study commissioned by SBF, RAS and SRA, July 2026. <a href="https://www.sbf.org.sg/newsroom/media/press-releases/detail/rts-link-could-reshape-cross-border-consumer-spending--spotlighting-both-opportunities-and-challenges-for-singapore-retail-and-f-b" target="_blank" rel="noopener">Summary ↗</a> <a href="https://www.sbf.org.sg/docs/default-source/advocacy-policy/sbf-rts-study_final-report-16-jul.pdf?sfvrsn=b7ba6722_1" target="_blank" rel="noopener">Full report ↗</a></figcaption>
   </figure>`;
 }

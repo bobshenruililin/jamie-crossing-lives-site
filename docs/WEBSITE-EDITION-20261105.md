@@ -32,6 +32,28 @@ The research says a cross-border life is a *combination*: people place home, wor
 
 **Evidence key.** Every claim carries a small glyph — account, observed, published figure, forecast, question, not established — so readers can see the kind of evidence without walls of grey caveats. Limits stay next to the claim they qualify.
 
+## Checkpoint 3 — let the layout explain
+
+Bob’s note: less secondary labelling; text only where it carries insight. This pass removed or merged most small grey text.
+
+- **Unknowns are layout, not lists.** Parts of a life an account doesn’t place float as hollow ghosts over the boundary gap in the miniature, with a drop line to the border. The first step explains the convention once.
+- **The ledger groups rows into arrangement bands**, so the framework appears five times, not under every name. On phones a sticky Hong Kong | Shenzhen header replaces per-row side labels, and hollow marks sit beside each name.
+- **The services trail is a filmstrip of the field photographs** running across the crossing. Stops without a photo are dashed tiles, so the kind of evidence shows without a caption.
+- **Direct labels replace legends** (the spending dumbbell). Takeaways lost their "What lens X suggests" labels; the rule and type carry them.
+- **Caveats moved into the sentence they qualify.**
+  - "Weighing lower earnings against…" for the guide.
+  - "—not only in Shenzhen—" for the pupils.
+  - "a forecast, not lost GDP" for the RTS net figure.
+  - Step source lines and duplicate decks went.
+- **One integrity line is kept where a misreading is likely:**
+  - the ledger ("illustrations, not a sample");
+  - the conclusion;
+  - the help point's untested referrals;
+  - the care pilot ("joining isn't evidence of outcomes").
+- **The in-page work-in-progress strip is removed**, because the requested status signals — the first-visit popup and the persistent header label — remain. It's easy to restore if wanted.
+- **A one-time sway of the model** replaces "drag to turn".
+- **Deep links now wait** for components above them to mount, so they land in the right place.
+
 ## Where I challenged the previous direction
 
 - **Vague display lines replaced** ("Different places. Different baskets.") with the findings themselves ("Shenzhen draws some activities. Hong Kong routines remain.").
@@ -43,7 +65,7 @@ The research says a cross-border life is a *combination*: people place home, wor
 ## Checks run (5 November, headless Chromium)
 
 - `node --check` on all 21 JS modules; `git diff --check` clean.
-- 41 scripted interaction checks, passing on both `/` and `/feature/`:
+- 41 scripted interaction checks, passing on both `/` and `/feature/` (re-run after checkpoint 3):
   - Popup: shows, closes, session acknowledgement, suppressed on reload; the header label persists.
   - Miniature: markers open cards; the photo viewer opens, highlights details, closes on Escape and returns focus; arrow keys turn the model; the switcher drives the tour.
   - Ledger: focus and expand.

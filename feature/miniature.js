@@ -35,6 +35,8 @@ const GEOMETRY = {
   'sz-park':      { x: 318,  z: 86,   w: 54, d: 72, h: 4 }
 };
 const EDGES = { 'hk-edge': [-150, 59, 6], 'sz-edge': [150, 59, 6] };
+/* Parts of a life an account does not place hover over the boundary gap. */
+const GHOSTS = { home: [0, 2, 52], work: [0, -58, 52], ties: [0, -118, 52], spend: [0, -178, 52] };
 const TREES = [[-200, -112, 20], [-118, -150, 18], [-112, -78, 16], [-196, 18, 17], [-120, 22, 15], [-112, 150, 18], [-372, 20, 16],
   [182, 8, 17], [290, 12, 15], [372, 18, 18], [178, -104, 16], [274, -118, 14], [370, -90, 16]];
 
@@ -62,14 +64,13 @@ export function initMiniature(host) {
       </svg>
       <div class="mini-overlay" data-mini="overlay"></div>
       <div class="mini-sides" aria-hidden="true"><span class="side-hk">Hong Kong</span><span class="side-bd">The boundary</span><span class="side-sz">Shenzhen</span></div>
-      <div class="mini-unplaced" data-mini="unplaced" hidden></div>
       <section class="mini-card" data-mini="card" hidden aria-live="polite"></section>
     </div>
     <p class="mini-status visually-hidden" data-mini="status" role="status" aria-atomic="true"></p>`;
 
   const $ = key => host.querySelector(`[data-mini="${key}"]`);
   const svg = $('svg'), world = $('world'), arcLayer = $('arcs'), overlay = $('overlay'), stage = $('stage');
-  const card = $('card'), unplacedBar = $('unplaced'), now = $('now'), status = $('status');
+  const card = $('card'), now = $('now'), status = $('status');
   let yaw = YAW, sceneId = 'overview', openId = null, destroyed = false;
   let vb = null, vbTarget = null, vbFrom = null, vbStart = 0, vbFrame = 0;
   let tokens = [], tokenStart = 0, tokenFrame = 0;
@@ -237,6 +238,7 @@ export function initMiniature(host) {
     return scenes[sceneId] || scenes.overview;
   }
   function anchorOf(id) {
+    if (id.startsWith('ghost:')) return GHOSTS[id.slice(6)];
     if (EDGES[id]) return EDGES[id];
     const g = GEOMETRY[id];
     const lift = { pitch: 10, park: 12, house: 30, gate: 8, tuition: 18, shop: 12 }[placeById[id].kind] || 6;
@@ -320,6 +322,7 @@ export function initMiniature(host) {
     const focusIds = [...scene.lit, ...scene.pins.map(p => p.at)].filter((v, i, a) => a.indexOf(v) === i);
     if (focusIds.length && sceneId !== 'together') {
       const pts = [];
+      (scene.unplaced || []).forEach(f => pts.push(project(...GHOSTS[f])));
       focusIds.forEach(id => { const g = GEOMETRY[id] || { x: EDGES[id][0] - 10, z: EDGES[id][1] - 10, w: 20, d: 20, h: 10 }; [g.x, g.x + g.w].forEach(x => [g.z, g.z + g.d].forEach(z => { pts.push(project(x, z, 0)); pts.push(project(x, z, g.h + 64)); })); });
       scene.arcs.forEach(arc => { const g = arcGeometry(arc.from, arc.to, false, arc.style); pts.push(g.pa, g.pb, g.c1, g.c2); });
       const f = bounds(pts);
@@ -393,14 +396,19 @@ export function initMiniature(host) {
       flag.style.left = `${l}%`; flag.style.top = `${t}%`;
       extras.append(flag);
     });
+    const ghosts = new Set(scene.unplaced || []);
+    scene.arcs.forEach(arc => { if (arc.from.startsWith('ghost:')) ghosts.add(arc.from.slice(6)); });
+    ghosts.forEach(facet => {
+      const ghost = make('span', 'mini-ghost');
+      ghost.title = `${FACETS[facet].short}: not established in this account`;
+      ghost.innerHTML = facetGlyph(facet);
+      const [l, t] = toPct(project(...GHOSTS[facet]));
+      const [, ground] = toPct(project(GHOSTS[facet][0], GHOSTS[facet][1], 0));
+      ghost.style.left = `${l}%`; ghost.style.top = `${t}%`;
+      ghost.style.setProperty('--drop', `${Math.max(0, (ground - t) / 100 * (stage.clientHeight || 500))}px`);
+      extras.append(ghost);
+    });
     scene.arcs.forEach(arc => {
-      if (arc.from === 'hk-edge') {
-        const ghost = make('span', 'mini-flag is-unknown');
-        ghost.innerHTML = `${evidenceGlyph('unknown')}<span>Home not established</span>`;
-        const [l, t] = toPct(project(...EDGES['hk-edge']));
-        ghost.style.left = `${l}%`; ghost.style.top = `${t}%`;
-        extras.append(ghost);
-      }
       if (!arc.text || !arc._g) return;
       const tag = make('span', `mini-arc-label arc-${arc.style}`, arc.text);
       const [l, t] = toPct(arc._g.mid);
@@ -451,24 +459,15 @@ export function initMiniature(host) {
     tokenFrame = requestAnimationFrame(step);
   }
 
-  function renderUnplaced() {
-    const scene = currentScene();
-    const list = scene.unplaced || [];
-    unplacedBar.hidden = !list.length;
-    unplacedBar.innerHTML = list.length ? `<span class="unplaced-label">Not established in this account</span>${list.map(f => `<span class="unplaced-item">${evidenceGlyph('unknown')}${esc(FACETS[f].short)}</span>`).join('')}` : '';
-  }
   function renderNow() {
     const person = byId[sceneId];
-    if (person) now.innerHTML = `<b>${esc(person.name)}</b><span>${esc(ARRANGEMENTS[person.arrangement].label)}</span>`;
-    else if (sceneId === 'together') now.innerHTML = '<b>Five examples together</b><span>Thin lines: each one’s crossings</span>';
-    else now.innerHTML = '<b>A miniature of the fieldwork</b><span>Tap a marker to see the evidence</span>';
+    now.innerHTML = person ? `<b>${esc(person.name)}</b>` : sceneId === 'together' ? '<b>All five together</b>' : '<b>Tap a marker for its evidence</b>';
   }
 
   function render({ animate = false } = {}) {
     if (destroyed) return;
     drawWorld();
     drawArcs();
-    renderUnplaced();
     renderNow();
     moveCamera(animate);
     if (animate) animateTokens();
@@ -559,6 +558,23 @@ export function initMiniature(host) {
   resize?.observe(stage);
   on(document, 'crossing:motion', () => { if (!motionAllowed()) { cancelAnimationFrame(tokenFrame); tokens.forEach(t => t.token.setAttribute('visibility', 'hidden')); } });
 
+  let swayed = false;
+  const swayWatch = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => {
+    if (swayed || !entries.some(e => e.isIntersecting && e.intersectionRatio > .6) || !motionAllowed()) return;
+    swayed = true; swayWatch.disconnect();
+    const from = yaw, start = performance.now();
+    const step = t => {
+      if (destroyed || drag) return;
+      const k = Math.min(1, (t - start) / 1800);
+      yaw = from + .14 * Math.sin(Math.PI * k) * (1 - k * .15);
+      drawWorld(); drawArcs(); placeOverlays();
+      if (k < 1) requestAnimationFrame(step); else { yaw = from; drawWorld(); drawArcs(); placeOverlays(); }
+    };
+    setTimeout(() => requestAnimationFrame(step), 700);
+  }, { threshold: [.6] }) : null;
+  swayWatch?.observe(stage);
+  cleanups.push(() => swayWatch?.disconnect());
+
   render();
   document.fonts?.ready.then(() => !destroyed && applyView(targetView()));
 
@@ -570,7 +586,8 @@ export function initMiniature(host) {
       closeCard(false);
       render({ animate });
       const person = byId[id];
-      status.textContent = person ? `${person.name}. ${person.summary}` : '';
+      const unknown = (scenes[id]?.unplaced || []).map(f => FACETS[f].short.toLowerCase());
+      status.textContent = person ? `${person.name}. ${person.summary}${unknown.length ? ` Not established: ${unknown.join(', ')}.` : ''}` : '';
       return true;
     },
     getScene: () => sceneId,
