@@ -6,6 +6,11 @@ Research and presentation: Jamie Ko. Visual support: Bob.
 This public export contains audience-facing materials and public source links.
 The full private research and authoring repository is separate.
 
+Current website design handoff: [Opus — make the whole story as revealing as A](docs/OPUS-WEBSITE-DIRECTION-20261106.md).
+It records the live baseline, section-by-section diagnosis, creative ownership,
+code entry points and verification limits. It supersedes older handoff status
+claims that the website edition has not been merged or deployed.
+
 The study is exploratory and Hong Kong-centred, informing questions for Singapore–Johor.
 Statistics, programme descriptions, forecasts and proposals are distinguished throughout.
 Comparative examples and future reading avenues do not establish transferable effects.
