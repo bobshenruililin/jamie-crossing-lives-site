@@ -90,7 +90,61 @@ Bob’s note: less secondary labelling; text only where it carries insight. This
 - **Places have no photographs yet** for Sheung Shui shops, the repair specialists, restaurants (beyond one menu), tuition and the clinic. Those cards say so honestly.
 - `research.html` and the presentation footer still carry older revision wording; they're out of scope for this pass.
 
-## Checkpoint 6 (work in progress) — a live GPU miniature · RESUME HERE
+## Checkpoint 8 — type cut from field photographs; life signatures; a cleaner frame · RESUME HERE
+
+**Type made of the fieldwork** (`feature/photo-type.js`).
+- The title's letterforms are filled with field photographs and coloured by side of the boundary:
+  - "A life" from the Sheung Shui driving school (Hong Kong, rust);
+  - "doesn't move" from the crossing hall and its HSITP sign (ink);
+  - "all at once." from Shenzhen towers, a posted menu and the Lianhua Ercun community centre (teal).
+- The letters are cut into small tiles that settle one at a time, so the title literally does not move all at once.
+- Hover or focus shows a word in true colour and names its photograph; activating it opens the photograph.
+- The real `<h1>` text stays for assistive technology, search and no-JavaScript readers.
+- The same treatment extends to each lens letter (A, B, C), built from that lens's photographs; clicking a letter cycles them.
+- It reuses the existing Barlow Condensed and Instrument Serif glyphs as masks, with no new font dependency.
+
+**Life signatures** (`feature/signature.js`).
+- Each account gets a four-lane glyph, top to bottom home, work, purchases and relationships, across a dashed boundary:
+  - a half-disc to the left is Hong Kong, to the right Shenzhen;
+  - a whole disc spans both;
+  - a dashed ghost is not established;
+  - a hatched mark pushed past Shenzhen is Mainland-not-only-Shenzhen.
+- They appear in every ledger row (with a key), in each tour step, and as a row of five in "Five examples".
+- The ledger's part-of-life highlight also dims the other lanes.
+- They are generated from `cast.js`, so evidence corrections flow through automatically; the checks assert the pupils' and the manager's signatures.
+
+**Frame.**
+- Desktop always shows the whole model; only stages narrower than 720px move in close.
+- Extra bottom clearance keeps the HONG KONG / SHENZHEN labels off the plinths.
+- The scene edges fade softly instead of hard-cutting.
+- Pins no longer lag behind the model while it turns (the CSS transform transition is removed).
+- These apply to both renderers.
+
+**Photos added** (Bob approved the shortlist on 6 November). Public derivatives are resized, and two are cropped to exclude people. Captions use visible signage only; originals are unchanged in the private source.
+
+| Asset | Contact-sheet ref | Derivative | Original SHA-256 |
+|---|---|---|---|
+| `hk-crossing-hall.jpg` | #1 | resized only | `190aea180d533326…` |
+| `hk-hsitp-sign.jpg` | #9 | crop [0, 0.1, 1, 0.38] | `0b29938918deb0ad…` |
+| `sz-help-kiosk.jpg` | #14 | crop [0.4, 0.18, 0.98, 0.93] | `978c9a408b6de50c…` |
+| `sz-police-office.jpg` | #43 | resized only | `98f0328b45f94159…` |
+| `sz-community-centre.jpg` | #64 | resized only | `0226d952a9b67e74…` |
+
+- Not used: #8 (near-duplicate of #1) and #7 (crowd).
+- `sz-help-kiosk.jpg` adds a Lens B trail stop, "Start-up help": the Futian service centre's posters advertise company registration and start-up support, and invite Hong Kong volunteers.
+- The hall photo is deliberately *not* attached to the arrival-form stop: it is the Hong Kong side, while the arrival help was at Futian.
+- **For dot:**
+  - Confirm the crossing-hall location (visible signs: "Futian Port / HSITP", MTR branding) and the kiosk poster wording.
+  - Add these five to the private photo ledger.
+
+**Checks:** `tools/check-site.js` now has 60 checks; all pass on `/` and `/feature/`, with no overflow at 320 or 390px.
+
+**Next ideas:**
+- a "share your signature" card;
+- signature-driven filtering of the miniature;
+- real-device checks of `?renderer=gpu`.
+
+## Checkpoint 6 (work in progress) — a live GPU miniature
 
 Bob's direction: less a traditional website, more something inherently interactive (WebGPU), built beyond generated imagery. The experience is built from the research itself, not from generated images (large generated illustrations were rejected earlier for feeling pasted in).
 
@@ -198,9 +252,9 @@ dot checked my questions against the saved Script v3 and the photo records.
 The public root `index.html` is the authored page here. `feature/index.html` is generated from it by `python3 tools/sync-feature-alias.py`. For the private source, copy the generated `feature/index.html` to `app/feature/index.html`; its paths are already relative to `feature/`.
 
 - **Add** to `app/feature/` and the export allowlist:
-  - Modules: `cast.js`, `grammar.js`, `miniature.js`, `ledger.js`, `lens-choices.js`, `lens-services.js`, `lens-ties.js`, `echo.js`, `photo-viewer.js`, `ties-icons.js`, `edition.js`, and `world-gpu.js` (opt-in, in development).
+  - Modules: `cast.js`, `grammar.js`, `miniature.js`, `ledger.js`, `lens-choices.js`, `lens-services.js`, `lens-ties.js`, `echo.js`, `photo-viewer.js`, `photo-type.js`, `signature.js`, `ties-icons.js`, `edition.js`, and `world-gpu.js` (opt-in, in development).
   - Stylesheets: `edition.css`, `desk.css`.
-  - Asset: `assets/sz-services-signage.jpg`.
+  - Assets: `assets/sz-services-signage.jpg`, `hk-crossing-hall.jpg`, `hk-hsitp-sign.jpg`, `sz-help-kiosk.jpg`, `sz-police-office.jpg`, `sz-community-centre.jpg`.
 - **Changed** (copy over): `field-gallery.js` now uses the signage derivative.
 - **Remove** the original `assets/sz-services.jpg` once nothing else depends on it.
 - **Remove** from `app/feature/` and the allowlist (superseded, recoverable from git history):

@@ -110,6 +110,21 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   check('motion pause sets data-motion=off', (await page.getAttribute('html', 'data-motion')) === 'off');
   await page.click('#motion-control');
 
+  // Type cut from field photographs
+  check('title is drawn from field photographs', await page.evaluate(() => document.documentElement.classList.contains('has-photo-title') && document.querySelectorAll('#hero-type .ptype-hit').length === 7));
+  check('title text stays in the document for assistive technology', (await page.textContent('#hero-title')).replace(/\s+/g, ' ').trim() === 'A life doesn’t move all at once.');
+  const wordLabel = await page.getAttribute('#hero-type .ptype-hit[data-word="0"]', 'aria-label');
+  check('each title word names its photograph', /field photograph: .+Open the photograph/.test(wordLabel || ''), wordLabel);
+  check('three lens letters are drawn from photographs', (await page.$$eval('.lens-mark.is-ready', l => l.length)) === 3);
+
+  // Life signatures
+  check('a signature for every ledger row', (await page.$$eval('.lrow .lrow-sig svg.sig', l => l.length)) === 9);
+  check('five signatures in the tour and five in the summary row', (await page.$$eval('.step-sig svg.sig', l => l.length)) === 5 && (await page.$$eval('.sig-row svg.sig', l => l.length)) === 5);
+  const pupilSig = await page.$$eval('.lrow[data-person="pupils"] .sig-lane', l => l.map(n => `${n.dataset.facet}:${n.dataset.where}`));
+  check('EVIDENCE pupils’ signature places home beyond Shenzhen', pupilSig.includes('home:beyond') && !pupilSig.some(t => t.startsWith('home:sz')), pupilSig.join(' '));
+  const managerSig = await page.$$eval('.lrow[data-person="manager"] .sig-lane', l => l.map(n => `${n.dataset.facet}:${n.dataset.where}`));
+  check('manager signature: shopping in both places, ties unknown', managerSig.includes('spend:both') && managerSig.includes('ties:unknown'), managerSig.join(' '));
+
   // Research shelves
   for (const id of ['about-inquiry', 'research-reading', 'evidence', 'care-evidence', 'school-evidence', 'street-level', 'policy-maps', 'horizon', 'questions', 'measure', 'responses', 'game-lab']) {
     await page.evaluate(id => { document.getElementById(id).open = true; }, id);
@@ -133,6 +148,7 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   }
 
   check('EVIDENCE the unconsented street photograph is never requested', !requests.some(u => /sz-services\.jpg/.test(u)));
+  check('new field photographs load as cropped derivatives', ['hk-crossing-hall', 'hk-hsitp-sign', 'sz-community-centre'].every(n => requests.some(u => u.includes(n))));
   check('no page errors', errors.length === 0, errors.join(' | '));
   await browser.close();
 

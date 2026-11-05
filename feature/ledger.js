@@ -5,6 +5,7 @@
    Highlighting a part of life changes emphasis only, never the data. */
 import { cast, FACETS, ARRANGEMENTS, EVIDENCE, tour } from './cast.js';
 import { evidenceGlyph, facetGlyph, esc } from './grammar.js';
+import { signatureSVG, signatureKey } from './signature.js';
 
 const ORDER = ['home', 'work', 'spend', 'ties'];
 
@@ -40,6 +41,7 @@ export function initLedger(host) {
     const inTour = tour.includes(person.id);
     return `<li class="lrow" data-person="${person.id}" data-evidence="${person.evidence}" style="--unk:${unknown.length}">
       <button type="button" class="lrow-who" aria-expanded="false" aria-controls="ledger-${person.id}">
+        <span class="lrow-sig">${signatureSVG(person.id, { size: 34, title: false })}</span>
         <span class="lrow-name">${esc(person.name)}${person.evidence === 'published' ? ` ${evidenceGlyph('published', 'lrow-ev')}` : ''}</span>
         <svg class="lrow-toggle" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg>
       </button>
@@ -66,7 +68,7 @@ export function initLedger(host) {
       <button type="button" data-focus="all" aria-pressed="true">All parts</button>
       ${ORDER.map(f => `<button type="button" data-focus="${f}" aria-pressed="false">${facetGlyph(f)}<span>${esc(FACETS[f].label)}</span></button>`).join('')}
     </div>
-    <p class="ledger-reading" aria-live="polite">${READINGS.all}</p>
+    <div class="ledger-intro"><p class="ledger-reading" aria-live="polite">${READINGS.all}</p>${signatureKey()}</div>
     <div class="ledger-head" aria-hidden="true"><span></span><span class="lh-hk">Hong Kong</span><span class="lh-bd"></span><span class="lh-sz">Shenzhen</span><span class="lh-un">${evidenceGlyph('unknown')}Not established</span></div>
     <ol class="ledger-rows">${rows}</ol>
   </div>`;

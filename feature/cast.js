@@ -216,6 +216,53 @@ export const photos = {
     limit: 'The exact park and capture date are unverified. No pictured person is a participant.',
     spots: []
   },
+  // Approved 6 November 2026 from the field-photo shortlist. Derivatives (resized;
+  // two cropped to exclude people). Captions describe visible signage only.
+  'crossing-hall': {
+    file: 'hk-crossing-hall.jpg', width: 1050, height: 1400, where: 'The crossing',
+    alt: 'A wide, bright crossing hall with lifts and pillars beneath a sign pointing left to Futian Port and HSITP.',
+    caption: 'A crossing hall; a sign points to “Futian Port / HSITP”.',
+    limit: 'Exact station and capture date are not verified. No pictured person is a participant.',
+    spots: [{ label: 'Direction sign', rect: [.39, .36, .19, .05], note: 'The sign reads 福田口岸 / 港深創科園 — Futian Port / HSITP.' }]
+  },
+  'hsitp-sign': {
+    file: 'hk-hsitp-sign.jpg', width: 1400, height: 294, where: 'The crossing',
+    alt: 'Signs reading No Entry and Elevated Public Transport Interchange (To HSITP), Authorised Persons Only.',
+    caption: 'Signs at the crossing: “Elevated Public Transport Interchange (To HSITP) · Authorised Persons Only”.',
+    limit: 'A signage-only crop. It shows wayfinding, not who may use the route or how often.',
+    spots: []
+  },
+  'help-kiosk': {
+    file: 'sz-help-kiosk.jpg', width: 696, height: 1200, where: 'Futian Port',
+    alt: 'Posters at the Futian Port Inbound Service Center advertise company registration and start-up support, and invite Hong Kong volunteers.',
+    caption: 'At the Futian Port Inbound Service Center: posters for company registration and start-up support, and for Hong Kong volunteers.',
+    limit: 'Advertised services and a recruitment poster, not evidence of uptake or outcomes. Cropped to the posters.',
+    spots: [
+      { label: 'Start-up support', rect: [.06, .04, .52, .37], note: '公司注冊 · 創業援助 — company registration and entrepreneurship support, with business matching, shop consultation, resources and free support listed.' },
+      { label: 'Volunteers', rect: [.06, .52, .52, .44], note: '來了就是「深圳人」· 港人義工申請 — a poster inviting Hong Kong people to apply as volunteers.' }
+    ]
+  },
+  'police-office': {
+    file: 'sz-police-office.jpg', width: 1050, height: 1400, where: 'Shenzhen',
+    alt: 'A sign beside a planted wall points to the Lian Hua Er Cun Community Police Affairs Office.',
+    caption: 'A sign points to the Lianhua Ercun community police affairs office.',
+    limit: 'The sign identifies a place, not its services, users or outcomes.',
+    spots: []
+  },
+  'community-centre': {
+    file: 'sz-community-centre.jpg', width: 1050, height: 1400, where: 'Shenzhen',
+    alt: 'The Lianhua Ercun Community Public Service Center, with a flag and bulletin boards in front.',
+    caption: 'The Lianhua Ercun Community Public Service Center.',
+    limit: 'A photographed building and its signage; services, eligibility and users are not established.',
+    spots: []
+  },
+  'place': {
+    file: 'sz-place.jpg', width: 1200, height: 1600, where: 'Shenzhen',
+    alt: 'Glass towers rise beyond an elevated walkway and a broad, tree-lined road.',
+    caption: 'Glass towers, a raised walkway and the street below.',
+    limit: 'Building names and street location are not verified. It does not establish land use, prices or how typical the streetscape is.',
+    spots: []
+  },
   'jb-concourse': {
     file: 'sgj-concourse.jpg', width: 1200, height: 1600, where: 'Johor Bahru',
     alt: 'A concourse with pedestrians and signs toward Bangunan Sultan Iskandar and Woodlands.',

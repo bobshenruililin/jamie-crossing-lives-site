@@ -328,11 +328,13 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
     const corners = [];
     [-386, usesMainland() ? BEYOND.x1 + 10 : 386].forEach(x => [-168, 168].forEach(z => [-24, 150].forEach(y => corners.push(project(x, z, y)))));
     const whole = bounds(corners);
-    const padTop = 44, padBottom = 34;
+    // Bottom clearance keeps the side labels off the plinths.
+    const padTop = 40, padBottom = 66;
     let box = { x: whole.x - 34, y: whole.y - padTop, w: whole.w + 68, h: whole.h + padTop + padBottom };
     const scene = currentScene();
     const focusIds = [...scene.lit, ...scene.pins.map(p => p.at)].filter((v, i, a) => a.indexOf(v) === i);
-    if (focusIds.length && sceneId !== 'together') {
+    // Wide stages always show the whole model; only narrow ones move in close.
+    if ((stage.clientWidth || 900) < 720 && focusIds.length && sceneId !== 'together') {
       const pts = [];
       (scene.unplaced || []).forEach(f => pts.push(project(...GHOSTS[f])));
       if (usesMainland()) [BEYOND.x0, BEYOND.x1].forEach(x => [BEYOND.z0, BEYOND.z1].forEach(z => pts.push(project(x, z, 0), project(x, z, 40))));
@@ -520,9 +522,10 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
   function gpuCamera(animate) {
     const sc = currentScene();
     const pts = [];
-    const whole = () => [-386, usesMainland() ? BEYOND.x1 + 10 : 386].forEach(x => [-168, 168].forEach(z => [-24, 120].forEach(y => pts.push([x, y, z]))));
+    const whole = () => { [-386, usesMainland() ? BEYOND.x1 + 10 : 386].forEach(x => [-168, 168].forEach(z => [-24, 120].forEach(y => pts.push([x, y, z])))); pts.push([-120, -56, 190], [120, -56, 190]); };
+    const wide = (stage.clientWidth || 900) >= 720;
     const focusIds = [...sc.lit, ...sc.pins.map(p => p.at)].filter((v, i, a) => a.indexOf(v) === i);
-    if (!focusIds.length || sceneId === 'together') whole();
+    if (wide || !focusIds.length || sceneId === 'together') { whole(); if (sceneId === 'pupils') pts.push([-380, -8, 206], [610, 236, -150]); }
     else {
       pts.push([-100, 0, 42], [100, 8, 76]);
       focusIds.forEach(id => { const g = GEOMETRY[id] || { x: EDGES[id][0] - 10, z: EDGES[id][1] - 10, w: 20, d: 20, h: 10 }; [g.x, g.x + Math.min(g.w, 160)].forEach(x => [g.z, g.z + g.d].forEach(z => { pts.push([x, 0, z], [x, g.h + 40, z]); })); });

@@ -26,6 +26,7 @@ motionButton?.addEventListener('click', () => { paused = !paused; motionUI(); })
 motionQuery.addEventListener('change', event => { paused = event.matches; motionUI(); });
 
 hydrateGlyphs();
+import(`./signature.js?v=${V}`).then(m => m.hydrateSignatures()).catch(error => console.error('Signatures failed:', error));
 
 function fail(element, retry) {
   element.replaceChildren();
@@ -93,6 +94,29 @@ function goToStep(scene) {
 }
 switcher?.addEventListener('click', event => { const b = event.target.closest('[data-go]'); if (b) goToStep(b.dataset.go); });
 document.addEventListener('mini:request-scene', event => goToStep(event.detail.id));
+
+/* ---- Type cut from field photographs: the title and each lens letter ---- */
+const heroTitle = document.querySelector('#hero-title');
+mount('#hero-type', async host => {
+  const { mountPhotoType } = await import(`./photo-type.js?v=${V}`);
+  const t = mountPhotoType(host, {
+    interactive: true,
+    size: () => parseFloat(getComputedStyle(heroTitle).fontSize),
+    lines: [
+      [{ text: 'A', photo: 'driving-school', tone: 'hk' }, { text: 'life', photo: 'driving-school', tone: 'hk', focus: [[.25, .55]] }],
+      [{ text: 'doesn’t', photo: 'crossing-hall', tone: 'x', focus: [[.5, .38]] }, { text: 'move', photo: 'hsitp-sign', tone: 'x' }],
+      [{ text: 'all', photo: 'place', tone: 'sz', font: 'accent' }, { text: 'at', photo: 'menu', tone: 'sz', font: 'accent' }, { text: 'once.', photo: 'community-centre', tone: 'sz', font: 'accent', focus: [[.5, .45]] }]
+    ]
+  });
+  requestAnimationFrame(() => { if (host.classList.contains('is-ready')) html.classList.add('has-photo-title'); });
+  new MutationObserver(() => { if (host.classList.contains('is-ready')) html.classList.add('has-photo-title'); }).observe(host, { attributes: true, attributeFilter: ['class'] });
+  return t;
+});
+const LENS_PHOTOS = { A: ['menu', 'service-street'], B: ['help-kiosk', 'help-point', 'driving-school'], C: ['community-centre', 'community-sign', 'park'] };
+document.querySelectorAll('.lens-mark').forEach(mark => mount(`.lens-mark[data-lens="${mark.dataset.lens}"]`, async host => {
+  const { mountPhotoType } = await import(`./photo-type.js?v=${V}`);
+  return mountPhotoType(host, { interactive: false, leading: 1, size: () => parseFloat(getComputedStyle(host).fontSize), lines: [[{ text: host.dataset.lens, photos: LENS_PHOTOS[host.dataset.lens], tone: 'x' }]] });
+}));
 
 /* ---- Story components ---- */
 mount('#life-ledger', async host => (await import(`./ledger.js?v=${V}`)).initLedger(host));
