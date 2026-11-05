@@ -8,11 +8,12 @@
 
    Needs Playwright with Chromium. If it is not already installed:
      npm install --no-save playwright && npx playwright install chromium
+   Or set CHROME_PATH to an existing Chrome executable.
 
    Covers interactions, deep links and every research shelf, plus evidence
    regressions agreed with dot on 5 November 2026: the unconsented street
-   photograph is never requested, schoolchildren's homes are never placed in
-   Shenzhen, the manager's shopping is never placed in Sheung Shui, the parent
+   photograph is never requested, schoolchildren's residential city is not
+   assigned or excluded, the manager's shopping is never placed in Sheung Shui, the parent
    is not "locally based", and no institution is disclosed. */
 const { chromium } = require('playwright');
 
@@ -21,12 +22,17 @@ const results = [];
 const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), detail });
 
 (async () => {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const page = await ctx.newPage();
-  const errors = [], requests = [];
+  const errors = [], requests = [], warnings = [];
   page.on('pageerror', e => errors.push(e.message));
-  page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+  page.on('console', m => {
+    if (m.type() !== 'error') return;
+    // A pre-existing missing browser icon is recorded separately from runtime failures.
+    if (/\/favicon\.ico(?:\?|$)/.test(m.location().url || '') && /404/.test(m.text())) warnings.push('favicon.ico returns 404');
+    else errors.push(m.text());
+  });
   ctx.on('request', r => requests.push(r.url()));
 
   await page.goto(base, { waitUntil: 'networkidle' });
@@ -68,7 +74,8 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   check('repair: unplaced parts float as ghosts', (await page.$$eval('.mini-ghost', l => l.length)) === 3);
   await scene('pupils');
   const pupilPins = await page.$$eval('.mini-flag, .mini-mark.has-pin', l => l.map(n => n.textContent));
-  check('EVIDENCE pupils: homes drawn beyond Shenzhen', await page.isVisible('.mini-zone') && pupilPins.some(t => t.includes('Mainland')), pupilPins.join(' | '));
+  check('EVIDENCE pupils: Mainland includes Shenzhen; residential city unspecified',
+    (await page.textContent('.mini-zone')) === 'Mainland · includes Shenzhen' && pupilPins.some(t => t.includes('city unspecified')), pupilPins.join(' | '));
   await scene('manager');
   const shopPin = await page.$eval('.mini-mark[data-place="hk-shops"]', n => n.textContent);
   const managerFlags = await page.$$eval('.mini-flag', l => l.map(n => n.textContent));
@@ -77,7 +84,9 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   // Ledger
   check('EVIDENCE ledger: eight selected accounts plus an official count', (await page.textContent('#ledger .deck')).includes('Eight selected accounts'));
   const pupilMarks = await page.$$eval('.lrow[data-person="pupils"] .lmark', l => l.map(n => `${n.dataset.side}:${n.dataset.facet}`));
-  check('EVIDENCE ledger: pupils’ home is Mainland, not Shenzhen', pupilMarks.includes('mainland:home') && !pupilMarks.includes('sz:home'), pupilMarks.join(' '));
+  check('EVIDENCE ledger: pupils’ home is Mainland with no city assigned', pupilMarks.includes('mainland:home') && !pupilMarks.includes('sz:home'), pupilMarks.join(' '));
+  const residentSpend = await page.$eval('.lrow[data-person="ss-resident"] .sig-lane[data-facet="spend"]', n => n.dataset.where);
+  check('EVIDENCE infrequent crossings are retained without implying purchases', residentSpend === 'unknown' && (await page.textContent('.lrow[data-person="ss-resident"] .lrow-context')).includes('Crosses infrequently'));
   const parentBand = await page.$eval('.lrow[data-person="parent"]', n => n.closest('.lband').querySelector('.lband-name').textContent);
   check('EVIDENCE ledger: parent is not "locally based"', !/locally based/i.test(parentBand), parentBand);
   await page.click('.ledger-controls [data-focus="work"]');
@@ -133,7 +142,9 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   check('a signature for every ledger row', (await page.$$eval('.lrow .lrow-sig svg.sig', l => l.length)) === 9);
   check('five signatures in the tour and five in the summary row', (await page.$$eval('.step-sig svg.sig', l => l.length)) === 5 && (await page.$$eval('.sig-row svg.sig', l => l.length)) === 5);
   const pupilSig = await page.$$eval('.lrow[data-person="pupils"] .sig-lane', l => l.map(n => `${n.dataset.facet}:${n.dataset.where}`));
-  check('EVIDENCE pupils’ signature places home beyond Shenzhen', pupilSig.includes('home:beyond') && !pupilSig.some(t => t.startsWith('home:sz')), pupilSig.join(' '));
+  check('EVIDENCE pupils’ signature leaves residential city unspecified', pupilSig.includes('home:mainland') && !pupilSig.some(t => t.startsWith('home:sz')), pupilSig.join(' '));
+  const pupilDescriptions = await page.$$eval('.sig[aria-label^="Cross-boundary schoolchildren"]', l => l.map(n => n.getAttribute('aria-label')));
+  check('EVIDENCE pupil signatures do not exclude Shenzhen', pupilDescriptions.length > 0 && pupilDescriptions.every(t => t.includes('city unspecified') && !/not only|elsewhere|beyond/i.test(t)), pupilDescriptions.join(' | '));
   const managerSig = await page.$$eval('.lrow[data-person="manager"] .sig-lane', l => l.map(n => `${n.dataset.facet}:${n.dataset.where}`));
   check('manager signature: shopping in both places, ties unknown', managerSig.includes('spend:both') && managerSig.includes('ties:unknown'), managerSig.join(' '));
 
@@ -161,11 +172,44 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
 
   check('EVIDENCE the unconsented street photograph is never requested', !requests.some(u => /sz-services\.jpg/.test(u)));
   check('new field photographs load as cropped derivatives', ['hk-crossing-hall', 'sz-help-kiosk', 'sz-community-centre'].every(n => requests.some(u => u.includes(n))));
-  check('no page errors', errors.length === 0, errors.join(' | '));
+  check('no runtime or resource errors apart from the recorded missing favicon', errors.length === 0, errors.join(' | '));
+
+  // Width regression: the services strip used to expand the whole document at
+  // 844px, causing mobile auto-scaling and making the Enlarge button unreachable.
+  // Compare against clientWidth: innerWidth can itself grow with the overflow.
+  for (const [width, height, touch] of [[320, 740, true], [390, 844, true], [412, 915, true], [768, 1024, true], [844, 390, true], [1024, 768, false], [1099, 800, false], [1100, 800, false], [1280, 800, false], [1440, 900, false]]) {
+    const responsive = await browser.newContext({ viewport: { width, height }, isMobile: touch, hasTouch: touch, reducedMotion: 'reduce' });
+    const p = await responsive.newPage();
+    await p.goto(base, { waitUntil: 'networkidle' });
+    await p.click('.status-popup-explore');
+    await p.locator('.tr-stop[data-stop="startup"]').click();
+    const box = await p.evaluate(() => ({ client: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth }));
+    check(`layout ${width}×${height}: services stay inside the page`, box.scroll <= box.client + 1, JSON.stringify(box));
+    await p.locator('.tr-enlarge').scrollIntoViewIfNeeded();
+    let opened = false;
+    try {
+      if (touch) await p.locator('.tr-enlarge').tap({ timeout: 2500 });
+      else await p.locator('.tr-enlarge').click({ timeout: 2500 });
+      opened = await p.evaluate(() => document.querySelector('.photo-viewer')?.open === true);
+    } catch (error) { /* Report the failed check, then continue the remaining widths. */ }
+    check(`layout ${width}×${height}: Enlarge is reachable${touch ? ' by touch' : ''}`, opened);
+    if (opened) await p.keyboard.press('Escape');
+    if (width === 844) {
+      await p.focus('.tr-stop[data-stop="licence"]');
+      const reached = [];
+      for (let i = 0; i < 9; i++) {
+        await p.keyboard.press('ArrowRight');
+        reached.push(await p.getAttribute('.tr-view', 'data-current'));
+      }
+      check('landscape: all nine services are reachable by keyboard', new Set(reached).size === 9, reached.join(', '));
+    }
+    await responsive.close();
+  }
   await browser.close();
 
   const failed = results.filter(r => !r.ok);
   results.forEach(r => console.log(`${r.ok ? 'PASS' : 'FAIL'}  ${r.name}${r.detail && !r.ok ? `  — ${r.detail}` : ''}`));
   console.log(`\n${results.length - failed.length}/${results.length} passed · ${base}`);
+  [...new Set(warnings)].forEach(w => console.log(`NOTE  ${w} (unchanged; not a runtime failure)`));
   process.exit(failed.length ? 1 : 0);
 })().catch(error => { console.error(error); process.exit(2); });

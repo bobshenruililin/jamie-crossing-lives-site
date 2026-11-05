@@ -272,7 +272,7 @@ const SIDE = {
 
 /* Build every solid from the shared footprints. Each part keeps its place id
    so a scene can light or dim it. */
-function buildScene(GEOMETRY, places, TREES, BEYOND) {
+function buildScene(GEOMETRY, places, TREES, MAINLAND_REGION) {
   const parts = { cube: [], prism: [], crown: [] };
   let seed = 1;
   const put = (mesh, x, y, z, w, h, d, color, { place = null, windows = false, ao = true } = {}) => parts[mesh].push({ x, y, z, w, h, d, color, place, windows, ao, seed: seed++ });
@@ -286,12 +286,12 @@ function buildScene(GEOMETRY, places, TREES, BEYOND) {
   put('cube', -100, -1, 42, 200, 9, 34, hex('#e3d3b2'));
   [43, 75].forEach(z => { put('cube', -100, 17, z - .6, 200, 1.4, 1.2, hex('#426d65'), { ao: false }); for (let x = -96; x <= 100; x += 24) put('cube', x - .5, 8, z - .5, 1, 9, 1, hex('#426d65'), { ao: false }); });
   for (let z = -178; z < 186; z += 16) { if (z > 32 && z < 84) continue; put('cube', -0.6, -6, z, 1.2, 0.8, 7, hex('#517d74'), { ao: false }); }
-  // the Mainland beyond Shenzhen (shown only when a scene reaches it)
-  const beyondStart = parts.cube.length;
-  put('cube', BEYOND.x0, -3, BEYOND.z0, BEYOND.x1 - BEYOND.x0, 0.6, BEYOND.z1 - BEYOND.z0, hex('#dce8e2'), { ao: false });
-  for (let x = BEYOND.x0; x < BEYOND.x1; x += 14) { put('cube', x, -2.2, BEYOND.z0 - .7, 7, .5, 1.4, hex('#008c7a'), { ao: false }); put('cube', x, -2.2, BEYOND.z1 - .7, 7, .5, 1.4, hex('#008c7a'), { ao: false }); }
-  for (let z = BEYOND.z0; z < BEYOND.z1; z += 14) put('cube', BEYOND.x1 - .7, -2.2, z, 1.4, .5, 7, hex('#008c7a'), { ao: false });
-  const beyondEnd = parts.cube.length;
+  // Mainland scope includes Shenzhen; no residential city is assigned.
+  const mainlandStart = parts.cube.length;
+  put('cube', MAINLAND_REGION.x0, -3, MAINLAND_REGION.z0, MAINLAND_REGION.x1 - MAINLAND_REGION.x0, 0.6, MAINLAND_REGION.z1 - MAINLAND_REGION.z0, hex('#dce8e2'), { ao: false });
+  for (let x = MAINLAND_REGION.x0; x < MAINLAND_REGION.x1; x += 14) { put('cube', x, -2.2, MAINLAND_REGION.z0 - .7, 7, .5, 1.4, hex('#008c7a'), { ao: false }); put('cube', x, -2.2, MAINLAND_REGION.z1 - .7, 7, .5, 1.4, hex('#008c7a'), { ao: false }); }
+  for (let z = MAINLAND_REGION.z0; z < MAINLAND_REGION.z1; z += 14) put('cube', MAINLAND_REGION.x1 - .7, -2.2, z, 1.4, .5, 7, hex('#008c7a'), { ao: false });
+  const mainlandEnd = parts.cube.length;
   // a tray in front of Hong Kong where the pupil count assembles
   const trayStart = parts.cube.length;
   put('cube', -380, -7.4, 172, 262, 2, 34, hex('#ece5d3'), { ao: false });
@@ -322,7 +322,7 @@ function buildScene(GEOMETRY, places, TREES, BEYOND) {
     }
   });
   TREES.forEach(([x, z, s]) => { put('cube', x - 1, 0, z - 1, 2, s * 1.2, 2, hex('#6c7f68'), { place: 'tree' }); put('crown', x - s * .62, s * .9, z - s * .62, s * 1.24, s * 1.1, s * 1.24, hex('#6e8f76'), { place: 'tree' }); });
-  return { parts, beyond: [beyondStart, beyondEnd], tray: [trayStart, trayEnd] };
+  return { parts, mainland: [mainlandStart, mainlandEnd], tray: [trayStart, trayEnd] };
 }
 
 export async function createGpuWorld(canvas, data, { onFrame, onLost } = {}) {
@@ -341,8 +341,8 @@ export async function createGpuWorld(canvas, data, { onFrame, onLost } = {}) {
   let destroyed = false;
   device.lost.then(info => { if (!destroyed) onLost?.(info); });
 
-  const { GEOMETRY, places, TREES, BEYOND } = data;
-  const scene = buildScene(GEOMETRY, places, TREES, BEYOND);
+  const { GEOMETRY, places, TREES, MAINLAND_REGION } = data;
+  const scene = buildScene(GEOMETRY, places, TREES, MAINLAND_REGION);
   const module = device.createShaderModule({ code: SHADER });
   const info = await module.getCompilationInfo?.();
   if (info?.messages?.some(m => m.type === 'error')) throw new Error(info.messages.map(m => m.message).join('\n'));
@@ -439,7 +439,7 @@ export async function createGpuWorld(canvas, data, { onFrame, onLost } = {}) {
   }
 
   /* ---------- scene state ---------- */
-  let litSet = new Set(), dimming = false, showBeyond = false, showTray = false;
+  let litSet = new Set(), dimming = false, showMainland = false, showTray = false;
   let pupilTarget = 0, pupilProgress = 0, pupilAlpha = 0, pupilStart = 0;
   let motion = true, pulses = false, inView = true, needsShadow = true;
   const stateAnim = { from: null, to: null, start: 0 };
@@ -452,7 +452,7 @@ export async function createGpuWorld(canvas, data, { onFrame, onLost } = {}) {
         const lit = isPlace && litSet.has(p.place) ? 1 : 0;
         const dim = dimming && (p.place === 'tree' || (isPlace && !litSet.has(p.place))) ? 1 : 0;
         let hide = 0;
-        if (key === 'cube' && i >= scene.beyond[0] && i < scene.beyond[1] && !showBeyond) hide = 1;
+        if (key === 'cube' && i >= scene.mainland[0] && i < scene.mainland[1] && !showMainland) hide = 1;
         if (key === 'cube' && i >= scene.tray[0] && i < scene.tray[1] && !showTray) hide = 1;
         return [lit, dim, hide];
       });
@@ -601,14 +601,14 @@ export async function createGpuWorld(canvas, data, { onFrame, onLost } = {}) {
   const onVisible = () => { if (!document.hidden) kick(); };
   document.addEventListener('visibilitychange', onVisible);
 
-  // hide the beyond zone at start
+  // hide the Mainland scope at start
   writeStates(targetStates());
   resize(); updateMatrices();
 
   const api = {
     renderer: 'webgpu',
-    setScene({ lit = [], dim = false, arcs = [], beyond = false, pupils = false, pulse = true }) {
-      litSet = new Set(lit); dimming = dim; showBeyond = beyond || pupils; showTray = pupils;
+    setScene({ lit = [], dim = false, arcs = [], mainland = false, pupils = false, pulse = true }) {
+      litSet = new Set(lit); dimming = dim; showMainland = mainland || pupils; showTray = pupils;
       stateAnim.from = currentStates(); stateAnim.to = targetStates(); stateAnim.start = performance.now();
       if (!motion) { writeStates(stateAnim.to); stateAnim.to = null; needsShadow = true; }
       setRibbons(arcs);

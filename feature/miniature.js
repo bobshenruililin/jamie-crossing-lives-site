@@ -34,11 +34,11 @@ const GEOMETRY = {
   'sz-community': { x: 254,  z: 90,   w: 50, d: 42, h: 24 },
   'sz-park':      { x: 318,  z: 86,   w: 54, d: 72, h: 4 }
 };
-/* Edges and loose points: 'mainland' lies beyond the Shenzhen plinth, because the
-   pupil data cover Mainland residence, not Shenzhen; 'hk-side' is an unplaced
-   point on the Hong Kong side for activities the account does not locate. */
+/* Loose anchors are diagram positions, not located homes. The Mainland region
+   includes Shenzhen; the pupil data do not give residential cities. 'hk-side'
+   is likewise unplaced within Hong Kong. */
 const EDGES = { 'hk-edge': [-150, 59, 6], 'sz-edge': [150, 59, 6], mainland: [478, 30, 6], 'hk-side': [-206, 59, 4] };
-const BEYOND = { x0: 404, x1: 556, z0: -150, z1: 150 };
+const MAINLAND_REGION = { x0: 86, x1: 556, z0: -184, z1: 184 };
 /* Parts of a life an account does not place hover over the boundary gap. */
 const GHOSTS = { home: [0, 2, 52], work: [0, -58, 52], ties: [0, -118, 52], spend: [0, -178, 52] };
 const TREES = [[-200, -112, 20], [-118, -150, 18], [-112, -78, 16], [-196, 18, 17], [-120, 22, 15], [-112, 150, 18], [-372, 20, 16],
@@ -259,6 +259,11 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
     const dimmed = scene.lit.length > 0;
     const [scx, scy] = project(0, 20, -30);
     el('ellipse', { cx: scx, cy: scy + 54, rx: 470, ry: 92, fill: '#315c4a', opacity: '.10' }, frag);
+    if (usesMainland()) {
+      const { x0, x1, z0, z1 } = MAINLAND_REGION;
+      poly([[x0, z0, -2], [x1, z0, -2], [x1, z1, -2], [x0, z1, -2]], '#008c7a12', frag, { stroke: '#008c7a', 'stroke-width': 1.4, 'stroke-dasharray': '6 6' });
+      for (let zz = z0 + 30; zz < z1; zz += 60) line([[x0 + 24, zz, -1.5], [x1 - 24, zz + 18, -1.5]], '#008c7a33', 1, frag, { 'stroke-dasharray': '2 5' });
+    }
     [['hk', -386], ['sz', 100]].forEach(([side, x0]) => {
       box(x0, -168, 286, 336, 22, { top: '#d6d4bf', side: '#7a9188', front: '#a6b3a1' }, frag, -24);
       poly([[x0 + 7, -161, 0], [x0 + 279, -161, 0], [x0 + 279, 161, 0], [x0 + 7, 161, 0]], side === 'hk' ? '#e7decb' : '#d8e2d5', frag);
@@ -266,11 +271,6 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
       poly([[x0 + 7, 44, .3], [x0 + 279, 44, .3], [x0 + 279, 74, .3], [x0 + 7, 74, .3]], '#efeadb', frag);
       for (let xx = x0 + 16; xx < x0 + 276; xx += 22) line([[xx, 59, .5], [xx + 10, 59, .5]], '#c9c3ad', .8, frag);
     });
-    if (usesMainland()) {
-      const { x0, x1, z0, z1 } = BEYOND;
-      poly([[x0, z0, -2], [x1, z0, -2], [x1, z1, -2], [x0, z1, -2]], '#008c7a12', frag, { stroke: '#008c7a', 'stroke-width': 1.4, 'stroke-dasharray': '6 6' });
-      for (let zz = z0 + 30; zz < z1; zz += 60) line([[x0 + 24, zz, -1.5], [x1 - 24, zz + 18, -1.5]], '#008c7a33', 1, frag, { 'stroke-dasharray': '2 5' });
-    }
     box(-100, 42, 200, 34, 8, { top: '#e8d8b9', side: '#8c9b88', front: '#b0bca4' }, frag, -1);
     for (let xx = -90; xx < 100; xx += 14) line([[xx, 44, 8], [xx, 74, 8]], '#ac9a7b', .7, frag);
     [43, 75].forEach(zz => { line([[-100, zz, 18], [100, zz, 18]], '#426d65', 1.6, frag); for (let xx = -96; xx <= 100; xx += 24) line([[xx, zz, 7], [xx, zz, 18]], '#426d65', 1.1, frag); });
@@ -327,7 +327,7 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
     const W = rect.width || 900, H = rect.height || 520;
     const ratio = W / H;
     const corners = [];
-    [-386, usesMainland() ? BEYOND.x1 + 10 : 386].forEach(x => [-168, 168].forEach(z => [-24, 150].forEach(y => corners.push(project(x, z, y)))));
+    [-386, usesMainland() ? MAINLAND_REGION.x1 + 10 : 386].forEach(x => [-168, 168].forEach(z => [-24, 150].forEach(y => corners.push(project(x, z, y)))));
     const whole = bounds(corners);
     // Bottom clearance keeps the side labels off the plinths.
     const padTop = 40, padBottom = 66;
@@ -338,7 +338,7 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
     if ((stage.clientWidth || 900) < 720 && focusIds.length && sceneId !== 'together') {
       const pts = [];
       (scene.unplaced || []).forEach(f => pts.push(project(...GHOSTS[f])));
-      if (usesMainland()) [BEYOND.x0, BEYOND.x1].forEach(x => [BEYOND.z0, BEYOND.z1].forEach(z => pts.push(project(x, z, 0), project(x, z, 40))));
+      if (usesMainland()) [MAINLAND_REGION.x0, MAINLAND_REGION.x1].forEach(x => [MAINLAND_REGION.z0, MAINLAND_REGION.z1].forEach(z => pts.push(project(x, z, 0), project(x, z, 40))));
       focusIds.forEach(id => { const g = GEOMETRY[id] || { x: EDGES[id][0] - 10, z: EDGES[id][1] - 10, w: 20, d: 20, h: 10 }; [g.x, g.x + g.w].forEach(x => [g.z, g.z + g.d].forEach(z => { pts.push(project(x, z, 0)); pts.push(project(x, z, g.h + 64)); })); });
       scene.arcs.forEach(arc => { const g = arcGeometry(arc.from, arc.to, false, arc.style); pts.push(g.pa, g.pb, g.c1, g.c2); });
       const f = bounds(pts);
@@ -420,8 +420,8 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
     layoutPins(stageWidth, stage.clientHeight || 500);
     extras.replaceChildren();
     if (usesMainland()) {
-      const zone = make('span', 'mini-zone', 'Elsewhere on the Mainland');
-      const [l, t] = pctAt(BEYOND.x1 - 20, BEYOND.z1 - 6, 0);
+      const zone = make('span', 'mini-zone', 'Mainland · includes Shenzhen');
+      const [l, t] = pctAt(MAINLAND_REGION.x1 - 20, MAINLAND_REGION.z1 - 6, 0);
       zone.style.left = `${l}%`; zone.style.top = `${t}%`;
       extras.append(zone);
     }
@@ -519,12 +519,12 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
 
   function gpuScene() {
     const sc = currentScene();
-    gpu.setScene({ lit: peekId ? [...sc.lit, peekId] : sc.lit, dim: sc.lit.length > 0, arcs: sc.arcs.map(arc3d), beyond: usesMainland(), pupils: sceneId === 'pupils' });
+    gpu.setScene({ lit: peekId ? [...sc.lit, peekId] : sc.lit, dim: sc.lit.length > 0, arcs: sc.arcs.map(arc3d), mainland: usesMainland(), pupils: sceneId === 'pupils' });
   }
   function gpuCamera(animate) {
     const sc = currentScene();
     const pts = [];
-    const whole = () => { [-386, usesMainland() ? BEYOND.x1 + 10 : 386].forEach(x => [-168, 168].forEach(z => [-24, 120].forEach(y => pts.push([x, y, z])))); pts.push([-120, -56, 190], [120, -56, 190]); };
+    const whole = () => { [-386, usesMainland() ? MAINLAND_REGION.x1 + 10 : 386].forEach(x => [-168, 168].forEach(z => [-24, 120].forEach(y => pts.push([x, y, z])))); pts.push([-120, -56, 190], [120, -56, 190]); };
     const wide = (stage.clientWidth || 900) >= 720;
     const focusIds = [...sc.lit, ...sc.pins.map(p => p.at)].filter((v, i, a) => a.indexOf(v) === i);
     if (wide || !focusIds.length || sceneId === 'together') { whole(); if (sceneId === 'pupils') pts.push([-380, -8, 206], [610, 236, -150]); }
@@ -533,7 +533,7 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
       focusIds.forEach(id => { const g = GEOMETRY[id] || { x: EDGES[id][0] - 10, z: EDGES[id][1] - 10, w: 20, d: 20, h: 10 }; [g.x, g.x + Math.min(g.w, 160)].forEach(x => [g.z, g.z + g.d].forEach(z => { pts.push([x, 0, z], [x, g.h + 40, z]); })); });
       sc.arcs.map(arc3d).forEach(a => pts.push(a.p0, a.p3, a.mid));
       (sc.unplaced || []).forEach(f => { const [x, z, y] = GHOSTS[f]; pts.push([x, y + 10, z]); });
-      if (usesMainland()) [BEYOND.x0, BEYOND.x1].forEach(x => [BEYOND.z0, BEYOND.z1].forEach(z => pts.push([x, 0, z])));
+      if (usesMainland()) [MAINLAND_REGION.x0, MAINLAND_REGION.x1].forEach(x => [MAINLAND_REGION.z0, MAINLAND_REGION.z1].forEach(z => pts.push([x, 0, z])));
       if (sceneId === 'pupils') pts.push([-380, -8, 206], [-118, -8, 206], [610, 236, -150], [340, 150, 150]);
     }
     gpu.flyTo(pts, { animate });
@@ -671,7 +671,7 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
     try {
       const { createGpuWorld } = await import('./world-gpu.js?v=20261105-gpu');
       canvas.hidden = false;
-      const world = await createGpuWorld(canvas, { GEOMETRY, places, TREES, BEYOND }, { onFrame: () => placeOverlays(), onLost: info => useSvg(info?.message || 'GPU device lost') });
+      const world = await createGpuWorld(canvas, { GEOMETRY, places, TREES, MAINLAND_REGION }, { onFrame: () => placeOverlays(), onLost: info => useSvg(info?.message || 'GPU device lost') });
       if (destroyed) { world.destroy(); return; }
       gpu = world;
       gpu.setMotion(motionAllowed());

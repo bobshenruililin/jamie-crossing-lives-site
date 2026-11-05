@@ -1,6 +1,6 @@
 # Crossing Lives — website edition of 5 November 2026
 
-Branch `claude/keen-cerf-j2szmo`. A coherent rebuild of the story layer, aligned with Script v3 (checked 2 November 2026). The presentation, `research.html`, `samples/`, PDFs and QR assets are untouched.
+Original branch `claude/keen-cerf-j2szmo`; follow-up review branch `codex/jamie-internal-draft-20261105`, based on `9482378`. A coherent rebuild of the story layer, aligned with Script v3 (checked 2 November 2026). The presentation, `research.html`, `samples/`, PDFs and QR assets are untouched. See checkpoint 10 for the current review state.
 
 ## Preview
 
@@ -90,7 +90,37 @@ Bob’s note: less secondary labelling; text only where it carries insight. This
 - **Places have no photographs yet** for Sheung Shui shops, the repair specialists, restaurants (beyond one menu), tuition and the clinic. Those cards say so honestly.
 - `research.html` and the presentation footer still carry older revision wording; they're out of scope for this pass.
 
-## Checkpoint 9 — the slogan rearranges itself; text that lights the model · RESUME HERE
+## Checkpoint 10 — preserve the visual draft, correct the evidence · RESUME HERE
+
+Bob's direction: keep Opus's visual approach for an internal review draft. Apply review items 1 and 3; investigate and preserve the substance of item 4. Leave photograph/consent decisions and photo-label revisions (items 2 and 5) for Bob and Jamie. This is not publication clearance.
+
+**Implemented:**
+
+- **Pupil geography:** the dashed Mainland region now includes the Shenzhen plinth in both SVG and WebGPU. The home label says "city unspecified". The ledger and life signatures use the same hatched Mainland convention without an outward arrow or an assertion that homes are elsewhere. The 16,139 count, crossing animation and school-level point chart remain.
+- **Responsive services strip:** tablet and landscape widths use the existing horizontal filmstrip treatment. Scrolling stays inside the strip; the page no longer expands and the photo's Enlarge button is reachable. All nine stops remain.
+- **Preserved, with source support:** the infrequent-crossing account keeps its place and reason graphic. Its ledger row now gives the reported crossing pattern a separate cue, rather than depicting an unreported purchase. The tour's existing payoff and five signatures remain, supported by the guide's continuing family visits and the manager's local shopping. Commercial, public and community services remain in the takeaway; the question of unmet needs stays a question. Both service-street and parcel-point observations remain, without asserting unverified adjacency.
+
+Source checks used saved Script v3, Appendix 2 and the accessible original field-observation text. Detailed traceability stays in the private source repository, not in this public export. No source document was edited. No photo file, photo caption, presentation frame or PDF changed in this pass. The first-visit popup and persistent Work in progress label remain.
+
+**Verified on 5 November 2026:**
+
+- `tools/check-site.js`: **88/88 on `/` and 88/88 on `/feature/`** in local Chrome 157.0.8103.38. Includes the existing interactions, shelves, legacy links and evidence checks, plus the new evidence and responsive regressions.
+- Services layout and Enlarge access at 320, 390, 412, 768, 844, 1024, 1099, 1100, 1280 and 1440px; touch emulation for the smaller widths; all nine stops reachable by keyboard at 844×390.
+- Native, headed WebGPU on Apple Metal: pupil scene renders, evidence card opens, motion pause works. This was not the off-screen debug renderer.
+- Desktop and phone-sized screenshots inspected; 22 JavaScript files pass syntax checks; generated `/feature/` alias agrees with root; `git diff --check` clean.
+- **Known minor issue:** the browser requests a missing `favicon.ico` (404). The check script reports this separately and still fails for other console/runtime errors. It has not been silently fixed or counted as a zero-error run.
+- **Not verified:** physical iPhone or Android hardware, Safari, Firefox, a screen reader, or Jamie's approval. Phone checks are Chrome touch/viewport emulation. WebGPU remains opt-in.
+
+**Proposals for the next visual pass — not implemented:**
+
+1. **Give the slogan a stronger resting state.** Keep its photographic rearrangement, but test a darker outline or restrained ink backing after it settles. The animation should leave a readable title without requiring hover or replay.
+2. **Move the GPU pupil breakdown below the model.** An inset directly above the place labels can keep the count key clear of the School pin while retaining the individual-pupil animation and spacious model.
+3. **Let the guide's story expand on demand.** Keep the concise tour, with an optional "What changed for her?" panel for the supported occupational sequence and trade-offs. Use the existing signature to connect it to the model; avoid adding another mandatory text layer.
+4. **Add a small site icon and complete real-device checks.** A simple mark using the existing boundary/two-side palette would remove the favicon warning. Real-phone checks should focus on the title, sticky model, photo viewer and landscape services strip.
+
+**Handoff and export protection:** this branch is the candidate to review; `main` and GitHub Pages are unchanged. Do not export over it from the older private runtime. The port list below still applies; this pass changes only the existing page, cast, ledger, signature, miniature/GPU and edition CSS files plus the browser checks. The private-source runtime has not yet been ported. Preserve the separate photo decisions for Bob and Jamie.
+
+## Checkpoint 9 — the slogan rearranges itself; text that lights the model
 
 **Opening slogan:** "Two places, / *one life, rearranged.*" (Bob's idea: a two-line slogan for the whole project whose first line's photos and colours rearrange into the second).
 - The project's arrangements framework becomes the opening gesture:

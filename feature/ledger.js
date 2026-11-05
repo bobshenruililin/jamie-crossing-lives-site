@@ -13,7 +13,7 @@ const ORDER = ['home', 'work', 'spend', 'ties'];
    checked against the rows below; none generalises beyond these accounts. */
 const READINGS = {
   all: 'Only one account describes moving home. More often, one part of life crosses: a repair, a meal, a school day, time with family.',
-  home: 'One account moved home north; the schoolchildren live across the Mainland, not only in Shenzhen; one resident rents in Hong Kong yet calls Shenzhen home. Four accounts do not say where home is.',
+  home: 'One account moved home north; the schoolchildren live on the Mainland, with no city specified; one resident rents in Hong Kong yet calls Shenzhen home. Four accounts do not say where home is.',
   work: 'Every workplace or school these accounts locate is in Hong Kong. The guide’s preferred work is not located.',
   spend: 'Purchases and services are what most often cross—a repair, meals, shopping and activities. The store manager still does most shopping in Hong Kong.',
   ties: 'Relationships and activities sit on both sides—for the guide and the resident, partly on the side opposite where they live.'
@@ -30,8 +30,8 @@ export function initLedger(host) {
       const f = person.facets[facet] || {};
       if (f.hk) hk.push(mark(facet, f.hk, 'hk'));
       if (f.sz) sz.push(mark(facet, f.sz, 'sz'));
-      // Mainland but not necessarily Shenzhen: drawn beyond the Shenzhen column.
-      if (f.mainland) sz.push(`<li class="lmark is-beyond" data-facet="${facet}" data-side="mainland">${facetGlyph(facet)}<span>${esc(f.mainland)}</span><svg class="beyond-arrow" viewBox="0 0 18 10" aria-hidden="true"><path d="M1 5h14M11 1l4 4-4 4"/></svg></li>`);
+      // A broader Mainland scope, without assigning or excluding a city.
+      if (f.mainland) sz.push(`<li class="lmark is-mainland" data-facet="${facet}" data-side="mainland">${facetGlyph(facet)}<span>${esc(f.mainland)}</span></li>`);
       if (!f.hk && !f.sz && !f.mainland) {
         const covered = !(person.notCovered || []).includes(facet);
         unknown.push(`<li class="lmark is-unknown" data-facet="${facet}" title="${covered ? 'Not established' : 'Not covered by this record'}">${facetGlyph(facet)}<span class="visually-hidden">${esc(FACETS[facet].label)}: ${covered ? 'not established' : 'not covered by this record'}</span></li>`);
@@ -43,11 +43,12 @@ export function initLedger(host) {
       <button type="button" class="lrow-who" aria-expanded="false" aria-controls="ledger-${person.id}">
         <span class="lrow-sig">${signatureSVG(person.id, { size: 34, title: false })}</span>
         <span class="lrow-name">${esc(person.name)}${person.evidence === 'published' ? ` ${evidenceGlyph('published', 'lrow-ev')}` : ''}</span>
+        ${person.crossing ? `<span class="lrow-context" aria-label="Reported crossing pattern: ${esc(person.crossing)}">${esc(person.crossing)}</span>` : ''}
         <svg class="lrow-toggle" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg>
       </button>
       <ul class="lrow-side lrow-hk" aria-label="Hong Kong">${hk.join('')}</ul>
       <span class="lrow-boundary" aria-hidden="true"></span>
-      <ul class="lrow-side lrow-sz" aria-label="Shenzhen">${sz.join('')}</ul>
+      <ul class="lrow-side lrow-sz" aria-label="${ORDER.some(f => person.facets[f]?.mainland) ? 'Mainland; residential city unspecified' : 'Shenzhen'}">${sz.join('')}</ul>
       <ul class="lrow-unknown" aria-label="Not established">${unknown.join('')}</ul>
       <div class="lrow-detail" id="ledger-${person.id}" hidden>
         <p>${esc(person.summary)}</p>
