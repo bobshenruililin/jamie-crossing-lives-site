@@ -15,11 +15,17 @@ const TILT = .54, YAW = -.62;
 const MARKS = [
   { n: 1, lens: 'A', type: 'question', at: [262, -118, 30], text: 'What would people buy or do in Johor Bahru, and why?', note: 'Ask customers directly.' },
   { n: 2, lens: 'C', type: 'question', at: [-300, -104, 40], text: 'After a move, would spending, relationships and participation continue—and which ties stay remote?' },
-  { n: 3, lens: 'C', type: 'question', at: [336, 8, 28], text: 'What new needs would Johor providers meet?' },
+  { n: 3, lens: 'B', type: 'question', at: [336, 8, 28], text: 'What new needs would Johor providers meet?' },
   { n: 4, lens: '+', type: 'question', at: [236, 116, 24], text: 'How do changing demand, jobs, housing and services affect people who already live in Johor?' },
   { n: 5, lens: 'C', type: 'published', at: [-292, 96, 26], text: '≈ 1 in 3 Singapore respondents could envisage buying a Johor Bahru home and retiring there, if travel became easier.', note: 'Stated interest in a 2024 survey, not observed moves.', href: 'https://www.linkedin.com/posts/blackbox-research_sensingsg-feb24-spotlight-on-the-sg-jb-activity-7165164423840550912-fz3R' },
   { n: 6, lens: '', type: 'published', at: [60, 40, 2], text: 'RTS Link passenger service is targeted for February 2027, subject to approvals.', href: 'https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/10/news-releases/grantors-informed-rts-link-service-targeted-feb-2027.html' }
 ];
+const TRANSFER = {
+  1: {text:'Selected activities crossed; daily routines kept some spending in Hong Kong.', label:'A · Choices', href:'#choices'},
+  2: {text:'The guide moved home while family visits continued. The resident’s work, housing and ties were in different places.', label:'C · Relationships', href:'#ties'},
+  3: {text:'Delivery, tuition and follow-up care illustrate different needs—and different kinds of provision.', label:'B · Services', href:'#services'},
+  4: {text:'Sheung Shui accounts described different customer mixes and experiences of change.', label:'Local business accounts', href:'#choices'}
+};
 const OUTLINES = [
   [-366, -150, 44, 40, 100], [-306, -146, 58, 40, 62], [-232, -150, 52, 46, 118], [-366, -54, 66, 56, 40], [-276, -44, 88, 66, 48], [-170, -30, 44, 40, 30], [-360, 86, 70, 46, 64], [-262, 92, 104, 52, 26],
   [118, -150, 56, 44, 52], [192, -146, 66, 40, 34], [300, -156, 48, 46, 132], [118, -60, 86, 64, 44], [226, -54, 54, 50, 36], [304, -46, 64, 60, 30], [118, 90, 62, 48, 58], [200, 94, 46, 40, 40], [262, 90, 104, 60, 22]
@@ -42,7 +48,7 @@ export function initEcho(host) {
       <div class="echo-overlay"></div>
       <div class="mini-sides" aria-hidden="true"><span class="side-sg">Singapore</span><span class="side-bd">The boundary</span><span class="side-jb">Johor Bahru</span></div>
     </div>
-    <ol class="echo-list"></ol>
+    <div class="echo-inquiry"><p class="eyebrow">Questions to take into the field</p><ol class="echo-list"></ol></div><div class="echo-context"></div>
     <p class="echo-net">${evidenceGlyph('forecast')}<span>Hatched arcs: forecast extra consumer spending each year once the RTS Link opens. Net, about <b>S$290 million</b> more would flow out of Singapore than in—a forecast, not lost GDP. <a href="https://www.sbf.org.sg/docs/default-source/advocacy-policy/sbf-rts-study_final-report-16-jul.pdf?sfvrsn=b7ba6722_1" target="_blank" rel="noopener">SBF/RAS/SRA study, July 2026 ↗</a></span></p>
   </figure>`;
   const svg = host.querySelector('svg');
@@ -135,26 +141,23 @@ export function initEcho(host) {
     geometry.forEach((g, i) => { const [l, t] = pct(g.mid); flowLabels[i].style.left = `${l}%`; flowLabels[i].style.top = `${t}%`; });
   }
 
-  list.innerHTML = MARKS.map(m => `<li class="echo-item is-${m.type}" data-n="${m.n}">
-    <span class="echo-num">${m.type === 'question' ? m.n : evidenceGlyph('published')}</span>
-    <div>${m.lens ? `<span class="echo-lens">${m.lens === '+' ? 'Johor residents' : m.lens === 'A' ? 'A · Businesses' : 'C · Lives across the border'}</span>` : '<span class="echo-lens">The link</span>'}<p>${esc(m.text)}</p>${m.note ? `<small>${esc(m.note)}${m.href ? ` <a href="${m.href}" target="_blank" rel="noopener">Source ↗</a>` : ''}</small>` : m.href ? `<small><a href="${m.href}" target="_blank" rel="noopener">Source ↗</a></small>` : ''}</div>
-  </li>`).join('');
-
-  // pairing: a marker and its question light up together
-  const items = [...list.children];
-  function light(n) {
-    markers.forEach(b => b.classList.toggle('is-on', b.dataset.n === String(n)));
-    items.forEach(li => li.classList.toggle('is-on', li.dataset.n === String(n)));
+  const labels={A:'A · Purchases',B:'B · Everyday support',C:'C · Relationships','+':'People already living in Johor'};
+  list.innerHTML=MARKS.filter(m=>m.type==='question').map(m=>`<li class="echo-item is-question" data-n="${m.n}"><button type="button" class="echo-question" data-n="${m.n}" aria-expanded="${m.n===1}" aria-controls="echo-learning-${m.n}"><span class="echo-num">${m.n}</span><span><span class="echo-lens">${labels[m.lens]}</span><span class="echo-q-text">${esc(m.text)}</span></span><span class="echo-q-toggle" aria-hidden="true">+</span></button><div class="echo-learning" id="echo-learning-${m.n}" ${m.n===1?'':'hidden'}><p class="echo-learning-label">What prompted this question</p><p>${esc(TRANSFER[m.n].text)}</p><a href="${TRANSFER[m.n].href}">Revisit ${TRANSFER[m.n].label} ↗</a></div></li>`).join('');
+  host.querySelector('.echo-context').innerHTML=`<p class="echo-context-label">Published context <span>Figures to read alongside the questions</span></p>${MARKS.filter(m=>m.type==='published').map(m=>`<article class="echo-item is-published" data-n="${m.n}" id="echo-context-${m.n}"><span class="echo-num">${evidenceGlyph('published')}</span><div><span class="echo-lens">${m.n===5?'Stated interest · 2024 survey':'The rail link · stated target'}</span><p>${esc(m.text)}</p>${m.note?`<small>${esc(m.note)}</small>`:''}<a href="${m.href}" target="_blank" rel="noopener">Source ↗</a></div></article>`).join('')}`;
+  const items=[...host.querySelectorAll('.echo-item')];let activeQuestion=1;
+  function light(n){markers.forEach(b=>b.classList.toggle('is-on',b.dataset.n===String(n)));items.forEach(li=>li.classList.toggle('is-on',li.dataset.n===String(n)));}
+  function selectQuestion(n){
+    activeQuestion=n==null?null:Number(n);
+    list.querySelectorAll('.echo-question').forEach(b=>{const on=+b.dataset.n===activeQuestion;b.setAttribute('aria-expanded',String(on));host.querySelector(`#${b.getAttribute('aria-controls')}`).hidden=!on;});
+    light(n);
   }
-  host.addEventListener('pointerover', e => { const t = e.target.closest('[data-n]'); light(t ? t.dataset.n : null); });
-  host.addEventListener('pointerleave', () => light(null));
-  host.addEventListener('focusin', e => { const t = e.target.closest('[data-n]'); if (t) light(t.dataset.n); });
-  overlay.addEventListener('click', e => {
-    const b = e.target.closest('.echo-mark');
-    if (!b) return;
-    light(b.dataset.n);
-    list.querySelector(`[data-n="${b.dataset.n}"]`)?.scrollIntoView({ block: 'nearest', behavior: motionAllowed() ? 'smooth' : 'instant' });
-  });
+  host.addEventListener('pointerover',e=>{const t=e.target.closest('[data-n]');light(t?t.dataset.n:activeQuestion);});
+  host.addEventListener('pointerleave',()=>light(activeQuestion));
+  host.addEventListener('focusin',e=>{const t=e.target.closest('[data-n]');if(t)light(t.dataset.n);});
+  list.addEventListener('click',e=>{const b=e.target.closest('.echo-question');if(b)selectQuestion(b.getAttribute('aria-expanded')==='true'?null:b.dataset.n);});
+  list.addEventListener('keydown',e=>{if(!['ArrowUp','ArrowDown','Home','End'].includes(e.key))return;const bs=[...list.querySelectorAll('.echo-question')],i=bs.indexOf(document.activeElement);if(i<0)return;e.preventDefault();const j=e.key==='Home'?0:e.key==='End'?3:(i+(e.key==='ArrowDown'?1:3))%4;bs[j].focus();selectQuestion(bs[j].dataset.n);});
+  overlay.addEventListener('click',e=>{const b=e.target.closest('.echo-mark');if(!b)return;const n=+b.dataset.n;if(n<=4)selectQuestion(n);else light(n);host.querySelector(`.echo-item[data-n="${n}"]`)?.scrollIntoView({block:'nearest',behavior:motionAllowed()?'smooth':'instant'});});
+  selectQuestion(1);
 
   // arrival: outlines and arcs draw in once, when seen
   const figure = host.firstElementChild;

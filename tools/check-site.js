@@ -104,15 +104,38 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   await page.click('.tr-stop[data-stop="tuition"]');
   check('reported stop shows no photograph', await page.isVisible('.tr-nophoto'));
 
-  // Lens C ties
+  // The documented care pathway remains conditional, with records by permission.
+  await page.click('[data-care-go="2"]');
+  check('care: follow-up connects records by permission', (await page.getAttribute('.care', 'data-care-step')) === '2' && /authorise.*eHealth/.test(await page.textContent('.care-reading')));
+  await page.click('[data-care-go="3"]');
+  check('care: return is on request according to clinical need', /on request, according to clinical need/.test(await page.textContent('.care-reading')));
+  await page.focus('[data-care-go="3"]'); await page.keyboard.press('Home');
+  check('care: keyboard selects the eligible starting appointment', (await page.getAttribute('.care', 'data-care-step')) === '1');
+
+  // Lens C: fixed comparison rows and an explicitly unplaced workplace.
+  check('guide starts with an unplaced workplace', (await page.getAttribute('.ties', 'data-profile')) === 'guide' && /location not established/.test(await page.textContent('.ties-unplaced')));
+  await page.click('.ties-switch [data-profile="resident"]');
   check('resident shows no former home', !(await page.isVisible('.tie-former')));
+  check('resident qualification is visible', /regular commute/.test(await page.textContent('.ties-note')));
+  await page.click('.ties-focus [data-focus="work"]');
+  check('facet focus preserves context and changes the reading', (await page.locator('.ties-lane.is-context').count()) === 2 && /regular commute/.test(await page.textContent('.ties-reading')));
   await page.click('.ties-switch [data-profile="guide"]');
+  check('profile comparison preserves selected facet', (await page.getAttribute('.ties', 'data-focus')) === 'work' && /does not place/.test(await page.textContent('.ties-reading')));
+  await page.click('.ties-focus [data-focus="all"]');
   check('guide leaves a former-home outline in Hong Kong', await page.isVisible('.city-hk .tie-former') && await page.isVisible('.city-sz [data-arrives]'));
+  await page.click('.contact-chain [data-contact="1"]');
+  check('qualification is distinguished from access to work', /reported age-related reluctance/.test(await page.textContent('#contact-reading')));
+  await page.keyboard.press('ArrowRight');
+  check('contact story advances by keyboard and stays attributed', /Someone at the organisation intervened/.test(await page.textContent('#contact-reading')));
 
   // Singapore–Johor
   check('Singapore–Johor: six markers and two forecast flows', (await page.$$eval('.echo-mark', l => l.length)) === 6 && (await page.$$eval('.echo-flow', l => l.length)) === 2);
   await page.hover('.echo-item[data-n="3"]');
   check('Singapore–Johor: a question lights its marker', await page.$eval('.echo-mark[data-n="3"]', n => n.classList.contains('is-on')));
+
+  await page.click('.echo-question[data-n="3"]');
+  check('Johor support question links back to lens B', await page.isVisible('#echo-learning-3') && (await page.getAttribute('#echo-learning-3 a', 'href')) === '#services');
+  check('Johor questions remain separate from published context', (await page.locator('.echo-list .echo-item').count()) === 4 && (await page.locator('.echo-context .echo-item').count()) === 2);
 
   // Motion
   await page.click('#motion-control');

@@ -5,7 +5,7 @@ import { hydrateGlyphs, motionAllowed } from './grammar.js';
 import { tour } from './cast.js';
 
 const html = document.documentElement;
-const V = '20261105-edition';
+const V = '20261106-connected';
 
 /* Motion: one control for the page; reduced-motion preference wins. */
 const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
@@ -138,6 +138,7 @@ mount('#basket', async host => (await import(`./lens-choices.js?v=${V}`)).initBa
 mount('#service-trail', async host => (await import(`./lens-services.js?v=${V}`)).initServiceTrail(host));
 mount('#care-loop', async host => (await import(`./lens-services.js?v=${V}`)).initCareLoop(host));
 mount('#ties-panel', async host => (await import(`./lens-ties.js?v=${V}`)).initTies(host));
+mount('#contact-story', async host => (await import(`./lens-ties.js?v=${V}`)).initContacts(host));
 mount('#echo', async host => (await import(`./echo.js?v=${V}`)).initEcho(host));
 
 /* ---- Research desk: modules load the first time their shelf opens ---- */

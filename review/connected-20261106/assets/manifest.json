@@ -1,0 +1,83 @@
+{
+  "capturedAt": "2026-11-06T15:35:25.762Z",
+  "base": "http://127.0.0.1:4188/",
+  "sourceCommit": "451ea2f35414cfc4456b236da4beade5040982aa",
+  "sourceDirty": false,
+  "browser": "157.0.8103.38",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "dpr": 1
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "emulated": true
+    }
+  ],
+  "screenshots": "Reduced motion; fonts ready; selected interaction states.",
+  "recordings": "Normal motion; real scripted clicks; not real-device testing.",
+  "recordingFiles": [
+    "care-interaction.webm",
+    "connections-interaction.webm"
+  ],
+  "checks": [
+    {
+      "name": "1440: resident note remains visible",
+      "ok": true
+    },
+    {
+      "name": "1440: no horizontal document overflow",
+      "ok": true
+    },
+    {
+      "name": "390: resident note remains visible",
+      "ok": true
+    },
+    {
+      "name": "phone: care response and illustration are in view together",
+      "ok": true
+    },
+    {
+      "name": "phone: guide workplace stays unplaced",
+      "ok": true
+    },
+    {
+      "name": "reduced motion: replay settles without an animation",
+      "ok": true
+    },
+    {
+      "name": "phone: open question can collapse",
+      "ok": true
+    },
+    {
+      "name": "phone: model marker opens the matching question",
+      "ok": true
+    },
+    {
+      "name": "390: no horizontal document overflow",
+      "ok": true
+    },
+    {
+      "name": "motion: the home actually moves",
+      "ok": true
+    },
+    {
+      "name": "motion: family stays put",
+      "ok": true
+    },
+    {
+      "name": "motion pause cancels the home animation",
+      "ok": true
+    },
+    {
+      "name": "no page errors during capture and interaction checks",
+      "ok": true
+    }
+  ],
+  "errors": []
+}
