@@ -6,7 +6,7 @@ Research and presentation: Jamie Ko. Visual support: Bob.
 This public export contains audience-facing materials and public source links.
 The full private research and authoring repository is separate.
 
-Website candidate of 6 November: [review guide, screenshots and recordings](review/connected-20261106/README.md), with [design decisions and checks](docs/CONNECTED-EDITION-20261106.md). On this branch, serve the repository and open `/review/connected-20261106/` to compare the actual candidate with captured views of published main. This candidate has not been merged or deployed.
+Website edition prepared on 6 November: [review guide, screenshots and recordings](review/connected-20261106/README.md), with [design decisions and checks](docs/CONNECTED-EDITION-20261106.md). Serve the repository and open `/review/connected-20261106/` to compare the running edition with the captured 6 November baseline. Bob approved merging and publishing on 7 November 2026; [PR #1](https://github.com/bobshenruililin/jamie-crossing-lives-site/pull/1) records the merge status.
 
 The study is exploratory and Hong Kong-centred, informing questions for Singapore–Johor.
 Statistics, programme descriptions, forecasts and proposals are distinguished throughout.

@@ -2,7 +2,7 @@
 
 **Branch:** `codex/connected-lives-20261106` · **runtime checkpoint:** `451ea2f` · **base main:** `008d77b`.
 
-Website only. Nothing merged or deployed. The presentation and PDFs are unchanged. The first-visit Work in progress notice remains.
+Website only. Bob approved merging and publishing on 7 November 2026; [PR #1](https://github.com/bobshenruililin/jamie-crossing-lives-site/pull/1) records the merge status. This package preserves the pre-publication review captures. The presentation and PDFs are unchanged. The first-visit Work in progress notice remains.
 
 ## Try the actual candidate
 

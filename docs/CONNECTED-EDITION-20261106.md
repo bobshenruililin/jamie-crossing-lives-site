@@ -1,6 +1,6 @@
 # Connected Lives candidate · 6 November 2026
 
-Website-only candidate on `codex/connected-lives-20261106`, built from main `008d77bac15c6ab371e07b4375db54c32d52b2af`. Nothing in this candidate is merged or deployed. Start the repository with `python3 -m http.server 4188 --bind 127.0.0.1`, then open [the interactive review](http://127.0.0.1:4188/review/connected-20261106/). [Screenshots and recordings](../review/connected-20261106/README.md) are also available directly in the repository.
+Website-only candidate prepared on `codex/connected-lives-20261106`, built from main `008d77bac15c6ab371e07b4375db54c32d52b2af`. Bob approved merging and publishing on 7 November 2026; [PR #1](https://github.com/bobshenruililin/jamie-crossing-lives-site/pull/1) records the merge status. The notes and captures below preserve the pre-publication review checkpoints. Start the repository with `python3 -m http.server 4188 --bind 127.0.0.1`, then open [the interactive review](http://127.0.0.1:4188/review/connected-20261106/). [Screenshots and recordings](../review/connected-20261106/README.md) are also available directly in the repository.
 
 ## What the reader can now see
 
