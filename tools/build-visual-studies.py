@@ -16,7 +16,11 @@ def rewrite(match):
 
 page = re.sub(r'\b(href|src)="([^"]*)"', rewrite, source)
 page = page.replace('<title>Crossing Lives — Work in progress</title>', '<title>Crossing Lives — visual experiment, not adopted</title>')
-mapping = {'imports': {f'../../feature/{name}.js?v=20261105-edition': f'./{name}.js' for name in ['photo-type', 'miniature']}}
+controller = (root / 'feature/edition.js').read_text()
+current_version = re.search(r"const V = '([^']+)';", controller).group(1)
+versions = dict.fromkeys(['20261105-edition', current_version])
+mapping = {'imports': {f'../../feature/{name}.js?v={version}': f'./{name}.js'
+                       for version in versions for name in ['photo-type', 'miniature']}}
 head = '<meta name="robots" content="noindex,nofollow">\n'
 head += '<link rel="stylesheet" href="study.css">\n'
 head += '<script type="importmap">' + json.dumps(mapping) + '</script>\n'
