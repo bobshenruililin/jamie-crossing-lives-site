@@ -12,7 +12,7 @@ function sync(load = false) {
   const spec = studies[study];
   document.querySelectorAll('[data-study]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.study === study)));
   document.querySelectorAll('[data-variant]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.variant === variant)));
-  document.querySelector('#variant-note').textContent = `${variant === 'original' ? 'Current' : 'Proposal'} · ${variant === 'original' ? 'The design on the live draft.' : spec.note}`;
+  document.querySelector('#variant-note').textContent = `${variant === 'original' ? '6 Nov baseline' : 'Proposal'} · ${variant === 'original' ? 'The archived November 6 design.' : spec.note}`;
   document.querySelector('#try-it').textContent = spec.try;
   const action = document.querySelector('#try-action');
   action.textContent = spec.action; action.hidden = !spec.action || (study === 'guide' && variant === 'original');

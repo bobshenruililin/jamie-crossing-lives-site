@@ -1,0 +1,76 @@
+.evi-frame{--evi-ink:#173e40;--evi-red:#c9512d;--evi-teal:#3c8b81;color:var(--evi-ink);border-top:2px solid var(--evi-ink);border-bottom:1px solid var(--evi-ink);padding:1rem 0 1.4rem;font-family:Barlow, sans-serif}
+.evi-controls{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 2.5rem}
+.evi-controls button{min-height:44px;padding:.55rem 1rem;border:1px solid var(--evi-ink);border-radius:0;background:transparent;color:var(--evi-ink);font:700 .88rem Barlow,sans-serif;cursor:pointer}
+.evi-controls button[aria-pressed="true"]{background:var(--evi-ink);color:#f2eee3}
+.evi-controls button:hover{background:#2d726a;border-color:#2d726a;color:#fff}
+.evi-controls button:focus-visible,.evi-details summary:focus-visible,.evi-sources a:focus-visible{outline:3px solid var(--evi-red);outline-offset:3px}
+.evi-heading{display:flex;justify-content:space-between;align-items:end;gap:2rem;border-bottom:1px solid var(--evi-ink);padding-bottom:1rem}
+.evi-heading h3{font:700 clamp(2rem,4.3vw,4.8rem)/.98 'Barlow Condensed',sans-serif;letter-spacing:-.025em;max-width:15ch;margin:.5rem 0 0;text-wrap:balance}
+.evi-scope,.evi-unit{font-size:.78rem;line-height:1.3;font-weight:700;letter-spacing:.045em;text-transform:uppercase;margin:0}
+.evi-unit{max-width:16rem;text-align:right}
+.evi-chart{padding:1.3rem 0 2rem;font-variant-numeric:tabular-nums}
+.evi-axis{display:flex;justify-content:space-between;margin:0 0 1rem calc(25% + 1rem);font-size:.75rem;font-weight:700;border-bottom:1px solid var(--evi-ink);padding-bottom:.45rem}
+.evi-row{display:grid;grid-template-columns:25% 1fr 5.5rem;gap:1rem;align-items:center;min-height:4.1rem;border-bottom:1px solid rgba(23,62,64,.22)}
+.evi-row-label{font-weight:700;font-size:.95rem;line-height:1.2}.evi-row strong{font:700 clamp(1.15rem,2vw,1.7rem)/1 'Barlow Condensed',sans-serif;text-align:right;white-space:nowrap}
+.evi-track{position:relative;height:1.4rem}.evi-bar{display:block;position:absolute;top:0;left:0;width:var(--width);height:100%;background:var(--evi-red)}
+.evi-diverging .evi-axis{margin-right:6.5rem}.evi-zero{position:absolute;left:50%;height:200%;top:-50%;border-left:1px solid var(--evi-ink)}.evi-diverging .evi-bar.evi-negative{left:auto;right:50%}.evi-diverging .evi-bar.evi-positive{left:50%;background:var(--evi-teal)}
+.evi-flows .evi-incoming,.evi-net-offset{background:var(--evi-teal)}
+.evi-bottom{display:grid;grid-template-columns:1fr 1fr;gap:3rem;border-top:1px solid var(--evi-ink);padding-top:1rem;font-size:.95rem;line-height:1.45}.evi-bottom>p{margin:0;max-width:45ch}.evi-details summary{min-height:44px;cursor:pointer;font-weight:700;text-decoration:underline;text-underline-offset:.2em}.evi-details p{margin:.5rem 0}.evi-sources{display:flex;flex-wrap:wrap;gap:.4rem 1rem}.evi-sources a{color:inherit;text-underline-offset:.2em}
+.evi-net-label{font-weight:700;margin-bottom:.8rem}.evi-overlap{position:relative;height:3.4rem;background:rgba(23,62,64,.08)}.evi-net-total,.evi-net-offset{position:absolute;left:0;top:0;width:var(--width);height:100%}.evi-net-total{background:var(--evi-red)}.evi-net-offset{background:var(--evi-teal);border-right:2px solid #f2eee3}.evi-key{display:flex;flex-wrap:wrap;gap:.8rem 2rem;margin-top:1rem;font-size:.85rem;font-weight:700}.evi-key span{display:flex;gap:.5rem;align-items:center}.evi-key i{display:inline-block;width:.8rem;height:.8rem;background:var(--evi-red)}.evi-key .evi-key-in{background:var(--evi-teal)}
+@media(max-width:600px){.evi-controls{margin-bottom:1.7rem}.evi-heading{display:block}.evi-unit{text-align:left;margin-top:1rem}.evi-row{grid-template-columns:1fr 4.5rem;gap:.5rem;min-height:0;padding:.8rem 0}.evi-row-label{grid-column:1/-1}.evi-track{height:1.25rem}.evi-row strong{font-size:1.25rem}.evi-axis,.evi-diverging .evi-axis{margin-left:0;margin-right:5rem}.evi-bottom{grid-template-columns:1fr;gap:1rem}.evi-overlap{height:2.5rem}}
+.evi-journeys .evi-axis,.evi-flows .evi-axis{margin-right:6.5rem}.evi-journeys .evi-row{grid-template-columns:25% 1fr 7rem}.evi-journeys .evi-axis{margin-right:8rem}.evi-caveat{font-size:.85rem;margin:.75rem 0 0;max-width:55ch}
+@media(max-width:600px){.evi-journeys .evi-row{grid-template-columns:1fr 7rem}.evi-journeys .evi-axis{margin-right:7.5rem}.evi-flows .evi-axis{margin-right:5rem}}
+/* The chart's measurement line and marks share the same plotting width. */
+.evi-heading{display:block;padding-bottom:0;border-bottom:0}.evi-heading h3{margin:0}.evi-metadata{display:flex;justify-content:space-between;align-items:end;gap:2rem;padding:1rem 0;border-bottom:1px solid var(--evi-ink)}
+.evi-flows .evi-axis,.evi-net .evi-axis{margin-left:calc(25% + 1rem);margin-right:6.5rem}
+.evi-overlap-wrap{margin-left:calc(25% + 1rem);margin-right:6.5rem}
+.evi-overlap{position:relative;height:2.5rem}.evi-net-total,.evi-net-offset{position:absolute;left:0;top:0;height:100%;width:var(--width)}.evi-net-total{background:var(--evi-red)}.evi-net-offset{background:var(--evi-teal)}
+.evi-net-label{margin:0 0 .8rem calc(25% + 1rem);font-weight:700}.evi-key{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;margin:1rem 0 0 calc(25% + 1rem);font-size:.85rem;font-weight:700}.evi-key span{display:flex;align-items:center;gap:.4rem}.evi-key i{display:inline-block;width:.9rem;height:.9rem;background:var(--evi-red)}.evi-key .evi-key-in{background:var(--evi-teal)}
+.evi-changed .evi-chart{animation:evi-reveal .22s ease-out both}@keyframes evi-reveal{from{opacity:.35;transform:translateY(3px)}to{opacity:1;transform:none}}
+.evi-paused .evi-chart,html[data-motion="off"] .evi-chart{animation:none}
+@media(prefers-reduced-motion:reduce){.evi-changed .evi-chart{animation:none}}
+@media(max-width:600px){.evi-metadata{display:block}.evi-metadata .evi-unit{margin-top:.5rem}.evi-flows .evi-axis,.evi-net .evi-axis{margin-left:0;margin-right:5rem}.evi-overlap-wrap{margin-left:0;margin-right:5rem}.evi-net-label,.evi-key{margin-left:0}}
+.evi-paused.evi-changed .evi-chart,html[data-motion="off"] .evi-changed .evi-chart{animation:none}
+
+.evi-heading h3{font-size:clamp(28px,3.4vw,48px);max-width:28ch}.evi-controls{margin-bottom:1.8rem}
+@media(max-width:600px){.evi-heading h3{font-size:28px;max-width:26ch}.evi-controls{margin-bottom:1.5rem}}
+
+/* Claim scope stays beside the marks; disclosure holds provenance. */
+.evi-type{font-size:.72rem;font-weight:700;line-height:1.4;letter-spacing:.07em;text-transform:uppercase;margin:0 0 .65rem;color:#2d726a}
+.evi-fixed{padding-top:1.2rem}
+.evi-bottom{grid-template-columns:minmax(0,1fr);gap:1rem}
+.evi-bottom>div{max-width:76ch}.evi-bottom>div>p:first-child{margin:0}
+.evi-caveat{max-width:76ch;line-height:1.5;border-left:2px solid #b4774e;padding-left:.8rem}
+.evi-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;padding:2rem 0}
+.evi-metric{border-top:1px solid rgba(23,62,64,.3);padding-top:1rem;min-width:0}
+.evi-metric h4{font-size:.9rem;line-height:1.3;margin:0 0 1.1rem;max-width:18ch;min-height:2.6em}
+.evi-metric>strong{display:block;font:700 clamp(1.8rem,3vw,3rem)/1 'Barlow Condensed',sans-serif;color:var(--evi-red);white-space:nowrap}
+.evi-metric>p{font-size:.85rem;line-height:1.4;margin:1rem 0 0;max-width:27ch}
+/* Only the two forecast quantities are colored; unused scale is transparent. */
+.evi-overlap{background:transparent}
+.evi-net-total-label{position:relative;display:flex;gap:.5rem;align-items:baseline;width:var(--end);padding:0 0 .65rem;margin:1.3rem 0 .4rem;border-bottom:1px solid var(--evi-ink);font-size:.8rem;line-height:1.3}
+.evi-net-total-label:before,.evi-net-total-label:after{content:'';position:absolute;bottom:-5px;height:8px;border-left:1px solid var(--evi-ink)}
+.evi-net-total-label:before{left:0}.evi-net-total-label:after{right:0}
+.evi-net-total-label strong{font-size:1rem;white-space:nowrap}.evi-net-values{display:flex;flex-wrap:wrap;gap:.9rem 1.5rem;margin-top:1rem}
+.evi-net-values p{display:grid;grid-template-columns:.65rem auto;gap:.2rem .4rem;margin:0;font-size:.8rem;line-height:1.35}
+.evi-net-values i{width:.65rem;height:.65rem;background:var(--evi-red);align-self:center}.evi-net-values .evi-key-in{background:var(--evi-teal)}
+.evi-net-values strong{font-size:.9rem}.evi-net-values span{grid-column:2}
+@media(max-width:600px){.evi-metrics{grid-template-columns:1fr;gap:1.3rem}.evi-metric{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.6rem 1rem}.evi-metric h4{min-height:0;margin:0;align-self:center}.evi-metric>strong{font-size:2rem}.evi-metric>p{grid-column:1/-1;margin:0;max-width:none}.evi-net-total-label{display:block}.evi-net-total-label span{display:block;margin-top:.2rem}.evi-net-values{gap:.9rem 1rem}}
+
+/* Forecasts have a declared texture; observed charts keep solid marks. */
+.evi-sg{--fc-out:#173e40;--fc-in:#5f8f86;--fc-paper:#f2eee3}
+.evi-sg .evi-bar,.evi-sg .evi-net-total,.evi-sg .evi-net-offset{--fc-mark:var(--fc-out);border-right:0;background:repeating-linear-gradient(135deg,var(--fc-mark) 0 2px,transparent 2px 6px) var(--fc-paper);box-shadow:inset 0 0 0 1px var(--fc-mark)}
+.evi-sg .evi-incoming,.evi-sg .evi-net-offset{--fc-mark:var(--fc-in)}
+.evi-sg .evi-bar::after,.evi-sg .evi-net-total::after,.evi-sg .evi-net-offset::after{content:'';position:absolute;top:-3px;bottom:-3px;right:0;border-right:2px solid var(--fc-mark)}
+.evi-forecast-key{display:flex;align-items:center;gap:.65rem;max-width:66ch;margin:1.15rem 0 0;font-size:.8rem;line-height:1.45}
+.evi-forecast-key i,.evi-sg .evi-net-values i{--fc-mark:var(--fc-out);flex:none;width:22px;height:12px;background:repeating-linear-gradient(135deg,var(--fc-mark) 0 2px,transparent 2px 6px) var(--fc-paper);box-shadow:inset 0 0 0 1px var(--fc-mark)}
+.evi-sg .evi-net-values .evi-key-in{--fc-mark:var(--fc-in)}
+.evi-sg .evi-net-values p{grid-template-columns:22px auto}
+/* System-color outlines survive forced colors without disabling the user's palette. */
+@media(forced-colors:active){
+  .evi-bar,.evi-net-total,.evi-net-offset{background:Canvas;border:1px solid CanvasText;box-shadow:none}
+  .evi-sg .evi-bar,.evi-sg .evi-net-total,.evi-sg .evi-net-offset,.evi-forecast-key i,.evi-sg .evi-net-values i{background:Canvas;box-shadow:none;border:2px dashed CanvasText}
+  .evi-sg .evi-incoming,.evi-sg .evi-net-offset,.evi-sg .evi-net-values .evi-key-in{border-style:solid}
+  .evi-sg .evi-bar::after,.evi-sg .evi-net-total::after,.evi-sg .evi-net-offset::after{border-color:CanvasText}
+  .evi-overlap{background:transparent}.evi-zero{border-color:CanvasText}
+}

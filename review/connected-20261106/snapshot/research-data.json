@@ -1,0 +1,367 @@
+{
+  "title": "When lives span a border",
+  "arrangements": [
+    {
+      "id": "use",
+      "title": "Cross for a particular purpose",
+      "home": "One side",
+      "work": "Not specified",
+      "use": "Across the border",
+      "ties": "Not specified",
+      "note": "A repair, meal or leisure trip can cross a border while other parts of life stay put. Illustrative arrangements overlap; this is not a population classification."
+    },
+    {
+      "id": "move",
+      "title": "Move home; retain connections",
+      "home": "Shenzhen after Hong Kong",
+      "work": "Reported guiding work",
+      "use": "Not specified",
+      "ties": "Family in Hong Kong",
+      "note": "One participant described lower earnings alongside lower living costs and preferred work. It is an individual account, not a measured general benefit."
+    },
+    {
+      "id": "work",
+      "title": "Separate residence and work or study",
+      "home": "One side of a boundary",
+      "work": "Across the boundary",
+      "use": "Not specified",
+      "ties": "Not specified",
+      "note": "Official cross-boundary pupil data illustrate separation of home and school. Mainland residence is not necessarily Shenzhen; the pupil count does not measure workers."
+    },
+    {
+      "id": "ties",
+      "title": "Stay based in Hong Kong; keep ties elsewhere",
+      "home": "Rents in Hong Kong",
+      "work": "Hong Kong",
+      "use": "Not specified",
+      "ties": "Shenzhen family and friends",
+      "note": "The source account also mentions Shenzhen property. It does not establish a regular commute. Connections can span places without moving home and work."
+    }
+  ],
+  "datasets": [
+    {
+      "id": "journeys",
+      "title": "Movement is visible. People are not counted once.",
+      "eyebrow": "HONG KONG RESIDENT DEPARTURES / SIX CHECKPOINTS",
+      "kind": "bars",
+      "unit": "Million departures",
+      "items": [
+        {
+          "label": "2024",
+          "value": 75.332211,
+          "display": "75.3m"
+        },
+        {
+          "label": "2025",
+          "value": 85.823687,
+          "display": "85.8m"
+        }
+      ],
+      "summary": "Hong Kong resident departures through six Shenzhen-facing checkpoints increased between these two years.",
+      "caveat": "Journeys, not unique people, verified shopping trips or spending. Counts sum Lo Wu, Lok Ma Chau, Lok Ma Chau Spur Line, Man Kam To, Heung Yuen Wai and Shenzhen Bay.",
+      "sources": [
+        {
+          "label": "[5.1] Table",
+          "url": "https://www.censtatd.gov.hk/en/web_table.html?id=650-80006"
+        }
+      ]
+    },
+    {
+      "id": "retail",
+      "title": "Retail conditions change over time.",
+      "eyebrow": "HONG KONG / NOMINAL RETAIL-SALES VALUE",
+      "kind": "diverging",
+      "unit": "Year-on-year change (%)",
+      "items": [
+        {
+          "label": "2024 · full year",
+          "value": -7.3,
+          "display": "−7.3%"
+        },
+        {
+          "label": "2025 · full year",
+          "value": 1.0,
+          "display": "+1.0%"
+        },
+        {
+          "label": "Jan–Aug 2026",
+          "value": 8.5,
+          "display": "+8.5%"
+        }
+      ],
+      "summary": "A fall, a modest annual increase and a later partial-year rebound describe different periods.",
+      "caveat": "Value, not volume. January–August compares the same months a year earlier and is not annualised. Retail excludes most services and purchases abroad. These figures do not identify Shenzhen as a cause.",
+      "sources": [
+        {
+          "label": "[5.3] Table 620-67001",
+          "url": "https://www.censtatd.gov.hk/en/web_table.html?id=620-67001"
+        },
+        {
+          "label": "[5.3] August 2026 release",
+          "url": "https://www.info.gov.hk/gia/general/202610/02/P2026100200324p.htm"
+        }
+      ]
+    },
+    {
+      "id": "restaurants",
+      "title": "Two restaurant categories, different directions.",
+      "eyebrow": "HONG KONG / 2025 RECEIPT VALUE",
+      "kind": "diverging",
+      "unit": "Annual change (%)",
+      "items": [
+        {
+          "label": "Chinese restaurants",
+          "value": -2.9,
+          "display": "−2.9%"
+        },
+        {
+          "label": "Non-Chinese restaurants",
+          "value": 4.1,
+          "display": "+4.1%"
+        }
+      ],
+      "summary": "The revised official series shows uneven conditions across restaurant categories.",
+      "caveat": "Receipt value, not profit or sales volume. Category differences do not identify their causes. The revised +4.1% supersedes +4.0% in an older research note.",
+      "sources": [
+        {
+          "label": "[5.8] Current table",
+          "url": "https://www.censtatd.gov.hk/en/web_table.html?id=625-68003"
+        }
+      ]
+    },
+    {
+      "id": "capacity",
+      "title": "An accounting snapshot of room to respond.",
+      "eyebrow": "FOOD SERVICES / 2024 COMPANY-SIZE ACCOUNTS",
+      "kind": "diverging",
+      "unit": "HK$ remaining per HK$100 receipts",
+      "items": [
+        {
+          "label": "Fewer than 10 persons",
+          "value": -1.2,
+          "display": "−1.2"
+        },
+        {
+          "label": "500 or more persons",
+          "value": 4.1,
+          "display": "+4.1"
+        }
+      ],
+      "summary": "The research calculation is (receipts − employee compensation − operating expenses − cost of goods sold) ÷ receipts × 100: the residual per HK$100 of receipts.",
+      "caveat": "Aggregate accounting residuals, not net-profit margins, cash reserves or survival rates. Employment size does not identify chain ownership; retail shows a less consistent size pattern.",
+      "sources": [
+        {
+          "label": "[5.11] Food services",
+          "url": "https://www.censtatd.gov.hk/wbr/B1080016/B10800162024AN24/att/en/B10800162024AN24.pdf"
+        },
+        {
+          "label": "[5.11] Retail",
+          "url": "https://www.censtatd.gov.hk/wbr/B1080014/B10800142024AN24/att/en/B10800142024AN24.pdf"
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "title": "Sector counts cannot tell us where workers went.",
+      "eyebrow": "HONG KONG / JUNE 2025 TO JUNE 2026",
+      "kind": "metrics",
+      "unit": "Distinct employment and vacancy measures",
+      "items": [
+        {
+          "label": "Retail employment",
+          "value": -2600,
+          "display": "−2,600",
+          "detail": "230,100 → 227,500; −1.1%"
+        },
+        {
+          "label": "Food and beverage employment",
+          "value": 100,
+          "display": "Broadly flat",
+          "detail": "218,000 → 218,100"
+        },
+        {
+          "label": "Food and beverage vacancies",
+          "value": -14,
+          "display": "−14%",
+          "detail": "4,090 → 3,530"
+        }
+      ],
+      "summary": "Employment and vacancies are different measures. Workable alternatives also depend on skills, pay, hours and care responsibilities.",
+      "caveat": "Net sector changes do not measure layoffs, individual job transitions or causal border effects. The vacancy series does not track the same people as the employment totals.",
+      "sources": [
+        {
+          "label": "[5.12] Release",
+          "url": "https://www.info.gov.hk/gia/general/202609/18/P2026091800290.htm"
+        },
+        {
+          "label": "[5.12] Tables",
+          "url": "https://gia.info.gov.hk/general/202609/18/P2026091800290_557077_1_1789705751580.pdf"
+        }
+      ]
+    },
+    {
+      "id": "care",
+      "title": "Three measures of use. Three different meanings.",
+      "eyebrow": "DEFINED CROSS-BOUNDARY HEALTH ARRANGEMENTS",
+      "kind": "metrics",
+      "unit": "Distinct scheme and feature measures",
+      "items": [
+        {
+          "label": "Eligible HA patients using follow-up pilot",
+          "value": 5900,
+          "display": ">5,900",
+          "detail": "By end-January 2026"
+        },
+        {
+          "label": "Attendances under the pilot",
+          "value": 25000,
+          "display": ">25,000",
+          "detail": "By end-January 2026"
+        },
+        {
+          "label": "Cross-boundary Health Record users",
+          "value": 23000,
+          "display": ">23,000",
+          "detail": "By end-May 2026"
+        }
+      ],
+      "summary": "Connected care can involve coverage, payment, records and follow-up through separate defined arrangements.",
+      "caveat": "Patients, attendances and record-feature users are distinct and potentially overlapping. Do not sum them or read them as a funnel, universal coverage or clinical outcomes.",
+      "sources": [
+        {
+          "label": "[5.6] Reply",
+          "url": "https://www.info.gov.hk/gia/general/202606/17/P2026061700586p.htm"
+        },
+        {
+          "label": "[5.14] 25 February 2026",
+          "url": "https://www.info.gov.hk/gia/general/202602/25/P2026022500444.htm"
+        }
+      ]
+    },
+    {
+      "id": "flows",
+      "title": "Spending is forecast to move both ways.",
+      "eyebrow": "ASSOCIATION-COMMISSIONED RTS STUDY / JULY 2026",
+      "kind": "flows",
+      "unit": "Additional annual consumer spending / S$ million",
+      "items": [
+        {
+          "label": "Singapore consumers → Johor Bahru",
+          "value": 1050,
+          "display": "S$1.05bn"
+        },
+        {
+          "label": "Johor Bahru consumers → Singapore",
+          "value": 756,
+          "display": "S$756m"
+        }
+      ],
+      "summary": "The study forecasts about S$290 million net incremental outflow, alongside incoming visitor opportunities.",
+      "caveat": "Forecasts, not realised spending, lost GDP or measured JS-SEZ effects. Rounded displayed inputs imply S$294m; retain the source’s approximate S$290m rather than implying extra precision.",
+      "sources": [
+        {
+          "label": "[7.5] Summary",
+          "url": "https://www.sbf.org.sg/newsroom/media/press-releases/detail/rts-link-could-reshape-cross-border-consumer-spending--spotlighting-both-opportunities-and-challenges-for-singapore-retail-and-f-b"
+        },
+        {
+          "label": "[7.5] Full report",
+          "url": "https://www.sbf.org.sg/docs/default-source/advocacy-policy/sbf-rts-study_final-report-16-jul.pdf?sfvrsn=b7ba6722_1"
+        }
+      ]
+    }
+  ],
+  "future": [
+    {
+      "name": "SIJORI",
+      "places": "Singapore · Johor · Batam · Bintan",
+      "question": "How do changing industrial and tourism roles shape jobs, suppliers and household activity?",
+      "caveat": "Distinguish Batam from Bintan. Sea-linked islands and historical divisions of labour are not forecasts for adjacent land-border cities.",
+      "sources": [
+        {
+          "label": "ISEAS book introduction",
+          "url": "https://bookshop.iseas.edu.sg/component/get/18693"
+        },
+        {
+          "label": "ISEAS Perspective 2014/44",
+          "url": "https://www.iseas.edu.sg/wp-content/uploads/pdfs/ISEAS_Perspective_2014_44.pdf"
+        }
+      ]
+    },
+    {
+      "name": "Macao–Hengqin / Zhuhai",
+      "places": "Macao · Hengqin · Zhuhai",
+      "question": "When do work and residence move together—and which services make that workable?",
+      "caveat": "Specific institutions and entitlements differ. Repeated needs surveys are not necessarily household panels or causal evaluations.",
+      "sources": [
+        {
+          "label": "cooperation-zone authority's release on its 2024 social/livelihood survey",
+          "url": "https://www.hengqin.gov.cn/macao_zh_hans/hzqgl/dtyw/dtxx/content/post_3725114.html"
+        }
+      ]
+    },
+    {
+      "name": "Mukdahan–Savannakhet",
+      "places": "Thailand · Lao PDR",
+      "question": "When does a bridge or freight corridor translate into locally accessible work?",
+      "caveat": "Border towns differ from metropolitan labour markets. The 2009 ADB analysis models effects; distinguish it from empirical research.",
+      "sources": [
+        {
+          "label": "ADB model-based study (2009)",
+          "url": "https://www.adb.org/publications/regional-economic-impacts-cross-border-infrastructure-general-equilibrium-application"
+        },
+        {
+          "label": "IDE-JETRO empirical-research column (2025)",
+          "url": "https://www.ide.go.jp/English/ResearchColumns/Columns/2025/kazunobu_hayakawa.html?_previewDate_=null&_previewToken_=&revision=0&viewForce=1"
+        }
+      ]
+    },
+    {
+      "name": "Hekou–Lao Cai",
+      "places": "China · Vietnam",
+      "question": "How do relationships, intermediaries and border rules shape access to customers and information?",
+      "caveat": "Qualitative borderland findings concern specific settings, not population estimates or a quantified return from social ties.",
+      "sources": [
+        {
+          "label": "Geographical Research article (2016)",
+          "url": "https://www.dlyj.ac.cn/EN/10.11821/dlyj201608011"
+        },
+        {
+          "label": "Cambridge chapter on business networks",
+          "url": "https://www.cambridge.org/core/books/abs/transnational-dynamics-in-southeast-asia/private-commitment-marital-alliance-in-the-establishment-of-business-networks-at-hekoulao-cai-twin-sinovietnamese-border-cities/2304F78A901F5A95338456B2B2C30A93"
+        }
+      ]
+    },
+    {
+      "name": "Greater Copenhagen",
+      "places": "Copenhagen · Malmö",
+      "question": "Who can use a mature cross-border labour market, and which barriers remain?",
+      "caveat": "Nordic institutions differ. The cited OECD report focuses on third-country nationals, not all cross-border workers.",
+      "sources": [
+        {
+          "label": "OECD report (2025)",
+          "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/02/mobility-and-integrated-labour-markets-for-third-country-nationals-in-greater-copenhagen_caa2d32e/ba2a4777-en.pdf"
+        }
+      ]
+    },
+    {
+      "name": "Grand Genève",
+      "places": "Geneva · neighbouring French areas",
+      "question": "How do earning, housing and service geographies distribute opportunities and public responsibilities?",
+      "caveat": "Do not transplant fiscal formulas or assume the same causes of housing pressure. These are routes for further reading.",
+      "sources": [
+        {
+          "label": "planning resources",
+          "url": "https://www.grand-geneve.org/ressources_type/urbanisation/"
+        },
+        {
+          "label": "mobility",
+          "url": "https://www.grand-geneve.org/thematiques/mobilite/"
+        },
+        {
+          "label": "Geneva regional statistics",
+          "url": "https://statistique.ge.ch/themes/regions.asp"
+        }
+      ]
+    }
+  ]
+}

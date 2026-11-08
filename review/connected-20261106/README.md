@@ -1,10 +1,12 @@
-# Crossing Lives · candidate for Bob
+# Crossing Lives · archived candidate for Bob
 
 **Branch:** `codex/connected-lives-20261106` · **runtime checkpoint:** `451ea2f` · **base main:** `008d77b`.
 
+**Archive note, 8 November:** the preview and earlier visual studies are now pinned to `snapshot/` at public baseline `ebad522`. They preserve the previous interactions without restoring them to the current website. Presentation links lead to the current files. `snapshot/provenance.json` records the original file hashes.
+
 Website only. Bob approved merging and publishing on 7 November 2026; [PR #1](https://github.com/bobshenruililin/jamie-crossing-lives-site/pull/1) records the merge status. This package preserves the pre-publication review captures. The presentation and PDFs are unchanged. The first-visit Work in progress notice remains.
 
-## Try the actual candidate
+## Try the archived candidate
 
 From the repository root:
 
@@ -12,7 +14,7 @@ From the repository root:
 python3 -m http.server 4188 --bind 127.0.0.1
 ```
 
-Open **[the interactive review](http://127.0.0.1:4188/review/connected-20261106/)** or [the full website](http://127.0.0.1:4188/). The review has four scenes, a phone-width switch and before/candidate controls. Its preview runs the actual website; acknowledge the Work in progress notice first. “Before” is a captured image, not a second running version.
+Open **[the interactive review](http://127.0.0.1:4188/review/connected-20261106/)** or [the full website](http://127.0.0.1:4188/). The review has four scenes, a phone-width switch and before/candidate controls. Its preview runs a frozen November 6 copy in `snapshot/`; acknowledge the Work in progress notice first. “Before” is a captured image, not a second running version.
 
 ## What to look for
 

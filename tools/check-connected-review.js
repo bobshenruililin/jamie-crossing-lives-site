@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* Review-page integration checks. Start the site server on 4188 first. */
+/* Historical review integration checks. Start the site server on 4188 first. */
 const {chromium}=require('playwright');
 const base=process.argv[2]||'http://127.0.0.1:4188/review/connected-20261106/';
 const results=[],errors=[];const check=(name,ok)=>results.push({name,ok:Boolean(ok)});
@@ -8,6 +8,8 @@ const results=[],errors=[];const check=(name,ok)=>results.push({name,ok:Boolean(
   const p=await browser.newPage({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
   p.on('pageerror',e=>errors.push(e.message));p.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
   await p.goto(base,{waitUntil:'networkidle'});
+  check('review is explicitly archived', /Archived/.test(await p.locator('.draft').textContent()));
+  check('review uses the frozen candidate, not the current website', /snapshot\/#services$/.test(await p.locator('#candidate').getAttribute('src')));
   const frame=p.frameLocator('#candidate');const child=()=>p.frames().find(f=>f!==p.mainFrame()&&f.url().includes('#services'))||p.frames()[1];
   check('actual first-visit WIP popup is retained',await frame.locator('#status-popup').evaluate(n=>n.open));
   await frame.locator('.status-popup-explore').click();await p.waitForFunction(()=>!document.querySelector('#try').disabled);
@@ -39,7 +41,8 @@ const results=[],errors=[];const check=(name,ok)=>results.push({name,ok:Boolean(
   }
   for(const width of [320,390,844,1440]){await p.setViewportSize({width,height:1000});check(`review fits ${width}px`,await p.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1));}
   await p.locator('[data-scene="care"]').click();await p.locator('#try').click();await p.evaluate(()=>scrollTo(0,0));
-  await p.screenshot({path:'review/connected-20261106/review-desktop.jpg',type:'jpeg',quality:88});
+  // Preserve the original November 6 capture; new QA output is temporary.
+  await p.screenshot({path:process.env.REVIEW_SCREENSHOT || require('node:path').join(require('node:os').tmpdir(),'crossing-lives-review-check.jpg'),type:'jpeg',quality:88});
   check('review has no observed browser errors',errors.length===0);
   await browser.close();results.forEach(r=>console.log(`${r.ok?'PASS':'FAIL'} ${r.name}`));if(errors.length)console.log(errors.join('\n'));console.log(`${results.filter(r=>r.ok).length}/${results.length} review checks passed`);if(results.some(r=>!r.ok))process.exitCode=1;
 })().catch(e=>{console.error(e);process.exit(2)});

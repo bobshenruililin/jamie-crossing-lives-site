@@ -1,0 +1,79 @@
+{
+  "areas": [
+    {
+      "id": "household-choices",
+      "name": "Household choices",
+      "track": "Purchases on each side; reasons, frequency, travel cost and time; access to better value or unavailable goods and services.",
+      "records": "Existing expenditure and travel data, with a few focused questions where useful.",
+      "decision": "Keep household benefits in view alongside employment and business pressures.",
+      "limit": "Define the group and coverage. The same person may be a consumer, worker and business owner; this focused menu does not calculate total consumer surplus or net welfare."
+    },
+    {
+      "id": "business-adjustment",
+      "name": "Business evolution",
+      "track": "Customer mix, products, operating model, staffing and costs; openings, closures and relocation. Separate sector, location, employment size and chain ownership.",
+      "records": "Follow selected comparable businesses at suitable intervals, including those that close or relocate. Ask what changed, what they tried and what made adaptation difficult.",
+      "decision": "Help businesses consider adaptations and associations identify useful support.",
+      "limit": "Observed chains provide a question, not evidence of better survival. Include exits and new entrants; employment size does not identify chain ownership."
+    },
+    {
+      "id": "worker-transitions",
+      "name": "Worker adjustment",
+      "track": "Next job or other destination; time taken, earnings and hours; position six and twelve months after a job change.",
+      "records": "Employment-service records and limited follow-up where feasible, including people not reached by programmes.",
+      "decision": "Identify groups needing help and understand workers’ destinations alongside household and business changes.",
+      "limit": "Keep retirement, care, training and self-employment distinct. Report coverage, non-response and exits; these destinations are not automatically failed transitions."
+    },
+    {
+      "id": "everyday-services",
+      "name": "Services and users",
+      "track": "When and why services began; needs addressed; information clarity, cost, referrals completed, problems resolved and people not reached.",
+      "records": "Combine provider histories and records with brief user follow-up. Establish the operator, funding, opening date and service changes; include people who abandon a process or never reach it.",
+      "decision": "Help providers improve offerings, referrals and reach.",
+      "limit": "Advertised provision does not establish completed use or resolution. A provider’s account of a service’s origins and users’ experience of getting help are distinct evidence."
+    },
+    {
+      "id": "useful-connections",
+      "name": "Movers and relationships",
+      "track": "Old and new ties; entry points used; useful support, attachment, cultural understanding, contribution to local life and barriers to participation.",
+      "records": "Short voluntary follow-ups, including non-participants. If feasible, repeat after six or twelve months; ask about work schedules, language and caring responsibilities.",
+      "decision": "Help community organisations understand changing needs and the connections people value.",
+      "limit": "Attendance alone cannot show stronger attachment or useful support. Do not treat participation in organised activities as a target or omit people outside them."
+    }
+  ],
+  "regions": [
+    {
+      "id": "singapore-johor",
+      "name": "Singapore–Johor",
+      "approach": "Use existing records and a pre-opening reference point where feasible, then compare actual spending patterns with RTS forecasts. Keep visitors’ spending in both directions visible. If extended stays or relocation grow, examine services and relationships alongside the experiences of established Johor residents.",
+      "caveat": "A pre-RTS reference point is not a baseline before integration generally. Keep RTS-related changes separate from JS-SEZ investment and other developments; forecasts are not observed outcomes."
+    },
+    {
+      "id": "hong-kong-shenzhen",
+      "name": "Hong Kong–Shenzhen",
+      "approach": "Investigate specific activities, services or groups. Follow differences in purchases, customer groups, neighbourhood settings and relationship patterns over time.",
+      "caveat": "Do not construct a general before-integration baseline. The accounts suggest useful contrasts, but their prevalence remains to be established. Compare like periods and activities; observed change does not establish its cause."
+    }
+  ],
+  "principles": [
+    "A focused menu for organisations that choose to explore the script’s three questions. It is not a commitment to further research by the author or a requirement to measure everything.",
+    "Start with one question, a defined group and a decision the evidence could inform. Check existing records before collecting anything new; establish access, coverage and the ability to follow people or firms.",
+    "Define the group and denominator; record non-response and exits. Follow comparable businesses and people where feasible, and distinguish chain ownership from employment size.",
+    "Compare like periods and activities, allowing for seasonality, prices and other changes. Observed improvements do not establish what caused them.",
+    "Report selected findings in aggregate and use proportionate data access. More elaborate evaluation is only needed if a specific decision warrants it."
+  ],
+  "sources": [
+    {
+      "label": "Hong Kong C&SD establishment, employment and vacancy statistics",
+      "url": "https://www.censtatd.gov.hk/en/wbr.html?ecode=B10500032026QQ02"
+    },
+    {
+      "label": "Singapore MOM labour-market re-entry tables and methodology",
+      "url": "https://stats.mom.gov.sg/iMAS_PdfLibrary/mrsd-Labour-Market-Report-4Q-2025.pdf"
+    },
+    {
+      "label": "OECD: Social Connections and Loneliness in OECD Countries",
+      "url": "https://www.oecd.org/en/publications/social-connections-and-loneliness-in-oecd-countries_6df2d6a0-en.html"
+    }
+  ]
+}
