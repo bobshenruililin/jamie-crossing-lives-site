@@ -3,7 +3,7 @@
    Each row places the parts of one life on the Hong Kong or Shenzhen side of a
    central boundary. Hollow marks are what the account does not establish.
    Highlighting a part of life changes emphasis only, never the data. */
-import { cast, FACETS, ARRANGEMENTS, EVIDENCE, tour } from './cast.js';
+import { cast, FACETS, ARRANGEMENTS, EVIDENCE, tour } from './cast.js?v=20261108-v4';
 import { evidenceGlyph, facetGlyph, esc } from './grammar.js';
 import { signatureSVG, signatureKey } from './signature.js';
 
@@ -14,7 +14,7 @@ const ORDER = ['home', 'work', 'spend', 'ties'];
 const READINGS = {
   all: 'Only one account describes moving home. More often, one part of life crosses: a repair, a meal, a school day, time with family.',
   home: 'One account moved home north; the schoolchildren live on the Mainland, with no city specified; one resident rents in Hong Kong yet calls Shenzhen home. Four accounts do not say where home is.',
-  work: 'Every workplace or school these accounts locate is in Hong Kong. The guide’s preferred work is not located.',
+  work: 'Several accounts locate work or school in Hong Kong. The guide works across several destinations; her combined Shenzhen/Hong Kong period is not split between the two cities.',
   spend: 'Purchases and services are what most often cross—a repair, meals, shopping and activities. The store manager still does most shopping in Hong Kong.',
   ties: 'Relationships and activities sit on both sides—for the guide and the resident, partly on the side opposite where they live.'
 };
@@ -34,7 +34,8 @@ export function initLedger(host) {
       if (f.mainland) sz.push(`<li class="lmark is-mainland" data-facet="${facet}" data-side="mainland">${facetGlyph(facet)}<span>${esc(f.mainland)}</span></li>`);
       if (!f.hk && !f.sz && !f.mainland) {
         const covered = !(person.notCovered || []).includes(facet);
-        unknown.push(`<li class="lmark is-unknown" data-facet="${facet}" title="${covered ? 'Not established' : 'Not covered by this record'}">${facetGlyph(facet)}<span class="visually-hidden">${esc(FACETS[facet].label)}: ${covered ? 'not established' : 'not covered by this record'}</span></li>`);
+        const scope = f.unplaced || (covered ? 'Not established' : 'Not covered by this record');
+        unknown.push(`<li class="lmark is-unknown" data-facet="${facet}" title="${esc(scope)}">${facetGlyph(facet)}<span class="visually-hidden">${esc(FACETS[facet].label)}: ${esc(scope)}</span></li>`);
       }
       if (f.note) notes.push(`<li><b>${esc(FACETS[facet].label)}.</b> ${esc(f.note)}</li>`);
     });

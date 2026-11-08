@@ -65,7 +65,7 @@ export function initServiceTrail(host) {
     const figure = photo ? `<figure class="tr-photo" data-format="${photo.width < photo.height ? 'portrait' : 'landscape'}">
         <div class="tr-frame" style="aspect-ratio:${photo.width}/${photo.height}"><img src="${asset(photo.file)}" alt="${esc(photo.alt)}" width="${photo.width}" height="${photo.height}" decoding="async"><span class="tr-box" hidden></span></div>
         <figcaption><button type="button" class="tr-enlarge" data-photo="${stop.photo}">Enlarge ↗</button></figcaption>
-      </figure>` : `<div class="tr-nophoto">${evidenceGlyph(stop.ev)}<p>${stop.ev === 'account' ? 'Reported in conversation' : 'Experienced at the crossing'}</p></div>`;
+      </figure>` : '';
     const spots = photo?.spots?.length ? `<div class="tr-spots" role="group" aria-label="Inspect a detail">${['Whole view', ...photo.spots.map(s => s.label)].map((label, i) => `<button type="button" data-spot="${i - 1}" aria-pressed="${i === 0}">${esc(label)}</button>`).join('')}</div><p class="tr-spot-note"></p>` : '';
     const more = stop.more ? `<button type="button" class="tr-more" data-photo="${stop.more}">${evidenceGlyph('photo')}${esc(photos[stop.more].caption)}</button>` : '';
     view.innerHTML = `${figure}<div class="tr-text">
@@ -75,6 +75,7 @@ export function initServiceTrail(host) {
       <p class="tr-limit">${esc(stop.limit)}</p>
     </div>`;
     view.dataset.current = id;
+    view.classList.toggle('is-text-only', !photo);
   }
   function chooseSpot(index) {
     const stop = STOPS.find(s => s.id === view.dataset.current);

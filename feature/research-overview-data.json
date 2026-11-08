@@ -20,31 +20,8 @@
           "label": "CUHK publication record",
           "url": "https://research.cuhk.edu.hk/en/publications/not-quite-a-twin-city-cross-boundary-integration-in-hong-kong-and-2/"
         }
-      ]
-    },
-    {
-      "id": "blackbox-2024",
-      "year": "2024",
-      "selector": "Conditional retirement interest",
-      "authors": "Blackbox Research",
-      "title": "SensingSG: Spotlight on the Singapore–Johor Bahru connection",
-      "type": "Survey · stated conditional interest",
-      "publication": "February 2024",
-      "dataPeriod": "2024 survey",
-      "geography": "Singapore respondents considering Johor Bahru",
-      "method": "Survey question about interest if travel becomes easier",
-      "contribution": "Around one in three respondents could envisage buying a JB home and retiring there under the easier-travel condition. This prompts questions about services and relationships.",
-      "limit": "Stated interest under a condition is not an observed move and does not represent one-third of all Singaporeans.",
-      "sources": [
-        {
-          "label": "Original survey post",
-          "url": "https://www.linkedin.com/posts/blackbox-research_sensingsg-feb24-spotlight-on-the-sg-jb-activity-7165164423840550912-fz3R"
-        },
-        {
-          "label": "Context",
-          "url": "https://www.businesstimes.com.sg/opinion-features/home-away-home-more-singaporeans-eye-malaysia-place-retire"
-        }
-      ]
+      ],
+      "region": "Hong Kong–Shenzhen"
     },
     {
       "id": "gao-han-song-2025",
@@ -68,7 +45,8 @@
           "label": "CUHK research page",
           "url": "https://cz-jrc.econ.cuhk.edu.hk/research/hong-kong-travelers-in-mainland-china-scale-destinations-and-expenditure-patterns/"
         }
-      ]
+      ],
+      "region": "Hong Kong–Shenzhen"
     },
     {
       "id": "yan-han-he-2026",
@@ -96,7 +74,54 @@
           "label": "Corrigendum",
           "url": "https://www.sciencedirect.com/science/article/abs/pii/S0277953626004557"
         }
-      ]
+      ],
+      "region": "Hong Kong–Shenzhen"
+    },
+    {
+      "id": "xiao-cai-zhang-2026",
+      "year": "2026",
+      "selector": "Living space",
+      "authors": "Yingbo Xiao, Yinger Cai & Wenjia Zhang",
+      "title": "Living Space Patterns and Planning Implications of Cross-Border Employees from Hong Kong in Shenzhen",
+      "type": "Journal article · spatial analysis",
+      "publication": "10 October 2026 · Land 15(10), 1930",
+      "dataPeriod": "November 2023",
+      "geography": "Hong Kong-linked people in Shenzhen; main spatial sample has Shenzhen home and work anchors",
+      "method": "Selected mobile-phone provider records; the main spatial sample has 2,964 selected Hong Kong-linked users with both home and work anchors inferred in Shenzhen",
+      "contribution": "Shows neighbourhood differences in how closely home, work and other activity spaces sit together. The project adds reported motives that location signals cannot supply.",
+      "limit": "Selected provider data from one month are not a census; the main analytical sample excludes Hong Kong-home/Shenzhen-work daily commuters and dual-residence cases. Motives cannot be inferred directly from the signals.",
+      "sources": [
+        {
+          "label": "Publisher article",
+          "url": "https://www.mdpi.com/2073-445X/15/10/1930"
+        }
+      ],
+      "region": "Hong Kong–Shenzhen"
+    },
+    {
+      "id": "blackbox-2024",
+      "year": "2024",
+      "selector": "Conditional retirement interest",
+      "authors": "Blackbox Research",
+      "title": "SensingSG: Spotlight on the Singapore–Johor Bahru connection",
+      "type": "Survey · stated conditional interest",
+      "publication": "February 2024",
+      "dataPeriod": "2024 survey",
+      "geography": "Singapore respondents considering Johor Bahru",
+      "method": "Survey question about interest if travel becomes easier",
+      "contribution": "Around one in three respondents could envisage buying a JB home and retiring there under the easier-travel condition. This prompts questions about services and relationships.",
+      "limit": "Stated interest under a condition is not an observed move and does not represent one-third of all Singaporeans.",
+      "sources": [
+        {
+          "label": "Original survey post",
+          "url": "https://www.linkedin.com/posts/blackbox-research_sensingsg-feb24-spotlight-on-the-sg-jb-activity-7165164423840550912-fz3R"
+        },
+        {
+          "label": "Context",
+          "url": "https://www.businesstimes.com.sg/opinion-features/home-away-home-more-singaporeans-eye-malaysia-place-retire"
+        }
+      ],
+      "region": "Singapore–Johor"
     },
     {
       "id": "sbf-rts-2026",
@@ -120,34 +145,15 @@
           "label": "Full report (PDF)",
           "url": "https://www.sbf.org.sg/docs/default-source/advocacy-policy/sbf-rts-study_final-report-16-jul.pdf?sfvrsn=b7ba6722_1"
         }
-      ]
-    },
-    {
-      "id": "xiao-cai-zhang-2026",
-      "year": "2026",
-      "selector": "Living space",
-      "authors": "Yingbo Xiao, Yinger Cai & Wenjia Zhang",
-      "title": "Living Space Patterns and Planning Implications of Cross-Border Employees from Hong Kong in Shenzhen",
-      "type": "Journal article · spatial analysis",
-      "publication": "10 October 2026 · Land 15(10), 1930",
-      "dataPeriod": "November 2023",
-      "geography": "Hong Kong-linked people in Shenzhen; main spatial sample has Shenzhen home and work anchors",
-      "method": "Selected mobile-phone provider records; the main spatial sample has 2,964 selected Hong Kong-linked users with both home and work anchors inferred in Shenzhen",
-      "contribution": "Shows neighbourhood differences in how closely home, work and other activity spaces sit together. The project adds reported motives that location signals cannot supply.",
-      "limit": "Selected provider data from one month are not a census; the main analytical sample excludes Hong Kong-home/Shenzhen-work daily commuters and dual-residence cases. Motives cannot be inferred directly from the signals.",
-      "sources": [
-        {
-          "label": "Publisher article",
-          "url": "https://www.mdpi.com/2073-445X/15/10/1930"
-        }
-      ]
+      ],
+      "region": "Singapore–Johor"
     }
   ],
   "framework": {
     "title": "A framework for questions, not a score.",
     "source": "Arup / Resilient Cities Network · City Resilience Framework, 2024 edition",
     "url": "https://www.arup.com/globalassets/downloads/insights/c/city-resilience-framework/city-resilience-framework-2024v2.pdf",
-    "introduction": "Jamie selected and adapted relevant themes to organise the inquiry. These three lenses do not reproduce the whole framework.",
+    "introduction": "The Arup / Resilient Cities Network City Resilience Framework (2024) is the source of the organising lenses. Jamie selected and adapted relevant themes for this exploratory inquiry; these three lenses do not reproduce the whole framework or measure a resilience score.",
     "lenses": [
       {
         "name": "Livelihoods and choices",

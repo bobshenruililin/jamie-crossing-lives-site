@@ -4,7 +4,7 @@
    Both: a whole disc across the boundary. Mainland residence, city unspecified:
    the right half is hatched, without an arrow to a different city. Not established: a small
    dashed ghost on the boundary — the same grammar as the miniature. */
-import { byId, FACETS } from './cast.js';
+import { byId, FACETS } from './cast.js?v=20261108-v4';
 import { esc } from './grammar.js';
 
 const ORDER = ['home', 'work', 'spend', 'ties'];
@@ -22,7 +22,7 @@ export function placement(person, facet) {
 
 const WORDS = { hk: 'Hong Kong', sz: 'Shenzhen', both: 'both places', mainland: 'the Mainland, city unspecified', unknown: 'not established' };
 export function describe(person) {
-  return `${person.name}: ${ORDER.map(f => `${FACETS[f].short.toLowerCase()} ${WORDS[placement(person, f)]}`).join('; ')}.`;
+  return `${person.name}: ${ORDER.map(f => `${FACETS[f].short.toLowerCase()} ${person.facets[f]?.unplaced || WORDS[placement(person, f)]}`).join('; ')}.`;
 }
 
 const X = 22, R = 8.6, Y = i => 10 + i * 18;

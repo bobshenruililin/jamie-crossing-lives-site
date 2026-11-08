@@ -1,7 +1,7 @@
 {
   "title": "Cross-border lives: Hong Kong–Shenzhen",
-  "status": "Revised draft · 2 November 2026",
-  "sourceVersion": "Script flow v3",
+  "status": "Script v4 · 7 November 2026",
+  "sourceVersion": "Script flow v4",
   "scenes": [
     {
       "id": "opening",
@@ -16,11 +16,11 @@
           "url": "https://www.edb.gov.sg/en/about-edb/media-releases-publications/agreement-between-singapore-and-malaysia-and-the-johor-singapore-special-economic-zone.html"
         },
         {
-          "label": "[2] Current RTS joint release",
+          "label": "[2] Joint release",
           "url": "https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/10/news-releases/grantors-informed-rts-link-service-targeted-feb-2027.html"
         }
       ],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "regional-context",
@@ -35,7 +35,7 @@
           "url": "https://www.edb.gov.sg/en/about-edb/media-releases-publications/agreement-between-singapore-and-malaysia-and-the-johor-singapore-special-economic-zone.html"
         },
         {
-          "label": "[2] Current RTS joint release",
+          "label": "[2] Joint release",
           "url": "https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/10/news-releases/grantors-informed-rts-link-service-targeted-feb-2027.html"
         },
         {
@@ -43,7 +43,7 @@
           "url": "https://www.naturalearthdata.com/about/terms-of-use/"
         }
       ],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "study-question",
@@ -53,7 +53,7 @@
       "durationSeconds": 45,
       "sourceNote": "Exploratory question using selected accounts and published evidence; no representative population estimate or causal integration effect.",
       "sourceLinks": [],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "research-timeline",
@@ -68,10 +68,6 @@
           "url": "https://research.cuhk.edu.hk/en/publications/not-quite-a-twin-city-cross-boundary-integration-in-hong-kong-and-2/"
         },
         {
-          "label": "[4] CUHK research release, Figure 3, 19 June 2025",
-          "url": "https://socsc.cuhk.edu.hk/voicedetails/research-release-on-hong-kong-travelers-in-mainland-china-official-data-e-wallet-data-model-analysis-reveals-hong-kong-residents-mainland-consumption-trends/"
-        },
-        {
           "label": "[4] Paper",
           "url": "https://www.michael-song.org/uploads/4/8/1/4/48141215/hongkongers_in_mainland.pdf"
         },
@@ -84,21 +80,21 @@
           "url": "https://www.mdpi.com/2073-445X/15/10/1930"
         },
         {
-          "label": "[16] WTO World Trade Report 2024",
+          "label": "[16] Report",
           "url": "https://www.wto.org/english/res_e/publications_e/wtr24_e.htm"
         }
       ],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "study-material",
-      "title": "At least fourteen conversations, three Shenzhen trips, and local fieldwork",
+      "title": "Sixteen conversations, three Shenzhen trips and local fieldwork",
       "subtitle": "Section 2 / Existing research and approach",
       "svg": "presentation-frames/05.svg",
       "durationSeconds": 65,
-      "sourceNote": "At least fourteen individual/group conversation occasions, not fourteen unique people or a representative sample. Brief exchanges supplement the count. All conversations belong to one qualitative body.",
+      "sourceNote": "Sixteen core individual/group conversation occasions, not sixteen people. Wider AGF reflections are recorded separately. Not a representative sample.",
       "sourceLinks": [],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "adapted-lenses",
@@ -110,10 +106,10 @@
       "sourceLinks": [
         {
           "label": "[6] Framework",
-          "url": "https://www.arup.com/globalassets/downloads/insights/c/city-resilience-framework/city-resilience-framework-2024v2.pdf"
+          "url": "https://resilientcitiesnetwork.org/wp-content/uploads/2025/08/city-resilience-framework-2024.pdf"
         }
       ],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "recurring-accounts",
@@ -123,7 +119,7 @@
       "durationSeconds": 40,
       "sourceNote": "Arrangements describe behaviour and overlap. Conceptual role illustrations are not likenesses. Accounts are paraphrased.",
       "sourceLinks": [],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "four-arrangements",
@@ -138,7 +134,7 @@
           "url": "https://www.edb.gov.hk/attachment/en/about-edb/press/legco/replies-to-fc/edb-e-2627.pdf"
         }
       ],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "locally-based-accounts",
@@ -148,17 +144,17 @@
       "durationSeconds": 35,
       "sourceNote": "Three distinct brief Sheung Shui chats; not a representative local sample. Illustrations identify recurring roles, not real likenesses.",
       "sourceLinks": [],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "household-choices",
       "title": "Shenzhen attracts some activities; Hong Kong routines remain",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/10.svg",
-      "durationSeconds": 130,
+      "durationSeconds": 100,
       "sourceNote": "Paraphrased accounts, not quotations or universal household categories. The manager visits Shenzhen for meals but shops mainly in Hong Kong. Parent is a personal account.",
       "sourceLinks": [],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "purchase-mixes",
@@ -166,12 +162,8 @@
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/11.svg",
       "durationSeconds": 40,
-      "sourceNote": "June 2025 CUHK release, Figure 3: seasoned AlipayHK users. Within-location spending shares; rounded HK labels total 101%. Mainland is broader than Shenzhen. Not evidence of displaced Hong Kong spending.",
+      "sourceNote": "March 2025 paper, Section 3.2/Figure 8; January–May 2024 AlipayHK cross-border spenders. Services 49% Mainland/12% Hong Kong; retail+dining 42%/86%. Shares of spending within each place, not Shenzhen-only or displaced Hong Kong spending. The profile of service users remains a question.",
       "sourceLinks": [
-        {
-          "label": "[4] CUHK research release, Figure 3, 19 June 2025",
-          "url": "https://socsc.cuhk.edu.hk/voicedetails/research-release-on-hong-kong-travelers-in-mainland-china-official-data-e-wallet-data-model-analysis-reveals-hong-kong-residents-mainland-consumption-trends/"
-        },
         {
           "label": "[4] Paper",
           "url": "https://www.michael-song.org/uploads/4/8/1/4/48141215/hongkongers_in_mainland.pdf"
@@ -181,45 +173,61 @@
           "url": "https://cz-jrc.econ.cuhk.edu.hk/research/hong-kong-travelers-in-mainland-china-scale-destinations-and-expenditure-patterns/"
         }
       ],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "business-customers",
       "title": "Business exposure differs by customers and occasions",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/12.svg",
-      "durationSeconds": 100,
+      "durationSeconds": 80,
       "sourceNote": "Reported customer mixes and perceptions, plus walking observations. No comparable footfall series or evidence that chains survive better. The guide’s restaurant comparison is her interpretation.",
       "sourceLinks": [],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "retail-context",
-      "title": "Retail-sales value fell in 2024, then rose modestly in 2025",
+      "title": "Employment and spending show different patterns",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/13.svg",
-      "durationSeconds": 25,
-      "sourceNote": "Citywide retail-sales value, not volume or local footfall. These changes do not isolate Shenzhen’s effect.",
+      "durationSeconds": 55,
+      "sourceNote": "C&SD persons engaged: June 2025/2026, retail 230,100/227,500 (-1.1%), F&B 218,000/218,100 (under +0.05%). Rounded counts and source percentage changes. Sales/receipts are value changes; 2026 is provisional January–September year-on-year. Sector totals do not follow displaced workers or isolate Shenzhen’s effect.",
       "sourceLinks": [
+        {
+          "label": "[20] Tables",
+          "url": "https://gia.info.gov.hk/general/202609/18/P2026091800290_557077_1_1789705751580.pdf"
+        },
+        {
+          "label": "[20] C&SD employment release",
+          "url": "https://www.info.gov.hk/gia/general/202609/18/P2026091800290.htm"
+        },
         {
           "label": "[10] Table",
           "url": "https://www.censtatd.gov.hk/en/web_table.html?id=620-67001"
+        },
+        {
+          "label": "[10] September release",
+          "url": "https://www.info.gov.hk/gia/general/202611/03/P2026110300398p.htm"
+        },
+        {
+          "label": "[19] 2024",
+          "url": "https://www.info.gov.hk/gia/general/202502/06/P2025020600273.htm"
+        },
+        {
+          "label": "[19] 2025",
+          "url": "https://www.info.gov.hk/gia/general/202602/03/P2026020300331p.htm"
         }
       ],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "lens-a-takeaway",
       "title": "Cross-border choices are selective; business pressures vary",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/14.svg",
-      "durationSeconds": 40,
+      "durationSeconds": 35,
       "sourceNote": "Synthesis of selected experiences and context. No net welfare calculation, representative gain or causal business-loss estimate.",
       "sourceLinks": [
-        {
-          "label": "[4] CUHK research release, Figure 3, 19 June 2025",
-          "url": "https://socsc.cuhk.edu.hk/voicedetails/research-release-on-hong-kong-travelers-in-mainland-china-official-data-e-wallet-data-model-analysis-reveals-hong-kong-residents-mainland-consumption-trends/"
-        },
         {
           "label": "[4] Paper",
           "url": "https://www.michael-song.org/uploads/4/8/1/4/48141215/hongkongers_in_mainland.pdf"
@@ -231,121 +239,124 @@
         {
           "label": "[10] Table",
           "url": "https://www.censtatd.gov.hk/en/web_table.html?id=620-67001"
+        },
+        {
+          "label": "[10] September release",
+          "url": "https://www.info.gov.hk/gia/general/202611/03/P2026110300398p.htm"
         }
       ],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "cross-border-services",
       "title": "Services help people manage activities in both places",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/15.svg",
-      "durationSeconds": 65,
-      "sourceNote": "Arrival assistance and help-centre provision are distinct. Delivery and driving-licence conversion offerings observed; HK-curriculum tuition reported by a property agent. No service-quality, uptake or outcome inference.",
+      "durationSeconds": 55,
+      "sourceNote": "Arrival assistance and separate help points are distinct. Delivery/licence-conversion offerings observed; HK-curriculum tuition reported. Approved signage-only photo replaces the old identifiable foreground photograph. Provision is not use or effectiveness.",
       "sourceLinks": [],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "follow-up-care",
-      "title": "Follow-up care in Shenzhen, with a route back to Hong Kong",
+      "title": "Hong Kong is exploring GBA care to ease pressure and shorten waits",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/16.svg",
-      "durationSeconds": 40,
-      "sourceNote": "More than 5,900 eligible patients joined by January 2026. A later 31 March release reports over 6,000 by end-February and specifies records/referral arrangements. Not universal coverage or clinical-outcome evidence.",
+      "durationSeconds": 50,
+      "sourceNote": "The April 2025 LegCo reply states government intention to explore strategic purchasing from suitable GBA institutions. The existing HKU–Shenzhen follow-up pilot had over 5,900 eligible patients by January 2026. Intention and uptake do not show hospital pressure fell or establish universal coverage or clinical outcomes.",
       "sourceLinks": [
         {
-          "label": "[12] 25 February 2026",
+          "label": "[21] Official reply",
+          "url": "https://www.info.gov.hk/gia/general/202504/02/P2025040200687.htm"
+        },
+        {
+          "label": "[12] February reply",
           "url": "https://www.info.gov.hk/gia/general/202602/25/P2026022500444.htm"
         },
         {
-          "label": "[12] 17 June 2026",
+          "label": "[12] June reply",
           "url": "https://www.info.gov.hk/gia/general/202606/17/P2026061700586p.htm"
-        },
-        {
-          "label": "[12] Health Bureau: follow-up eligibility, records and return referrals, 31 March 2026",
-          "url": "https://www.info.gov.hk/gia/general/202603/31/P2026033100709.htm"
         }
       ],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "lens-b-takeaway",
-      "title": "Cross-border needs can also create business activity",
+      "title": "Cross-border needs create business opportunities and changing support needs",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/17.svg",
       "durationSeconds": 35,
-      "sourceNote": "Commercial services can generate income and employment; scale and wider contribution are unmeasured. No causal attribution to an SEZ or GDP estimate.",
+      "sourceNote": "Commercial opportunities and evolving care/mobility needs are qualitative implications; scale and economic effects are unmeasured.",
       "sourceLinks": [
         {
-          "label": "[12] 25 February 2026",
+          "label": "[12] February reply",
           "url": "https://www.info.gov.hk/gia/general/202602/25/P2026022500444.htm"
         },
         {
-          "label": "[12] 17 June 2026",
+          "label": "[12] June reply",
           "url": "https://www.info.gov.hk/gia/general/202606/17/P2026061700586p.htm"
-        },
-        {
-          "label": "[12] Health Bureau: follow-up eligibility, records and return referrals, 31 March 2026",
-          "url": "https://www.info.gov.hk/gia/general/202603/31/P2026033100709.htm"
         }
       ],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "continuing-ties",
-      "title": "Work, housing and relationships need not be in one city",
+      "title": "Relationships span places",
       "subtitle": "Section 4 / Three exploratory findings",
       "svg": "presentation-frames/18.svg",
-      "durationSeconds": 80,
-      "sourceNote": "Two accounts, not measured commuting patterns. Property is one resident’s explanation of home. The guide reports a useful lead from friends about an opportunity to qualify.",
-      "sourceLinks": [],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
-    },
-    {
-      "id": "joining-circles",
-      "title": "Work and interests offer ways into new circles",
-      "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/19.svg",
-      "durationSeconds": 45,
-      "sourceNote": "Guide’s examples concern Shenzhen; dining visitors discussed Hong Kong activities during a Shenzhen outing. Mandarin usefulness is the guide’s view.",
-      "sourceLinks": [],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "durationSeconds": 120,
+      "sourceNote": "2017 cross-boundary survey: 28.8% of Hong Kong–Mainland trips by people living in Hong Kong were to visit relatives/friends during two weeks, not people share or Shenzhen-only. Resident and guide accounts are paraphrases. One additional informal account concerns identity and limited time; no workplace or institution is disclosed.",
+      "sourceLinks": [
+        {
+          "label": "[23] Survey",
+          "url": "https://www.info.gov.hk/gia/general/201902/28/P2019022800379.htm"
+        },
+        {
+          "label": "[23] Marriage data",
+          "url": "https://www.censtatd.gov.hk/en/data/stat_report/product/B1010003/att/B10100032026AN26B0100.pdf"
+        },
+        {
+          "label": "[23] Family-reunion report",
+          "url": "https://www.immd.gov.hk/publications/a_report_2024/en/chapter2.html"
+        }
+      ],
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "lens-c-takeaway",
-      "title": "Residence alone does not show where people connect and participate",
+      "title": "Home, connections and identity need not follow residence",
       "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/20.svg",
+      "svg": "presentation-frames/19.svg",
       "durationSeconds": 35,
-      "sourceNote": "Qualitative insight, not a population measure of belonging, support or participation.",
+      "sourceNote": "Selected qualitative experiences, not population estimates. Residence, language, chosen identity, ties and actual participation are distinct.",
       "sourceLinks": [],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "lasting-ties-question",
       "title": "Can lasting ties sustain participation after a move or change in routine?",
       "subtitle": "Section 4 / Three exploratory findings",
-      "svg": "presentation-frames/21.svg",
+      "svg": "presentation-frames/20.svg",
       "durationSeconds": 25,
       "sourceNote": "Hypothesis for future inquiry. Continued spending and community contribution after moving were not measured as effects of stronger ties.",
       "sourceLinks": [],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "questions-worth-exploring",
       "title": "Three questions to investigate",
       "subtitle": "Section 5 / Questions worth exploring",
-      "svg": "presentation-frames/22.svg",
-      "durationSeconds": 120,
+      "svg": "presentation-frames/21.svg",
+      "durationSeconds": 90,
       "sourceNote": "Research questions, not findings. Demand, use, costs, business adaptation and actual participation would need to be followed separately.",
       "sourceLinks": [],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "singapore-johor-questions",
       "title": "Which purchases move, and which ties remain?",
       "subtitle": "Section 6 / Questions for Singapore–Johor",
-      "svg": "presentation-frames/23.svg",
+      "svg": "presentation-frames/22.svg",
       "durationSeconds": 180,
       "sourceNote": "RTS figures forecast additional annual consumer spending, not realised impacts, GDP or JS-SEZ effects. Rounded gross values imply S$294m; source gives about S$290m. Survey is conditional interest among respondents, not moves. Learning exchange is Jamie’s proposal.",
       "sourceLinks": [
@@ -354,7 +365,7 @@
           "url": "https://www.edb.gov.sg/en/about-edb/media-releases-publications/agreement-between-singapore-and-malaysia-and-the-johor-singapore-special-economic-zone.html"
         },
         {
-          "label": "[2] Current RTS joint release",
+          "label": "[2] Joint release",
           "url": "https://www.lta.gov.sg/content/ltagov/en/newsroom/2026/10/news-releases/grantors-informed-rts-link-service-targeted-feb-2027.html"
         },
         {
@@ -374,17 +385,27 @@
           "url": "https://www.businesstimes.com.sg/opinion-features/home-away-home-more-singaporeans-eye-malaysia-place-retire"
         }
       ],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     },
     {
       "id": "closing",
       "title": "What these accounts help us see",
-      "subtitle": "Section 7 / Closing",
+      "subtitle": "Section 7 / Closing, reflections and open questions",
+      "svg": "presentation-frames/23.svg",
+      "durationSeconds": 60,
+      "sourceNote": "Exploratory synthesis and wider questions. The public companion is a separate research resource, not final research approval.",
+      "sourceLinks": [],
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
+    },
+    {
+      "id": "agf-reflections",
+      "title": "Broader reflections from AGF sessions",
+      "subtitle": "Section 7 / Closing, reflections and open questions",
       "svg": "presentation-frames/24.svg",
       "durationSeconds": 120,
-      "sourceNote": "Exploratory synthesis and a wider research question. Full references and visual research are available through the public companion.",
+      "sourceNote": "Jamie’s reflections on Dee Poon, Benjamin Hung/Standard Chartered and Jockey Club sessions, separate from the sixteen core occasions. Paraphrases, not direct quotations or evidence of effectiveness. No commitment to an article, outreach or a further role.",
       "sourceLinks": [],
-      "reviewQuestion": "Does this slide make the intended v3 message clear while supporting Jamie’s narration?"
+      "reviewQuestion": "Does this slide make the intended v4 message clear while supporting Jamie’s narration?"
     }
   ]
 }

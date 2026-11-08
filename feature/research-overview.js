@@ -20,7 +20,7 @@ function sourceLink(source) {
 /** Optional research-map depth. Publication order is separate from data periods. */
 export async function mountResearchOverview(host, suppliedData) {
   if (!host) return {destroy() {}};
-  const data = suppliedData || await fetch(new URL('./research-overview-data.json?v=20261101-script', import.meta.url)).then(response => {
+  const data = suppliedData || await fetch(new URL('./research-overview-data.json?v=20261107-feedback', import.meta.url)).then(response => {
     if (!response.ok) throw new Error(`Research map could not load (${response.status})`);
     return response.json();
   });
@@ -29,7 +29,7 @@ export async function mountResearchOverview(host, suppliedData) {
   const uid = `research-overview-${++overviewInstance}`;
   const shell = node('div', 'ro-shell');
   const introduction = node('p', 'ro-introduction', data.scope);
-  const publicationLabel = node('p', 'ro-timeline-label', 'Publication order · evidence periods shown separately');
+  const publicationLabel = node('p', 'ro-timeline-label', 'Hong Kong–Shenzhen first · Singapore–Johor as a separate research context');
   const timeline = node('div', 'ro-timeline');
   timeline.setAttribute('role', 'group');
   timeline.setAttribute('aria-label', 'Choose a study in the research map');
@@ -39,6 +39,13 @@ export async function mountResearchOverview(host, suppliedData) {
   const live = node('p', 'ro-status');
   live.setAttribute('role', 'status');
   let selected = 0;
+  const regionLists = new Map();
+  for (const region of ['Hong Kong–Shenzhen', 'Singapore–Johor']) {
+    const group = node('section', 'ro-region');
+    group.append(node('h4', 'ro-region-title', region));
+    const choices = node('div', 'ro-region-choices');
+    group.append(choices); timeline.append(group); regionLists.set(region, choices);
+  }
   const buttons = data.studies.map((study, index) => {
     const button = node('button', 'ro-choice');
     button.type = 'button';
@@ -46,7 +53,7 @@ export async function mountResearchOverview(host, suppliedData) {
     button.setAttribute('aria-pressed', String(index === 0));
     button.setAttribute('aria-controls', stage.id);
     button.append(node('span', 'ro-year', study.year), node('span', 'ro-choice-title', study.selector));
-    timeline.append(button);
+    regionLists.get(study.region).append(button);
     return button;
   });
 

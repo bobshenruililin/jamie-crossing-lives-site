@@ -40,6 +40,8 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   // Work-in-progress status (explicit requirement)
   check('popup shows on first visit', await page.evaluate(() => document.querySelector('#status-popup').open));
   await page.click('.status-popup-explore');
+  // The native dialog close event, which saves acknowledgement, is queued.
+  await page.waitForFunction(() => sessionStorage.getItem('crossing-lives:website-wip-acknowledged') === 'yes');
   check('popup closes via its button', !(await page.evaluate(() => document.querySelector('#status-popup').open)));
   check('acknowledgement lasts for the tab session', await page.evaluate(() => sessionStorage.getItem('crossing-lives:website-wip-acknowledged') === 'yes'));
   check('header shows "Work in progress"', (await page.textContent('.site-status')) === 'Work in progress');
@@ -90,9 +92,10 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   const parentBand = await page.$eval('.lrow[data-person="parent"]', n => n.closest('.lband').querySelector('.lband-name').textContent);
   check('EVIDENCE ledger: parent is not "locally based"', !/locally based/i.test(parentBand), parentBand);
   await page.click('.ledger-controls [data-focus="work"]');
-  check('ledger highlight changes the reading', (await page.textContent('.ledger-reading')).startsWith('Every workplace'));
+  check('ledger highlight changes the reading without erasing the guide’s destinations', /guide works across several destinations/.test(await page.textContent('.ledger-reading')));
   await page.click('.lrow[data-person="guide"] .lrow-who');
   check('ledger row expands alone', await page.isVisible('#ledger-guide') && !(await page.isVisible('#ledger-repair')));
+  check('guide work retains the clarified itinerary without assigning the combined six months to one city', /three months in Xinjiang, three in Zhangjiajie, and six across Shenzhen\/Hong Kong combined/.test(await page.textContent('#ledger-guide')));
 
   // Lens B trail
   await page.click('.tr-stop[data-stop="licence"]');
@@ -102,7 +105,7 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   await page.click('.tr-stop[data-stop="delivery"]');
   check('EVIDENCE street photo uses the signage derivative', (await page.getAttribute('.tr-frame img', 'src')).includes('sz-services-signage'));
   await page.click('.tr-stop[data-stop="tuition"]');
-  check('reported stop shows no photograph', await page.isVisible('.tr-nophoto'));
+  check('reported stop has no photograph placeholder', (await page.locator('.tr-nophoto').count()) === 0 && await page.isVisible('.tr-view.is-text-only .tr-text'));
 
   // The documented care pathway remains conditional, with records by permission.
   await page.click('[data-care-go="2"]');
@@ -112,17 +115,10 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   await page.focus('[data-care-go="3"]'); await page.keyboard.press('Home');
   check('care: keyboard selects the eligible starting appointment', (await page.getAttribute('.care', 'data-care-step')) === '1');
 
-  // Lens C: fixed comparison rows and an explicitly unplaced workplace.
-  check('guide starts with an unplaced workplace', (await page.getAttribute('.ties', 'data-profile')) === 'guide' && /location not established/.test(await page.textContent('.ties-unplaced')));
-  await page.click('.ties-switch [data-profile="resident"]');
-  check('resident shows no former home', !(await page.isVisible('.tie-former')));
-  check('resident qualification is visible', /regular commute/.test(await page.textContent('.ties-note')));
-  await page.click('.ties-focus [data-focus="work"]');
-  check('facet focus preserves context and changes the reading', (await page.locator('.ties-lane.is-context').count()) === 2 && /regular commute/.test(await page.textContent('.ties-reading')));
-  await page.click('.ties-switch [data-profile="guide"]');
-  check('profile comparison preserves selected facet', (await page.getAttribute('.ties', 'data-focus')) === 'work' && /does not place/.test(await page.textContent('.ties-reading')));
-  await page.click('.ties-focus [data-focus="all"]');
-  check('guide leaves a former-home outline in Hong Kong', await page.isVisible('.city-hk .tie-former') && await page.isVisible('.city-sz [data-arrives]'));
+  // Lens C is a static two-account graphic, with no flight or facet controls.
+  check('static ties: both accounts visible together', (await page.locator('.ties-static-profile').count()) === 2);
+  check('static ties: no profile, facet or replay controls', (await page.locator('.ties-switch, .ties-focus, .ties-replay').count()) === 0);
+  check('static ties: housing and relationship limits remain explicit', /not a residence calendar/.test(await page.textContent('#ties-panel')) && /regular cross-border commute/.test(await page.textContent('#ties-panel')));
   await page.click('.contact-chain [data-contact="1"]');
   check('qualification is distinguished from access to work', /reported age-related reluctance/.test(await page.textContent('#contact-reading')));
   await page.keyboard.press('ArrowRight');
@@ -142,15 +138,16 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   check('motion pause sets data-motion=off', (await page.getAttribute('html', 'data-motion')) === 'off');
   await page.click('#motion-control');
 
-  // The slogan: line 1's photo pieces rearrange into line 2
-  check('slogan is drawn from field photographs', await page.evaluate(() => document.documentElement.classList.contains('has-photo-title') && document.querySelectorAll('#hero-type .ptype-hit').length === 2));
-  check('slogan text stays in the document for assistive technology', (await page.textContent('#hero-title')).replace(/\s+/g, ' ').trim() === 'Two places, one life, rearranged.');
-  await page.waitForFunction(() => document.querySelector('#hero-type').classList.contains('is-rearranged'), null, { timeout: 9000 }).catch(() => {});
-  check('line 1’s pieces rearrange into line 2', await page.$eval('#hero-type', n => n.classList.contains('is-rearranged')));
-  const wordLabel = await page.getAttribute('#hero-type .ptype-hit[data-word="0"]', 'aria-label');
-  check('each slogan word names its photograph', /field photograph: .+Open the photograph/.test(wordLabel || ''), wordLabel);
-  check('“A life doesn’t move all at once” is the tour’s payoff', (await page.textContent('#step-together h2')).includes('A life doesn’t move'));
-  check('three lens letters are drawn from photographs', (await page.$$eval('.lens-mark.is-ready', l => l.length)) === 3);
+  // The opening slogan remains ordinary, readable text.
+  check('opening is static with no animated slogan host', (await page.locator('#hero-type').count()) === 0 && !(await page.evaluate(() => document.documentElement.classList.contains('has-photo-title'))));
+  check('opening title remains readable', (await page.textContent('#hero-title')).replace(/\s+/g, ' ').trim() === 'Two places, one life, rearranged.');
+  check('signature legend explains the row order', /home, work or study, purchases, relationships/.test(await page.textContent('.signature-explainer')));
+  check('Alipay uses one paper and period', /49%/.test(await page.textContent('#basket')) && /January–May 2024/.test(await page.textContent('#basket')) && !/47%/.test(await page.textContent('#basket')));
+  check('Alipay distinguishes the services denominator', /Different denominator/.test(await page.textContent('#basket')) && /≈80%/.test(await page.textContent('#basket')));
+  check('jobs comparison includes both June snapshots and official F&B caveat', /230,100/.test(await page.textContent('.jobs-context')) && /227,500/.test(await page.textContent('.jobs-context')) && /less than \+0.05%/.test(await page.textContent('.jobs-context')));
+  check('field observations precede policy and healthcare', await page.evaluate(() => document.querySelector('#service-trail').compareDocumentPosition(document.querySelector('.care-policy')) & Node.DOCUMENT_POSITION_FOLLOWING));
+  check('Johor published panels match pins 5 and 6', (await page.locator('.echo-context .echo-num').allTextContents()).join(',') === '5,6');
+  check('removed reader-route sections stay absent', (await page.locator('#measure, #responses, #game-lab, .go-deeper').count()) === 0);
 
   // Place words light the model and open its evidence
   await page.hover('.pw[data-place="sz-repair"] >> nth=0');
@@ -172,7 +169,7 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   check('manager signature: shopping in both places, ties unknown', managerSig.includes('spend:both') && managerSig.includes('ties:unknown'), managerSig.join(' '));
 
   // Research shelves
-  for (const id of ['about-inquiry', 'research-reading', 'evidence', 'care-evidence', 'school-evidence', 'street-level', 'policy-maps', 'horizon', 'questions', 'measure', 'responses', 'game-lab']) {
+  for (const id of ['about-inquiry', 'research-reading', 'evidence', 'care-evidence', 'school-evidence', 'street-level', 'policy-maps', 'horizon', 'questions']) {
     await page.evaluate(id => { document.getElementById(id).open = true; }, id);
     await page.waitForTimeout(700);
     const length = await page.$eval(`#${id} .shelf-body`, n => n.innerText.length);
@@ -184,17 +181,26 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   check('EVIDENCE trips name Lok Ma Chau/Futian and Lo Wu', text.includes('Lok Ma Chau/Futian') && text.includes('Lo Wu'));
 
   // Deep links, including legacy anchors
-  for (const [hash, id] of [['#responses', 'responses'], ['#selective', 'choices'], ['#two-way', 'johor'], ['#arrangements', 'accounts']]) {
+  for (const [hash, id] of [['#questions', 'questions'], ['#selective', 'choices'], ['#two-way', 'johor'], ['#arrangements', 'accounts']]) {
     const p = await ctx.newPage();
     await p.goto(base + hash, { waitUntil: 'networkidle' });
     await p.waitForTimeout(1400);
-    const r = await p.evaluate(id => { const el = document.getElementById(id); const d = el.closest('details'); return { top: Math.round(el.getBoundingClientRect().top), open: d ? d.open : true }; }, id);
-    check(`deep link ${hash} reaches #${id}`, r.open && Math.abs(r.top) < 160, JSON.stringify(r));
+    const r = await p.evaluate(id => {
+      const el = document.getElementById(id), box = el.getBoundingClientRect(), d = el.closest('details');
+      return { top: Math.round(box.top), bottom: Math.round(box.bottom), viewport: innerHeight,
+        atEnd: Math.abs(scrollY + innerHeight - document.documentElement.scrollHeight) < 2,
+        open: d ? d.open : true };
+    }, id);
+    // A final short shelf cannot align with the header once scrolling reaches
+    // the page end. Its complete panel must then be visible, not merely open.
+    const aligned = Math.abs(r.top) < 160;
+    const fullyVisibleAtEnd = r.atEnd && r.top >= 0 && r.bottom <= r.viewport;
+    check(`deep link ${hash} reaches #${id}`, r.open && (aligned || fullyVisibleAtEnd), JSON.stringify(r));
     await p.close();
   }
 
   check('EVIDENCE the unconsented street photograph is never requested', !requests.some(u => /sz-services\.jpg/.test(u)));
-  check('new field photographs load as cropped derivatives', ['hk-crossing-hall', 'sz-help-kiosk', 'sz-community-centre'].every(n => requests.some(u => u.includes(n))));
+  check('new field photographs load as cropped derivatives', ['sz-help-kiosk', 'sz-community-centre'].every(n => requests.some(u => u.includes(n))));
   check('no runtime or resource errors apart from the recorded missing favicon', errors.length === 0, errors.join(' | '));
 
   // Width regression: the services strip used to expand the whole document at

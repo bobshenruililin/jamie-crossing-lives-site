@@ -1,11 +1,11 @@
-/* Crossing Lives — page controller for the 5 November 2026 edition.
+/* Crossing Lives — page controller for the 7 November 2026 feedback edition.
    Native scrolling and buttons stay in charge; components enhance static
    markup that remains readable without JavaScript. */
 import { hydrateGlyphs, motionAllowed } from './grammar.js';
 import { tour } from './cast.js';
 
 const html = document.documentElement;
-const V = '20261106-connected';
+const V = '20261108-v4';
 
 /* Motion: one control for the page; reduced-motion preference wins. */
 const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
@@ -95,20 +95,7 @@ function goToStep(scene) {
 switcher?.addEventListener('click', event => { const b = event.target.closest('[data-go]'); if (b) goToStep(b.dataset.go); });
 document.addEventListener('mini:request-scene', event => goToStep(event.detail.id));
 
-/* ---- Type cut from field photographs: the title and each lens letter ---- */
-const heroTitle = document.querySelector('#hero-title');
-mount('#hero-type', async host => {
-  const { mountRearrange } = await import(`./photo-type.js?v=${V}`);
-  const t = mountRearrange(host, {
-    size: () => parseFloat(getComputedStyle(heroTitle).fontSize),
-    from: [[{ text: 'Two', photo: 'driving-school', tone: 'hk' }, { text: 'places,', photo: 'place', tone: 'sz', focus: [.5, .35] }]],
-    to: [[{ text: 'one' }, { text: 'life,' }], [{ text: 'rearranged.', font: 'accent' }]]
-  });
-  const ready = () => { if (host.classList.contains('is-ready')) html.classList.add('has-photo-title'); };
-  new MutationObserver(ready).observe(host, { attributes: true, attributeFilter: ['class'] });
-  ready();
-  return t;
-});
+/* ---- Opening heading stays static and readable. ---- */
 
 /* ---- Place words: the text and the model are one instrument ---- */
 document.addEventListener('pointerover', event => { const w = event.target.closest?.('.pw'); if (w) mini?.peek?.(w.dataset.place); });
@@ -152,13 +139,12 @@ function getData(path) {
 }
 const loaders = {
   '#policy-map': async host => (await import('./policy-map.js?v=20261031-v3')).mountPolicyMap(host),
-  '#research-overview': async host => (await import('./research-overview.js?v=20261101-script')).mountResearchOverview(host),
+  '#research-overview': async host => (await import('./research-overview.js?v=20261108-v4')).mountResearchOverview(host),
   '#field-gallery': async host => (await import('./field-gallery.js?v=20261031-v3')).initFieldGallery(host),
-  '#opening-game': async host => (await import('./game.js?v=20261031-v3')).initGame(host),
   '[data-evidence]': async host => (await import('./evidence.js?v=20261031-v3')).initEvidence(host, await getData('../research-data.json')),
   '[data-everyday-view]': async host => (await import('./everyday.js?v=20261031-v3')).initEveryday(host, await getData('./everyday-data.json')),
   '[data-library]': async host => {
-    const [{ initLibrary }, cases, measurement, research] = await Promise.all([import('./library.js?v=20261101-script'), getData('../data/response-cases.json'), getData('./measurement-menu.json?v=20261101-script'), getData('../research-data.json')]);
+    const [{ initLibrary }, cases, measurement, research] = await Promise.all([import('./library.js?v=20261108-v4'), getData('../data/response-cases.json'), getData('./measurement-menu.json?v=20261108-v4'), getData('../research-data.json')]);
     return initLibrary(host, cases, measurement, research.future);
   }
 };

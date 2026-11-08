@@ -1,9 +1,7 @@
 /* Lens A — livelihoods and choices.
-   1. Reasons: what each account says draws an activity across, and what keeps
-      it local. Paraphrased from Script v3, slide 10.
-   2. Basket: CUHK research release, Figure 3 (19 June 2025). Exact printed
-      shares; shares of recorded spending within each location, not a common
-      budget. Hong Kong's rounded labels total 101% and are preserved. */
+   Reasons are paraphrased accounts. Spending comparisons use the March 2025
+   Gao, Han and Song working paper, January–May 2024 selected AlipayHK users.
+   Exact prose-supported values and approximate service shares stay distinct. */
 import { byId } from './cast.js';
 import { evidenceGlyph, esc } from './grammar.js';
 
@@ -38,41 +36,20 @@ export function initReasons(host) {
   if (observer) observer.observe(host); else host.firstElementChild.classList.add('is-seen');
 }
 
-const CATEGORIES = [
-  { id: 'services', label: 'Services', mainland: 47, hk: 12 },
-  { id: 'retail', label: 'Retail', mainland: 28, hk: 58 },
-  { id: 'food', label: 'Food & beverages', mainland: 16, hk: 29 },
-  { id: 'other', label: 'Other sectors', mainland: 9, hk: 2 }
-];
-const SOURCE = 'https://socsc.cuhk.edu.hk/voicedetails/research-release-on-hong-kong-travelers-in-mainland-china-official-data-e-wallet-data-model-analysis-reveals-hong-kong-residents-mainland-consumption-trends/';
-const MAX = 60;
+const SOURCE = 'https://www.michael-song.org/uploads/4/8/1/4/48141215/hongkongers_in_mainland.pdf#page=12';
 
+/* Use prose-supported figures from the same paper/sample, not the different
+   CUHK release. Do not assign precise values to Figure 8's unlabelled bars. */
 export function initBasket(host) {
-  const ticks = [0, 20, 40, 60];
-  const rows = CATEGORIES.map((c, index) => {
-    const series = name => index === 0 ? `<i class="bk-series">${name}</i>` : '';
-    const lo = Math.min(c.mainland, c.hk), hi = Math.max(c.mainland, c.hk);
-    const mainlandHigher = c.mainland > c.hk;
-    return `<li class="bk-row" data-category="${c.id}" tabindex="0" aria-label="${esc(c.label)}: Mainland China ${c.mainland}%, Hong Kong ${c.hk}% of recorded spending">
-      <span class="bk-label">${esc(c.label)}</span>
-      <span class="bk-track" aria-hidden="true">
-        ${ticks.map(t => `<i class="bk-grid" style="left:${t / MAX * 100}%"></i>`).join('')}
-        <span class="bk-span ${mainlandHigher ? 'to-mainland' : 'to-hk'}" style="left:${lo / MAX * 100}%;width:${(hi - lo) / MAX * 100}%"></span>
-        <span class="bk-dot dot-mainland ${mainlandHigher ? 'is-high' : 'is-low'}" style="left:${c.mainland / MAX * 100}%">${series('Mainland')}<b>${c.mainland}%</b></span>
-        <span class="bk-dot dot-hk ${mainlandHigher ? 'is-low' : 'is-high'}" style="left:${c.hk / MAX * 100}%">${series('Hong Kong')}<b>${c.hk}%</b></span>
-      </span>
-    </li>`;
-  }).join('');
-  host.innerHTML = `<figure class="basket">
-    <ol class="bk-rows">${rows}</ol>
-    <div class="bk-axis" aria-hidden="true"><span></span><span class="bk-axis-track">${ticks.map(t => `<b style="left:${t / MAX * 100}%">${t}${t === MAX ? '%' : ''}</b>`).join('')}</span></div>
-    <div class="visually-hidden"><table><caption>Share of recorded spending within each location, seasoned AlipayHK users</caption><thead><tr><th scope="col">Category</th><th scope="col">Mainland China</th><th scope="col">Hong Kong</th></tr></thead><tbody>${CATEGORIES.map(c => `<tr><th scope="row">${esc(c.label)}</th><td>${c.mainland}%</td><td>${c.hk}%</td></tr>`).join('')}</tbody></table></div>
-    <figcaption>${evidenceGlyph('published')} Share of recorded spending within each place, among seasoned AlipayHK users · CUHK, June 2025</figcaption>
-    <details class="source-note"><summary>Source and limits</summary>
-      <p>Services are 47% of recorded Mainland spending—the largest category, not a majority. Hong Kong’s published labels are rounded and total 101%; the chart keeps them as printed.</p>
-      <p>“Seasoned” users registered and started before 30 June 2021, with transactions after 1 January 2022. These users do not represent all residents or all spending, and identical membership in both panels is not established. Mainland China is broader than Shenzhen.</p>
-      <p>The shares do not measure spending displaced from Hong Kong, explain individual motives or establish a causal effect.</p>
-      <a href="${SOURCE}" target="_blank" rel="noopener">Read the CUHK release and original figure ↗</a>
-    </details>
+  const bar = (place, value, tone, approximate = false) => `<div class="spend-row"><span>${place}</span><div class="spend-track"><i class="${tone}" style="width:${value}%"></i></div><b>${approximate ? '≈' : ''}${value}%</b></div>`;
+  host.innerHTML = `<figure class="basket basket-clear">
+    <p class="bk-period">Selected AlipayHK cross-border spenders · January–May 2024</p>
+    <div class="spend-panels">
+      <section aria-label="Services as a share of all recorded spending"><h4>Services</h4><p class="spend-unit">Share of all recorded spending in each place</p>${bar('Mainland China',49,'sz')}${bar('Hong Kong',12,'hk')}<p class="spend-question">Who uses these services? Occasional visits, or lives spanning both places?</p></section>
+      <section aria-label="Retail and dining as a share of all recorded spending"><h4>Retail + dining</h4><p class="spend-unit">Share of all recorded spending in each place</p>${bar('Mainland China',42,'sz')}${bar('Hong Kong',86,'hk')}</section>
+    </div>
+    <section class="service-breakdown" aria-label="Life services as a share of services spending"><h4>Inside services: life services</h4><p class="spend-unit"><b>Different denominator:</b> share of services spending only</p>${bar('Mainland China',80,'sz',true)}${bar('Hong Kong',25,'hk',true)}<p class="life-examples"><b>Examples:</b> cleaning and garment care; personal care and beauty; water, electricity and gas bills.</p><p class="fine">The remaining services include medical, educational, recreational, car and repair, business, other professional and other services. No precise shares are assigned to the paper’s unlabelled bars.</p></section>
+    <figcaption>${evidenceGlyph('published')} Gao, Han &amp; Song, March 2025, Figure 8 and accompanying text. Each bar has a zero baseline and a 100% scale.</figcaption>
+    <details class="source-note"><summary>Source and limits</summary><p>Services account for 49% of selected users’ recorded Mainland spending. Life services account for approximately 80% of those services, or roughly 40% of all Mainland spending. These denominators are not interchangeable.</p><p>Selected AlipayHK cross-border spenders are not all Hong Kong residents or all spending. Mainland China is broader than Shenzhen. The published breakdown does not identify which people maintain lives on both sides, or how much Hong Kong spending was displaced.</p><a href="${SOURCE}" target="_blank" rel="noopener">Read the paper, Figure 8 (PDF page 12) ↗</a></details>
   </figure>`;
 }

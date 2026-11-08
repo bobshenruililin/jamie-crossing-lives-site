@@ -3,7 +3,8 @@
 
    Wording is paraphrased from material already public in this repository:
    the Script v3 presentation frames (checked 2 November 2026) and the earlier
-   website edition. No quotations, private identifiers, employers, institutions
+   website edition, with the guide’s itinerary clarified in Jamie’s 7 November feedback.
+   No quotations, private identifiers, employers, institutions
    or invented values. "Not established" means the public account does not say.
    Pronouns follow the earlier public edition; otherwise wording stays neutral. */
 
@@ -70,7 +71,10 @@ export const cast = [
     summary: 'She moved home to Shenzhen, weighing lower earnings against lower living costs and preferred guiding work.',
     facets: {
       home: { sz: 'Moved home from Hong Kong', note: 'Lower living costs, in her account; she prepared before moving.' },
-      work: { note: 'Preferred guiding work; its location is not established.' },
+      work: {
+        unplaced: 'Work spans several destinations; the Hong Kong–Shenzhen split is unspecified.',
+        note: 'Jamie clarified a guiding schedule of three months in Xinjiang, three in Zhangjiajie, and six across Shenzhen/Hong Kong combined. That combined period is not divided between the two cities; the other destinations sit outside this miniature.'
+      },
       spend: {},
       ties: { hk: 'Family visits', sz: 'Community life and guiding friends', note: 'Sports, interest groups and food-related activities too. Mandarin helped her join in, in her view.' }
     },
