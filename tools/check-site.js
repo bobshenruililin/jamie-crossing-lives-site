@@ -15,14 +15,17 @@
    photograph is never requested, schoolchildren's residential city is not
    assigned or excluded, the manager's shopping is never placed in Sheung Shui, the parent
    is not "locally based", and no institution is disclosed. */
-const { chromium } = require('playwright');
+const { chromium, firefox, webkit } = require('playwright');
 
 const base = process.argv[2] || 'http://127.0.0.1:4188/';
 const results = [];
 const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), detail });
 
 (async () => {
-  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
+  const engine = process.env.BROWSER || 'chromium';
+  const browserType = { chromium, firefox, webkit }[engine];
+  if (!browserType) throw new Error(`Unknown BROWSER: ${engine}`);
+  const browser = await browserType.launch(engine === 'chromium' && process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const page = await ctx.newPage();
   const errors = [], requests = [], warnings = [];
@@ -75,6 +78,14 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   await scene('repair');
   check('repair: unplaced parts float as ghosts', (await page.$$eval('.mini-ghost', l => l.length)) === 3);
   await scene('pupils');
+  await page.click('.mini-mark[data-place="hk-school"]');
+  check('school evidence is below the model, with no marker overlap', await page.evaluate(() => {
+    const stage = document.querySelector('.mini-stage').getBoundingClientRect();
+    const card = document.querySelector('.mini-card').getBoundingClientRect();
+    return card.top >= stage.bottom - 1 && card.bottom <= innerHeight;
+  }));
+  check('school story hides unrelated marker buttons', await page.locator('.mini-mark.is-dim:visible').count() === 0);
+  await page.keyboard.press('Escape');
   const pupilPins = await page.$$eval('.mini-flag, .mini-mark.has-pin', l => l.map(n => n.textContent));
   check('EVIDENCE pupils: Mainland includes Shenzhen; residential city unspecified',
     (await page.textContent('.mini-zone')) === 'Mainland · includes Shenzhen' && pupilPins.some(t => t.includes('city unspecified')), pupilPins.join(' | '));
@@ -144,6 +155,11 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   check('signature legend explains the row order', /home, work or study, purchases, relationships/.test(await page.textContent('.signature-explainer')));
   check('Alipay uses one paper and period', /49%/.test(await page.textContent('#basket')) && /January–May 2024/.test(await page.textContent('#basket')) && !/47%/.test(await page.textContent('#basket')));
   check('Alipay distinguishes the services denominator', /Different denominator/.test(await page.textContent('#basket')) && /≈80%/.test(await page.textContent('#basket')));
+  check('spending panels follow the two places in the presentation', (await page.locator('.spend-place h4').allTextContents()).join('|') === 'Mainland China|Hong Kong');
+  await page.click('.service-breakdown > summary');
+  check('services detail opens with the examples and separate denominator', await page.locator('.service-detail').isVisible() && /cleaning and garment care/.test(await page.textContent('.service-detail')));
+  await page.focus('.service-breakdown > summary'); await page.keyboard.press('Enter');
+  check('services detail closes from the keyboard', !(await page.locator('.service-detail').isVisible()));
   check('jobs comparison includes both June snapshots and official F&B caveat', /230,100/.test(await page.textContent('.jobs-context')) && /227,500/.test(await page.textContent('.jobs-context')) && /less than \+0.05%/.test(await page.textContent('.jobs-context')));
   check('field observations precede policy and healthcare', await page.evaluate(() => document.querySelector('#service-trail').compareDocumentPosition(document.querySelector('.care-policy')) & Node.DOCUMENT_POSITION_FOLLOWING));
   check('Johor published panels match pins 5 and 6', (await page.locator('.echo-context .echo-num').allTextContents()).join(',') === '5,6');
@@ -207,7 +223,7 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   // 844px, causing mobile auto-scaling and making the Enlarge button unreachable.
   // Compare against clientWidth: innerWidth can itself grow with the overflow.
   for (const [width, height, touch] of [[320, 740, true], [390, 844, true], [412, 915, true], [768, 1024, true], [844, 390, true], [1024, 768, false], [1099, 800, false], [1100, 800, false], [1280, 800, false], [1440, 900, false]]) {
-    const responsive = await browser.newContext({ viewport: { width, height }, isMobile: touch, hasTouch: touch, reducedMotion: 'reduce' });
+    const responsive = await browser.newContext({ viewport: { width, height }, ...(engine !== 'firefox' ? { isMobile: touch } : {}), hasTouch: touch, reducedMotion: 'reduce' });
     const p = await responsive.newPage();
     await p.goto(base, { waitUntil: 'networkidle' });
     await p.click('.status-popup-explore');
@@ -223,6 +239,14 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
     } catch (error) { /* Report the failed check, then continue the remaining widths. */ }
     check(`layout ${width}×${height}: Enlarge is reachable${touch ? ' by touch' : ''}`, opened);
     if (opened) await p.keyboard.press('Escape');
+    if (width === 390) {
+      await p.locator('#step-pupils .pw').tap();
+      await p.waitForTimeout(250);
+      check('phone: tapping school keeps its evidence visible after scroll settles', await p.locator('.mini-card').evaluate(n => {
+        const r=n.getBoundingClientRect();
+        return !n.hidden && r.top >= 0 && r.bottom <= innerHeight && /Schools/.test(n.textContent);
+      }));
+    }
     if (width === 844) {
       await p.focus('.tr-stop[data-stop="licence"]');
       const reached = [];
@@ -238,7 +262,7 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
 
   const failed = results.filter(r => !r.ok);
   results.forEach(r => console.log(`${r.ok ? 'PASS' : 'FAIL'}  ${r.name}${r.detail && !r.ok ? `  — ${r.detail}` : ''}`));
-  console.log(`\n${results.length - failed.length}/${results.length} passed · ${base}`);
+  console.log(`\n${results.length - failed.length}/${results.length} passed · ${engine} · ${base}`);
   [...new Set(warnings)].forEach(w => console.log(`NOTE  ${w} (unchanged; not a runtime failure)`));
   process.exit(failed.length ? 1 : 0);
 })().catch(error => { console.error(error); process.exit(2); });

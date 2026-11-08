@@ -69,8 +69,8 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
       <canvas class="mini-canvas" data-mini="canvas" hidden tabindex="0" role="img" aria-label="A miniature of the fieldwork, rendered live: Hong Kong on the left and Shenzhen on the right, joined by one crossing. Each building stands for a place in the research. Arrow keys turn it; plus and minus zoom."></canvas>
       <div class="mini-overlay" data-mini="overlay"></div>
       <div class="mini-sides" aria-hidden="true"><span class="side-hk">Hong Kong</span><span class="side-bd">The boundary</span><span class="side-sz">Shenzhen</span></div>
-      <section class="mini-card" data-mini="card" hidden aria-live="polite"></section>
     </div>
+    <section class="mini-card" data-mini="card" id="${uid}-card" hidden aria-labelledby="${uid}-card-title"></section>
     <p class="mini-status visually-hidden" data-mini="status" role="status" aria-atomic="true"></p>`;
 
   const $ = key => host.querySelector(`[data-mini="${key}"]`);
@@ -413,7 +413,11 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
       button.classList.toggle('has-pin', Boolean(pin));
       button.classList.toggle('is-open', openId === id);
       button.classList.toggle('is-peek', peekId === id);
+      // During a person's story, only their places need buttons. The Places
+      // overview still offers every building, and a text-linked place stays visible.
+      button.hidden = Boolean(byId[sceneId]) && state === 'dim' && openId !== id && peekId !== id;
       button.setAttribute('aria-expanded', String(openId === id));
+      button.setAttribute('aria-controls', `${uid}-card`);
       const label = button.querySelector('.mark-label');
       label.innerHTML = pin ? `${facetGlyph(pin.facet)}<span>${esc(pin.text)}</span>` : '';
     });
@@ -565,7 +569,7 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
     if (place.observed) rows.push(`<li>${evidenceGlyph('observed')}<div><p>${esc(place.observed)}</p><small>Field observation</small></div></li>`);
     if (place.published) rows.push(`<li>${evidenceGlyph('published')}<div><p>${esc(place.published)}</p><small>Government release</small></div></li>`);
     const photo = place.photo && photos[place.photo];
-    card.innerHTML = `<header><p class="card-side side-${place.side}">${sideName}</p><h3>${esc(place.label)}</h3><button type="button" class="card-close" aria-label="Close ${esc(place.label)}"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15"/></svg></button></header>
+    card.innerHTML = `<header><p class="card-side side-${place.side}">${sideName}</p><h3 id="${uid}-card-title">${esc(place.label)}</h3><button type="button" class="card-close" aria-label="Close ${esc(place.label)}"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15"/></svg></button></header>
       <ul class="card-evidence">${rows.join('')}</ul>
       ${photo ? `<button type="button" class="card-photo" data-photo="${place.photo}"><img src="${asset(photo.file)}" alt="" loading="lazy" decoding="async" width="${photo.width}" height="${photo.height}"><span>${evidenceGlyph('photo')}Inspect the field photograph</span></button>${place.photoNote ? `<p class="card-photo-note">${esc(place.photoNote)}</p>` : ''}` : ''}
       <p class="card-limit">Placed to explain, not mapped. Accounts are paraphrased.</p>`;
