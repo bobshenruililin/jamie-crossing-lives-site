@@ -11,7 +11,7 @@
   const dataFile = studyMode ? 'review-data.json' : 'presentation-data.json';
   const runtimeUrl = (path) => {
     const url = new URL(path, document.baseURI);
-    url.searchParams.set('v', '20261102-v3-final');
+    url.searchParams.set('v', '20261107-v4');
     return url;
   };
   const framePattern = studyMode ? /^frames\/[a-zA-Z0-9][a-zA-Z0-9_.-]*\.svg$/ : /^presentation-frames\/[a-zA-Z0-9][a-zA-Z0-9_.-]*\.svg$/;
@@ -50,6 +50,7 @@
       'visible-services': 'cross-border-services',
       'driving-licence-services': 'cross-border-services',
       'help-through-connections': 'continuing-ties',
+      'joining-circles': 'continuing-ties',
       'inquiry-businesses-workers': 'questions-worth-exploring',
       'inquiry-services-users': 'questions-worth-exploring',
       'inquiry-movers-relationships': 'questions-worth-exploring',
@@ -325,9 +326,9 @@
     ['next', 'fullscreen-next'].forEach((id) => byId(id).setAttribute('aria-label', `Next reveal or ${sceneName}`));
     byId('previous').title = `Previous reveal or ${sceneName} (←)`;
     byId('next').title = `Next reveal or ${sceneName} (→)`;
-    byId('draft-label').textContent = studyMode ? 'Visual studies · draft for discussion' : 'Presentation draft';
+    byId('draft-label').textContent = studyMode ? 'Visual studies · draft for discussion' : 'Script v4 · 7 November 2026';
     byId('keyboard-hint').textContent = `Use ← → to move through ${studyMode ? 'each study' : 'the presentation'}. Home / End jump to the beginning / end.`;
-    byId('dialog-caveat').textContent = `${studyMode ? 'Provisional visual study' : 'Working presentation draft'} for review. Source scope and caveats remain part of the claim.`;
+    byId('dialog-caveat').textContent = `${studyMode ? 'Provisional visual study' : 'Presentation based on script v4'}. Source scope and caveats remain part of the claim.`;
     const loadingMessage = stage.querySelector('.stage-message');
     if (loadingMessage) loadingMessage.textContent = studyMode ? 'Loading the studies…' : 'Loading the presentation…';
   }

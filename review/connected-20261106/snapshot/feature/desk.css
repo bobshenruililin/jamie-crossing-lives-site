@@ -1,0 +1,9 @@
+/* Research desk: light adjustments to the namespaced module stylesheets
+   (evidence, everyday, library, policy-map, research-overview, field-gallery,
+   game), loaded after them. Modules keep their own internal layout. */
+.shelf-body .small-note{font-size:12.5px;color:var(--muted);line-height:1.5}
+.shelf-body h2{font-family:var(--font-display);font-weight:700;letter-spacing:-.01em}
+.shelf-body .evi-controls button,.shelf-body .lib-controls button{min-height:40px}
+.shelf-body img{max-width:100%}
+.game-depth h4{font-family:var(--font-display);font-size:30px;line-height:1;margin-bottom:12px}
+.game-depth p{font-size:15px;margin-bottom:10px}

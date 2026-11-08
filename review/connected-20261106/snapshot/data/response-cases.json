@@ -1,0 +1,446 @@
+[
+  {
+    "id": "cgc-japan",
+    "name": "CGC Japan",
+    "region": "Japan",
+    "problem": "Customers and markets",
+    "mechanism": "Independently owned supermarkets share purchasing, private-label products, logistics, IT and back-office services through a common organisation.",
+    "evidenceType": "Operating model",
+    "evidence": "The operator documents an established shared-service network while member businesses retain separate ownership.",
+    "limit": "This is not a controlled estimate of savings or business survival. Assess worthwhile savings after coordination and participation costs, customer demand and competition safeguards.",
+    "sources": [
+      {
+        "label": "CGC business overview",
+        "url": "https://www.cgcjapan.co.jp/company/business/"
+      },
+      {
+        "label": "CGC English overview",
+        "url": "https://www.cgcjapan.co.jp/english/"
+      }
+    ]
+  },
+  {
+    "id": "aic-alps",
+    "name": "AIC–ALPS shared procurement",
+    "region": "Singapore",
+    "problem": "Customers and markets",
+    "mechanism": "AIC and ALPS organise suitable purchases across participating community care providers, pooling demand through shared procurement.",
+    "evidenceType": "Operating model",
+    "evidence": "Provider documentation records a 2010 pilot and formalisation in July 2012. Its participation figure relates to the term beginning April 2022.",
+    "limit": "Documented operation does not establish independently estimated savings or better business survival. Purchasing volume, quality, coordination costs and applicable rules determine suitability.",
+    "sources": [
+      {
+        "label": "AIC Shared Procurement Programme",
+        "url": "https://www.aic.sg/Partners/Shared-Procurement-Programme"
+      }
+    ]
+  },
+  {
+    "id": "otop-thailand",
+    "name": "One Tambon One Product",
+    "region": "Thailand",
+    "problem": "Customers and markets",
+    "mechanism": "Local products receive assessment, development, training, branding and routes to customers through exhibitions, sales channels and intermediaries.",
+    "evidenceType": "Programme provision",
+    "evidence": "FAO documents programme operation; original field research identifies uneven producer capabilities and barriers to using marketing channels.",
+    "limit": "Reported sales and participation do not establish additional demand or benefits for every producer. Rural products and tourism differ from urban food and retail businesses.",
+    "sources": [
+      {
+        "label": "FAO programme account",
+        "url": "https://www.fao.org/one-country-one-priority-product/asia-pacific/good-practices/detail/one-tambon-one-product-%28otop%29-to-promote-grassroots-economy-in-thailand/en"
+      },
+      {
+        "label": "ISEAS field research",
+        "url": "https://www.iseas.edu.sg/articles-commentaries/iseas-perspective/2022-35-can-otop-support-northeastern-thailands-post-pandemic-recovery-by-alexandra-dalferro/"
+      }
+    ]
+  },
+  {
+    "id": "singapore-ccp",
+    "name": "Place-and-Train Career Conversion Programme",
+    "region": "Singapore",
+    "problem": "Work and employment risks",
+    "mechanism": "Hiring, occupational training and salary support connect a worker to a destination job through employers and programme partners.",
+    "evidenceType": "Comparative evaluation",
+    "evidence": "The published evaluation estimates higher wages and employment retention against constructed comparison groups, using different methods for the two outcomes.",
+    "limit": "The study is non-randomised, predominantly covers PMET participants and excludes participants with fewer than three months of employment records at their placement company. It does not predict results for displaced Hong Kong retail workers.",
+    "sources": [
+      {
+        "label": "Singapore CCP evaluation report",
+        "url": "https://isomer-user-content.by.gov.sg/1004/c1fe97bf-398d-4c4b-ae21-3e58ee6beaa4/FA2_AES2024.pdf"
+      }
+    ]
+  },
+  {
+    "id": "ntuc-job-security-council",
+    "name": "NTUC Job Security Council",
+    "region": "Singapore",
+    "problem": "Work and employment risks",
+    "mechanism": "Unions, employers and employment intermediaries connect firms releasing staff with firms recruiting, with training where needed.",
+    "evidenceType": "Operating model",
+    "evidence": "NTUC’s 2020 account describes early matching and worker redeployment during restructuring.",
+    "limit": "The account does not independently estimate unemployment avoided. Suitable vacancies and willing participants are necessary; assess pay, conditions and retention after matching.",
+    "sources": [
+      {
+        "label": "NTUC operational account",
+        "url": "https://www.ntuc.org.sg/uportal/news/NTUC-Job-Security-Council-supports-nationwide-efforts-to-help-companies-and-place-affected-workers-into-new-jobs/"
+      }
+    ]
+  },
+  {
+    "id": "happy-bridge",
+    "name": "Happy Bridge worker cooperative",
+    "region": "South Korea",
+    "problem": "Work and employment risks",
+    "mechanism": "A restaurant franchise company converted to worker cooperative ownership, changing governance, finance and working practices.",
+    "evidenceType": "Operating model",
+    "evidence": "Original research and a Korean social-economy case study examine the 2013 conversion and later organisational learning.",
+    "limit": "The business was profitable before conversion. Not all franchise workers can be assumed to be members, and ownership does not establish a causal survival advantage or remove price competition.",
+    "sources": [
+      {
+        "label": "Original transition research",
+        "url": "https://ccr.ica.coop/sites/ccr.ica.coop/files/attachments/4.4%20Jong%20Ho%20WON%20%20%26%20Seungkwon%20JANG.pdf"
+      },
+      {
+        "label": "Korean social-economy case study",
+        "url": "https://sewfonline.com/wp-content/uploads/2021/03/Analyzing-the-Success-Factors-of-Best-Practices-in-the-Korean-Social-Economy-Published-in-KoSEA.pdf"
+      },
+      {
+        "label": "Later organisational research",
+        "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002712725"
+      }
+    ]
+  },
+  {
+    "id": "vietnam-supplier-development",
+    "name": "Supplier Development Programme",
+    "region": "Vietnam",
+    "problem": "Access for smaller local participants",
+    "mechanism": "Supplier assessment, customised coaching, training and buyer connections help selected local firms qualify for multinational purchasers.",
+    "evidenceType": "Programme provision",
+    "evidence": "The FIAS 2021 review reports that 14 of 25 Phase 2 firms qualified as new multinational suppliers.",
+    "limit": "Qualification is an intermediate outcome, not proof of sustained contracts, additional profits or causal programme gains. Selected manufacturers differ from neighbourhood service firms.",
+    "sources": [
+      {
+        "label": "FIAS 2021 review",
+        "url": "https://documents1.worldbank.org/curated/en/099818306242247017/pdf/IDU1c18695e6164571458d195a71863d4445cda5.pdf"
+      }
+    ]
+  },
+  {
+    "id": "gogba",
+    "name": "GoGBA business support",
+    "region": "Hong Kong–Mainland GBA",
+    "problem": "Access for smaller local participants",
+    "mechanism": "HKTDC and partner-operated centres combine advice, training, policy information and business connections through physical and digital support.",
+    "evidenceType": "Programme provision",
+    "evidence": "Provider documentation establishes operating centres and on-the-ground assistance for firms exploring GBA markets.",
+    "limit": "Provision, introductions and event attendance do not establish additional sales or survival. Assess the particular firm’s needs and existing service reach before proposing another platform.",
+    "sources": [
+      {
+        "label": "GoGBA service centres",
+        "url": "https://www.go-gba.com/en/service-centre/"
+      },
+      {
+        "label": "HKTDC programme announcement",
+        "url": "https://mediaroom.hktdc.com/en/pressrelease/detail/20269/HKTDC%20launches%20GoGBA%20one-stop%20platform"
+      }
+    ]
+  },
+  {
+    "id": "gba-youth-support",
+    "name": "GBA Youth Employment Scheme support",
+    "region": "Hong Kong–Mainland GBA",
+    "problem": "Practical cross-border arrangements",
+    "mechanism": "Labour Department-appointed partners provide eligible scheme participants with arrival advice, practical help, specialist referrals and peer groups.",
+    "evidenceType": "Programme provision",
+    "evidence": "The official service description documents Mainland briefings, hotlines, emergency help, referrals, company exchanges and peer support.",
+    "limit": "Provision is not universal coverage or evidence of retention effects. It does not establish who outside the scheme has equivalent help or an unmet need.",
+    "sources": [
+      {
+        "label": "Labour Department support services",
+        "url": "https://www2.jobs.gov.hk/0/tc/information/gbayes/supportservices/"
+      }
+    ]
+  },
+  {
+    "id": "connected-care",
+    "name": "Defined cross-border care arrangements",
+    "region": "Hong Kong–Mainland GBA",
+    "problem": "Practical cross-border arrangements",
+    "mechanism": "An eligible Hospital Authority patient follow-up pilot at HKU–Shenzhen Hospital sits alongside separate arrangements for records and clinically appropriate return referrals.",
+    "evidenceType": "Programme provision",
+    "evidence": "Government replies document follow-up consultations, service use, health-record sharing and defined referral arrangements.",
+    "limit": "These are separate schemes with eligibility and scope limits, not universal healthcare portability or evidence of clinical outcomes. They do not establish routine failure or rank care above other household needs.",
+    "sources": [
+      {
+        "label": "Government reply: follow-up pilot",
+        "url": "https://www.info.gov.hk/gia/general/202602/25/P2026022500444.htm"
+      },
+      {
+        "label": "Government reply: records and referrals",
+        "url": "https://www.info.gov.hk/gia/general/202606/17/P2026061700586p.htm"
+      }
+    ]
+  },
+  {
+    "id": "sewa-sangini",
+    "name": "SEWA Sangini childcare",
+    "region": "India",
+    "problem": "Everyday essentials",
+    "mechanism": "Mothers and childcare workers participate in a cooperative offering full-day care, supported by parent fees, grants, donations, subsidies and cross-subsidised provision.",
+    "evidenceType": "Operating model",
+    "evidence": "SEWA’s May 2022 account documents the service and funding model; parent fees covered around one-third of costs in that account.",
+    "limit": "The provider-authored case does not estimate a causal employment or earnings effect. Stable funding, quality and suitable hours remain necessary; this is not a cross-border adjustment programme.",
+    "sources": [
+      {
+        "label": "SEWA childcare case study",
+        "url": "https://www.wiego.org/wp-content/uploads/2022/07/Sewa_ShortReport_en.pdf"
+      }
+    ]
+  },
+  {
+    "id": "aware-she",
+    "name": "AWARE S.H.E. housing project",
+    "region": "Singapore",
+    "problem": "Everyday essentials",
+    "mechanism": "Affordable temporary housing and practical support help single mothers establish more stable living arrangements, using donated housing resources.",
+    "evidenceType": "Programme provision",
+    "evidence": "The 2018–2021 project housed 18 mothers and 21 children. Qualitative follow-up of 12 longer-staying mothers reported employment and income improvements for eight.",
+    "limit": "This was a small, selected group with no comparison group. Changes cannot be attributed to housing or support alone, and do not predict outcomes for cross-border movers.",
+    "sources": [
+      {
+        "label": "AWARE S.H.E. project report",
+        "url": "https://www.aware.org.sg/2022/05/stable-housing-single-mothers-she-project-report/"
+      }
+    ]
+  },
+  {
+    "id": "light-be",
+    "name": "Light Be",
+    "region": "Hong Kong",
+    "problem": "Everyday essentials",
+    "mechanism": "A nonprofit social enterprise mobilises private property resources alongside support for households experiencing poverty, particularly young people and families with children.",
+    "evidenceType": "Operating model",
+    "evidence": "The provider describes its housing and upward-mobility approach and partnerships with property owners and other supporters.",
+    "limit": "The description does not independently establish employment gains, poverty reduction or a citywide housing solution. Eligibility, duration, funding and the household’s next housing option matter.",
+    "sources": [
+      {
+        "label": "Light Be organisational account",
+        "url": "https://www.lightbe.hk/aboutus-1"
+      }
+    ]
+  },
+  {
+    "id": "greenprice",
+    "name": "GreenPrice surplus retail",
+    "region": "Hong Kong",
+    "problem": "Everyday essentials",
+    "mechanism": "A commercial retail model sells surplus and short-dated goods, building supplier agreements and sales channels.",
+    "evidenceType": "Operating model",
+    "evidence": "The SIE Fund’s early venture record documents development of the pilot and business model.",
+    "limit": "An early venture record is not an independent evaluation of current operations. Reliable sourcing, safety, logistics and operating costs remain; no causal household-poverty effect is established.",
+    "sources": [
+      {
+        "label": "SIE Fund venture record",
+        "url": "https://www.sie.gov.hk/en/our-work/funded-ventures/detailb150.html?content=1368"
+      }
+    ]
+  },
+  {
+    "id": "fairprice",
+    "name": "FairPrice cooperative retail",
+    "region": "Singapore",
+    "problem": "Everyday essentials",
+    "mechanism": "A cooperative retailer combines a commercial operating base with an affordability mission, supported by group procurement, logistics and retail capabilities.",
+    "evidenceType": "Operating model",
+    "evidence": "The group’s 2025 sustainability report describes its operations and affordability activities; the report states that it is not externally assured.",
+    "limit": "FairPrice is not a network of independently owned shops like CGC or worker ownership like Happy Bridge. Its scale does not show that a small cooperative could reproduce its results.",
+    "sources": [
+      {
+        "label": "FairPrice 2025 sustainability report",
+        "url": "https://www.fairpricegroup.com.sg/wp-content/uploads/2026/05/FairPrice-Group-Sustainability-Report-2025.pdf"
+      }
+    ]
+  },
+  {
+    "id": "fudeichi-hippo",
+    "name": "Fudeichi / Hippo community shop",
+    "region": "Japan",
+    "problem": "Everyday essentials",
+    "mechanism": "Community fundraising and a local organisation sustain a shop selling everyday goods and local products, with a place for social contact.",
+    "evidenceType": "Operating model",
+    "evidence": "Municipal and local tourism accounts document the community-funded shop established in 2018.",
+    "limit": "This is a shrinking rural community, not an urban border-shopping case. Documented operation does not establish a survival advantage, financial self-sufficiency or the viability of every service.",
+    "sources": [
+      {
+        "label": "Local tourism account",
+        "url": "https://marumori.jp/spot/fudeichi/"
+      },
+      {
+        "label": "Municipal agricultural account",
+        "url": "https://marumori-nougyou.jp/%E8%BE%B2%E7%94%A3%E7%89%A9%E7%9B%B4%E5%A3%B2%E6%89%80/%E3%81%B5%E3%81%A7%E3%81%84%E3%81%A1/"
+      }
+    ]
+  },
+  {
+    "id": "home-market",
+    "name": "Home Market",
+    "region": "Hong Kong",
+    "problem": "Everyday essentials",
+    "mechanism": "A philanthropy-supported nonprofit retailer sells essentials close to cost to eligible members and provides inclusive employment, including jobs for people with disabilities.",
+    "evidenceType": "Operating model",
+    "evidence": "The provider documents its retail model, membership rules and intended beneficiaries.",
+    "limit": "The account does not independently estimate net savings, additional employment or poverty reduction. It is not an entitlement for all residents; funding, accessibility and effects on other retailers require assessment.",
+    "sources": [
+      {
+        "label": "Home Market model",
+        "url": "https://www.homemarket.hk/en/about_us.php"
+      },
+      {
+        "label": "Home Market membership",
+        "url": "https://www.homemarket.hk/en/become_member.php"
+      }
+    ]
+  },
+  {
+    "id": "food-angel",
+    "name": "Food Angel",
+    "region": "Hong Kong",
+    "problem": "Everyday essentials",
+    "mechanism": "A charity combines rescued and purchased ingredients, kitchens, donations, volunteers and community partners to deliver free food assistance through several collection and delivery options.",
+    "evidenceType": "Operating model",
+    "evidence": "Provider accounts document partner distribution, home delivery, automated collection and a token-based choice model.",
+    "limit": "Delivery descriptions do not establish restored earnings or compensation for integration-related losses. Nutrition, dignity, eligibility, collection burdens and reliable funding and supply matter; logistics and staff are not costless.",
+    "sources": [
+      {
+        "label": "Food assistance",
+        "url": "https://foodangel.org.hk/en/food-assistance"
+      },
+      {
+        "label": "Delivery models",
+        "url": "https://www.foodangel.org.hk/en/our-work"
+      },
+      {
+        "label": "Provider data centre",
+        "url": "https://www.foodangel.org.hk/en/data-centre"
+      }
+    ]
+  },
+  {
+    "id": "yangtze-fiscal-sharing",
+    "name": "Yangtze River Delta joint-development revenue sharing",
+    "region": "Mainland China",
+    "problem": "Public costs and benefits",
+    "mechanism": "Participating jurisdictions share specified district- and county-retained tax revenues from jointly invested enterprises and joint projects.",
+    "evidenceType": "Operating model",
+    "evidence": "An official Shanghai account records a September 2024 agreement and first settlement for 2021–2023, shared equally among Qingpu, Wujiang and Jiashan.",
+    "limit": "This covers specified joint-development revenues within one country, not all regional tax receipts or residential service-cost compensation. No causal welfare or growth estimate is established.",
+    "sources": [
+      {
+        "label": "Shanghai official implementation account",
+        "url": "https://sheitc.sh.gov.cn/rddbta/20251030/bbc644c7b25e472bb242eb0a629599cc.html"
+      }
+    ]
+  },
+  {
+    "id": "project-quest",
+    "name": "Project QUEST",
+    "region": "United States",
+    "problem": "Work and employment risks",
+    "mechanism": "A nonprofit connects training for occupations with demand to counselling, financial assistance and placement support, including some transport and childcare assistance.",
+    "evidenceType": "Comparative evaluation",
+    "evidence": "A randomised trial followed 410 low-income adults seeking healthcare training in San Antonio over fourteen years and found higher cumulative earnings than controls.",
+    "limit": "The result concerns a bundled intervention for the 2006–2008 intake, not displaced Hong Kong service workers or a separate effect of childcare. Occupations, entry requirements, training time and cost affect transfer.",
+    "sources": [
+      {
+        "label": "Fourteen-year evaluation report",
+        "url": "https://economicmobilitycorp.org/wp-content/uploads/2024/10/Project-Quest-14-Year-Gains.pdf"
+      },
+      {
+        "label": "Evaluation summary",
+        "url": "https://economicmobilitycorp.org/fourteen-year-gains-project-quests-remarkable-impact/"
+      }
+    ]
+  },
+  {
+    "id": "preston",
+    "name": "Preston community wealth building",
+    "region": "United Kingdom",
+    "problem": "Access for smaller local participants",
+    "mechanism": "Institutions rooted in a place use purchasing, employment and assets to widen local opportunity through supplier access, social-value procurement and employment practices.",
+    "evidenceType": "Comparative evaluation",
+    "evidence": "A 2026 mixed-methods evaluation used matching, comparison areas and difference-in-differences methods, finding improvements associated with employment, wages and wellbeing.",
+    "limit": "The programme combined measures and does not establish a universal effect of buying locally. Participation was limited beyond core institutions; supplier capability, value for money and effects on neighbouring places matter.",
+    "sources": [
+      {
+        "label": "Preston procurement policy",
+        "url": "https://www.preston.gov.uk/article/12847/Social-value-in-procurement"
+      },
+      {
+        "label": "Programme description",
+        "url": "https://www.preston.gov.uk/article/1338/Community-Wealth-Building-in-action"
+      },
+      {
+        "label": "NIHR evaluation",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK621935/"
+      },
+      {
+        "label": "Employment study",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12418530/"
+      }
+    ]
+  },
+  {
+    "id": "oresunddirekt",
+    "name": "Øresunddirekt",
+    "region": "Denmark–Sweden",
+    "problem": "Practical cross-border arrangements",
+    "mechanism": "Participating public agencies connect employment, tax and social-insurance guidance for cross-border workers and employers; the service began shortly before the bridge opened in 2000.",
+    "evidenceType": "Programme provision",
+    "evidence": "OECD and provider accounts document the guidance model and substantial use through contacts and website visits.",
+    "limit": "Use is not an estimate of additional jobs. OECD also identifies uneven agency engagement and funding limits; the transferable question is how existing channels can explain steps and escalate obstacles.",
+    "sources": [
+      {
+        "label": "OECD assessment",
+        "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/02/mobility-and-integrated-labour-markets-for-third-country-nationals-in-greater-copenhagen_caa2d32e/ba2a4777-en.pdf"
+      },
+      {
+        "label": "Øresunddirekt service description",
+        "url": "https://www.oresunddirekt.dk/en/about-oeresunddirekt"
+      }
+    ]
+  },
+  {
+    "id": "cerdanya-hospital",
+    "name": "Cerdanya Hospital qualification procedure",
+    "region": "France–Spain",
+    "problem": "Practical cross-border arrangements",
+    "mechanism": "A shared cross-border hospital and the responsible authority addressed qualification-recognition delays with a provisional fast-track procedure.",
+    "evidenceType": "Programme provision",
+    "evidence": "OECD reports that a 2024 arrangement allowed relevant French professionals to perform their work within a week of hire after an earlier personal-contact workaround proved fragile.",
+    "limit": "The procedure is hospital-specific and provisional, not automatic recognition everywhere or universal healthcare portability. The lesson is to identify the exact bottleneck and institutionalise its resolution.",
+    "sources": [
+      {
+        "label": "OECD case account",
+        "url": "https://www.oecd.org/en/publications/building-more-resilient-cross-border-regions_d5fd3e59-en/full-report/promotion-and-advocacy-for-cross-border-development_d03b4dfc.html"
+      }
+    ]
+  },
+  {
+    "id": "greater-geneva",
+    "name": "Greater Geneva financial compensation",
+    "region": "France–Switzerland",
+    "problem": "Public costs and benefits",
+    "mechanism": "A recurring agreement transfers resources from Geneva to France in recognition of public-service costs where covered cross-border workers live.",
+    "evidenceType": "Operating model",
+    "evidence": "Official documentation records the arrangement established in 1973: compensation equivalent to 3.5% of covered workers’ gross payroll, not 3.5% of income-tax receipts.",
+    "limit": "Operation of the transfer does not establish how far it resolves housing or service pressures. The formula cannot be applied to Singapore–Johor without examining different tax and service responsibilities.",
+    "sources": [
+      {
+        "label": "Canton of Geneva compensation documentation",
+        "url": "https://www.ge.ch/document/elements-detailles-repartition-compensation-financiere-genevoise-relative-aux-frontaliers-cfg-versee-2024"
+      }
+    ]
+  }
+]

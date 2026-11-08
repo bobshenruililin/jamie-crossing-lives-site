@@ -1,4 +1,4 @@
-/* Review controls operate the real same-origin candidate. No changes are saved. */
+/* Review controls operate the frozen November 6 candidate. No changes are saved. */
 const scenes={
   care:{target:'#care-loop',anchor:'#services',description:'Follow eligible care, records by permission and a conditional route back.',action:'Follow the pathway →'},
   connections:{target:'#ties-panel',anchor:'#ties',description:'Trace housing, work or relationships. Compare the two accounts in the same positions.',action:'Replay the home’s move →'},
@@ -12,7 +12,7 @@ function position(){const n=doc()?.querySelector(scenes[scene].target);if(n)fram
 function showScene(id){
   scene=id;step=0;document.querySelectorAll('[data-scene]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.scene===id)));
   document.querySelector('#scene-description').textContent=scenes[id].description;
-  document.querySelector('#full-scene').href='../../'+scenes[id].anchor;
+  document.querySelector('#full-scene').href='snapshot/'+scenes[id].anchor;
   before.querySelector('img').src=`assets/before-${id}.jpg`;before.querySelector('img').alt=`Published main before this candidate: ${id}`;
   tryButton.textContent=ready?scenes[id].action:'Start in the preview ↓';
   if(ready){

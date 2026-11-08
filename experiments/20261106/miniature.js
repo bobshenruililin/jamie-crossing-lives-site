@@ -5,9 +5,9 @@
    published figure — and opens the evidence behind it. Positions are authored
    for explanation: this is not a map, and no route, distance or frequency is
    measured. Pins and labels are HTML so they stay legible at any size. */
-import { places, placeById, scenes, byId, photos, ARRANGEMENTS, FACETS, EVIDENCE, tour } from '../../feature/cast.js';
-import { evidenceGlyph, facetGlyph, make, esc, asset, motionAllowed } from '../../feature/grammar.js';
-import { openPhoto } from '../../feature/photo-viewer.js';
+import { places, placeById, scenes, byId, photos, ARRANGEMENTS, FACETS, EVIDENCE, tour } from '../../review/connected-20261106/snapshot/feature/cast.js';
+import { evidenceGlyph, facetGlyph, make, esc, asset, motionAllowed } from '../../review/connected-20261106/snapshot/feature/grammar.js';
+import { openPhoto } from '../../review/connected-20261106/snapshot/feature/photo-viewer.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 const TILT = .54;
@@ -681,7 +681,7 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
     // Opt-in while the WebGPU renderer is in development: add ?renderer=gpu to the URL.
     if (renderer === 'svg' || forced !== 'gpu' || !('gpu' in navigator)) { host.dataset.renderer = 'svg'; return; }
     try {
-      const { createGpuWorld } = await import('../../feature/world-gpu.js?v=20261105-gpu');
+      const { createGpuWorld } = await import('../../review/connected-20261106/snapshot/feature/world-gpu.js?v=20261105-gpu');
       canvas.hidden = false;
       const world = await createGpuWorld(canvas, { GEOMETRY, places, TREES, MAINLAND_REGION }, { onFrame: () => placeOverlays(), onLost: info => useSvg(info?.message || 'GPU device lost') });
       if (destroyed) { world.destroy(); return; }

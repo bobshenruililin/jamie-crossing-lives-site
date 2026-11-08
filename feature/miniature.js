@@ -4,7 +4,7 @@
    published figure — and opens the evidence behind it. Positions are authored
    for explanation: this is not a map, and no route, distance or frequency is
    measured. Pins and labels are HTML so they stay legible at any size. */
-import { places, placeById, scenes, byId, photos, ARRANGEMENTS, FACETS, EVIDENCE, tour } from './cast.js';
+import { places, placeById, scenes, byId, photos, ARRANGEMENTS, FACETS, EVIDENCE, tour } from './cast.js?v=20261108-v4';
 import { evidenceGlyph, facetGlyph, make, esc, asset, motionAllowed } from './grammar.js';
 import { openPhoto } from './photo-viewer.js';
 
@@ -436,7 +436,7 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
     scene.arcs.forEach(arc => { if (arc.from.startsWith('ghost:')) ghosts.add(arc.from.slice(6)); });
     ghosts.forEach(facet => {
       const ghost = make('span', 'mini-ghost');
-      ghost.title = `${FACETS[facet].short}: not established in this account`;
+      ghost.title = `${FACETS[facet].short}: ${byId[sceneId]?.facets[facet]?.unplaced || 'not established in this account'}`;
       ghost.innerHTML = facetGlyph(facet);
       const [l, t] = pctAt(...GHOSTS[facet]);
       const [, ground] = pctAt(GHOSTS[facet][0], GHOSTS[facet][1], 0);
@@ -569,6 +569,7 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
       <ul class="card-evidence">${rows.join('')}</ul>
       ${photo ? `<button type="button" class="card-photo" data-photo="${place.photo}"><img src="${asset(photo.file)}" alt="" loading="lazy" decoding="async" width="${photo.width}" height="${photo.height}"><span>${evidenceGlyph('photo')}Inspect the field photograph</span></button>${place.photoNote ? `<p class="card-photo-note">${esc(place.photoNote)}</p>` : ''}` : ''}
       <p class="card-limit">Placed to explain, not mapped. Accounts are paraphrased.</p>`;
+    card.dataset.side = place.side;
     card.hidden = false;
     status.textContent = `${place.label}. ${sideName}. ${card.querySelector('.card-evidence').textContent}`;
     placeOverlays();
@@ -727,8 +728,8 @@ export function initMiniature(host, { renderer = 'auto' } = {}) {
       closeCard(false);
       render({ animate });
       const person = byId[id];
-      const unknown = (scenes[id]?.unplaced || []).map(f => FACETS[f].short.toLowerCase());
-      status.textContent = person ? `${person.name}. ${person.summary}${unknown.length ? ` Not established: ${unknown.join(', ')}.` : ''}` : '';
+      const unknown = (scenes[id]?.unplaced || []).map(f => person?.facets[f]?.unplaced || `${FACETS[f].short}: not established.`);
+      status.textContent = person ? `${person.name}. ${person.summary}${unknown.length ? ` ${unknown.join(' ')}` : ''}` : '';
       return true;
     },
     getScene: () => sceneId,

@@ -1,0 +1,105 @@
+/* The ledger: eight selected accounts and one official count, side by side.
+   It is not an exhaustive cast of everyone mentioned in the research.
+   Each row places the parts of one life on the Hong Kong or Shenzhen side of a
+   central boundary. Hollow marks are what the account does not establish.
+   Highlighting a part of life changes emphasis only, never the data. */
+import { cast, FACETS, ARRANGEMENTS, EVIDENCE, tour } from './cast.js';
+import { evidenceGlyph, facetGlyph, esc } from './grammar.js';
+import { signatureSVG, signatureKey } from './signature.js';
+
+const ORDER = ['home', 'work', 'spend', 'ties'];
+
+/* Readings of the pattern for each highlighted part of life. Each sentence is
+   checked against the rows below; none generalises beyond these accounts. */
+const READINGS = {
+  all: 'Only one account describes moving home. More often, one part of life crosses: a repair, a meal, a school day, time with family.',
+  home: 'One account moved home north; the schoolchildren live on the Mainland, with no city specified; one resident rents in Hong Kong yet calls Shenzhen home. Four accounts do not say where home is.',
+  work: 'Every workplace or school these accounts locate is in Hong Kong. The guide’s preferred work is not located.',
+  spend: 'Purchases and services are what most often cross—a repair, meals, shopping and activities. The store manager still does most shopping in Hong Kong.',
+  ties: 'Relationships and activities sit on both sides—for the guide and the resident, partly on the side opposite where they live.'
+};
+
+function mark(facet, text, side) {
+  return `<li class="lmark" data-facet="${facet}" data-side="${side}">${facetGlyph(facet)}<span>${esc(text)}</span></li>`;
+}
+
+export function initLedger(host) {
+  const rowFor = person => {
+    const hk = [], sz = [], unknown = [], notes = [];
+    ORDER.forEach(facet => {
+      const f = person.facets[facet] || {};
+      if (f.hk) hk.push(mark(facet, f.hk, 'hk'));
+      if (f.sz) sz.push(mark(facet, f.sz, 'sz'));
+      // A broader Mainland scope, without assigning or excluding a city.
+      if (f.mainland) sz.push(`<li class="lmark is-mainland" data-facet="${facet}" data-side="mainland">${facetGlyph(facet)}<span>${esc(f.mainland)}</span></li>`);
+      if (!f.hk && !f.sz && !f.mainland) {
+        const covered = !(person.notCovered || []).includes(facet);
+        unknown.push(`<li class="lmark is-unknown" data-facet="${facet}" title="${covered ? 'Not established' : 'Not covered by this record'}">${facetGlyph(facet)}<span class="visually-hidden">${esc(FACETS[facet].label)}: ${covered ? 'not established' : 'not covered by this record'}</span></li>`);
+      }
+      if (f.note) notes.push(`<li><b>${esc(FACETS[facet].label)}.</b> ${esc(f.note)}</li>`);
+    });
+    const inTour = tour.includes(person.id);
+    return `<li class="lrow" data-person="${person.id}" data-evidence="${person.evidence}" style="--unk:${unknown.length}">
+      <button type="button" class="lrow-who" aria-expanded="false" aria-controls="ledger-${person.id}">
+        <span class="lrow-sig">${signatureSVG(person.id, { size: 34, title: false })}</span>
+        <span class="lrow-name">${esc(person.name)}${person.evidence === 'published' ? ` ${evidenceGlyph('published', 'lrow-ev')}` : ''}</span>
+        ${person.crossing ? `<span class="lrow-context" aria-label="Reported crossing pattern: ${esc(person.crossing)}">${esc(person.crossing)}</span>` : ''}
+        <svg class="lrow-toggle" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5"/></svg>
+      </button>
+      <ul class="lrow-side lrow-hk" aria-label="Hong Kong">${hk.join('')}</ul>
+      <span class="lrow-boundary" aria-hidden="true"></span>
+      <ul class="lrow-side lrow-sz" aria-label="${ORDER.some(f => person.facets[f]?.mainland) ? 'Mainland; residential city unspecified' : 'Shenzhen'}">${sz.join('')}</ul>
+      <ul class="lrow-unknown" aria-label="Not established">${unknown.join('')}</ul>
+      <div class="lrow-detail" id="ledger-${person.id}" hidden>
+        <p>${esc(person.summary)}</p>
+        ${notes.length ? `<ul class="lrow-notes">${notes.join('')}</ul>` : ''}
+        <p class="lrow-limit">${esc(person.limit)}</p>
+        <p class="lrow-source">${evidenceGlyph(person.evidence)}${esc(person.source)}${inTour ? ` · <a href="#step-${person.id}">See this account in the miniature ↑</a>` : ''}</p>
+      </div>
+    </li>`;
+  };
+  const BANDS = { user: 'Cross-border users', mover: 'Northbound mover', worker: 'Worker or student · an official count', base: 'Hong Kong base, Mainland ties', local: 'Locally based', unplaced: 'Arrangement not established' };
+  const rows = Object.entries(BANDS).map(([key, name]) => {
+    const people = cast.filter(p => p.arrangement === key);
+    return people.length ? `<li class="lband"><p class="lband-name">${esc(name)}</p><ol class="lband-rows">${people.map(rowFor).join('')}</ol></li>` : '';
+  }).join('');
+
+  host.innerHTML = `<div class="ledger">
+    <div class="ledger-controls" role="group" aria-label="Highlight a part of life">
+      <button type="button" data-focus="all" aria-pressed="true">All parts</button>
+      ${ORDER.map(f => `<button type="button" data-focus="${f}" aria-pressed="false">${facetGlyph(f)}<span>${esc(FACETS[f].label)}</span></button>`).join('')}
+    </div>
+    <div class="ledger-intro"><p class="ledger-reading" aria-live="polite">${READINGS.all}</p>${signatureKey()}</div>
+    <div class="ledger-head" aria-hidden="true"><span></span><span class="lh-hk">Hong Kong</span><span class="lh-bd"></span><span class="lh-sz">Shenzhen</span><span class="lh-un">${evidenceGlyph('unknown')}Not established</span></div>
+    <ol class="ledger-rows">${rows}</ol>
+  </div>`;
+
+  const ledger = host.firstElementChild;
+  const reading = ledger.querySelector('.ledger-reading');
+  const focusButtons = [...ledger.querySelectorAll('[data-focus]')];
+  function setFocus(id) {
+    focusButtons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.focus === id)));
+    ledger.dataset.highlight = id;
+    reading.textContent = READINGS[id];
+  }
+  ledger.addEventListener('click', event => {
+    const focus = event.target.closest('[data-focus]');
+    if (focus) { setFocus(focus.dataset.focus); return; }
+    const who = event.target.closest('.lrow-who');
+    if (who) {
+      const open = who.getAttribute('aria-expanded') !== 'true';
+      who.setAttribute('aria-expanded', String(open));
+      who.closest('.lrow').classList.toggle('is-open', open);
+      ledger.querySelector(`#${who.getAttribute('aria-controls')}`).hidden = !open;
+    }
+  });
+  ledger.querySelector('.ledger-controls').addEventListener('keydown', event => {
+    const i = focusButtons.indexOf(document.activeElement);
+    if (i < 0 || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+    event.preventDefault();
+    const next = focusButtons[(i + (event.key === 'ArrowRight' ? 1 : focusButtons.length - 1)) % focusButtons.length];
+    next.focus(); setFocus(next.dataset.focus);
+  });
+  setFocus('all');
+  return { setFocus };
+}

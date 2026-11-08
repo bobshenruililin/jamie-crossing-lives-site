@@ -6,9 +6,9 @@
    shows a word in its true colour and names its photograph; activating it
    opens the photograph. The real text stays in the document for assistive
    technology, search and when canvas is unavailable. */
-import { photos } from '../../feature/cast.js';
-import { asset, esc, motionAllowed } from '../../feature/grammar.js';
-import { openPhoto } from '../../feature/photo-viewer.js';
+import { photos } from '../../review/connected-20261106/snapshot/feature/cast.js';
+import { asset, esc, motionAllowed } from '../../review/connected-20261106/snapshot/feature/grammar.js';
+import { openPhoto } from '../../review/connected-20261106/snapshot/feature/photo-viewer.js';
 
 const TONES = {
   hk: [[61, 20, 8], [214, 98, 58]],
