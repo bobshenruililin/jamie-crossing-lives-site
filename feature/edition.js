@@ -5,7 +5,7 @@ import { hydrateGlyphs, motionAllowed } from './grammar.js';
 import { tour } from './cast.js';
 
 const html = document.documentElement;
-const V = '20261108-v4';
+const V = '20261108-polish';
 
 /* Motion: one control for the page; reduced-motion preference wins. */
 const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
@@ -105,6 +105,9 @@ document.addEventListener('focusout', event => { if (event.target.closest?.('.pw
 document.addEventListener('click', event => {
   const w = event.target.closest?.('.pw');
   if (!w || !mini) return;
+  // Settle a pending scroll update before opening: on touch screens a tap can
+  // arrive before the next animation frame would otherwise change the scene.
+  syncStep(true);
   mini.openPlace(w.dataset.place);
   const graphic = document.querySelector('.scrolly-graphic');
   const box = graphic?.getBoundingClientRect();
@@ -139,12 +142,12 @@ function getData(path) {
 }
 const loaders = {
   '#policy-map': async host => (await import('./policy-map.js?v=20261031-v3')).mountPolicyMap(host),
-  '#research-overview': async host => (await import('./research-overview.js?v=20261108-v4')).mountResearchOverview(host),
+  '#research-overview': async host => (await import('./research-overview.js?v=20261108-polish')).mountResearchOverview(host),
   '#field-gallery': async host => (await import('./field-gallery.js?v=20261031-v3')).initFieldGallery(host),
   '[data-evidence]': async host => (await import('./evidence.js?v=20261031-v3')).initEvidence(host, await getData('../research-data.json')),
   '[data-everyday-view]': async host => (await import('./everyday.js?v=20261031-v3')).initEveryday(host, await getData('./everyday-data.json')),
   '[data-library]': async host => {
-    const [{ initLibrary }, cases, measurement, research] = await Promise.all([import('./library.js?v=20261108-v4'), getData('../data/response-cases.json'), getData('./measurement-menu.json?v=20261108-v4'), getData('../research-data.json')]);
+    const [{ initLibrary }, cases, measurement, research] = await Promise.all([import('./library.js?v=20261108-polish'), getData('../data/response-cases.json'), getData('./measurement-menu.json?v=20261108-polish'), getData('../research-data.json')]);
     return initLibrary(host, cases, measurement, research.future);
   }
 };

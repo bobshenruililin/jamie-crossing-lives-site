@@ -16,8 +16,8 @@ check('opening navigation uses arrangements', html.includes('data-chapter="accou
 check('guide work clarification is preserved without an invented city allocation', read('feature/cast.js').includes('three months in Xinjiang, three in Zhangjiajie, and six across Shenzhen/Hong Kong combined') && !read('feature/cast.js').includes('its location is not established'));
 check('Alipay uses paper rather than other CUHK summary', choices.includes('hongkongers_in_mainland.pdf#page=12') && !choices.includes('mainland: 47'));
 check('Alipay period and selective sample are explicit', choices.includes('Selected AlipayHK cross-border spenders · January–May 2024'));
-check('Mainland services 49% and HK services 12%', choices.includes("bar('Mainland China',49") && choices.includes("bar('Hong Kong',12"));
-check('retail plus dining uses same paper figures', choices.includes("bar('Mainland China',42") && choices.includes("bar('Hong Kong',86"));
+check('paired Mainland and HK panels use the same-paper values', choices.includes("panel('Mainland China','sz',49,42)") && choices.includes("panel('Hong Kong','hk',12,86)"));
+check('services detail is available on demand', choices.includes('<details class="service-breakdown">'));
 check('life services has separate approximate denominator', choices.includes("bar('Mainland China',80,'sz',true)") && choices.includes('Different denominator'));
 check('user-profile interpretation remains a question', choices.includes('Who uses these services?') && choices.includes('does not identify which people'));
 check('jobs uses the two June snapshots', ['June 2025','June 2026','230,100','227,500','218,000','218,100'].every(t=>html.includes(t)));
