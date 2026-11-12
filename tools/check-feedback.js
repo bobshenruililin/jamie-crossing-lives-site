@@ -9,7 +9,7 @@ const choices = read('feature/lens-choices.js'), ties = read('feature/lens-ties.
 const studies = JSON.parse(read('feature/research-overview-data.json'));
 const results = [];
 const check = (name, ok) => results.push({ name, ok: !!ok });
-check('opening animation removed from markup and controller', !html.includes('id="hero-type"') && !edition.includes('mountRearrange'));
+check('requested animated opening restored with readable heading', html.includes('id="hero-type"') && edition.includes('mountRearrange') && html.includes('id="hero-title"'));
 check('four signature rows have a plain-language legend', html.includes('home, work or study, purchases, relationships'));
 check('arrangements and accounts remain distinct', html.includes('These are overlapping <b>arrangements</b>') && html.includes('Individual conversations remain <b>accounts</b>'));
 check('opening navigation uses arrangements', html.includes('data-chapter="accounts">Arrangements</a>') && html.includes('data-chapter-title="Arrangements"'));

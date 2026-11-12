@@ -149,8 +149,8 @@ const check = (name, ok, detail = '') => results.push({ name, ok: Boolean(ok), d
   check('motion pause sets data-motion=off', (await page.getAttribute('html', 'data-motion')) === 'off');
   await page.click('#motion-control');
 
-  // The opening slogan remains ordinary, readable text.
-  check('opening is static with no animated slogan host', (await page.locator('#hero-type').count()) === 0 && !(await page.evaluate(() => document.documentElement.classList.contains('has-photo-title'))));
+  // The restored photo-cut title keeps its accessible heading.
+  check('opening has the restored animated slogan', (await page.locator('#hero-type.is-ready').count()) === 1 && (await page.evaluate(() => document.documentElement.classList.contains('has-photo-title'))));
   check('opening title remains readable', (await page.textContent('#hero-title')).replace(/\s+/g, ' ').trim() === 'Two places, one life, rearranged.');
   check('signature legend explains the row order', /home, work or study, purchases, relationships/.test(await page.textContent('.signature-explainer')));
   check('Alipay uses one paper and period', /49%/.test(await page.textContent('#basket')) && /January–May 2024/.test(await page.textContent('#basket')) && !/47%/.test(await page.textContent('#basket')));

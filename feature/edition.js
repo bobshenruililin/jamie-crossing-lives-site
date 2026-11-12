@@ -5,7 +5,7 @@ import { hydrateGlyphs, motionAllowed } from './grammar.js';
 import { tour } from './cast.js';
 
 const html = document.documentElement;
-const V = '20261108-polish';
+const V = '20261112-title';
 
 /* Motion: one control for the page; reduced-motion preference wins. */
 const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
@@ -95,7 +95,20 @@ function goToStep(scene) {
 switcher?.addEventListener('click', event => { const b = event.target.closest('[data-go]'); if (b) goToStep(b.dataset.go); });
 document.addEventListener('mini:request-scene', event => goToStep(event.detail.id));
 
-/* ---- Opening heading stays static and readable. ---- */
+/* ---- Type cut from field photographs: the title and each lens letter ---- */
+const heroTitle = document.querySelector('#hero-title');
+mount('#hero-type', async host => {
+  const { mountRearrange } = await import(`./photo-type.js?v=${V}`);
+  const t = mountRearrange(host, {
+    size: () => parseFloat(getComputedStyle(heroTitle).fontSize),
+    from: [[{ text: 'Two', photo: 'driving-school', tone: 'hk' }, { text: 'places,', photo: 'place', tone: 'sz', focus: [.5, .35] }]],
+    to: [[{ text: 'one' }, { text: 'life,' }], [{ text: 'rearranged.', font: 'accent' }]]
+  });
+  const ready = () => { if (host.classList.contains('is-ready')) html.classList.add('has-photo-title'); };
+  new MutationObserver(ready).observe(host, { attributes: true, attributeFilter: ['class'] });
+  ready();
+  return t;
+});
 
 /* ---- Place words: the text and the model are one instrument ---- */
 document.addEventListener('pointerover', event => { const w = event.target.closest?.('.pw'); if (w) mini?.peek?.(w.dataset.place); });
